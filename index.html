@@ -433,27 +433,31 @@ p{font-family:sans-serif;font-size:14px;color:#888;line-height:1.7}
 
 <script>
 // Supabase connection
-const _sb = supabase.createClient(
-  'https://lonavuripzywpgguznza.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvbmF2dXJpcHp5d3BnZ3V6bnphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDgzMjksImV4cCI6MjA4ODkyNDMyOX0.YpubAkauQDr4k-_6Lo7qlW9hBYY3lYb_ewv6pBinkMk'
-);
+var _sb = null;
+try {
+  _sb = supabase.createClient(
+    'https://lonavuripzywpgguznza.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvbmF2dXJpcHp5d3BnZ3V6bnphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDgzMjksImV4cCI6MjA4ODkyNDMyOX0.YpubAkauQDr4k-_6Lo7qlW9hBYY3lYb_ewv6pBinkMk'
+  );
+} catch(e) { console.log('Supabase init failed', e); }
 
 // Save fan signup to Supabase
 async function saveFan(name, email, ecocash, city) {
-  const {error} = await _sb.from('fans').insert([{full_name:name, email:email, ecocash:ecocash, city:city}]);
-  return error;
+  if(!_sb) return null;
+  try { const {error} = await _sb.from('fans').insert([{full_name:name, email:email, ecocash:ecocash, city:city}]); return error; }
+  catch(e) { return null; }
 }
 
-// Save artist signup to Supabase
 async function saveArtist(stage, full, email, ecocash, genre, city, bio) {
-  const {data, error} = await _sb.from('artists').insert([{stage_name:stage, full_name:full, email:email, ecocash:ecocash, genre:genre, city:city, bio:bio}]).select();
-  return {data, error};
+  if(!_sb) return {data:null, error:null};
+  try { const {data,error} = await _sb.from('artists').insert([{stage_name:stage, full_name:full, email:email, ecocash:ecocash, genre:genre, city:city, bio:bio}]).select(); return {data,error}; }
+  catch(e) { return {data:null, error:null}; }
 }
 
-// Save tip to Supabase
 async function saveTip(fanName, artistId, trackId, amount, ecocash) {
-  const {error} = await _sb.from('tips').insert([{fan_name:fanName, artist_id:artistId, track_id:trackId, amount:amount, ecocash:ecocash}]);
-  return error;
+  if(!_sb) return null;
+  try { const {error} = await _sb.from('tips').insert([{fan_name:fanName, artist_id:artistId, track_id:trackId, amount:amount, ecocash:ecocash}]); return error; }
+  catch(e) { return null; }
 }
 
 var T=[
