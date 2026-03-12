@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Malbry</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#080808;color:#F5F0E8;font-family:Georgia,serif;min-height:100vh}
@@ -428,6 +429,30 @@ p{font-family:sans-serif;font-size:14px;color:#888;line-height:1.7}
 </div>
 
 <script>
+// Supabase connection
+const _sb = supabase.createClient(
+  'https://lonavuripzywpgguznza.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvbmF2dXJpcHp5d3BnZ3V6bnphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDgzMjksImV4cCI6MjA4ODkyNDMyOX0.YpubAkauQDr4k-_6Lo7qlW9hBYY3lYb_ewv6pBinkMk'
+);
+
+// Save fan signup to Supabase
+async function saveFan(name, email, ecocash, city) {
+  const {error} = await _sb.from('fans').insert([{full_name:name, email:email, ecocash:ecocash, city:city}]);
+  return error;
+}
+
+// Save artist signup to Supabase
+async function saveArtist(stage, full, email, ecocash, genre, city, bio) {
+  const {data, error} = await _sb.from('artists').insert([{stage_name:stage, full_name:full, email:email, ecocash:ecocash, genre:genre, city:city, bio:bio}]).select();
+  return {data, error};
+}
+
+// Save tip to Supabase
+async function saveTip(fanName, artistId, trackId, amount, ecocash) {
+  const {error} = await _sb.from('tips').insert([{fan_name:fanName, artist_id:artistId, track_id:trackId, amount:amount, ecocash:ecocash}]);
+  return error;
+}
+
 var T=[
   {id:1,e:'&#127925;',n:'Ndinewe',a:'Jah Signal',g:'Zimdancehall',p:'8.2K',t:'$14.50'},
   {id:2,e:'&#127926;',n:'Rudo Rwangu',a:'Jah Signal',g:'Zimdancehall',p:'6.7K',t:'$11.20'},
@@ -537,7 +562,16 @@ function rProfile(){document.getElementById('pGrid').innerHTML=T.slice(0,6).map(
 var tipAmt=1;
 function openTip(a){document.getElementById('tipSub').textContent='Support '+a+' via EcoCash';document.getElementById('tipModal').classList.add('open');}
 function setAmt(btn,a){document.querySelectorAll('.ta').forEach(function(b){b.classList.remove('on')});btn.classList.add('on');tipAmt=a;document.getElementById('tipBtn').textContent='Send $'+a.toFixed(2)+' via EcoCash';}
-function sendTip(){var eco=document.getElementById('tipEco').value;if(!eco){alert('Please enter your EcoCash number');return;}document.getElementById('tipModal').classList.remove('open');setTimeout(function(){alert('Sent! Check EcoCash for payment prompt.');},300);}
+async function sendTip(){
+  var eco=document.getElementById('tipEco').value;
+  if(!eco){alert('Please enter your EcoCash number');return;}
+  var btn=document.getElementById('tipBtn');
+  btn.textContent='Sending...';btn.disabled=true;
+  await saveTip('Fan',null,null,tipAmt,eco);
+  btn.textContent='Send $'+tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;
+  document.getElementById('tipModal').classList.remove('open');
+  setTimeout(function(){alert('Sent! Check EcoCash for payment prompt.');},300);
+}
 
 function doPayout(){var a=document.getElementById('payAmt').value;if(!a||a<5){alert('Minimum $5');return;}document.getElementById('payModal').classList.remove('open');setTimeout(function(){alert('Payout sent! SMS confirmation within 2 hours.');},300);}
 
@@ -550,7 +584,17 @@ function aStep(n){
   for(var i=1;i<=4;i++){var el=document.getElementById('as'+i);if(el)el.style.display=i===n?'block':'none';var d=document.getElementById('d'+i);d.classList.remove('on','done');if(i===n)d.classList.add('on');else if(i<n){d.classList.add('done');d.textContent='v';}else d.textContent=i;}
 }
 
-function joinFan(){if(!document.getElementById('fFirst').value||!document.getElementById('fEmail').value){alert('Please fill in all fields');return;}document.getElementById('fanF').style.display='none';document.getElementById('fanDone').style.display='block';}
+async function joinFan(){
+  var name=document.getElementById('fFirst').value;
+  var email=document.getElementById('fEmail').value;
+  if(!name||!email){alert('Please fill in all fields');return;}
+  var btn=document.querySelector('#fanF .btn');
+  btn.textContent='Saving...';btn.disabled=true;
+  var error=await saveFan(name,email,'','');
+  if(error&&error.code!=='23505'){btn.textContent='Create Free Account';btn.disabled=false;alert('Error: '+error.message);return;}
+  document.getElementById('fanF').style.display='none';
+  document.getElementById('fanDone').style.display='block';
+}
 
 function doShare(){var msg=encodeURIComponent('Check out Malbry - Zimbabwe music platform! https://malbry59.github.io/Malbry09/');if(navigator.share){navigator.share({title:'Malbry',url:'https://malbry59.github.io/Malbry09/'});}else{window.open('https://wa.me/?text='+msg,'_blank');}}
 function doWA(){window.open('https://wa.me/?text='+encodeURIComponent('Listen to my track on Malbry! https://'+document.getElementById('artLink').textContent),'_blank');}
