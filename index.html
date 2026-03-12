@@ -141,7 +141,8 @@ p{font-family:sans-serif;font-size:14px;color:#888;line-height:1.7}
   <div class="logo" onclick="go('home')">MALB<span>RY</span></div>
   <div style="display:flex;gap:12px;align-items:center">
     <button style="background:none;border:none;color:#888;font-size:13px;cursor:pointer;font-family:sans-serif" onclick="go('search')">Search</button>
-    <button class="ncta" onclick="go('fan-signup')">Join Free</button>
+    <button class="ncta" id="navJoin" onclick="go('fan-signup')">Join Free</button>
+    <button style="display:none;background:none;border:1px solid #444;color:#F5F0E8;padding:8px 14px;border-radius:2px;font-size:12px;cursor:pointer;font-family:sans-serif" id="navUser" onclick="go('dashboard')">My Account</button>
   </div>
 </nav>
 
@@ -205,8 +206,8 @@ p{font-family:sans-serif;font-size:14px;color:#888;line-height:1.7}
     <button class="btn-o" onclick="go('artist-signup')">I'm an Artist</button>
   </div>
   <div class="stats">
-    <div><div class="stat-num">2.4K</div><div class="stat-lbl">Artists</div></div>
-    <div><div class="stat-num">$18K</div><div class="stat-lbl">Paid Out</div></div>
+    <div><div class="stat-num" id="statArtists">...</div><div class="stat-lbl">Artists</div></div>
+    <div><div class="stat-num" id="statPaid">$0</div><div class="stat-lbl">Paid Out</div></div>
     <div><div class="stat-num">0%</div><div class="stat-lbl">First $500 Cut</div></div>
   </div>
   <div class="div"></div>
@@ -326,22 +327,23 @@ p{font-family:sans-serif;font-size:14px;color:#888;line-height:1.7}
     <p style="margin-bottom:24px">Free forever. Follow artists and tip via EcoCash.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
       <div class="field"><label>First Name</label><input type="text" id="fFirst" placeholder="First"/></div>
-      <div class="field"><label>Last Name</label><input type="text" placeholder="Last"/></div>
+      <div class="field"><label>Last Name</label><input type="text" id="fLast" placeholder="Last"/></div>
     </div>
     <div class="field"><label>Email</label><input type="email" id="fEmail" placeholder="your@email.com"/></div>
-    <div class="field"><label>Password</label><input type="password" placeholder="Min 8 characters"/></div>
-    <div class="field"><label>EcoCash Number</label><input type="tel" placeholder="e.g. 0771234567"/></div>
+    <div class="field"><label>Password</label><input type="password" id="fPass" placeholder="Min 8 characters"/></div>
+    <div class="field"><label>EcoCash Number (optional)</label><input type="tel" id="fEco" placeholder="e.g. 0771234567"/></div>
     <div class="field"><label>Location</label>
-      <select><option value="">Select...</option><option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Diaspora - UK</option><option>Diaspora - South Africa</option><option>Diaspora - USA</option></select>
+      <select id="fCity"><option value="">Select...</option><option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option><option>Masvingo</option><option>Diaspora - UK</option><option>Diaspora - South Africa</option><option>Diaspora - USA</option><option>Diaspora - Australia</option></select>
     </div>
-    <button class="btn" style="width:100%" onclick="joinFan()">Create Free Account</button>
+    <button class="btn" style="width:100%" id="fanBtn" onclick="joinFan()">Create Free Account</button>
   </div>
   <div id="fanDone" style="display:none">
     <div class="success">
       <div class="s-icon">&#10022;</div>
       <div class="s-title">Welcome to <em>Malbry.</em></div>
-      <p class="s-sub">Your account is live. Start discovering music and tipping artists via EcoCash.</p>
-      <button class="btn" onclick="go('home')">Start Listening</button>
+      <p class="s-sub" id="fanWelcome">Your account is live. Start discovering music and tipping artists via EcoCash.</p>
+      <button class="btn" style="width:100%;margin-bottom:10px" onclick="go('home')">Start Listening</button>
+      <button class="btn-o" style="width:100%" onclick="go('search')">Discover Artists</button>
     </div>
   </div>
 </div>
@@ -363,30 +365,31 @@ p{font-family:sans-serif;font-size:14px;color:#888;line-height:1.7}
     <h2>Create your <em>account</em></h2>
     <div class="field"><label>Full Name</label><input type="text" id="aFull" placeholder="Your real name"/></div>
     <div class="field"><label>Stage Name</label><input type="text" id="aStage" placeholder="What fans know you as"/></div>
-    <div class="field"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
-    <div class="field"><label>Password</label><input type="password" placeholder="Min 8 characters"/></div>
-    <div class="field"><label>EcoCash Number</label><input type="tel" placeholder="e.g. 0771234567"/></div>
+    <div class="field"><label>Email</label><input type="email" id="aEmail" placeholder="your@email.com"/></div>
+    <div class="field"><label>Password</label><input type="password" id="aPass" placeholder="Min 8 characters"/></div>
+    <div class="field"><label>EcoCash Number</label><input type="tel" id="aEco" placeholder="e.g. 0771234567"/></div>
     <button class="btn" style="width:100%" onclick="aStep(2)">Continue</button>
   </div>
   <div id="as2" style="display:none">
     <h2>Build your <em>profile</em></h2>
-    <div class="field"><label>Bio</label><textarea placeholder="Tell fans who you are..."></textarea></div>
-    <div class="field"><label>Genre</label>
-      <div class="pills"><button class="pill" onclick="this.classList.toggle('on')">Zimdancehall</button><button class="pill" onclick="this.classList.toggle('on')">Afrobeats</button><button class="pill" onclick="this.classList.toggle('on')">Gospel</button><button class="pill" onclick="this.classList.toggle('on')">Hip Hop</button></div>
+    <div class="field"><label>Bio</label><textarea id="aBio" placeholder="Tell fans who you are..."></textarea></div>
+    <div class="field"><label>Genre — tap to select</label>
+      <div class="pills" id="aGenrePills"><button class="pill" onclick="this.classList.toggle('on')">Zimdancehall</button><button class="pill" onclick="this.classList.toggle('on')">Afrobeats</button><button class="pill" onclick="this.classList.toggle('on')">Gospel</button><button class="pill" onclick="this.classList.toggle('on')">Hip Hop</button><button class="pill" onclick="this.classList.toggle('on')">Amapiano</button><button class="pill" onclick="this.classList.toggle('on')">Sungura</button><button class="pill" onclick="this.classList.toggle('on')">R&B</button><button class="pill" onclick="this.classList.toggle('on')">Pop</button></div>
     </div>
-    <div class="field"><label>City</label><select><option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Diaspora - UK</option></select></div>
+    <div class="field"><label>City</label><select id="aCity"><option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option><option>Masvingo</option><option>Diaspora - UK</option><option>Diaspora - South Africa</option><option>Diaspora - USA</option></select></div>
     <button class="btn" style="width:100%" onclick="aStep(3)">Continue</button>
     <button class="btn-o" style="width:100%;margin-top:8px" onclick="aStep(1)">Back</button>
   </div>
   <div id="as3" style="display:none">
     <h2>Upload your first <em>track</em></h2>
     <div class="field"><label>Track Title</label><input type="text" id="aTrack" placeholder="What's this track called?"/></div>
+    <div class="field"><label>Genre</label><select id="aTrackGenre"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&B</option><option>Pop</option></select></div>
     <div style="border:1px dashed #444;border-radius:4px;padding:28px 16px;text-align:center;margin-bottom:16px">
       <div style="font-size:28px;color:#C9A84C;margin-bottom:8px">&#127925;</div>
       <div style="font-size:14px;font-weight:700;margin-bottom:4px;font-family:sans-serif">Tap to upload audio</div>
-      <div style="font-size:12px;color:#888;font-family:sans-serif">MP3, WAV up to 50MB</div>
+      <div style="font-size:12px;color:#888;font-family:sans-serif">MP3, WAV up to 50MB — coming soon</div>
     </div>
-    <button class="btn" style="width:100%" onclick="aStep(4)">Publish Track</button>
+    <button class="btn" style="width:100%" onclick="aStep(4)">Go Live</button>
     <button class="btn-o" style="width:100%;margin-top:8px" onclick="aStep(2)">Back</button>
   </div>
   <div id="as4" style="display:none">
@@ -578,30 +581,93 @@ function doPayout(){var a=document.getElementById('payAmt').value;if(!a||a<5){al
 var fol=false;
 function doFollow(){fol=!fol;var b=document.getElementById('fBtn');b.textContent=fol?'Following':'Follow';b.style.background=fol?'transparent':'#C9A84C';b.style.color=fol?'#C9A84C':'#080808';b.style.border=fol?'1px solid #C9A84C':'none';}
 
-function aStep(n){
-  if(n===2&&!document.getElementById('aFull').value){alert('Please fill in all fields');return;}
-  if(n===4){var s=document.getElementById('aStage').value||'artist';var tr=document.getElementById('aTrack').value||'track';document.getElementById('artLink').textContent='malbry.app/track/'+(s+'-'+tr).toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');}
-  for(var i=1;i<=4;i++){var el=document.getElementById('as'+i);if(el)el.style.display=i===n?'block':'none';var d=document.getElementById('d'+i);d.classList.remove('on','done');if(i===n)d.classList.add('on');else if(i<n){d.classList.add('done');d.textContent='v';}else d.textContent=i;}
+async function aStep(n){
+  if(n===2){
+    var full=document.getElementById('aFull').value;
+    var stage=document.getElementById('aStage').value;
+    var email=document.getElementById('aEmail').value;
+    var eco=document.getElementById('aEco').value;
+    if(!full||!stage||!email){alert('Please fill in your name, stage name and email');return;}
+  }
+  if(n===4){
+    var s=document.getElementById('aStage').value||'artist';
+    var tr=document.getElementById('aTrack').value||'track';
+    if(!tr){alert('Please enter your track title');return;}
+    var link='malbry.vercel.app/artist/'+(s).toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+    document.getElementById('artLink').textContent=link;
+    // Save artist to Supabase
+    var genres=[];
+    document.querySelectorAll('#aGenrePills .pill.on').forEach(function(p){genres.push(p.textContent);});
+    var btn=document.querySelector('#as3 .btn');
+    btn.textContent='Publishing...';btn.disabled=true;
+    var res=await saveArtist(
+      document.getElementById('aStage').value,
+      document.getElementById('aFull').value,
+      document.getElementById('aEmail').value,
+      document.getElementById('aEco').value,
+      genres.join(', '),
+      document.getElementById('aCity').value,
+      document.getElementById('aBio').value
+    );
+    btn.textContent='Go Live';btn.disabled=false;
+    // Set logged in state
+    window._artistId=res.data?res.data[0].id:null;
+    window._artistName=document.getElementById('aStage').value;
+    setLoggedIn(window._artistName);
+  }
+  for(var i=1;i<=4;i++){var el=document.getElementById('as'+i);if(el)el.style.display=i===n?'block':'none';var d=document.getElementById('d'+i);d.classList.remove('on','done');if(i===n)d.classList.add('on');else if(i<n){d.classList.add('done');d.innerHTML='&#10003;';}else d.textContent=i;}
 }
 
 async function joinFan(){
   var name=document.getElementById('fFirst').value;
+  var last=document.getElementById('fLast').value;
   var email=document.getElementById('fEmail').value;
-  if(!name||!email){alert('Please fill in all fields');return;}
-  var btn=document.querySelector('#fanF .btn');
-  btn.textContent='Saving...';btn.disabled=true;
-  var error=await saveFan(name,email,'','');
-  if(error&&error.code!=='23505'){btn.textContent='Create Free Account';btn.disabled=false;alert('Error: '+error.message);return;}
+  var eco=document.getElementById('fEco').value;
+  var city=document.getElementById('fCity').value;
+  if(!name||!email){alert('Please enter your name and email');return;}
+  var btn=document.getElementById('fanBtn');
+  btn.textContent='Creating account...';btn.disabled=true;
+  var error=await saveFan(name+' '+last,email,eco,city);
+  if(error&&error.code!=='23505'){
+    btn.textContent='Create Free Account';btn.disabled=false;
+    if(error.code==='23505'){/* duplicate email - still proceed */}
+    else{alert('Something went wrong. Try again.');return;}
+  }
+  document.getElementById('fanWelcome').textContent='Welcome '+name+'! Your account is live.';
   document.getElementById('fanF').style.display='none';
   document.getElementById('fanDone').style.display='block';
+  setLoggedIn(name);
 }
 
-function doShare(){var msg=encodeURIComponent('Check out Malbry - Zimbabwe music platform! https://malbry59.github.io/Malbry09/');if(navigator.share){navigator.share({title:'Malbry',url:'https://malbry59.github.io/Malbry09/'});}else{window.open('https://wa.me/?text='+msg,'_blank');}}
+function setLoggedIn(name){
+  var j=document.getElementById('navJoin');
+  var u=document.getElementById('navUser');
+  if(j)j.style.display='none';
+  if(u){u.style.display='block';u.textContent=name;}
+}
+
+function doShare(){var url='https://malbry.vercel.app';if(navigator.share){navigator.share({title:'Malbry - Zimbabwe Music Platform',url:url});}else{window.open('https://wa.me/?text='+encodeURIComponent('Check out Malbry - where Zimbabwean artists get tipped directly via EcoCash! '+url),'_blank');}}
 function doWA(){window.open('https://wa.me/?text='+encodeURIComponent('Listen to my track on Malbry! https://'+document.getElementById('artLink').textContent),'_blank');}
 function copyLink(){if(navigator.clipboard){navigator.clipboard.writeText('https://'+document.getElementById('artLink').textContent).then(function(){var b=document.querySelector('.copy');b.textContent='Copied!';setTimeout(function(){b.textContent='Copy';},2000);});}}
 
 rHome();
 rSearch();
+loadStats();
+
+async function loadStats(){
+  try{
+    var res=await _sb.from('artists').select('id',{count:'exact',head:true});
+    var count=res.count||0;
+    var el=document.getElementById('statArtists');
+    if(el)el.textContent=count>0?count+'':'Be first!';
+    var tips=await _sb.from('tips').select('amount');
+    if(tips.data){
+      var total=tips.data.reduce(function(s,t){return s+(parseFloat(t.amount)||0);},0);
+      var pel=document.getElementById('statPaid');
+      if(pel)pel.textContent='$'+total.toFixed(0);
+    }
+  }catch(e){}
+}
 </script>
 
 </body>
