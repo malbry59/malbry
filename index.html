@@ -5,208 +5,376 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Malbry — Zimbabwe's Music Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+:root{
+  --bg:#050505;
+  --bg2:#0a0a0a;
+  --bg3:#111;
+  --card:#0d0d0d;
+  --border:#1c1c1c;
+  --border2:#242424;
+  --gold:#D4A843;
+  --gold2:rgba(212,168,67,.12);
+  --gold3:rgba(212,168,67,.06);
+  --cream:#F0EBE0;
+  --muted:#5a5a5a;
+  --muted2:#3a3a3a;
+  --white:#F0EBE0;
+  --red:#c0392b;
+}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{height:100%}
-body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;min-height:100vh;overflow-x:hidden}
-.pg{display:none;padding:62px 20px 82px;max-width:600px;margin:0 auto;min-height:100vh}
-.pg.on{display:block;animation:fu .2s ease}
-@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-/* NAV */
-.tnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,.97);border-bottom:1px solid #1a1a1a;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
-.logo{font-family:Georgia,serif;font-size:19px;color:#C9A84C;cursor:pointer;letter-spacing:.04em}
-.logo b{color:#F5F0E8}
+html,body{height:100%;overscroll-behavior:none}
+body{background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── PAGES ── */
+.pg{display:none;padding:58px 0 76px;min-height:100vh}
+.pg.on{display:block}
+.pg-in{max-width:600px;margin:0 auto;padding:0 20px}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.fade-up{animation:fadeUp .35s cubic-bezier(.22,1,.36,1) both}
+.fade-up-1{animation:fadeUp .35s .05s cubic-bezier(.22,1,.36,1) both}
+.fade-up-2{animation:fadeUp .35s .1s cubic-bezier(.22,1,.36,1) both}
+.fade-up-3{animation:fadeUp .35s .15s cubic-bezier(.22,1,.36,1) both}
+.fade-up-4{animation:fadeUp .35s .2s cubic-bezier(.22,1,.36,1) both}
+
+/* ── TOP NAV ── */
+.tnav{
+position:fixed;top:0;left:0;right:0;z-index:200;
+height:54px;display:flex;align-items:center;justify-content:space-between;
+padding:0 20px;
+background:rgba(5,5,5,.92);
+backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+border-bottom:1px solid var(–border);
+}
+.logo{font-family:‘Playfair Display’,serif;font-size:22px;font-weight:700;color:var(–gold);cursor:pointer;letter-spacing:.02em}
 .tnav-r{display:flex;gap:8px;align-items:center}
-.btn-join{background:#C9A84C;color:#080808;border:none;padding:8px 16px;border-radius:100px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
-.btn-snav{background:transparent;color:#F5F0E8;border:1px solid #2a2a2a;padding:8px 14px;border-radius:100px;font-size:12px;cursor:pointer;font-family:inherit}
-.nav-user{display:none;background:transparent;border:1px solid rgba(201,168,76,.4);color:#C9A84C;padding:7px 14px;border-radius:100px;font-size:12px;cursor:pointer;font-family:inherit}
-/* BOTTOM NAV */
-.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(8,8,8,.97);border-top:1px solid #1a1a1a;display:flex;height:58px}
-.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;color:#3a3a3a;font-size:9px;text-transform:uppercase;letter-spacing:.07em;font-weight:600;cursor:pointer;font-family:inherit;transition:color .2s}
-.bn.on{color:#C9A84C}
-.bni{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-/* MINI PLAYER */
-.mp{display:none;position:fixed;bottom:58px;left:0;right:0;z-index:90;background:#0d0d0d;border-top:1px solid #1a1a1a;align-items:center;gap:12px;padding:10px 16px}
+.nav-join{
+background:var(–gold);color:#080808;border:none;
+padding:7px 16px;border-radius:6px;font-size:12px;font-weight:600;
+cursor:pointer;font-family:‘DM Sans’,sans-serif;letter-spacing:.02em;
+transition:opacity .2s;
+}
+.nav-join:active{opacity:.8}
+.nav-search-btn{
+background:transparent;color:var(–muted);border:1px solid var(–border2);
+padding:7px 14px;border-radius:6px;font-size:12px;cursor:pointer;
+font-family:‘DM Sans’,sans-serif;color:var(–cream);transition:border-color .2s;
+}
+.nav-search-btn:active{border-color:var(–gold)}
+.nav-user{
+display:none;background:var(–gold2);border:1px solid rgba(212,168,67,.25);
+color:var(–gold);padding:7px 14px;border-radius:6px;font-size:12px;
+cursor:pointer;font-family:‘DM Sans’,sans-serif;font-weight:500;
+}
+
+/* ── BOTTOM NAV ── */
+.bnav{
+position:fixed;bottom:0;left:0;right:0;z-index:200;
+background:rgba(5,5,5,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+border-top:1px solid var(–border);
+display:flex;height:60px;
+}
+.bn{
+flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+gap:4px;background:none;border:none;color:var(–muted2);
+font-size:9px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;
+cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:color .2s;
+}
+.bn.on{color:var(–gold)}
+.bni{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── MINI PLAYER ── */
+.mp{
+display:none;position:fixed;bottom:60px;left:0;right:0;z-index:190;
+background:var(–bg3);border-top:1px solid var(–border);
+align-items:center;gap:12px;padding:10px 20px;
+}
 .mp.on{display:flex}
-.mp-th{width:36px;height:36px;border-radius:6px;background:#141414;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.mp-inf{flex:1;min-width:0}
-.mp-t{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mp-a{font-size:11px;color:#666;margin-top:1px}
-.mp-btn{width:32px;height:32px;border-radius:50%;background:#C9A84C;border:none;color:#080808;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
-.mp-tip{font-size:11px;color:#C9A84C;border:1px solid rgba(201,168,76,.3);padding:6px 12px;border-radius:100px;cursor:pointer;white-space:nowrap;background:rgba(201,168,76,.06);font-family:inherit}
-/* MODALS */
-.mbg{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;display:none;align-items:flex-end}
-.mbg.on{display:flex}
-.mod{background:#0d0d0d;border:1px solid #222;border-radius:18px 18px 0 0;padding:0 20px 50px;width:100%;max-width:540px;margin:0 auto;position:relative}
-.mh{width:36px;height:4px;background:#222;border-radius:2px;margin:14px auto 22px}
-.mx{position:absolute;top:14px;right:16px;background:none;border:none;color:#555;font-size:24px;cursor:pointer;line-height:1;font-family:inherit}
-.mt{font-family:Georgia,serif;font-size:26px;font-weight:400;margin-bottom:6px}
-.ms{font-size:13px;color:#888;margin-bottom:20px}
-/* TIP AMOUNTS */
-.tamts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
-.ta{padding:12px 4px;border:1px solid #2a2a2a;border-radius:10px;text-align:center;cursor:pointer;font-size:14px;background:transparent;color:#F5F0E8;font-family:inherit;font-weight:600;transition:all .2s}
-.ta.on{border-color:rgba(201,168,76,.5);background:rgba(201,168,76,.08);color:#C9A84C}
-/* FORMS */
+.mp-art{width:38px;height:38px;border-radius:8px;background:var(–bg2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid var(–border)}
+.mp-info{flex:1;min-width:0}
+.mp-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-artist{font-size:11px;color:var(–muted);margin-top:1px}
+.mp-play{width:34px;height:34px;border-radius:50%;background:var(–gold);border:none;color:#080808;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mp-tip{font-size:11px;color:var(–gold);border:1px solid rgba(212,168,67,.3);padding:6px 12px;border-radius:6px;cursor:pointer;background:var(–gold3);font-family:‘DM Sans’,sans-serif;white-space:nowrap}
+
+/* ── TYPOGRAPHY ── */
+.display{font-family:‘Playfair Display’,serif;line-height:1.06}
+.display em{font-style:italic;color:var(–gold)}
+.section-title{font-family:‘Playfair Display’,serif;font-size:22px;font-weight:400;margin-bottom:18px;color:var(–cream)}
+.section-title em{font-style:italic;color:var(–gold)}
+.label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(–muted);font-weight:600}
+
+/* ── DIVIDER ── */
+.hr{height:1px;background:var(–border);margin:28px 0}
+
+/* ── BUTTONS ── */
+.btn{
+display:block;width:100%;background:var(–gold);color:#080808;border:none;
+border-radius:8px;padding:14px;font-size:14px;font-weight:600;cursor:pointer;
+font-family:‘DM Sans’,sans-serif;margin-bottom:10px;transition:opacity .15s;
+letter-spacing:.01em;
+}
+.btn:active{opacity:.8}
+.btn:disabled{opacity:.4;cursor:default}
+.btn-o{
+display:block;width:100%;background:transparent;color:var(–cream);
+border:1px solid var(–border2);border-radius:8px;padding:14px;font-size:14px;
+cursor:pointer;font-family:‘DM Sans’,sans-serif;margin-bottom:10px;transition:border-color .2s;
+}
+.btn-o:active{border-color:var(–gold)}
+.btn-ghost{
+display:block;width:100%;background:transparent;color:var(–red);
+border:1px solid rgba(192,57,43,.3);border-radius:8px;padding:14px;font-size:14px;
+cursor:pointer;font-family:‘DM Sans’,sans-serif;
+}
+.btn-sm{width:auto;padding:9px 18px;font-size:12px;border-radius:6px;display:inline-block;margin-bottom:0}
+.btn-row{display:flex;gap:10px}
+.btn-row .btn,.btn-row .btn-o{flex:1;margin-bottom:0}
+
+/* ── FORMS ── */
 .field{margin-bottom:14px}
-.field label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:6px;font-weight:600}
-.field input,.field select,.field textarea{width:100%;background:#0d0d0d;border:1px solid #2a2a2a;border-radius:10px;padding:13px 14px;color:#F5F0E8;font-size:14px;font-family:inherit;outline:none;-webkit-appearance:none;appearance:none;transition:border-color .2s}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#C9A84C}
-.field input::placeholder,.field textarea::placeholder{color:#2a2a2a}
-.field select option{background:#0d0d0d}
-.field textarea{min-height:80px;resize:vertical}
+.field label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(–muted);margin-bottom:7px;font-weight:600}
+.field input,.field select,.field textarea{
+width:100%;background:var(–bg2);border:1px solid var(–border2);
+border-radius:8px;padding:13px 14px;color:var(–cream);font-size:14px;
+font-family:‘DM Sans’,sans-serif;outline:none;-webkit-appearance:none;
+appearance:none;transition:border-color .2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(–gold)}
+.field input::placeholder,.field textarea::placeholder{color:var(–muted2)}
+.field select option{background:var(–bg2)}
+.field textarea{min-height:90px;resize:vertical;line-height:1.6}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .at-wrap{position:relative}
-.at-sym{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#555;font-size:14px;pointer-events:none}
+.at-sym{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(–muted);font-size:14px;pointer-events:none}
 .at-wrap input{padding-left:28px}
-/* BUTTONS */
-.btn{display:block;width:100%;background:#C9A84C;color:#080808;border:none;border-radius:10px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:10px;transition:opacity .15s}
-.btn:active{opacity:.8}
-.btn:disabled{opacity:.45;cursor:default}
-.btn-o{display:block;width:100%;background:transparent;color:#888;border:1px solid #2a2a2a;border-radius:10px;padding:14px;font-size:14px;cursor:pointer;font-family:inherit;margin-bottom:10px}
-.btn-d{display:block;width:100%;background:transparent;color:#e05555;border:1px solid rgba(224,85,85,.3);border-radius:10px;padding:14px;font-size:14px;cursor:pointer;font-family:inherit}
-.btn-sm{width:auto;padding:9px 18px;font-size:12px;border-radius:100px;display:inline-block}
-.brow{display:flex;gap:10px}
-.brow .btn,.brow .btn-o{flex:1}
-/* PILLS */
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.pill{padding:7px 16px;border-radius:100px;border:1px solid #2a2a2a;font-size:12px;cursor:pointer;background:transparent;color:#666;font-family:inherit;transition:all .2s}
-.pill.on{border-color:rgba(201,168,76,.5);color:#C9A84C;background:rgba(201,168,76,.08)}
-/* TOGGLE */
-.tog{display:flex;background:#0d0d0d;border:1px solid #1a1a1a;border-radius:100px;padding:4px;margin-bottom:24px}
-.topt{flex:1;padding:10px;text-align:center;font-size:13px;cursor:pointer;border-radius:100px;border:none;background:transparent;color:#555;font-family:inherit;font-weight:600;transition:all .2s}
-.topt.on{background:#C9A84C;color:#080808}
-/* STEPS */
-.steps{display:flex;align-items:center;margin-bottom:28px}
-.sdot{width:28px;height:28px;border-radius:50%;border:2px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#444;flex-shrink:0;transition:all .25s}
-.sdot.on{background:#C9A84C;border-color:#C9A84C;color:#080808}
-.sdot.done{border-color:#C9A84C;color:#C9A84C}
-.sline{flex:1;height:1px;background:#1a1a1a;margin:0 6px}
-/* CARDS */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tcard{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .2s}
-.tcard:active{opacity:.8}
-.tcard-art{aspect-ratio:1;background:#111;display:flex;align-items:center;justify-content:center;font-size:48px}
+.field-error{font-size:11px;color:#e05555;margin-top:5px;display:none}
+
+/* ── PILLS ── */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.pill{
+padding:7px 16px;border-radius:6px;border:1px solid var(–border2);
+font-size:12px;cursor:pointer;background:transparent;color:var(–muted);
+font-family:‘DM Sans’,sans-serif;transition:all .2s;
+}
+.pill.on{border-color:rgba(212,168,67,.5);color:var(–gold);background:var(–gold2)}
+
+/* ── TOGGLE ── */
+.tog{
+display:flex;background:var(–bg2);border:1px solid var(–border);
+border-radius:8px;padding:4px;margin-bottom:26px;
+}
+.topt{
+flex:1;padding:10px;text-align:center;font-size:13px;cursor:pointer;
+border-radius:6px;border:none;background:transparent;color:var(–muted);
+font-family:‘DM Sans’,sans-serif;font-weight:500;transition:all .2s;
+}
+.topt.on{background:var(–gold);color:#080808;font-weight:600}
+
+/* ── STEPS ── */
+.steps{display:flex;align-items:center;margin-bottom:30px}
+.sdot{
+width:30px;height:30px;border-radius:50%;border:1.5px solid var(–border2);
+display:flex;align-items:center;justify-content:center;font-size:11px;
+font-weight:600;color:var(–muted);flex-shrink:0;transition:all .25s;
+}
+.sdot.on{background:var(–gold);border-color:var(–gold);color:#080808}
+.sdot.done{border-color:var(–gold);color:var(–gold)}
+.sline{flex:1;height:1px;background:var(–border);margin:0 8px}
+
+/* ── TRACK CARDS ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tcard{
+background:var(–card);border:1px solid var(–border);border-radius:12px;
+overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;
+}
+.tcard:active{transform:scale(.98)}
+.tcard-art{
+aspect-ratio:1;background:var(–bg3);display:flex;align-items:center;
+justify-content:center;font-size:52px;position:relative;
+}
+.tcard-art::after{
+content:’’;position:absolute;inset:0;
+background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.5));
+}
 .tcard-body{padding:12px}
-.tcard-n{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.tcard-a{font-size:11px;color:#888;margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tcard-f{display:flex;justify-content:space-between;align-items:center}
-.plays{font-size:11px;color:#444}
-.tpill{font-size:10px;color:#C9A84C;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.07);padding:4px 10px;border-radius:100px;cursor:pointer;font-family:inherit}
-/* ARTIST ROW */
-.arow{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #141414;cursor:pointer}
+.tcard-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.tcard-artist{font-size:11px;color:var(–muted);margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tcard-foot{display:flex;justify-content:space-between;align-items:center}
+.tpill{font-size:10px;color:var(–gold);border:1px solid rgba(212,168,67,.3);background:var(–gold3);padding:4px 10px;border-radius:5px;cursor:pointer;font-family:‘DM Sans’,sans-serif}
+
+/* ── ARTIST ROW ── */
+.arow{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(–border);cursor:pointer;transition:opacity .15s}
 .arow:last-child{border-bottom:none}
-.ava{width:44px;height:44px;border-radius:50%;background:rgba(201,168,76,.12);display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:18px;color:#C9A84C;font-weight:700;flex-shrink:0}
-.ar-inf{flex:1;min-width:0}
-.ar-n{font-size:14px;font-weight:600}
-.ar-m{font-size:11px;color:#555;margin-top:2px}
-.fbtn{flex-shrink:0;background:transparent;border:1px solid #2a2a2a;color:#666;padding:7px 14px;border-radius:100px;font-size:11px;cursor:pointer;font-family:inherit}
-.fbtn.on{border-color:rgba(201,168,76,.4);color:#C9A84C;background:rgba(201,168,76,.07)}
-/* GENRE GRID */
-.gg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
-.gc{border-radius:12px;padding:18px 14px;cursor:pointer;border:1px solid rgba(255,255,255,.03);position:relative;overflow:hidden;min-height:74px}
-.gc:active{opacity:.8}
-.gc-n{font-size:13px;font-weight:600}
-.gc-c{font-size:11px;opacity:.4;margin-top:2px}
-.gc-e{position:absolute;bottom:-4px;right:8px;font-size:44px;opacity:.12;pointer-events:none}
-/* SEARCH */
-.sw{position:relative;margin-bottom:18px}
-.si{width:100%;background:#0d0d0d;border:1px solid #2a2a2a;border-radius:12px;padding:13px 14px 13px 42px;color:#F5F0E8;font-size:14px;font-family:inherit;outline:none;-webkit-appearance:none}
-.si:focus{border-color:#C9A84C}
-.si::placeholder{color:#2a2a2a}
-.sico{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#444;font-size:16px;pointer-events:none}
-/* PROFILE */
-.pban{height:120px;background:linear-gradient(135deg,#0d0d0d,#1a1408);margin:-62px -20px 0}
-.phed{display:flex;align-items:flex-end;gap:14px;margin-top:-38px;margin-bottom:16px;position:relative;z-index:1}
-.pava{width:76px;height:76px;border-radius:50%;background:rgba(201,168,76,.15);border:3px solid #080808;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:28px;color:#C9A84C;font-weight:700;flex-shrink:0}
-.pava-lg{width:80px;height:80px;border-radius:50%;background:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:30px;color:#C9A84C;font-weight:700;margin:0 auto 14px}
-.pstats{display:flex;border:1px solid #1a1a1a;border-radius:12px;overflow:hidden;margin-bottom:18px}
-.ps{flex:1;padding:14px 4px;text-align:center;border-right:1px solid #1a1a1a}
+.arow:active{opacity:.7}
+.ava{width:46px;height:46px;border-radius:50%;background:var(–gold2);border:1px solid rgba(212,168,67,.2);display:flex;align-items:center;justify-content:center;font-family:‘Playfair Display’,serif;font-size:18px;color:var(–gold);font-weight:700;flex-shrink:0}
+.ar-info{flex:1;min-width:0}
+.ar-name{font-size:14px;font-weight:500}
+.ar-meta{font-size:11px;color:var(–muted);margin-top:2px}
+.fbtn{flex-shrink:0;background:transparent;border:1px solid var(–border2);color:var(–muted);padding:7px 14px;border-radius:6px;font-size:11px;cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:all .2s}
+.fbtn.on{border-color:rgba(212,168,67,.4);color:var(–gold);background:var(–gold2)}
+
+/* ── GENRE GRID ── */
+.gg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:26px}
+.gc{border-radius:12px;padding:20px 16px;cursor:pointer;position:relative;overflow:hidden;min-height:80px;border:1px solid rgba(255,255,255,.04);transition:transform .15s}
+.gc:active{transform:scale(.97)}
+.gc-name{font-size:14px;font-weight:500;margin-bottom:3px}
+.gc-count{font-size:11px;opacity:.4}
+.gc-emoji{position:absolute;bottom:-6px;right:8px;font-size:48px;opacity:.1;pointer-events:none}
+
+/* ── SEARCH ── */
+.search-wrap{position:relative;margin-bottom:20px}
+.search-inp{
+width:100%;background:var(–bg2);border:1px solid var(–border2);border-radius:10px;
+padding:13px 14px 13px 44px;color:var(–cream);font-size:15px;
+font-family:‘DM Sans’,sans-serif;outline:none;-webkit-appearance:none;transition:border-color .2s;
+}
+.search-inp:focus{border-color:var(–gold)}
+.search-inp::placeholder{color:var(–muted2)}
+.search-ico{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(–muted);pointer-events:none}
+
+/* ── PROFILE ── */
+.pbanner{
+height:160px;margin:-58px -20px 0;
+background:linear-gradient(160deg,#0d0d08 0%,#150f00 50%,#0d0d0d 100%);
+position:relative;overflow:hidden;
+}
+.pbanner::after{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(212,168,67,.08) 0%,transparent 70%)}
+.phead{display:flex;align-items:flex-end;gap:14px;margin-top:-40px;margin-bottom:18px;position:relative;z-index:1}
+.pava{width:80px;height:80px;border-radius:50%;background:var(–gold2);border:3px solid var(–bg);display:flex;align-items:center;justify-content:center;font-family:‘Playfair Display’,serif;font-size:30px;color:var(–gold);font-weight:700;flex-shrink:0}
+.pava-lg{width:84px;height:84px;border-radius:50%;background:var(–gold2);border:2px solid rgba(212,168,67,.2);display:flex;align-items:center;justify-content:center;font-family:‘Playfair Display’,serif;font-size:34px;color:var(–gold);font-weight:700;margin:0 auto 16px}
+.pstats-row{display:flex;border:1px solid var(–border);border-radius:12px;overflow:hidden;margin-bottom:20px}
+.ps{flex:1;padding:14px 4px;text-align:center;border-right:1px solid var(–border)}
 .ps:last-child{border-right:none}
-.ps-v{font-family:Georgia,serif;font-size:20px;color:#C9A84C}
-.ps-l{font-size:9px;color:#555;text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
-/* TRACK PAGE */
-.tart{width:180px;height:180px;border-radius:14px;background:#0d0d0d;border:1px solid #1a1a1a;display:flex;align-items:center;justify-content:center;font-size:72px;margin:0 auto 20px}
-.gbadge{display:inline-block;font-size:10px;color:#C9A84C;border:1px solid rgba(201,168,76,.3);border-radius:100px;padding:4px 12px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em}
-.pbar{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:12px;padding:18px;margin-bottom:20px}
-.prog{height:3px;background:#1a1a1a;border-radius:2px;margin-bottom:12px;cursor:pointer}
-.pf{height:100%;background:#C9A84C;border-radius:2px;width:0;transition:width .5s linear}
-.tr{display:flex;justify-content:space-between;font-size:11px;color:#555;margin-bottom:14px}
-.ctrls{display:flex;align-items:center;justify-content:center;gap:20px}
-.ctrl{background:none;border:none;color:#555;font-size:20px;cursor:pointer;padding:4px}
-.pbig{width:52px;height:52px;border-radius:50%;background:#C9A84C;border:none;color:#080808;cursor:pointer;display:flex;align-items:center;justify-content:center}
-/* WALLET */
-.wallet{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.03));border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:24px;text-align:center;margin-bottom:20px}
-.w-l{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#888;margin-bottom:6px}
-.w-a{font-family:Georgia,serif;font-size:52px;color:#C9A84C;line-height:1}
-.w-s{font-size:12px;color:#666;margin-top:6px}
-/* STAT CARDS */
-.scards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.sc{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:12px;padding:16px}
-.sc.g{border-color:rgba(201,168,76,.25)}
-.sc-l{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#555;margin-bottom:6px}
-.sc-v{font-family:Georgia,serif;font-size:28px}
-.sc.g .sc-v{color:#C9A84C}
-/* CHART */
-.chart{display:flex;align-items:flex-end;gap:5px;height:88px}
-.cc{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
-.cbs{width:100%;display:flex;gap:2px;align-items:flex-end;flex:1}
-.cbp{border-radius:2px 2px 0 0;width:50%;background:#1a1a1a}
-.cbt{border-radius:2px 2px 0 0;width:50%;background:#C9A84C}
-.cl{font-size:8px;color:#3a3a3a}
-/* TIP FEED */
-.tf{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #111}
-.tf:last-child{border-bottom:none}
-.tf-av{width:36px;height:36px;border-radius:50%;background:#111;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-.tf-n{font-size:13px;font-weight:600}
-.tf-tr{font-size:11px;color:#555;margin-top:1px}
-.tf-a{font-family:Georgia,serif;font-size:20px;color:#C9A84C}
-.tf-ti{font-size:10px;color:#3a3a3a;margin-top:1px}
-/* DIVIDER */
-.div{height:1px;background:#141414;margin:28px 0}
-/* SERIF HEADINGS */
-.sh{font-family:Georgia,serif;font-weight:400;line-height:1.05}
-.sh em{font-style:italic;color:#C9A84C}
-.sec{font-family:Georgia,serif;font-size:22px;font-weight:400;margin-bottom:16px}
-.sec em{font-style:italic;color:#C9A84C}
-/* STATS ROW */
-.srow{display:flex;gap:28px;flex-wrap:wrap}
-.snum{font-family:Georgia,serif;font-size:36px;color:#C9A84C}
-.slbl{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#555;margin-top:2px}
-/* SHARE */
-.sbox{background:#0d0d0d;border:1px solid #2a2a2a;border-radius:10px;padding:13px 14px;display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.surl{flex:1;font-size:12px;color:#C9A84C;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cbtn{background:#C9A84C;color:#080808;border:none;border-radius:6px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
-/* SUCCESS */
-.succ{text-align:center;padding:40px 0}
-.s-ico{font-size:44px;margin-bottom:16px}
-.s-ttl{font-family:Georgia,serif;font-size:32px;font-weight:400;margin-bottom:10px}
-.s-ttl em{font-style:italic;color:#C9A84C}
-.s-sub{font-size:14px;color:#888;line-height:1.7;margin-bottom:28px}
-/* CTA BOX */
-.cbox{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:14px;padding:28px 20px}
-/* UPLOAD */
-.upa{border:2px dashed #2a2a2a;border-radius:12px;padding:32px 16px;text-align:center;margin-bottom:16px;cursor:pointer}
-.upa:active{border-color:#C9A84C}
-/* EMPTY */
-.empty{text-align:center;padding:40px 0;color:#333;font-size:14px}
-/* LAUNCH STATS */
-.lstat{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:12px;padding:20px;text-align:center;flex:1}
-.lstat-n{font-family:Georgia,serif;font-size:32px;color:#C9A84C;margin-bottom:4px}
-.lstat-l{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#555}
-/* PAYNOW TIP STATUS */
-.tip-status{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:10px;padding:16px;text-align:center;margin-top:12px;display:none}
+.ps-val{font-family:‘Playfair Display’,serif;font-size:20px;color:var(–gold)}
+.ps-lbl{font-size:9px;color:var(–muted);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
+
+/* ── TRACK PAGE ── */
+.track-art-big{
+width:200px;height:200px;border-radius:16px;background:var(–bg3);
+border:1px solid var(–border);display:flex;align-items:center;
+justify-content:center;font-size:80px;margin:0 auto 24px;
+box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.genre-tag{
+display:inline-block;font-size:10px;color:var(–gold);
+border:1px solid rgba(212,168,67,.3);border-radius:5px;
+padding:4px 12px;margin-bottom:14px;text-transform:uppercase;letter-spacing:.1em;
+}
+.progress-bar{height:3px;background:var(–border2);border-radius:2px;margin-bottom:12px;cursor:pointer;position:relative}
+.progress-fill{height:100%;background:var(–gold);border-radius:2px;width:0;transition:width .3s linear}
+.time-row{display:flex;justify-content:space-between;font-size:11px;color:var(–muted);margin-bottom:16px}
+.controls{display:flex;align-items:center;justify-content:center;gap:22px}
+.ctrl-btn{background:none;border:none;color:var(–muted);cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center;transition:color .2s}
+.ctrl-btn:active{color:var(–gold)}
+.play-btn{width:56px;height:56px;border-radius:50%;background:var(–gold);border:none;color:#080808;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(212,168,67,.3);transition:transform .15s}
+.play-btn:active{transform:scale(.93)}
+
+/* ── WALLET ── */
+.wallet{
+background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(212,168,67,.02));
+border:1px solid rgba(212,168,67,.18);border-radius:14px;
+padding:28px;text-align:center;margin-bottom:22px;
+}
+.w-label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(–muted);margin-bottom:8px}
+.w-amount{font-family:‘Playfair Display’,serif;font-size:56px;color:var(–gold);line-height:1}
+.w-sub{font-size:12px;color:var(–muted);margin-top:8px}
+
+/* ── STAT CARDS ── */
+.scards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.sc{background:var(–card);border:1px solid var(–border);border-radius:12px;padding:18px}
+.sc.gold{border-color:rgba(212,168,67,.2)}
+.sc-label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(–muted);margin-bottom:8px}
+.sc-value{font-family:‘Playfair Display’,serif;font-size:30px}
+.sc.gold .sc-value{color:var(–gold)}
+
+/* ── TIP FEED ── */
+.tfeed{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(–border)}
+.tfeed:last-child{border-bottom:none}
+.tfeed-av{width:38px;height:38px;border-radius:50%;background:var(–bg3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.tfeed-name{font-size:13px;font-weight:500}
+.tfeed-track{font-size:11px;color:var(–muted);margin-top:2px}
+.tfeed-amt{font-family:‘Playfair Display’,serif;font-size:22px;color:var(–gold)}
+.tfeed-time{font-size:10px;color:var(–muted2);margin-top:2px}
+
+/* ── UPLOAD ── */
+.upload-area{
+border:1.5px dashed var(–border2);border-radius:12px;padding:36px 16px;
+text-align:center;cursor:pointer;transition:border-color .2s,background .2s;
+margin-bottom:16px;
+}
+.upload-area:active,.upload-area.has-file{border-color:var(–gold);background:var(–gold3)}
+
+/* ── MODALS ── */
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:none;align-items:flex-end;backdrop-filter:blur(4px)}
+.mbg.on{display:flex}
+.mod{
+background:var(–bg3);border:1px solid var(–border2);
+border-radius:20px 20px 0 0;padding:0 20px 50px;
+width:100%;max-width:540px;margin:0 auto;position:relative;
+}
+.mod-handle{width:36px;height:4px;background:var(–border2);border-radius:2px;margin:14px auto 24px}
+.mod-x{position:absolute;top:16px;right:18px;background:none;border:none;color:var(–muted);font-size:22px;cursor:pointer;line-height:1;font-family:‘DM Sans’,sans-serif}
+.mod-title{font-family:‘Playfair Display’,serif;font-size:26px;font-weight:400;margin-bottom:6px}
+.mod-sub{font-size:13px;color:var(–muted);margin-bottom:22px}
+
+/* ── TIP AMOUNTS ── */
+.tip-amts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.ta{padding:13px 4px;border:1px solid var(–border2);border-radius:8px;text-align:center;cursor:pointer;font-size:14px;background:transparent;color:var(–cream);font-family:‘DM Sans’,sans-serif;font-weight:500;transition:all .2s}
+.ta.on{border-color:rgba(212,168,67,.5);background:var(–gold2);color:var(–gold)}
+
+/* ── TIP STATUS ── */
+.tip-status{background:var(–bg2);border:1px solid var(–border);border-radius:8px;padding:14px;text-align:center;margin-top:12px;display:none;font-size:13px;line-height:1.6}
+
+/* ── SUCCESS ── */
+.success-page{text-align:center;padding:48px 0}
+.success-icon{font-size:48px;margin-bottom:20px;display:block}
+.success-title{font-family:‘Playfair Display’,serif;font-size:36px;font-weight:400;margin-bottom:12px}
+.success-title em{font-style:italic;color:var(–gold)}
+.success-sub{font-size:14px;color:var(–muted);line-height:1.8;margin-bottom:30px}
+
+/* ── SHARE BOX ── */
+.share-box{background:var(–bg2);border:1px solid var(–border2);border-radius:10px;padding:13px 14px;display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.share-url{flex:1;font-size:12px;color:var(–gold);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.copy-btn{background:var(–gold);color:#080808;border:none;border-radius:6px;padding:7px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:‘DM Sans’,sans-serif}
+
+/* ── CTA BOX ── */
+.cta-box{background:linear-gradient(135deg,rgba(212,168,67,.07),rgba(212,168,67,.02));border:1px solid rgba(212,168,67,.15);border-radius:16px;padding:28px 22px}
+
+/* ── LAUNCH STATS ── */
+.launch-stats{display:flex;gap:10px;margin-bottom:28px}
+.lstat{background:var(–card);border:1px solid var(–border);border-radius:12px;padding:20px 14px;text-align:center;flex:1}
+.lstat-val{font-family:‘Playfair Display’,serif;font-size:28px;color:var(–gold);margin-bottom:4px}
+.lstat-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(–muted)}
+
+/* ── LAUNCH BANNER ── */
+.launch-banner{
+background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(212,168,67,.03));
+border:1px solid rgba(212,168,67,.2);border-radius:12px;
+padding:18px 20px;margin-bottom:28px;display:flex;align-items:center;gap:16px;
+}
+
+/* ── EMPTY ── */
+.empty{text-align:center;padding:32px 0;color:var(–muted2);font-size:14px}
+
 ::-webkit-scrollbar{width:0}
 </style>
+
 </head>
 <body>
 
 <!-- TOP NAV -->
 
 <div class="tnav">
-  <div class="logo" onclick="go('home')">MALB<b>RY</b></div>
+  <div class="logo" onclick="go('home')">Malbry</div>
   <div class="tnav-r">
-    <button class="btn-snav" onclick="go('search')">Search</button>
-    <button class="btn-join" id="navJoin" onclick="go('fan-signup')">Join Free</button>
+    <button class="nav-search-btn" onclick="go('search')">Search</button>
+    <button class="nav-join" id="navJoin" onclick="go('fan-signup')">Join Free</button>
     <button class="nav-user" id="navUser" onclick="go('me')">@<span id="navName"></span></button>
   </div>
 </div>
@@ -220,7 +388,7 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
   <button class="bn" data-p="search" onclick="go('search')">
     <svg class="bni" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search
   </button>
-  <button class="bn" data-p="fan-signup" onclick="go('fan-signup')">
+  <button class="bn" data-p="join" onclick="go('fan-signup')">
     <svg class="bni" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Join
   </button>
 </div>
@@ -228,28 +396,33 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
 <!-- MINI PLAYER -->
 
 <div class="mp" id="miniPlayer">
-  <div class="mp-th" id="mpTh">🎵</div>
-  <div class="mp-inf"><div class="mp-t" id="mpT">-</div><div class="mp-a" id="mpA">-</div></div>
-  <button class="mp-btn" id="mpBtn" onclick="toggleMini()">▶</button>
-  <div class="mp-tip" onclick="openTip(window._nowA||'')">Tip</div>
+  <div class="mp-art" id="mpArt">🎵</div>
+  <div class="mp-info">
+    <div class="mp-title" id="mpTitle">-</div>
+    <div class="mp-artist" id="mpArtist">-</div>
+  </div>
+  <button class="mp-play" id="mpPlay" onclick="toggleMini()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="#080808"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+  </button>
+  <div class="mp-tip" onclick="openTip(window._nowArtist||'')">Tip</div>
 </div>
 
 <!-- TIP MODAL -->
 
 <div class="mbg" id="tipModal">
   <div class="mod">
-    <button class="mx" onclick="cm('tipModal')">×</button>
-    <div class="mh"></div>
-    <div class="mt">Send a Tip</div>
-    <div class="ms" id="tipFor">Support this artist via EcoCash</div>
-    <div class="tamts">
+    <button class="mod-x" onclick="cm('tipModal')">×</button>
+    <div class="mod-handle"></div>
+    <div class="mod-title">Send a Tip</div>
+    <div class="mod-sub" id="tipFor">Support this artist via EcoCash</div>
+    <div class="tip-amts">
       <button class="ta" onclick="setAmt(this,.5)">$0.50</button>
       <button class="ta on" onclick="setAmt(this,1)">$1.00</button>
       <button class="ta" onclick="setAmt(this,2)">$2.00</button>
       <button class="ta" onclick="setAmt(this,5)">$5.00</button>
     </div>
     <div class="field"><label>Your EcoCash Number</label><input type="tel" id="tipEco" placeholder="e.g. 0771234567"/></div>
-    <div class="field"><label>Message to artist (optional)</label><input type="text" id="tipMsg" placeholder="Keep doing this!"/></div>
+    <div class="field"><label>Message (optional)</label><input type="text" id="tipMsg" placeholder="Keep doing this!"/></div>
     <button class="btn" id="tipSendBtn" onclick="sendTip()">Send $1.00 via EcoCash</button>
     <div class="tip-status" id="tipStatus"></div>
   </div>
@@ -259,83 +432,98 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
 
 <div class="mbg" id="payModal">
   <div class="mod">
-    <button class="mx" onclick="cm('payModal')">×</button>
-    <div class="mh"></div>
-    <div class="mt">Request Payout</div>
-    <div class="ms">Arrives in your EcoCash within 2 hours</div>
-    <div class="wallet" style="margin-bottom:16px"><div class="w-l">Available</div><div class="w-a" id="payBal">$0.00</div></div>
-    <div class="field"><label>Amount to withdraw</label><input type="number" id="payAmt" placeholder="Min $5.00"/></div>
+    <button class="mod-x" onclick="cm('payModal')">×</button>
+    <div class="mod-handle"></div>
+    <div class="mod-title">Request Payout</div>
+    <div class="mod-sub">We will process and send to your EcoCash</div>
+    <div class="wallet" style="margin-bottom:18px"><div class="w-label">Available</div><div class="w-amount" id="payBal">$0.00</div></div>
+    <div class="field"><label>Amount</label><input type="number" id="payAmt" placeholder="Min $5.00"/></div>
     <div class="field"><label>EcoCash Number</label><input type="tel" id="payEco" placeholder="0771234567"/></div>
     <button class="btn" onclick="doPayout()">Send to EcoCash</button>
   </div>
 </div>
 
-<!-- ═══ HOME ═══ -->
+<!-- ══════════════════════════════
+     HOME
+══════════════════════════════ -->
 
 <div class="pg on" id="pg-home">
-  <div style="padding-top:20px;margin-bottom:32px">
-    <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#C9A84C;margin-bottom:14px;font-weight:600">Zimbabwe's Music Platform</div>
-    <div class="sh" style="font-size:clamp(44px,13vw,76px);margin-bottom:16px">Where <em>artists</em><br>get paid.</div>
-    <p style="font-size:14px;color:#888;line-height:1.7;max-width:340px;margin-bottom:24px">Stream, discover and tip your favourite artists directly via EcoCash. No middlemen. No ZIMURA cut.</p>
-    <div class="brow" style="flex-wrap:wrap;margin-bottom:0">
-      <button class="btn btn-sm" style="background:#C9A84C;color:#080808;border:none;font-weight:700;margin:0" onclick="go('search')">Explore Music</button>
-      <button class="btn-o btn-sm" style="margin:0" onclick="go('artist-signup')">I'm an Artist</button>
+  <!-- HERO -->
+  <div style="position:relative;overflow:hidden;padding:48px 20px 40px;background:linear-gradient(180deg,#0a0900 0%,var(--bg) 100%)">
+    <div style="position:absolute;top:-40px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(212,168,67,.07) 0%,transparent 70%);pointer-events:none"></div>
+    <div class="label fade-up" style="color:var(--gold);margin-bottom:16px">Zimbabwe's Music Platform</div>
+    <div class="display fade-up-1" style="font-size:clamp(48px,14vw,80px);margin-bottom:18px">Where<br><em>artists</em><br>get paid.</div>
+    <p class="fade-up-2" style="font-size:14px;color:var(--muted);line-height:1.8;max-width:320px;margin-bottom:28px">Stream and discover Zimbabwean music. Tip your favourite artists directly via EcoCash. No middlemen.</p>
+    <div class="btn-row fade-up-3">
+      <button class="btn btn-sm" onclick="go('search')">Explore Music</button>
+      <button class="btn-o btn-sm" onclick="go('artist-signup')">I'm an Artist</button>
     </div>
   </div>
-  <!-- LAUNCH STATS -->
-  <div style="display:flex;gap:12px;margin-bottom:32px">
-    <div class="lstat">
-      <div class="lstat-n">100</div>
-      <div class="lstat-l">Artist goal</div>
+
+  <div class="pg-in">
+    <!-- LAUNCH STATS -->
+    <div class="launch-stats fade-up" style="margin-top:28px">
+      <div class="lstat"><div class="lstat-val">100</div><div class="lstat-lbl">Artist Goal</div></div>
+      <div class="lstat"><div class="lstat-val">Free</div><div class="lstat-lbl">First $500</div></div>
+      <div class="lstat"><div class="lstat-val">Direct</div><div class="lstat-lbl">EcoCash</div></div>
     </div>
-    <div class="lstat">
-      <div class="lstat-n">Free</div>
-      <div class="lstat-l">First $500</div>
-    </div>
-    <div class="lstat">
-      <div class="lstat-n">Direct</div>
-      <div class="lstat-l">EcoCash tips</div>
-    </div>
+
+```
+<!-- LAUNCH BANNER -->
+<div class="launch-banner fade-up">
+  <div style="width:42px;height:42px;border-radius:10px;background:var(--gold2);border:1px solid rgba(212,168,67,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
   </div>
-  <!-- LAUNCH BANNER -->
-  <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:16px 18px;margin-bottom:32px;display:flex;align-items:center;gap:14px">
-    <div style="font-size:28px">🚀</div>
-    <div>
-      <div style="font-size:13px;font-weight:700;color:#F5F0E8;margin-bottom:3px">We just launched</div>
-      <div style="font-size:12px;color:#888">Be one of the first 100 artists on Malbry. 0% on your first $500 earned.</div>
-    </div>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div class="sec" style="margin:0">Trending <em>Now</em></div>
-    <button style="background:none;border:none;color:#C9A84C;font-size:12px;cursor:pointer;font-family:inherit" onclick="go('search')">See All</button>
-  </div>
-  <div class="pills" id="hFilter">
-    <button class="pill on" onclick="fHome(this,'All')">All</button>
-    <button class="pill" onclick="fHome(this,'Zimdancehall')">Zimdancehall</button>
-    <button class="pill" onclick="fHome(this,'Afrobeats')">Afrobeats</button>
-    <button class="pill" onclick="fHome(this,'Gospel')">Gospel</button>
-    <button class="pill" onclick="fHome(this,'Hip Hop')">Hip Hop</button>
-  </div>
-  <div class="g2" id="hGrid"></div>
-  <div class="div"></div>
-  <div class="sec">Featured <em>Artists</em></div>
-  <div id="hArtists"></div>
-  <div class="div"></div>
-  <div class="cbox">
-    <div class="sec" style="margin-bottom:10px">Are you an <em>artist?</em></div>
-    <p style="color:#888;font-size:14px;margin-bottom:20px">Upload your music. Share your link. Receive EcoCash tips directly from fans. We take 0% on your first $500.</p>
-    <button class="btn" style="width:auto;padding:11px 24px" onclick="go('artist-signup')">Join as an Artist →</button>
+  <div>
+    <div style="font-size:13px;font-weight:600;margin-bottom:3px">We just launched</div>
+    <div style="font-size:12px;color:var(--muted)">Be one of the first 100 artists. 0% on your first $500 earned.</div>
   </div>
 </div>
 
-<!-- ═══ SEARCH ═══ -->
+<!-- TRENDING -->
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+  <div class="section-title" style="margin:0">Trending <em>Now</em></div>
+  <button style="background:none;border:none;color:var(--gold);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500" onclick="go('search')">See All</button>
+</div>
+<div class="pills" id="hFilter">
+  <button class="pill on" onclick="fHome(this,'All')">All</button>
+  <button class="pill" onclick="fHome(this,'Zimdancehall')">Zimdancehall</button>
+  <button class="pill" onclick="fHome(this,'Afrobeats')">Afrobeats</button>
+  <button class="pill" onclick="fHome(this,'Gospel')">Gospel</button>
+  <button class="pill" onclick="fHome(this,'Hip Hop')">Hip Hop</button>
+</div>
+<div class="grid2" id="hGrid"></div>
+
+<div class="hr"></div>
+
+<!-- ARTISTS -->
+<div class="section-title">Featured <em>Artists</em></div>
+<div id="hArtists"></div>
+
+<div class="hr"></div>
+
+<!-- CTA -->
+<div class="cta-box">
+  <div class="section-title" style="margin-bottom:10px">Are you an <em>artist?</em></div>
+  <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:20px">Upload your music. Share your link. Fans tip you directly via EcoCash. We take 0% on your first $500.</p>
+  <button class="btn" style="width:auto;padding:11px 24px" onclick="go('artist-signup')">Join as an Artist</button>
+</div>
+<div style="height:8px"></div>
+```
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SEARCH
+══════════════════════════════ -->
 
 <div class="pg" id="pg-search">
-  <div style="padding-top:18px">
-    <div class="sh" style="font-size:28px;margin-bottom:18px">Find your <em>sound.</em></div>
-    <div class="sw">
-      <span class="sico">🔍</span>
-      <input class="si" type="search" id="sQ" placeholder="Artists, tracks, genres..." oninput="doSearch(this.value)">
+  <div class="pg-in" style="padding-top:18px">
+    <div class="display" style="font-size:30px;margin-bottom:20px">Find your <em>sound.</em></div>
+    <div class="search-wrap">
+      <svg class="search-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-inp" type="search" id="sQ" placeholder="Artists, tracks, genres..." oninput="doSearch(this.value)">
     </div>
     <div class="pills">
       <button class="pill" onclick="doSearch('Zimdancehall')">Zimdancehall</button>
@@ -345,88 +533,102 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
       <button class="pill" onclick="doSearch('Amapiano')">Amapiano</button>
       <button class="pill" onclick="doSearch('Sungura')">Sungura</button>
     </div>
+    <div id="sDef">
+      <div class="section-title">Browse <em>Genres</em></div>
+      <div class="gg" id="gGrid"></div>
+      <div class="hr"></div>
+      <div class="section-title">Top <em>Artists</em></div>
+      <div id="sArtists"></div>
+    </div>
+    <div id="sRes" style="display:none"><div id="rA"></div><div id="rT" style="margin-top:20px"></div></div>
+    <div id="sEmpty" style="display:none"><div class="empty">No results found</div></div>
   </div>
-  <div id="sDef">
-    <div class="sec">Browse <em>Genres</em></div>
-    <div class="gg" id="gGrid"></div>
-    <div class="div"></div>
-    <div class="sec">Top <em>Artists</em></div>
-    <div id="sArtists"></div>
-  </div>
-  <div id="sRes" style="display:none"><div id="rA"></div><div id="rT" style="margin-top:20px"></div></div>
-  <div id="sEmpty" style="display:none"><div class="empty">No results found</div></div>
 </div>
 
-<!-- ═══ TRACK ═══ -->
+<!-- ══════════════════════════════
+     TRACK
+══════════════════════════════ -->
 
 <div class="pg" id="pg-track">
-  <button onclick="goBack()" style="background:none;border:none;color:#555;font-size:13px;cursor:pointer;margin:14px 0 20px;font-family:inherit">← Back</button>
-  <div class="tart" id="tArt">🎵</div>
-  <div class="gbadge" id="tGenre">Genre</div>
-  <div class="sh" style="font-size:30px;margin-bottom:6px" id="tTitle">Track</div>
-  <div style="font-size:14px;font-weight:600;color:#F5F0E8;margin-bottom:22px;cursor:pointer" id="tArtBtn" onclick="go('artist-profile')"></div>
-  <div class="pbar">
-    <div class="prog" onclick="seekT(event)"><div class="pf" id="tFill"></div></div>
-    <div class="tr"><span id="tCur">0:00</span><span>3:47</span></div>
-    <div class="ctrls">
-      <button class="ctrl">⏮</button>
-      <button class="pbig" id="tBtn" onclick="toggleTrack()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#080808"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </button>
-      <button class="ctrl">⏭</button>
+  <div class="pg-in">
+    <button onclick="goBack()" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin:16px 0 22px;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back
+    </button>
+    <div class="track-art-big" id="tArt">🎵</div>
+    <div style="text-align:center;margin-bottom:22px">
+      <div class="genre-tag" id="tGenre">Genre</div>
+      <div class="display" style="font-size:28px;margin-bottom:8px" id="tTitle">Track</div>
+      <div style="font-size:14px;font-weight:500;color:var(--muted);cursor:pointer" id="tArtBtn" onclick="go('artist-profile')"></div>
     </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:22px">
+      <div class="progress-bar" onclick="seekT(event)"><div class="progress-fill" id="tFill"></div></div>
+      <div class="time-row"><span id="tCur">0:00</span><span>3:47</span></div>
+      <div class="controls">
+        <button class="ctrl-btn" onclick="prevTrack()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="4" x2="5" y2="20"/></svg>
+        </button>
+        <button class="play-btn" id="tBtn" onclick="toggleTrack()">
+          <svg id="tBtnIcon" width="20" height="20" viewBox="0 0 24 24" fill="#080808"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+        <button class="ctrl-btn" onclick="nextTrack()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="btn-row" style="margin-bottom:22px">
+      <button class="btn" style="margin:0" id="tTipBtn">Tip Artist</button>
+      <button class="btn-o" style="margin:0;width:auto;padding:14px 18px" onclick="shareApp()">Share</button>
+    </div>
+    <div class="hr"></div>
+    <div class="section-title" style="font-size:18px">More Tracks</div>
+    <div id="mTracks"></div>
   </div>
-  <div style="display:flex;gap:28px;margin-bottom:20px">
-    <div><div class="snum" style="font-size:24px" id="tPlays">0</div><div class="slbl">Plays</div></div>
-    <div><div class="snum" style="font-size:24px" id="tTips">$0</div><div class="slbl">Tips</div></div>
-  </div>
-  <div class="brow">
-    <button class="btn" style="margin:0" id="tTipBtn">💛 Tip Artist</button>
-    <button class="btn-o" style="margin:0;width:auto;padding:14px 18px" onclick="shareApp()">Share</button>
-  </div>
-  <div class="div"></div>
-  <div class="sec" style="font-size:18px">More Tracks</div>
-  <div id="mTracks"></div>
 </div>
 
-<!-- ═══ ARTIST PROFILE ═══ -->
+<!-- ══════════════════════════════
+     ARTIST PROFILE
+══════════════════════════════ -->
 
 <div class="pg" id="pg-artist-profile">
-  <div class="pban"></div>
-  <div class="phed">
-    <div class="pava" id="apAva">J</div>
-    <div style="padding-bottom:6px">
-      <div class="sh" style="font-size:24px" id="apName">Artist</div>
-      <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.07em;margin-top:3px" id="apTag">Genre · City</div>
+  <div class="pg-in">
+    <div class="pbanner"></div>
+    <div class="phead">
+      <div class="pava" id="apAva">J</div>
+      <div style="padding-bottom:8px">
+        <div class="display" style="font-size:24px" id="apName">Artist</div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:4px" id="apTag">Genre · City</div>
+      </div>
     </div>
+    <div class="btn-row" style="margin-bottom:20px;flex-wrap:wrap;gap:8px">
+      <button class="btn btn-sm" id="apFBtn" onclick="doFollow()" style="border:none;margin:0">Follow</button>
+      <button class="btn-o btn-sm" style="margin:0" onclick="openTip(document.getElementById('apName').textContent)">Tip</button>
+      <button class="btn-o btn-sm" style="margin:0" onclick="shareApp()">Share</button>
+    </div>
+    <div class="pstats-row">
+      <div class="ps"><div class="ps-val" id="apPl">—</div><div class="ps-lbl">Plays</div></div>
+      <div class="ps"><div class="ps-val" id="apTr">—</div><div class="ps-lbl">Tracks</div></div>
+      <div class="ps"><div class="ps-val" id="apFo">—</div><div class="ps-lbl">Followers</div></div>
+      <div class="ps"><div class="ps-val" id="apTi">—</div><div class="ps-lbl">Tips</div></div>
+    </div>
+    <p id="apBio" style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:24px"></p>
+    <div class="section-title" style="font-size:18px">Tracks</div>
+    <div class="grid2" id="apGrid"></div>
   </div>
-  <div class="brow" style="margin-bottom:18px;flex-wrap:wrap">
-    <button class="btn btn-sm" id="apFBtn" onclick="doFollow()" style="border:none;margin:0">Follow</button>
-    <button class="btn-o btn-sm" style="margin:0" onclick="openTip(document.getElementById('apName').textContent)">Tip</button>
-    <button class="btn-o btn-sm" style="margin:0" onclick="shareApp()">Share</button>
-  </div>
-  <div class="pstats">
-    <div class="ps"><div class="ps-v" id="apPl">0</div><div class="ps-l">Plays</div></div>
-    <div class="ps"><div class="ps-v" id="apTr">0</div><div class="ps-l">Tracks</div></div>
-    <div class="ps"><div class="ps-v" id="apFo">0</div><div class="ps-l">Followers</div></div>
-    <div class="ps"><div class="ps-v" id="apTi">$0</div><div class="ps-l">Tips</div></div>
-  </div>
-  <p id="apBio" style="color:#888;font-size:14px;line-height:1.7;margin-bottom:22px"></p>
-  <div class="sec" style="font-size:18px">Tracks</div>
-  <div class="g2" id="apGrid"></div>
 </div>
 
-<!-- ═══ FAN SIGNUP ═══ -->
+<!-- ══════════════════════════════
+     FAN SIGNUP
+══════════════════════════════ -->
 
 <div class="pg" id="pg-fan-signup">
-  <div style="padding-top:14px">
+  <div class="pg-in" style="padding-top:16px">
     <div class="tog">
       <button class="topt on" onclick="go('fan-signup')">I'm a Fan</button>
       <button class="topt" onclick="go('artist-signup')">I'm an Artist</button>
     </div>
     <div id="fanForm">
-      <div class="sh" style="font-size:28px;margin-bottom:8px">Join <em>Malbry</em></div>
-      <p style="color:#888;font-size:14px;margin-bottom:22px">Free forever. Follow artists and tip directly via EcoCash.</p>
+      <div class="display" style="font-size:30px;margin-bottom:8px">Join <em>Malbry</em></div>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Free forever. Follow artists and tip via EcoCash.</p>
       <div class="field-row">
         <div class="field"><label>First Name</label><input type="text" id="fFirst" placeholder="First"/></div>
         <div class="field"><label>Last Name</label><input type="text" id="fLast" placeholder="Last"/></div>
@@ -436,7 +638,7 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
       </div>
       <div class="field"><label>Email</label><input type="email" id="fEmail" placeholder="your@email.com"/></div>
       <div class="field"><label>Password</label><input type="password" id="fPass" placeholder="Min 8 characters"/></div>
-      <div class="field"><label>EcoCash Number <span style="color:#444;font-weight:400;text-transform:none;letter-spacing:0">(to send tips)</span></label><input type="tel" id="fEco" placeholder="0771234567"/></div>
+      <div class="field"><label>EcoCash Number <span style="color:var(--muted2);font-weight:400;text-transform:none;letter-spacing:0">(to send tips)</span></label><input type="tel" id="fEco" placeholder="0771234567"/></div>
       <div class="field"><label>City</label>
         <select id="fCity">
           <option value="">Select...</option>
@@ -447,13 +649,13 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
         </select>
       </div>
       <button class="btn" id="fanBtn" onclick="joinFan()">Create Free Account</button>
-      <p style="text-align:center;font-size:12px;color:#555">Already have an account? <span style="color:#C9A84C;cursor:pointer" onclick="showLogin()">Log in</span></p>
+      <p style="text-align:center;font-size:12px;color:var(--muted)">Already have an account? <span style="color:var(--gold);cursor:pointer" onclick="showLogin()">Log in</span></p>
     </div>
     <div id="fanDone" style="display:none">
-      <div class="succ">
-        <div class="s-ico">✦</div>
-        <div class="s-ttl">Welcome to <em>Malbry.</em></div>
-        <p class="s-sub" id="fanMsg">Your account is live.</p>
+      <div class="success-page">
+        <span class="success-icon">✦</span>
+        <div class="success-title">Welcome to <em>Malbry.</em></div>
+        <p class="success-sub" id="fanMsg">Your account is live.</p>
         <button class="btn" onclick="go('home')">Start Listening</button>
         <button class="btn-o" onclick="go('search')">Discover Artists</button>
       </div>
@@ -461,10 +663,12 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
   </div>
 </div>
 
-<!-- ═══ ARTIST SIGNUP ═══ -->
+<!-- ══════════════════════════════
+     ARTIST SIGNUP
+══════════════════════════════ -->
 
 <div class="pg" id="pg-artist-signup">
-  <div style="padding-top:14px">
+  <div class="pg-in" style="padding-top:16px">
     <div class="tog">
       <button class="topt" onclick="go('fan-signup')">I'm a Fan</button>
       <button class="topt on" onclick="go('artist-signup')">I'm an Artist</button>
@@ -476,8 +680,8 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
       <div class="sdot" id="sd4">✦</div>
     </div>
     <div id="as1">
-      <div class="sh" style="font-size:26px;margin-bottom:8px">Create your <em>account</em></div>
-      <p style="color:#888;font-size:14px;margin-bottom:20px">Free. 0% on your first $500 earned.</p>
+      <div class="display" style="font-size:28px;margin-bottom:8px">Create your <em>account</em></div>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:22px">Free. 0% on your first $500 earned.</p>
       <div class="field"><label>Full Name</label><input type="text" id="aFull" placeholder="Your real name"/></div>
       <div class="field"><label>Stage Name</label><input type="text" id="aStage" placeholder="What fans know you as"/></div>
       <div class="field"><label>Username</label>
@@ -485,14 +689,14 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
       </div>
       <div class="field"><label>Email</label><input type="email" id="aEmail" placeholder="your@email.com"/></div>
       <div class="field"><label>Password</label><input type="password" id="aPass" placeholder="Min 8 characters"/></div>
-      <div class="field"><label>EcoCash Number <span style="color:#444;font-weight:400;text-transform:none;letter-spacing:0">(to receive tips)</span></label><input type="tel" id="aEco" placeholder="0771234567"/></div>
-      <button class="btn" onclick="aStep(2)">Continue →</button>
+      <div class="field"><label>EcoCash Number <span style="color:var(--muted2);font-weight:400;text-transform:none;letter-spacing:0">(tips go here)</span></label><input type="tel" id="aEco" placeholder="0771234567"/></div>
+      <button class="btn" onclick="aStep(2)">Continue</button>
     </div>
     <div id="as2" style="display:none">
-      <div class="sh" style="font-size:26px;margin-bottom:8px">Build your <em>profile</em></div>
-      <p style="color:#888;font-size:14px;margin-bottom:20px">Help fans discover you.</p>
-      <div class="field"><label>Bio</label><textarea id="aBio" placeholder="Tell fans who you are and what your music is about..."></textarea></div>
-      <div class="field"><label>Genre — tap all that apply</label>
+      <div class="display" style="font-size:28px;margin-bottom:8px">Build your <em>profile</em></div>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:22px">Help fans discover you.</p>
+      <div class="field"><label>Bio</label><textarea id="aBio" placeholder="Tell fans who you are..."></textarea></div>
+      <div class="field"><label>Your Genres</label>
         <div class="pills">
           <button class="pill" onclick="this.classList.toggle('on')">Zimdancehall</button>
           <button class="pill" onclick="this.classList.toggle('on')">Afrobeats</button>
@@ -505,166 +709,158 @@ body{background:#080808;color:#F5F0E8;font-family:-apple-system,BlinkMacSystemFo
         </div>
       </div>
       <div class="field"><label>City</label>
-        <select id="aCity">
-          <option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option>
-          <option>Masvingo</option><option>Kwekwe</option>
-          <option>Diaspora — UK</option><option>Diaspora — South Africa</option><option>Diaspora — USA</option>
-        </select>
+        <select id="aCity"><option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option><option>Masvingo</option><option>Kwekwe</option><option>Diaspora — UK</option><option>Diaspora — South Africa</option><option>Diaspora — USA</option></select>
       </div>
-      <button class="btn" onclick="aStep(3)">Continue →</button>
+      <button class="btn" onclick="aStep(3)">Continue</button>
       <button class="btn-o" onclick="aStep(1)">Back</button>
     </div>
     <div id="as3" style="display:none">
-      <div class="sh" style="font-size:26px;margin-bottom:8px">Upload your first <em>track</em></div>
-      <p style="color:#888;font-size:14px;margin-bottom:20px">You can add more from your dashboard.</p>
+      <div class="display" style="font-size:28px;margin-bottom:8px">Upload your first <em>track</em></div>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:22px">Add more from your dashboard anytime.</p>
       <div class="field"><label>Track Title</label><input type="text" id="aTrack" placeholder="What's this track called?"/></div>
       <div class="field"><label>Genre</label>
-        <select id="aTrackG">
-          <option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option>
-          <option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</option>
-        </select>
+        <select id="aTrackG"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</option></select>
       </div>
-      <div class="upa" onclick="alert('Audio upload launching soon! Your profile goes live now — add your track when upload is ready.')">
-        <div style="font-size:30px;color:#C9A84C;margin-bottom:8px">🎵</div>
-        <div style="font-size:14px;font-weight:600;margin-bottom:4px">Tap to upload audio</div>
-        <div style="font-size:12px;color:#555">MP3 or WAV · Launching soon</div>
+      <div class="upload-area" id="uploadArea" onclick="document.getElementById('audioFile').click()">
+        <div style="font-size:32px;color:var(--gold);margin-bottom:10px" id="upIcon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:4px" id="upLabel">Tap to upload audio</div>
+        <div style="font-size:12px;color:var(--muted)" id="upSub">MP3 or WAV up to 50MB</div>
       </div>
-      <button class="btn" onclick="aStep(4)">Go Live ✦</button>
+      <input type="file" id="audioFile" accept=".mp3,.wav,audio/mpeg,audio/wav" style="display:none" onchange="handleUpload(this)"/>
+      <button class="btn" onclick="aStep(4)">Go Live</button>
       <button class="btn-o" onclick="aStep(2)">Back</button>
     </div>
     <div id="as4" style="display:none">
-      <div class="succ">
-        <div class="s-ico">✦</div>
-        <div class="s-ttl">You're <em>live!</em></div>
-        <p class="s-sub">Share your link — fans can tip you directly via EcoCash the moment they hear your music.</p>
-        <div class="sbox">
-          <span class="surl" id="artLink">malbry.vercel.app/@you</span>
-          <button class="cbtn" onclick="copyLink()">Copy</button>
+      <div class="success-page">
+        <span class="success-icon">✦</span>
+        <div class="success-title">You're <em>live!</em></div>
+        <p class="success-sub">Share your link — fans can tip you directly via EcoCash.</p>
+        <div class="share-box">
+          <span class="share-url" id="artLink">malbry.vercel.app/@you</span>
+          <button class="copy-btn" onclick="copyLink()">Copy</button>
         </div>
-        <button class="btn" onclick="shareWA()">Share on WhatsApp 📲</button>
+        <button class="btn" onclick="shareWA()">Share on WhatsApp</button>
         <button class="btn-o" onclick="go('dashboard')">Go to Dashboard</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ DASHBOARD ═══ -->
+<!-- ══════════════════════════════
+     DASHBOARD
+══════════════════════════════ -->
 
 <div class="pg" id="pg-dashboard">
-  <div style="padding-top:18px">
-    <div class="sh" style="font-size:28px;margin-bottom:6px">Your <em>Earnings</em></div>
-    <div style="font-size:13px;color:#555;margin-bottom:20px" id="dashUsername"></div>
+  <div class="pg-in" style="padding-top:20px">
+    <div class="display" style="font-size:30px;margin-bottom:6px">Your <em>Earnings</em></div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:22px" id="dashUser"></div>
     <div class="wallet">
-      <div class="w-l">Available Balance</div>
-      <div class="w-a" id="dashBal">$0.00</div>
-      <div class="w-s">Ready to withdraw to EcoCash</div>
+      <div class="w-label">Available Balance</div>
+      <div class="w-amount" id="dashBal">$0.00</div>
+      <div class="w-sub">Ready to withdraw to EcoCash</div>
     </div>
     <button class="btn" onclick="document.getElementById('payBal').textContent=document.getElementById('dashBal').textContent;document.getElementById('payModal').classList.add('on')">Request EcoCash Payout</button>
     <div class="scards">
-      <div class="sc g"><div class="sc-l">Total Earned</div><div class="sc-v" id="dEarned">$0.00</div></div>
-      <div class="sc"><div class="sc-l">Total Plays</div><div class="sc-v" id="dPlays">0</div></div>
-      <div class="sc"><div class="sc-l">Tips Received</div><div class="sc-v" id="dTips">0</div></div>
-      <div class="sc"><div class="sc-l">Tracks Live</div><div class="sc-v" id="dTracks">0</div></div>
+      <div class="sc gold"><div class="sc-label">Total Earned</div><div class="sc-value" id="dEarned">$0.00</div></div>
+      <div class="sc"><div class="sc-label">Total Plays</div><div class="sc-value" id="dPlays">0</div></div>
+      <div class="sc"><div class="sc-label">Tips Received</div><div class="sc-value" id="dTips">0</div></div>
+      <div class="sc"><div class="sc-label">Tracks Live</div><div class="sc-value" id="dTrackCount">0</div></div>
     </div>
-    <div class="div"></div>
-    <div class="sec" style="font-size:17px">Your Tracks</div>
-    <div id="dTrackList">
-      <div class="empty" style="padding:20px 0">No tracks yet — <span style="color:#C9A84C;cursor:pointer" onclick="go('artist-signup')">upload your first track</span></div>
-    </div>
-    <div class="div"></div>
-    <div class="sec" style="font-size:17px">Recent Tips</div>
-    <div id="dTipFeed">
-      <div class="empty" style="padding:20px 0">Tips will appear here once fans start tipping</div>
-    </div>
+    <div class="hr"></div>
+    <div class="section-title" style="font-size:18px">Your Tracks</div>
+    <div id="dTrackList"><div class="empty">No tracks yet — <span style="color:var(--gold);cursor:pointer" onclick="aStep(1);go('artist-signup')">upload your first track</span></div></div>
+    <div class="hr"></div>
+    <div class="section-title" style="font-size:18px">Recent Tips</div>
+    <div id="dTipFeed"><div class="empty">Tips will appear here once fans start tipping</div></div>
     <div style="margin-top:24px">
       <button class="btn" onclick="aStep(1);go('artist-signup')">+ Upload New Track</button>
     </div>
   </div>
 </div>
 
-<!-- ═══ ME ═══ -->
+<!-- ══════════════════════════════
+     ME
+══════════════════════════════ -->
 
 <div class="pg" id="pg-me">
-  <div style="padding-top:20px">
+  <div class="pg-in" style="padding-top:22px">
     <div id="meGuest">
-      <div class="sh" style="font-size:28px;margin-bottom:10px">Join <em>Malbry</em></div>
-      <p style="color:#888;font-size:14px;margin-bottom:24px">Create an account to follow artists, send tips and track your listening.</p>
+      <div class="display" style="font-size:30px;margin-bottom:10px">Join <em>Malbry</em></div>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:26px">Create an account to follow artists, send tips and track your listening.</p>
       <button class="btn" onclick="go('fan-signup')">Join as a Fan</button>
       <button class="btn-o" onclick="go('artist-signup')">Join as an Artist</button>
     </div>
     <div id="meIn" style="display:none">
-      <div style="text-align:center;margin-bottom:28px">
+      <div style="text-align:center;margin-bottom:30px">
         <div class="pava-lg" id="meAva">?</div>
-        <div class="sh" style="font-size:24px" id="meName">-</div>
-        <div style="font-size:13px;color:#C9A84C;margin-top:4px" id="meUD">@-</div>
-        <div style="font-size:12px;color:#555;margin-top:3px" id="meTL">Fan</div>
+        <div class="display" style="font-size:26px" id="meName">-</div>
+        <div style="font-size:13px;color:var(--gold);margin-top:5px;font-weight:500" id="meUD">@-</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px" id="meTL">Fan</div>
       </div>
-      <div class="div" style="margin-top:0"></div>
-      <div id="meFan">
-        <div class="sec" style="font-size:17px">Your Activity</div>
+      <div class="hr" style="margin-top:0"></div>
+      <div id="meFanStats">
+        <div class="section-title" style="font-size:17px">Your Activity</div>
         <div class="scards">
-          <div class="sc"><div class="sc-l">Following</div><div class="sc-v" id="meFol">0</div></div>
-          <div class="sc g"><div class="sc-l">Tips Sent</div><div class="sc-v" id="meTS">$0</div></div>
+          <div class="sc"><div class="sc-label">Following</div><div class="sc-value" id="meFol">0</div></div>
+          <div class="sc gold"><div class="sc-label">Tips Sent</div><div class="sc-value" id="meTS">$0</div></div>
         </div>
       </div>
-      <div id="meArt" style="display:none">
+      <div id="meArtLinks" style="display:none">
         <button class="btn-o" style="margin-bottom:10px" onclick="go('dashboard')">View Earnings Dashboard</button>
         <button class="btn-o" style="margin-bottom:10px" onclick="go('artist-profile')">View My Artist Profile</button>
       </div>
-      <div class="div"></div>
-      <button class="btn-d" onclick="doLogout()">Log Out</button>
+      <div class="hr"></div>
+      <button class="btn-ghost" onclick="doLogout()">Log Out</button>
     </div>
   </div>
 </div>
 
 <script>
-// ═══════════ CONFIG — paste your Paynow keys here when ready ═══════════
-var PAYNOW_ID = '';   // e.g. '12345'
-var PAYNOW_KEY = '';  // e.g. 'abc123xyz...'
-// ══════════════════════════════════════════════════════════════════════
+// ══ CONFIG ══
+var PAYNOW_ID='';
+var PAYNOW_KEY='';
 
-// ═══════════ DEMO DATA — real artists, real genres ═══════════
-var TRACKS = [
-  {id:1,e:'🎵',n:'Ndinewe',a:'Jah Signal',g:'Zimdancehall',p:'8.2K',t:'14'},
-  {id:2,e:'🎶',n:'Rudo Rwangu',a:'Jah Signal',g:'Zimdancehall',p:'6.7K',t:'11'},
-  {id:3,e:'🎸',n:'Simba',a:'Tocky Vibes',g:'Zimdancehall',p:'31.2K',t:'8'},
-  {id:4,e:'🎤',n:'Disappear',a:'Ammara Brown',g:'Afrobeats',p:'18.7K',t:'7'},
-  {id:5,e:'🙏',n:'Hallelujah',a:'Charles Charamba',g:'Gospel',p:'15.9K',t:'6'},
-  {id:6,e:'🎙',n:'Street Anthem',a:'Killer T',g:'Zimdancehall',p:'12.4K',t:'5'},
-  {id:7,e:'🔥',n:'Zora',a:'Winky D',g:'Zimdancehall',p:'52.8K',t:'9'},
-  {id:8,e:'🎺',n:'Sendekera',a:'Jah Prayzah',g:'Afrobeats',p:'44.1K',t:'8'}
+// ══ DATA ══
+var TRACKS=[
+  {id:1,e:'🎵',n:'Ndinewe',a:'Jah Signal',g:'Zimdancehall'},
+  {id:2,e:'🎶',n:'Rudo Rwangu',a:'Jah Signal',g:'Zimdancehall'},
+  {id:3,e:'🎸',n:'Simba',a:'Tocky Vibes',g:'Zimdancehall'},
+  {id:4,e:'🎤',n:'Disappear',a:'Ammara Brown',g:'Afrobeats'},
+  {id:5,e:'🙏',n:'Hallelujah',a:'Charles Charamba',g:'Gospel'},
+  {id:6,e:'🎙',n:'Street Anthem',a:'Killer T',g:'Zimdancehall'},
+  {id:7,e:'🔥',n:'Zora',a:'Winky D',g:'Zimdancehall'},
+  {id:8,e:'🎺',n:'Sendekera',a:'Jah Prayzah',g:'Afrobeats'}
 ];
-var ARTISTS = [
-  {i:'W',n:'Winky D',g:'Zimdancehall',l:'Harare',p:'52.8K'},
-  {i:'J',n:'Jah Prayzah',g:'Afrobeats',l:'Harare',p:'44.2K'},
-  {i:'A',n:'Ammara Brown',g:'Afrobeats',l:'Harare',p:'31.4K'},
-  {i:'K',n:'Killer T',g:'Zimdancehall',l:'Harare',p:'27.1K'},
-  {i:'T',n:'Tocky Vibes',g:'Zimdancehall',l:'Masvingo',p:'22.3K'},
-  {i:'C',n:'Charles Charamba',g:'Gospel',l:'Harare',p:'18.1K'},
-  {i:'J',n:'Jah Signal',g:'Zimdancehall',l:'Harare',p:'15.6K'}
+var ARTISTS=[
+  {i:'W',n:'Winky D',g:'Zimdancehall',l:'Harare'},
+  {i:'J',n:'Jah Prayzah',g:'Afrobeats',l:'Harare'},
+  {i:'A',n:'Ammara Brown',g:'Afrobeats',l:'Harare'},
+  {i:'K',n:'Killer T',g:'Zimdancehall',l:'Harare'},
+  {i:'T',n:'Tocky Vibes',g:'Zimdancehall',l:'Masvingo'},
+  {i:'C',n:'Charles Charamba',g:'Gospel',l:'Harare'},
+  {i:'J',n:'Jah Signal',g:'Zimdancehall',l:'Harare'}
 ];
-var GENRES = [
-  {n:'Zimdancehall',c:'1,240 tracks',e:'🎵',bg:'#0a1528'},
-  {n:'Afrobeats',c:'860 tracks',e:'🥁',bg:'#0a2814'},
-  {n:'Gospel',c:'620 tracks',e:'🙏',bg:'#280a0a'},
-  {n:'Hip Hop',c:'440 tracks',e:'🎤',bg:'#0a1c28'},
-  {n:'Amapiano',c:'380 tracks',e:'🎹',bg:'#28240a'},
-  {n:'Sungura',c:'210 tracks',e:'🎸',bg:'#1c0a28'},
-  {n:'R&B',c:'190 tracks',e:'🎶',bg:'#0a2822'},
-  {n:'Pop',c:'160 tracks',e:'🌟',bg:'#280a1c'}
+var GENRES=[
+  {n:'Zimdancehall',c:'1,240 tracks',e:'🎵',bg:'#080f1f'},{n:'Afrobeats',c:'860 tracks',e:'🥁',bg:'#081a0f'},
+  {n:'Gospel',c:'620 tracks',e:'🙏',bg:'#1a0808'},{n:'Hip Hop',c:'440 tracks',e:'🎤',bg:'#081018'},
+  {n:'Amapiano',c:'380 tracks',e:'🎹',bg:'#181508'},{n:'Sungura',c:'210 tracks',e:'🎸',bg:'#110818'},
+  {n:'R&B',c:'190 tracks',e:'🎶',bg:'#081814'},{n:'Pop',c:'160 tracks',e:'🌟',bg:'#180812'}
 ];
 
-// ═══════════ STATE ═══════════
-var _user=null,_fol=0,_tipTotal=0,_tipAmt=1,_prevPg='home',_apF=false,_tPlaying=false,_tPct=0,_tInt=null,_mPlaying=false;
+// ══ STATE ══
+var _user=null,_fol=0,_tipTotal=0,_tipAmt=1,_prevPg='home',_apF=false;
+var _tPlaying=false,_tPct=0,_tInt=null,_nowId=1;
 
-// ═══════════ NAV ═══════════
+// ══ NAV ══
 function go(p){
-  _prevPg=document.querySelector('.pg.on')?document.querySelector('.pg.on').id.replace('pg-',''):'home';
+  _prevPg=(document.querySelector('.pg.on')||{id:'pg-home'}).id.replace('pg-','');
   document.querySelectorAll('.pg').forEach(function(x){x.classList.remove('on')});
   var el=document.getElementById('pg-'+p);
-  if(el)el.classList.add('on');
+  if(el){el.classList.add('on');el.style.animation='none';el.offsetHeight;el.style.animation='';}
   document.querySelectorAll('.bn').forEach(function(x){x.classList.remove('on')});
-  var map={home:'home',search:'search',track:'search','artist-profile':'search','fan-signup':'me','artist-signup':'upload',dashboard:'earn',me:'me'};
+  var map={home:'home',search:'search',track:'search','artist-profile':'search','fan-signup':'join','artist-signup':'join',dashboard:'earn',me:'me'};
   document.querySelectorAll('.bn').forEach(function(b){if(b.getAttribute('data-p')===map[p])b.classList.add('on')});
   window.scrollTo(0,0);
   if(p==='artist-signup')resetAForm();
@@ -679,16 +875,16 @@ function buildNav(type){
     search:'<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
     upload:'<polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>',
     earn:'<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
-    me:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>'
+    me:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+    join:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>'
   };
   var items;
   if(type==='fan') items=[['home','home','Home'],['search','search','Search'],['me','me','Me']];
   else if(type==='artist') items=[['home','home','Home'],['search','search','Search'],['artist-signup','upload','Upload'],['dashboard','earn','Earn'],['me','me','Me']];
-  else items=[['home','home','Home'],['search','search','Search'],['fan-signup','me','Join']];
+  else items=[['home','home','Home'],['search','search','Search'],['fan-signup','join','Join']];
   items.forEach(function(it){
     var btn=document.createElement('button');
-    btn.className='bn';
-    btn.setAttribute('data-p',it[1]);
+    btn.className='bn';btn.setAttribute('data-p',it[1]);
     btn.innerHTML='<svg class="bni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+svgs[it[1]]+'</svg>'+it[2];
     btn.onclick=function(){go(it[0])};
     nav.appendChild(btn);
@@ -697,7 +893,7 @@ function buildNav(type){
   if(hb)hb.classList.add('on');
 }
 
-// ═══════════ USER ═══════════
+// ══ USER ══
 function setUser(type,name,username){
   _user={type:type,name:name,username:username};
   document.getElementById('navJoin').style.display='none';
@@ -710,48 +906,40 @@ function setUser(type,name,username){
   document.getElementById('meName').textContent=name;
   document.getElementById('meUD').textContent='@'+username;
   document.getElementById('meTL').textContent=type==='artist'?'Artist':'Fan';
-  document.getElementById('meFan').style.display=type==='fan'?'block':'none';
-  document.getElementById('meArt').style.display=type==='artist'?'block':'none';
-  if(type==='artist'){
-    document.getElementById('dashUsername').textContent='@'+username;
-  }
+  document.getElementById('meFanStats').style.display=type==='fan'?'block':'none';
+  document.getElementById('meArtLinks').style.display=type==='artist'?'block':'none';
+  if(type==='artist') document.getElementById('dashUser').textContent='@'+username;
 }
 function doLogout(){
   if(!confirm('Log out of Malbry?'))return;
   _user=null;_fol=0;_tipTotal=0;
-  document.getElementById('navJoin').style.display='block';
-  document.getElementById('navUser').style.display='none';
-  document.getElementById('meGuest').style.display='block';
-  document.getElementById('meIn').style.display='none';
+  ['navJoin','meGuest'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='block'});
+  ['navUser','meIn'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none'});
   buildNav(null);
   go('home');
 }
-function showLogin(){
-  alert('Login is being built.\n\nFor now, create a new account — your data will be saved properly once login is live.');
-}
+function showLogin(){alert('Login is being built.\n\nCreate a new account for now — your data will be saved once login is live.');}
 
-// ═══════════ RENDER ═══════════
+// ══ RENDER ══
 function tCard(t){
   return '<div class="tcard" onclick="openTrack('+t.id+')">'+
     '<div class="tcard-art">'+t.e+'</div>'+
     '<div class="tcard-body">'+
-    '<div class="tcard-n">'+t.n+'</div>'+
-    '<div class="tcard-a">'+t.a+'</div>'+
-    '<div class="tcard-f"><span class="plays">'+t.p+' plays</span>'+
+    '<div class="tcard-name">'+t.n+'</div>'+
+    '<div class="tcard-artist">'+t.a+'</div>'+
+    '<div class="tcard-foot"><span style="font-size:11px;color:var(--muted)">'+t.g+'</span>'+
     '<button class="tpill" onclick="event.stopPropagation();openTip(\''+t.a+'\')">Tip</button>'+
     '</div></div></div>';
 }
 function aRow(a){
   return '<div class="arow" onclick="openArtist(\''+a.n+'\',\''+a.i+'\',\''+a.g+'\',\''+a.l+'\')">'+
     '<div class="ava">'+a.i+'</div>'+
-    '<div class="ar-inf"><div class="ar-n">'+a.n+'</div><div class="ar-m">'+a.g+' · '+a.l+'</div></div>'+
-    '<div style="font-size:11px;color:#3a3a3a;margin-right:8px">'+a.p+'</div>'+
+    '<div class="ar-info"><div class="ar-name">'+a.n+'</div><div class="ar-meta">'+a.g+' · '+a.l+'</div></div>'+
     '<button class="fbtn" onclick="event.stopPropagation();toggleFol(this)">Follow</button>'+
     '</div>';
 }
 function renderHome(g){
-  g=g||'All';
-  var f=g==='All'?TRACKS:TRACKS.filter(function(t){return t.g===g});
+  var f=(!g||g==='All')?TRACKS:TRACKS.filter(function(t){return t.g===g});
   document.getElementById('hGrid').innerHTML=f.map(tCard).join('');
   document.getElementById('hArtists').innerHTML=ARTISTS.slice(0,4).map(aRow).join('');
 }
@@ -762,112 +950,106 @@ function fHome(btn,g){
 function renderSearch(){
   document.getElementById('gGrid').innerHTML=GENRES.map(function(g){
     return '<div class="gc" style="background:'+g.bg+'" onclick="doSearch(\''+g.n+'\')">'+
-      '<div class="gc-n">'+g.n+'</div><div class="gc-c">'+g.c+'</div>'+
-      '<div class="gc-e">'+g.e+'</div></div>';
+      '<div class="gc-name">'+g.n+'</div><div class="gc-count">'+g.c+'</div>'+
+      '<div class="gc-emoji">'+g.e+'</div></div>';
   }).join('');
   document.getElementById('sArtists').innerHTML=ARTISTS.map(aRow).join('');
 }
 function doSearch(q){
-  var inp=document.getElementById('sQ');
-  if(inp)inp.value=q;
-  if(!q||!q.trim()){
-    document.getElementById('sDef').style.display='block';
-    document.getElementById('sRes').style.display='none';
-    document.getElementById('sEmpty').style.display='none';
-    return;
-  }
+  var inp=document.getElementById('sQ');if(inp)inp.value=q;
+  if(!q||!q.trim()){document.getElementById('sDef').style.display='block';document.getElementById('sRes').style.display='none';document.getElementById('sEmpty').style.display='none';return;}
   var ql=q.toLowerCase();
   var fa=ARTISTS.filter(function(a){return a.n.toLowerCase().indexOf(ql)>-1||a.g.toLowerCase().indexOf(ql)>-1});
   var ft=TRACKS.filter(function(t){return t.n.toLowerCase().indexOf(ql)>-1||t.a.toLowerCase().indexOf(ql)>-1||t.g.toLowerCase().indexOf(ql)>-1});
   document.getElementById('sDef').style.display='none';
   if(!fa.length&&!ft.length){document.getElementById('sRes').style.display='none';document.getElementById('sEmpty').style.display='block';return;}
-  document.getElementById('sEmpty').style.display='none';
-  document.getElementById('sRes').style.display='block';
-  document.getElementById('rA').innerHTML=fa.length?'<div class="sec" style="font-size:18px">Artists</div>'+fa.map(aRow).join(''):'';
-  document.getElementById('rT').innerHTML=ft.length?'<div class="sec" style="font-size:18px">Tracks</div><div class="g2">'+ft.map(tCard).join('')+'</div>':'';
+  document.getElementById('sEmpty').style.display='none';document.getElementById('sRes').style.display='block';
+  document.getElementById('rA').innerHTML=fa.length?'<div class="section-title" style="font-size:18px">Artists</div>'+fa.map(aRow).join(''):'';
+  document.getElementById('rT').innerHTML=ft.length?'<div class="section-title" style="font-size:18px">Tracks</div><div class="grid2">'+ft.map(tCard).join('')+'</div>':'';
 }
 
-// ═══════════ TRACK ═══════════
+// ══ TRACK ══
 function openTrack(id){
-  var t=TRACKS.find(function(x){return x.id===id});
-  if(!t)return;
+  var t=TRACKS.find(function(x){return x.id===id});if(!t)return;
+  _nowId=id;
   document.getElementById('tArt').textContent=t.e;
   document.getElementById('tTitle').textContent=t.n;
   document.getElementById('tArtBtn').textContent=t.a;
   document.getElementById('tGenre').textContent=t.g;
-  document.getElementById('tPlays').textContent=t.p;
-  document.getElementById('tTips').textContent='$'+t.t;
   document.getElementById('tTipBtn').onclick=function(){openTip(t.a)};
+  window._nowArtist=t.a;
   _tPct=0;if(_tInt)clearInterval(_tInt);_tPlaying=false;
   document.getElementById('tFill').style.width='0';
   document.getElementById('tCur').textContent='0:00';
-  document.getElementById('tBtn').innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="#080808"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+  document.getElementById('tBtnIcon').innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>';
+  document.getElementById('tBtnIcon').setAttribute('fill','#080808');
   document.getElementById('mTracks').innerHTML=TRACKS.filter(function(x){return x.id!==id}).slice(0,4).map(function(x){
     return '<div class="arow" onclick="openTrack('+x.id+')">'+
-      '<div style="width:38px;height:38px;border-radius:8px;background:#111;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">'+x.e+'</div>'+
-      '<div class="ar-inf"><div class="ar-n">'+x.n+'</div><div class="ar-m">'+x.a+' · '+x.g+'</div></div>'+
-      '<div style="font-size:11px;color:#3a3a3a">'+x.p+'</div></div>';
+      '<div style="width:40px;height:40px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">'+x.e+'</div>'+
+      '<div class="ar-info"><div class="ar-name">'+x.n+'</div><div class="ar-meta">'+x.a+' · '+x.g+'</div></div>'+
+      '</div>';
   }).join('');
-  window._nowA=t.a;
-  document.getElementById('mpTh').textContent=t.e;
-  document.getElementById('mpT').textContent=t.n;
-  document.getElementById('mpA').textContent=t.a;
+  document.getElementById('mpArt').textContent=t.e;
+  document.getElementById('mpTitle').textContent=t.n;
+  document.getElementById('mpArtist').textContent=t.a;
   document.getElementById('miniPlayer').classList.add('on');
   go('track');
 }
-
-// ═══════════ ARTIST ═══════════
-function openArtist(name,initial,genre,city){
-  document.getElementById('apAva').textContent=initial;
-  document.getElementById('apName').textContent=name;
-  document.getElementById('apTag').textContent=genre+' · '+city;
-  document.getElementById('apBio').textContent=name+' is a '+genre+' artist from '+city+'. Known for powerful performances and authentic music that connects with fans across Zimbabwe.';
-  document.getElementById('apPl').textContent='—';
-  document.getElementById('apTr').textContent='—';
-  document.getElementById('apFo').textContent='—';
-  document.getElementById('apTi').textContent='—';
-  document.getElementById('apGrid').innerHTML=TRACKS.slice(0,6).map(tCard).join('');
-  _apF=false;
-  var btn=document.getElementById('apFBtn');
-  btn.textContent='Follow';btn.style.cssText='border:none;background:#C9A84C;color:#080808';
-  go('artist-profile');
+function prevTrack(){var idx=TRACKS.findIndex(function(x){return x.id===_nowId});openTrack(TRACKS[(idx-1+TRACKS.length)%TRACKS.length].id);}
+function nextTrack(){var idx=TRACKS.findIndex(function(x){return x.id===_nowId});openTrack(TRACKS[(idx+1)%TRACKS.length].id);}
+function toggleMini(){
+  var svg=document.getElementById('mpPlay');
+  if(svg.innerHTML.indexOf('polygon')>-1){svg.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="#080808"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';}
+  else{svg.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="#080808"><polygon points="5 3 19 12 5 21 5 3"/></svg>';}
 }
-
-// ═══════════ PLAYER ═══════════
-function toggleMini(){_mPlaying=!_mPlaying;document.getElementById('mpBtn').textContent=_mPlaying?'⏸':'▶';}
 function toggleTrack(){
   _tPlaying=!_tPlaying;
-  var btn=document.getElementById('tBtn');
+  var icon=document.getElementById('tBtnIcon');
   if(_tPlaying){
-    btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#080808"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+    icon.innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+    icon.setAttribute('fill','#080808');
     _tInt=setInterval(function(){
       _tPct=Math.min(_tPct+100/227,100);
       document.getElementById('tFill').style.width=_tPct+'%';
       var s=Math.round((_tPct/100)*227);
       document.getElementById('tCur').textContent=Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
-      if(_tPct>=100){clearInterval(_tInt);_tPlaying=false;_tPct=0;btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="#080808"><polygon points="5 3 19 12 5 21 5 3"/></svg>';}
+      if(_tPct>=100){clearInterval(_tInt);_tPlaying=false;_tPct=0;icon.innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>';icon.setAttribute('fill','#080808');}
     },1000);
   } else {
     clearInterval(_tInt);
-    btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="#080808"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+    icon.innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>';icon.setAttribute('fill','#080808');
   }
 }
 function seekT(e){var r=e.currentTarget.getBoundingClientRect();_tPct=((e.clientX-r.left)/r.width)*100;document.getElementById('tFill').style.width=_tPct+'%';}
 
-// ═══════════ FOLLOW ═══════════
-function toggleFol(btn){var on=btn.classList.toggle('on');btn.textContent=on?'Following':'Follow';_fol+=on?1:-1;document.getElementById('meFol').textContent=_fol;}
+// ══ ARTIST ══
+function openArtist(name,initial,genre,city){
+  document.getElementById('apAva').textContent=initial;
+  document.getElementById('apName').textContent=name;
+  document.getElementById('apTag').textContent=genre+' · '+city;
+  document.getElementById('apBio').textContent=name+' is a '+genre+' artist from '+city+'. Known for powerful performances and authentic music that connects deeply with fans across Zimbabwe.';
+  ['apPl','apTr','apFo','apTi'].forEach(function(id){document.getElementById(id).textContent='—'});
+  document.getElementById('apGrid').innerHTML=TRACKS.slice(0,6).map(tCard).join('');
+  _apF=false;
+  var btn=document.getElementById('apFBtn');
+  btn.textContent='Follow';btn.style.cssText='border:none;background:var(--gold);color:#080808;margin:0';
+  go('artist-profile');
+}
 function doFollow(){
   _apF=!_apF;
   var btn=document.getElementById('apFBtn');
-  if(_apF){btn.textContent='Following';btn.style.cssText='background:transparent;color:#C9A84C;border:1px solid rgba(201,168,76,.4)';}
-  else{btn.textContent='Follow';btn.style.cssText='border:none;background:#C9A84C;color:#080808';}
+  btn.textContent=_apF?'Following':'Follow';
+  btn.style.cssText=_apF?'background:var(--gold2);color:var(--gold);border:1px solid rgba(212,168,67,.4);margin:0':'border:none;background:var(--gold);color:#080808;margin:0';
+}
+function toggleFol(btn){
+  var on=btn.classList.toggle('on');btn.textContent=on?'Following':'Follow';
+  _fol+=on?1:-1;document.getElementById('meFol').textContent=_fol;
 }
 
-// ═══════════ TIP ═══════════
+// ══ TIP ══
 function openTip(a){
   document.getElementById('tipFor').textContent='Support '+(a||'this artist')+' via EcoCash';
   document.getElementById('tipStatus').style.display='none';
-  document.getElementById('tipStatus').textContent='';
   document.getElementById('tipModal').classList.add('on');
 }
 function setAmt(btn,a){
@@ -881,69 +1063,40 @@ function sendTip(){
   var btn=document.getElementById('tipSendBtn');
   var st=document.getElementById('tipStatus');
   btn.textContent='Sending...';btn.disabled=true;
-
-  // If Paynow keys are configured, use real payment
   if(PAYNOW_ID&&PAYNOW_KEY){
-    st.style.display='block';
-    st.style.color='#C9A84C';
-    st.textContent='⏳ Sending EcoCash prompt to '+eco+'...';
-    // Paynow EcoCash mobile payment
+    st.style.display='block';st.style.color='var(--gold)';st.textContent='Sending to '+eco+'...';
     fetch('https://www.paynow.co.zw/interface/remotetransaction',{
-      method:'POST',
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:new URLSearchParams({
-        id:PAYNOW_ID,
-        reference:'tip-'+Date.now(),
-        amount:_tipAmt.toFixed(2),
-        additionalinfo:'Malbry tip',
-        authemail:document.getElementById('tipEco').value+'@malbry.app',
-        phone:eco,
-        method:'ecocash',
-        returnurl:'https://malbry.vercel.app',
-        resulturl:'https://malbry.vercel.app'
-      })
+      method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams({id:PAYNOW_ID,reference:'tip-'+Date.now(),amount:_tipAmt.toFixed(2),additionalinfo:'Malbry tip',authemail:eco+'@malbry',phone:eco,method:'ecocash',returnurl:'https://malbry.vercel.app',resulturl:'https://malbry.vercel.app'})
     }).then(function(r){return r.text()}).then(function(res){
       btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;
-      if(res.toLowerCase().indexOf('ok')>-1||res.toLowerCase().indexOf('success')>-1){
-        st.style.color='#4caf50';
-        st.textContent='✅ EcoCash prompt sent! Approve on your phone to complete.';
-        _tipTotal+=_tipAmt;
-        document.getElementById('meTS').textContent='$'+_tipTotal.toFixed(2);
-      } else {
-        st.style.color='#e05555';
-        st.textContent='Payment could not be processed. Please try again.';
-      }
-    }).catch(function(){
-      btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;
-      st.style.color='#e05555';
-      st.textContent='Connection error. Please check your internet and try again.';
-    });
+      if(res.toLowerCase().indexOf('ok')>-1){st.style.color='#4caf50';st.textContent='EcoCash prompt sent. Approve on your phone to complete.';_tipTotal+=_tipAmt;document.getElementById('meTS').textContent='$'+_tipTotal.toFixed(2);}
+      else{st.style.color='var(--red)';st.textContent='Payment could not be processed. Please try again.';}
+    }).catch(function(){btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;st.style.color='var(--red)';st.textContent='Connection error. Please check your internet and try again.';});
   } else {
-    // No keys yet — show honest message
     setTimeout(function(){
       btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;
-      st.style.display='block';st.style.color='#C9A84C';
-      st.textContent='⚙️ EcoCash payments are being set up. Tips will be live very soon!';
+      st.style.display='block';st.style.color='var(--gold)';
+      st.textContent='EcoCash payments are being set up. Tips will be live very soon.';
     },800);
   }
 }
 
-// ═══════════ PAYOUT ═══════════
+// ══ PAYOUT ══
 function doPayout(){
   var a=parseFloat(document.getElementById('payAmt').value);
   if(!a||a<5){alert('Minimum payout is $5');return;}
   cm('payModal');
-  setTimeout(function(){alert('Payout requested! You\'ll receive an EcoCash notification within 2 hours.');},300);
+  setTimeout(function(){alert('Payout request submitted. We will process it and send to your EcoCash.');},300);
 }
 
-// ═══════════ MODALS ═══════════
+// ══ MODALS ══
 function cm(id){document.getElementById(id).classList.remove('on')}
 document.addEventListener('click',function(e){if(e.target.classList.contains('mbg'))e.target.classList.remove('on')});
 
-// ═══════════ FAN SIGNUP ═══════════
+// ══ FAN SIGNUP ══
 function joinFan(){
   var first=document.getElementById('fFirst').value.trim();
-  var last=document.getElementById('fLast').value.trim();
   var user=document.getElementById('fUser').value.trim();
   var email=document.getElementById('fEmail').value.trim();
   var pass=document.getElementById('fPass').value;
@@ -954,22 +1107,21 @@ function joinFan(){
   var btn=document.getElementById('fanBtn');
   btn.textContent='Creating account...';btn.disabled=true;
   setTimeout(function(){
-    var full=first+(last?' '+last:'');
+    var last=document.getElementById('fLast').value.trim();
     document.getElementById('fanForm').style.display='none';
     document.getElementById('fanDone').style.display='block';
-    document.getElementById('fanMsg').textContent='Welcome '+first+'! Your account @'+user+' is ready. Discover music and tip artists directly via EcoCash.';
-    setUser('fan',full,user);
+    document.getElementById('fanMsg').textContent='Welcome '+first+'! Your account @'+user+' is ready.';
+    setUser('fan',first+(last?' '+last:''),user);
     btn.textContent='Create Free Account';btn.disabled=false;
   },700);
 }
 
-// ═══════════ ARTIST SIGNUP ═══════════
+// ══ ARTIST SIGNUP ══
 function resetAForm(){
   for(var i=1;i<=4;i++){
-    var el=document.getElementById('as'+i);
-    if(el)el.style.display=i===1?'block':'none';
+    var el=document.getElementById('as'+i);if(el)el.style.display=i===1?'block':'none';
     var d=document.getElementById('sd'+i);
-    if(d){d.classList.remove('on','done');if(i===1)d.classList.add('on');d.textContent=i===4?'✦':i;}
+    if(d){d.classList.remove('on','done');if(i===1)d.classList.add('on');d.textContent=i===4?'✦':String(i);}
   }
 }
 function aStep(n){
@@ -989,35 +1141,45 @@ function aStep(n){
     setUser('artist',stage,uname);
   }
   for(var i=1;i<=4;i++){
-    var el=document.getElementById('as'+i);
-    if(el)el.style.display=i===n?'block':'none';
+    var el=document.getElementById('as'+i);if(el)el.style.display=i===n?'block':'none';
     var d=document.getElementById('sd'+i);
     if(d){
       d.classList.remove('on','done');
       if(i===n)d.classList.add('on');
       else if(i<n){d.classList.add('done');d.textContent='✓';}
-      else d.textContent=i===4?'✦':i;
+      else d.textContent=i===4?'✦':String(i);
     }
   }
 }
 
-// ═══════════ SHARE ═══════════
+// ══ UPLOAD ══
+function handleUpload(input){
+  var file=input.files[0];if(!file)return;
+  if(file.size>50*1024*1024){alert('File too large. Maximum 50MB.');input.value='';return;}
+  var area=document.getElementById('uploadArea');
+  area.classList.add('has-file');
+  document.getElementById('upLabel').textContent=file.name;
+  document.getElementById('upSub').textContent=(file.size/1024/1024).toFixed(1)+'MB — ready';
+  document.getElementById('upIcon').innerHTML='<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+}
+
+// ══ SHARE ══
 function shareApp(){
   var url='https://malbry.vercel.app';
-  if(navigator.share){navigator.share({title:'Malbry',text:'Zimbabwe music platform — tip artists directly via EcoCash',url:url});}
+  if(navigator.share){navigator.share({title:'Malbry',text:'Zimbabwe music — tip artists directly via EcoCash',url:url});}
   else{window.open('https://wa.me/?text='+encodeURIComponent('Check out Malbry — Zimbabwean artists get tipped directly via EcoCash! '+url),'_blank');}
 }
 function shareWA(){
-  var u=document.getElementById('aUser').value||'you';
-  window.open('https://wa.me/?text='+encodeURIComponent('Listen to my music on Malbry and tip me via EcoCash 🎵 https://malbry.vercel.app/@'+u),'_blank');
+  var u=document.getElementById('aUser').value||'me';
+  window.open('https://wa.me/?text='+encodeURIComponent('Listen to my music on Malbry and tip me via EcoCash — https://malbry.vercel.app/@'+u),'_blank');
 }
 function copyLink(){
   var link='https://'+document.getElementById('artLink').textContent;
-  if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){var b=document.querySelector('.cbtn');b.textContent='Copied!';setTimeout(function(){b.textContent='Copy';},2000);});}
+  if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){var b=document.querySelector('.copy-btn');b.textContent='Copied!';setTimeout(function(){b.textContent='Copy';},2000);});}
   else alert(link);
 }
 
-// ═══════════ INIT ═══════════
+// ══ INIT ══
 renderHome();
 renderSearch();
 </script>
