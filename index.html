@@ -16,7 +16,7 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none}
 html,body{height:100%;background:var(--bg);overscroll-behavior:none}
 body{color:var(--tx);font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;overflow-x:hidden}
-button{cursor:pointer;font-family:inherit;border:none;background:none}
+button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit;-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:transparent}
 input,select,textarea{font-family:inherit;color:var(--tx)}
 a{color:inherit;text-decoration:none}
 
@@ -33,7 +33,7 @@ background:var(–s1);border-bottom:1px solid var(–s3);
 }
 .logo{font-size:21px;font-weight:900;color:var(–gold);letter-spacing:-.03em}
 .tnr{display:flex;align-items:center;gap:8px}
-.nbtn{padding:7px 16px;border-radius:500px;font-size:13px;font-weight:700;letter-spacing:.01em;border:1px solid var(–s4);color:var(–tx2);background:transparent}
+.nbtn{padding:7px 16px;border-radius:500px;font-size:13px;font-weight:700;letter-spacing:.01em;border:1px solid #3E3E3E!important;color:#B3B3B3!important;background:transparent!important;outline:none!important;-webkit-appearance:none!important;}
 .nbtn.gold{background:var(–gold);color:#000;border-color:var(–gold)}
 .nuser{display:none;align-items:center;gap:8px;background:var(–s3);border-radius:500px;padding:4px 12px 4px 4px;border:none}
 .nav-av{width:28px;height:28px;border-radius:50%;background:var(–gold);color:#000;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center}
@@ -46,12 +46,8 @@ position:fixed;bottom:0;left:0;right:0;z-index:500;
 height:var(–bot-h);background:var(–s1);border-top:1px solid var(–s3);
 display:flex;align-items:stretch;
 }
-.bn{
-flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-gap:4px;color:var(–tx3);font-size:10px;font-weight:600;letter-spacing:.03em;border:none;background:none;
-padding:0;transition:color .15s;
-}
-.bn.on{color:var(–tx)}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6A6A6A!important;font-size:10px;font-weight:600;letter-spacing:.03em;border:none!important;background:none!important;padding:0;transition:color .15s;outline:none!important;-webkit-appearance:none!important;}
+.bn.on{color:#FFFFFF!important}
 .bni{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
 .bn.on .bni.filled{fill:currentColor}
 
@@ -306,6 +302,29 @@ white-space:nowrap;pointer-events:none;
 
 /* ── GREETING ── */
 .greet{font-size:22px;font-weight:900;margin-bottom:18px;letter-spacing:-.02em}
+
+.set-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid #282828;font-size:15px;font-weight:500;cursor:pointer;color:#FFFFFF}
+.set-row:last-child{border-bottom:none}
+.set-row:active{opacity:.7}
+/* Feed card */
+.feed-card{background:#181818;border-radius:10px;padding:16px;margin-bottom:12px;cursor:pointer}
+.feed-card:active{background:#282828}
+.fc-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.fc-art{width:44px;height:44px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#D4A843;flex-shrink:0}
+.fc-name{font-size:14px;font-weight:700}
+.fc-time{font-size:12px;color:#6A6A6A;margin-top:2px}
+.fc-track{background:#282828;border-radius:8px;padding:12px;display:flex;align-items:center;gap:12px}
+.fc-track-art{width:48px;height:48px;border-radius:6px;background:#3E3E3E;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+/* Chart row */
+.chart-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #1c1c1c;cursor:pointer}
+.chart-row:active{opacity:.7}
+.chart-num{width:28px;font-size:14px;font-weight:900;color:#6A6A6A;text-align:center;flex-shrink:0}
+.chart-num.top{color:#D4A843}
+.chart-art{width:48px;height:48px;border-radius:6px;background:#282828;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.chart-inf{flex:1;min-width:0}
+.chart-n{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chart-a{font-size:12px;color:#B3B3B3;margin-top:2px}
+.chart-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.35);padding:4px 12px;border-radius:500px;flex-shrink:0}
 </style>
 
 </head>
@@ -334,8 +353,14 @@ white-space:nowrap;pointer-events:none;
   <button class="bn on" data-p="home" onclick="go('home')">
     <svg class="bni filled" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home
   </button>
+  <button class="bn" data-p="charts" onclick="go('charts')">
+    <svg class="bni" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Charts
+  </button>
   <button class="bn" data-p="search" onclick="go('search')">
     <svg class="bni" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search
+  </button>
+  <button class="bn" data-p="feed" onclick="go('feed')">
+    <svg class="bni" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Feed
   </button>
   <button class="bn" data-p="join" onclick="go('fan-signup')">
     <svg class="bni" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Join
@@ -358,7 +383,7 @@ white-space:nowrap;pointer-events:none;
     <button class="mp-play" onclick="togglePlay()">
       <svg id="mpPlayIco" width="16" height="16" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     </button>
-    <div class="mp-tip" onclick="openTip(window._nA||'')">Tip</div>
+    <div class="mp-tip" onclick="openTip(window._nA||'',true)">Tip</div>
   </div>
 </div>
 
@@ -622,7 +647,7 @@ white-space:nowrap;pointer-events:none;
   <div class="pi" style="padding-top:16px">
     <div class="brow" style="margin-bottom:18px;flex-wrap:wrap;gap:8px">
       <button class="btn btn-sm" id="apFBtn" onclick="doFollow()" style="margin:0">Follow</button>
-      <button class="btn-o btn-sm" style="margin:0" onclick="openTip(document.getElementById('apName').textContent)">Tip</button>
+      <button class="btn-o btn-sm" style="margin:0" onclick="openTip(document.getElementById('apName').textContent||'')">Tip</button>
       <button class="btn-o btn-sm" style="margin:0" onclick="openShare('https://malbry.vercel.app')">Share</button>
     </div>
     <div class="pstats">
@@ -844,6 +869,10 @@ white-space:nowrap;pointer-events:none;
         <button class="btn-o" style="margin-bottom:10px" onclick="go('upload')">Upload a track</button>
       </div>
       <div class="hr"></div>
+      <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" onclick="go('settings')">
+        <span>Settings</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
       <button class="btn-danger" id="logoutBtn">Log out</button>
     </div>
   </div>
@@ -912,13 +941,14 @@ function go(p){
   var el=document.getElementById('pg-'+p);
   if(el)el.classList.add('on');
   document.querySelectorAll('.bn').forEach(function(x){x.classList.remove('on')});
-  var map={home:'home',search:'search',track:'search','artist-profile':'search',
-    'fan-signup':'join','artist-signup':'join',upload:'upload',dashboard:'earn',me:'me'};
+  var map={home:'home',search:'search',track:'search','artist-profile':'search','fan-signup':'join','artist-signup':'join',upload:'upload',dashboard:'earn',me:'me',charts:'charts',feed:'feed',settings:'settings'};
   document.querySelectorAll('.bn').forEach(function(b){
     if(b.getAttribute('data-p')===map[p])b.classList.add('on');
   });
   window.scrollTo(0,0);
   if(p==='artist-signup'&&(!window._user||window._user.type!=='artist'))resetAForm();
+  if(p==='feed')renderFeed();
+  if(p==='charts')renderCharts();
 }
 function goBack(){go(_prevPg||'home')}
 
@@ -928,15 +958,17 @@ function buildNav(type){
   var S={
     home:'<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
     search:'<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+    charts:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+    feed:'<path d=\"M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M23 21v-2a4 4 0 00-3-3.87\"/><path d=\"M16 3.13a4 4 0 010 7.75\"/>',
     upload:'<polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>',
     earn:'<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
     me:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>',
     join:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>'
   };
   var items;
-  if(type==='fan') items=[['home','home','Home'],['search','search','Search'],['me','me','Me']];
-  else if(type==='artist') items=[['home','home','Home'],['search','search','Search'],['upload','upload','Upload'],['dashboard','earn','Earn'],['me','me','Me']];
-  else items=[['home','home','Home'],['search','search','Search'],['fan-signup','join','Join']];
+  if(type==='fan') items=[['home','home','Home'],['charts','charts','Charts'],['search','search','Search'],['feed','feed','Feed'],['me','me','Me']];
+  else if(type==='artist') items=[['home','home','Home'],['charts','charts','Charts'],['upload','upload','Upload'],['dashboard','earn','Earn'],['me','me','Me']];
+  else items=[['home','home','Home'],['charts','charts','Charts'],['search','search','Search'],['feed','feed','Feed'],['fan-signup','join','Join']];
   items.forEach(function(it){
     var b=document.createElement('button');
     b.className='bn';b.setAttribute('data-p',it[1]);
@@ -1026,7 +1058,7 @@ function tRow(t,i){
     '<div class="trow-art">'+t.e+'</div>' +
     '<div class="trow-inf"><div class="trow-n">'+t.n+'</div><div class="trow-a">'+t.a+'</div></div>' +
     '<div class="trow-dur">'+t.dur+'</div>' +
-    '<button class="trow-tip" onclick="event.stopPropagation();openTip(\''+t.a+'\')">Tip</button>' +
+    '<button class="trow-tip" onclick="event.stopPropagation();tipById('+t.id+')">Tip</button>' +
     '</div>';
 }
 function aRow(a){
@@ -1089,7 +1121,7 @@ function openTrack(id){
   ['npArtist','mpA'].forEach(function(i){var el=document.getElementById(i);if(el)el.textContent=t.a;});
   document.getElementById('tArtBtn').textContent=t.a;
   document.getElementById('tGenre').textContent=t.g;
-  document.getElementById('tTipBtn').onclick=function(){openTip(t.a)};
+  document.getElementById('tTipBtn').onclick=function(){openTip(t.a||'')};
   window._nA=t.a;
   // reset player
   _pct=0;if(_pInt)clearInterval(_pInt);_playing=false;
@@ -1198,6 +1230,8 @@ function toggleFol(btn){
 }
 
 // ══ TIP ══
+function safeA(s){return s?s.replace(/'/g,"\u0027"):"";}function tipById(id){var t=TRACKS.find(function(x){return x.id===id});if(t)openTip(t.a);}
+function tipByArtist(idx){var a=ARTISTS[idx];if(a)openTip(a.n);}
 function openTip(a){
   document.getElementById('tipFor').textContent='Support '+(a||'this artist')+' via EcoCash';
   document.getElementById('tipSt').style.display='none';
@@ -1376,11 +1410,143 @@ function copyLink(){
   else showToast(link);
 }
 
+// ══ CHARTS ══
+var _chartGenre='Zimbabwe';
+function fChart(btn,g){
+  document.querySelectorAll('#chartFilter .pill').forEach(function(p){p.classList.remove('on')});
+  btn.classList.add('on');_chartGenre=g;renderCharts();
+}
+function renderCharts(){
+  var tracks=_chartGenre==='Zimbabwe'?TRACKS:TRACKS.filter(function(t){return t.g===_chartGenre});
+  if(!tracks.length)tracks=TRACKS;
+  var sorted=tracks.slice().sort(function(){return Math.random()-.5});
+  document.getElementById('chartList').innerHTML=sorted.map(function(t,i){
+    return '<div class="chart-row" onclick="openTrack('+t.id+')">'+
+      '<div class="chart-num'+(i<3?' top':'')+'>'+(i+1)+'</div>'+
+      '<div class="chart-art">'+t.e+'</div>'+
+      '<div class="chart-inf"><div class="chart-n">'+t.n+'</div><div class="chart-a">'+t.a+'</div></div>'+
+      '<button class="chart-tip" onclick="event.stopPropagation();tipById('+t.id+')">Tip</button>'+
+      '</div>';
+  }).join('');
+}
+
+// ══ FEED ══
+var _feedItems=[];
+function renderFeed(){
+  var el=document.getElementById('feedList');
+  var ge=document.getElementById('feedGuest');
+  if(!window._user){
+    if(el)el.innerHTML='';
+    if(ge)ge.style.display='block';
+    return;
+  }
+  if(ge)ge.style.display='none';
+  if(!_feedItems.length){
+    // generate sample feed from followed artists
+    _feedItems=ARTISTS.slice(0,4).map(function(a,i){
+      var t=TRACKS[i]||TRACKS[0];
+      return {artist:a,track:t,time:['2 mins ago','15 mins ago','1 hour ago','3 hours ago'][i]};
+    });
+  }
+  el.innerHTML=_feedItems.map(function(item){
+    return '<div class="feed-card" onclick="openTrack('+item.track.id+')">'+
+      '<div class="fc-head">'+
+      '<div class="fc-art">'+item.artist.i+'</div>'+
+      '<div><div class="fc-name">'+item.artist.n+'</div><div class="fc-time">Uploaded a new track · '+item.time+'</div></div>'+
+      '</div>'+
+      '<div class="fc-track">'+
+      '<div class="fc-track-art">'+item.track.e+'</div>'+
+      '<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+item.track.n+'</div>'+
+      '<div style="font-size:12px;color:#B3B3B3;margin-top:2px">'+item.track.g+' · '+item.track.dur+'</div></div>'+
+      '<button class="chart-tip" onclick="event.stopPropagation();tipByArtist('+ARTISTS.indexOf(item.artist)+')">Tip</button>'+
+      '</div></div>';
+  }).join('');
+}
+
 // ══ INIT ══
 document.getElementById('greetMsg').textContent=getGreet();
 renderHome();
 renderSearch();
+renderCharts();
+renderFeed();
 </script>
 
+<!-- ═══ CHARTS ═══ -->
+
+<div class="pg" id="pg-charts">
+  <div class="pi" style="padding-top:20px">
+    <div style="font-size:24px;font-weight:900;margin-bottom:4px">Charts</div>
+    <p style="font-size:13px;color:#B3B3B3;margin-bottom:22px">Top tracks in Zimbabwe right now</p>
+    <div class="pills" id="chartFilter">
+      <button class="pill on" onclick="fChart(this,'Zimbabwe')">Zimbabwe</button>
+      <button class="pill" onclick="fChart(this,'Zimdancehall')">Zimdancehall</button>
+      <button class="pill" onclick="fChart(this,'Afrobeats')">Afrobeats</button>
+      <button class="pill" onclick="fChart(this,'Gospel')">Gospel</button>
+    </div>
+    <div id="chartList"></div>
+  </div>
+</div>
+
+<!-- ═══ FEED ═══ -->
+
+<div class="pg" id="pg-feed">
+  <div class="pi" style="padding-top:20px">
+    <div style="font-size:24px;font-weight:900;margin-bottom:22px">Feed</div>
+    <div id="feedList"></div>
+    <div id="feedGuest" style="display:none;text-align:center;padding:60px 0">
+      <div style="font-size:40px;margin-bottom:16px">🎵</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:8px">Follow artists to see updates</div>
+      <p style="font-size:14px;color:#B3B3B3;margin-bottom:24px">When you follow artists, their new tracks and tips will appear here.</p>
+      <button class="btn" style="width:auto;padding:12px 28px" onclick="go('search')">Find artists to follow</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SETTINGS ═══ -->
+
+<div class="pg" id="pg-settings">
+  <div class="pi" style="padding-top:20px">
+    <div style="font-size:24px;font-weight:900;margin-bottom:24px">Settings</div>
+    <div style="background:#181818;border-radius:10px;overflow:hidden;margin-bottom:16px">
+      <div style="padding:16px;border-bottom:1px solid #282828">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6A6A6A;font-weight:700;margin-bottom:12px">Account</div>
+        <div class="set-row" onclick="showToast('Edit profile coming soon')">
+          <span>Edit profile</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="set-row" onclick="showToast('Change password coming soon')">
+          <span>Change password</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="set-row" onclick="showToast('Notifications coming soon')">
+          <span>Notifications</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+      <div style="padding:16px;border-bottom:1px solid #282828">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6A6A6A;font-weight:700;margin-bottom:12px">Payments</div>
+        <div class="set-row" onclick="showToast('EcoCash number coming soon')">
+          <span>EcoCash number</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="set-row" onclick="showToast('Payout history coming soon')">
+          <span>Payout history</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="set-row" onclick="showToast('Tip history coming soon')">
+          <span>Tip history</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+      <div style="padding:16px;border-bottom:1px solid #282828">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6A6A6A;font-weight:700;margin-bottom:12px">About</div>
+        <div class="set-row" onclick="showToast('Version 1.0.0 — malbry.vercel.app')">
+          <span>App version</span><span style="color:#6A6A6A;font-size:13px">1.0.0</span>
+        </div>
+        <div class="set-row" onclick="openShare('https://malbry.vercel.app')">
+          <span>Share Malbry</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="set-row" onclick="showToast('support@malbry.vercel.app')">
+          <span>Contact support</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
+    <button class="btn-danger" onclick="doLogout()" style="margin-top:8px">Log out</button>
+  </div>
+</div>
 </body>
 </html>
