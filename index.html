@@ -1,3 +1,8 @@
+const supabase = window.supabase.createClient(
+  'https://lonavuripzywpgguznza.supabase.co',
+  'YOUR_ANON_KEY'
+);
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -1279,7 +1284,44 @@ function sFB(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encod
 function sIG(){showToast('Copy the link and paste in your Instagram story');}
 
 // ══ FAN SIGNUP ══
-function joinFan(){
+async function joinFan(){
+  var first=document.getElementById('fFirst').value.trim(),
+      user=document.getElementById('fUser').value.trim(),
+      email=document.getElementById('fEmail').value.trim(),
+      pass=document.getElementById('fPass').value;
+
+  if(!first||!user||!email||pass.length<8){
+    showToast('Fill all fields correctly');
+    return;
+  }
+
+  var btn=document.getElementById('fanBtn');
+  btn.textContent='Creating...';
+  btn.disabled=true;
+
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: pass
+  });
+
+  if(error){
+    showToast(error.message);
+    btn.textContent='Create account';
+    btn.disabled=false;
+    return;
+  }
+
+  await supabase.from('fans').insert({
+    id: data.user.id,
+    username: user
+  });
+
+  setUser('fan', first, user);
+
+  btn.textContent='Create account';
+  btn.disabled=false;
+  showToast('Account created');
+}
   var first=document.getElementById('fFirst').value.trim(),user=document.getElementById('fUser').value.trim(),email=document.getElementById('fEmail').value.trim(),pass=document.getElementById('fPass').value;
   if(!first){showToast('Please enter your first name');return;}
   if(!user){showToast('Please choose a username');return;}
@@ -1342,7 +1384,49 @@ function handleUploadPage(input){
   document.getElementById('uSub').textContent=(file.size/1024/1024).toFixed(1)+'MB — ready';
   document.getElementById('uIcon').innerHTML='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 }
-function submitUpload(){
+async function submitUpload(){
+  var title=document.getElementById('uTitle').value.trim(),
+      file=document.getElementById('uFile').files[0];
+
+  if(!title || !file){
+    showToast('Missing fields');
+    return;
+  }
+
+  var btn=document.getElementById('uBtn'),
+      st=document.getElementById('uStat');
+
+  btn.textContent='Uploading...';
+  btn.disabled=true;
+
+  const filePath = `tracks/${Date.now()}_${file.name}`;
+
+  const { error } = await supabase.storage
+    .from('tracks')
+    .upload(filePath, file);
+
+  if(error){
+    showToast('Upload failed');
+    btn.textContent='Upload track';
+    btn.disabled=false;
+    return;
+  }
+
+  const { data } = supabase.storage
+    .from('tracks')
+    .getPublicUrl(filePath);
+
+  await supabase.from('tracks').insert({
+    title: title,
+    audio_url: data.publicUrl
+  });
+
+  showToast('Track uploaded');
+  btn.textContent='Upload track';
+  btn.disabled=false;
+
+  loadTracks();
+}
   var title=document.getElementById('uTitle').value.trim(),file=document.getElementById('uFile').files[0];
   if(!title){showToast('Please enter a track title');return;}
   if(!file){showToast('Please select an audio file');return;}
@@ -1359,10 +1443,34 @@ function copyLink(){
   var link='https://'+document.getElementById('artLink').textContent;
   if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){showToast('Link copied!');});}else showToast(link);
 }
+async function loadTracks(){
+  const { data, error } = await supabase
+    .from('tracks')
+    .select('*');
 
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  TRACKS = data.map(function(t){
+    return {
+      id: t.id,
+      e: '🎵',
+      n: t.title,
+      a: t.artist_name || 'Unknown',
+      g: t.genre || 'Unknown',
+      dur: '3:00'
+    };
+  });
+
+  renderHome();
+  renderCharts();
+}
 // ══ INIT ══
 document.getElementById('greet').textContent=greet();
-renderHome();renderSearch();renderCharts();
+renderSearch();
+loadTracks();
 </script>
 
 </body>
