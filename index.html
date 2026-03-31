@@ -1,32 +1,26 @@
 const supabase = window.supabase.createClient(
-  'https://lonavuripzywpgguznza.supabase.co',
-  'YOUR_ANON_KEY'
+‘https://lonavuripzywpgguznza.supabase.co’,
+‘sb_publishable_So1qP7RouKGl0Me5SP5W1Q_h70iNJuH’
 );
 
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-  ...
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Malbry</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Malbry</title>
-<style>
+  <style>
 /* ── ALL COLORS HARDCODED — NO CSS VARS ON INTERACTIVE ELEMENTS ── */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none}
 html,body{height:100%;background:#000;overscroll-behavior:none}
 body{color:#fff;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;overflow-x:hidden}
 button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit;outline:none;-webkit-appearance:none}
 input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:none;outline:none}
-
-/* ── PAGES ── */
 .pg{display:none;min-height:100vh;padding-top:56px}
 .pg.on{display:block}
 .pi{max-width:600px;margin:0 auto;padding:0 16px 120px}
-
-/* ── TOP NAV ── */
 .tnav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#121212;border-bottom:1px solid #282828}
 .logo{font-size:21px;font-weight:900;color:#D4A843;letter-spacing:-.03em;cursor:pointer;background:none;border:none}
 .tnr{display:flex;align-items:center;gap:8px}
@@ -36,14 +30,10 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .nav-av{width:28px;height:28px;border-radius:50%;background:#D4A843;color:#000;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .nav-un{font-size:13px;font-weight:700;color:#fff}
 .nbell{width:32px;height:32px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;color:#B3B3B3;display:none}
-
-/* ── BOTTOM NAV ── */
 .bnav{position:fixed;bottom:0;left:0;right:0;z-index:500;height:64px;background:#121212;border-top:1px solid #282828;display:flex;align-items:stretch}
 .bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6A6A6A!important;font-size:10px;font-weight:600;letter-spacing:.03em;border:none!important;background:none!important;padding:0;transition:color .15s}
 .bn.on{color:#fff!important}
 .bni{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
-
-/* ── MINI PLAYER ── */
 .mp{display:none;position:fixed;bottom:64px;left:0;right:0;z-index:490;background:#181818;border-top:1px solid #282828;padding:10px 16px;align-items:center;gap:12px}
 .mp.on{display:flex}
 .mp-prog{position:absolute;top:0;left:0;right:0;height:2px;background:#3E3E3E}
@@ -57,8 +47,6 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .mp-heart.on{color:#D4A843}
 .mp-play{width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;border:none}
 .mp-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.4);padding:5px 12px;border-radius:500px;background:rgba(212,168,67,.07)}
-
-/* ── NOW PLAYING ── */
 .nps{position:fixed;inset:0;z-index:800;background:linear-gradient(180deg,#1a1200 0%,#000 60%);display:none;flex-direction:column}
 .nps.on{display:flex}
 .nps-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px}
@@ -76,12 +64,8 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .nps-ctrl{color:#B3B3B3;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;background:none}
 .nps-ctrl.on{color:#D4A843}
 .nps-pbig{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;border:none}
-
-/* ── TOAST ── */
 .toast{position:fixed;bottom:calc(64px + 78px);left:50%;transform:translateX(-50%) translateY(20px);z-index:900;background:#3E3E3E;color:#fff;padding:12px 20px;border-radius:500px;font-size:13px;font-weight:600;opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap;pointer-events:none}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ── MODALS ── */
 .mbg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:600;display:none;align-items:flex-end}
 .mbg.on{display:flex}
 .mod{background:#181818;border-radius:16px 16px 0 0;padding:0 20px 48px;width:100%;max-width:600px;margin:0 auto;position:relative;max-height:90vh;overflow-y:auto}
@@ -89,8 +73,6 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .mx{position:absolute;top:14px;right:16px;color:#B3B3B3;font-size:24px;line-height:1;border:none;background:none}
 .m-ttl{font-size:20px;font-weight:900;margin-bottom:4px;color:#fff}
 .m-sub{font-size:14px;color:#B3B3B3;margin-bottom:20px}
-
-/* ── BUTTONS ── */
 .btn{display:block;width:100%;background:#D4A843;color:#000;border:none;border-radius:500px;padding:14px;font-size:14px;font-weight:700;letter-spacing:.04em;margin-bottom:10px;transition:transform .1s,opacity .15s}
 .btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.4}
@@ -101,8 +83,6 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .btn-sm{width:auto;padding:8px 20px;font-size:13px;display:inline-block;margin-bottom:0}
 .brow{display:flex;gap:10px}
 .brow .btn,.brow .btn-o{flex:1;margin-bottom:0}
-
-/* ── FORMS ── */
 .field{margin-bottom:14px}
 .field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#B3B3B3;margin-bottom:7px;font-weight:700}
 .field input,.field select,.field textarea{width:100%;background:#282828;border:1px solid transparent;border-radius:6px;padding:13px 14px;color:#fff;font-size:15px;transition:border-color .2s}
@@ -114,26 +94,18 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .at-w{position:relative}
 .at-s{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#6A6A6A;font-size:15px;pointer-events:none}
 .at-w input{padding-left:28px}
-
-/* ── PILLS ── */
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 .pill{padding:7px 16px;border-radius:500px;border:1px solid #3E3E3E;font-size:13px;color:#B3B3B3;font-weight:500;background:transparent;transition:all .15s}
 .pill.on{border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,.1)}
-
-/* ── TOGGLE ── */
 .tog{display:flex;background:#282828;border-radius:6px;padding:3px;margin-bottom:24px;gap:3px}
 .topt{flex:1;padding:10px;text-align:center;font-size:14px;border-radius:4px;color:#6A6A6A;font-weight:700;background:none;border:none;transition:all .15s}
 .topt.on{background:#121212;color:#fff}
-
-/* ── STEPS ── */
 .steps{display:flex;align-items:center;margin-bottom:26px}
 .sdot{width:28px;height:28px;border-radius:50%;border:2px solid #3E3E3E;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#6A6A6A;flex-shrink:0;transition:all .2s}
 .sdot.on{background:#D4A843;border-color:#D4A843;color:#000}
 .sdot.done{border-color:#D4A843;color:#D4A843}
 .sline{flex:1;height:2px;background:#282828;margin:0 6px;transition:background .3s}
 .sline.done{background:#D4A843}
-
-/* ── TRACK CARDS ── */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .tcard{background:#181818;border-radius:8px;cursor:pointer;overflow:hidden;transition:background .2s}
 .tcard:active{background:#282828}
@@ -143,8 +115,6 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .tcard-body{padding:12px 14px}
 .tcard-n{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;color:#fff}
 .tcard-a{font-size:12px;color:#B3B3B3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* ── TRACK ROW ── */
 .trow{display:flex;align-items:center;gap:12px;padding:8px 0;border-radius:4px;cursor:pointer;transition:background .15s}
 .trow:active{background:#1a1a1a}
 .trow-num{width:20px;font-size:14px;color:#6A6A6A;text-align:center;flex-shrink:0;font-weight:600}
@@ -155,8 +125,6 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .trow-a{font-size:12px;color:#B3B3B3;margin-top:2px}
 .trow-dur{font-size:12px;color:#6A6A6A;flex-shrink:0}
 .trow-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.35);padding:4px 12px;border-radius:500px;flex-shrink:0;background:transparent}
-
-/* ── ARTIST ROW ── */
 .arow{display:flex;align-items:center;gap:14px;padding:10px 0;cursor:pointer;border-radius:6px;transition:background .15s}
 .arow:active{background:#1a1a1a}
 .ava{width:52px;height:52px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#D4A843;flex-shrink:0}
@@ -165,8 +133,6 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .ar-m{font-size:12px;color:#B3B3B3;margin-top:2px}
 .fbtn{background:transparent;border:1px solid #3E3E3E;color:#fff;padding:7px 16px;border-radius:500px;font-size:12px;font-weight:700;white-space:nowrap;transition:all .15s}
 .fbtn.on{border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,.1)}
-
-/* ── HORIZONTAL SCROLL ── */
 .hscroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
 .hscroll::-webkit-scrollbar{display:none}
 .hcard{flex-shrink:0;width:140px;cursor:pointer}
@@ -174,24 +140,18 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .hcard-art{width:140px;height:140px;border-radius:8px;background:#181818;display:flex;align-items:center;justify-content:center;font-size:52px;margin-bottom:10px}
 .hcard-n{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
 .hcard-a{font-size:12px;color:#B3B3B3;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* ── GENRE GRID ── */
 .gg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
 .gc{border-radius:8px;padding:16px;height:88px;cursor:pointer;position:relative;overflow:hidden;transition:filter .15s}
 .gc:active{filter:brightness(.8)}
 .gc-n{font-size:15px;font-weight:700;color:#fff;position:relative;z-index:1}
 .gc-c{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px;position:relative;z-index:1}
 .gc-e{position:absolute;bottom:-10px;right:-4px;font-size:58px;opacity:.18;transform:rotate(15deg)}
-
-/* ── SEARCH INPUT ── */
 .si-w{position:relative;margin-bottom:20px}
 .si{width:100%;background:#fff;color:#000;border-radius:500px;padding:12px 16px 12px 44px;font-size:15px;font-weight:500;border:none}
 .si::placeholder{color:#6a6a6a}
 .si-ico{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#6a6a6a;pointer-events:none}
-
-/* ── PROFILE HERO ── */
 .phero{min-height:180px;background:linear-gradient(180deg,#2a1a00,#000);padding:calc(56px + 20px) 16px 20px;position:relative;overflow:hidden}
-.phero::after{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at 60%,rgba(212,168,67,.07),transparent 70%)}
+.phero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60%,rgba(212,168,67,.07),transparent 70%)}
 .p-ava{width:88px;height:88px;border-radius:50%;background:#282828;border:3px solid #000;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:900;color:#D4A843;margin-bottom:14px}
 .p-name{font-size:28px;font-weight:900;margin-bottom:4px;color:#fff}
 .p-tag{font-size:13px;color:#B3B3B3;margin-bottom:10px}
@@ -201,8 +161,6 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .ps:last-child{border-right:none}
 .ps-v{font-size:20px;font-weight:900;color:#D4A843}
 .ps-l{font-size:10px;color:#6A6A6A;text-transform:uppercase;letter-spacing:.07em;margin-top:4px;font-weight:600}
-
-/* ── PLAYER ── */
 .track-art-lg{width:220px;height:220px;border-radius:10px;background:#181818;display:flex;align-items:center;justify-content:center;font-size:90px;margin:0 auto 24px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
 .gbadge{display:inline-block;font-size:10px;color:#D4A843;border:1px solid rgba(212,168,67,.35);border-radius:500px;padding:3px 12px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
 .prog-bar{height:4px;background:#3E3E3E;border-radius:2px;cursor:pointer;margin-bottom:8px}
@@ -214,76 +172,50 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .ctrl.on{color:#D4A843}
 .pbig{width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;border:none;transition:transform .1s}
 .pbig:active{transform:scale(.93)}
-
-/* ── WALLET ── */
 .wallet{background:linear-gradient(135deg,#1c1400,#0d0d0d);border:1px solid rgba(212,168,67,.2);border-radius:10px;padding:28px;text-align:center;margin-bottom:20px}
 .w-l{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#B3B3B3;margin-bottom:8px;font-weight:700}
 .w-a{font-size:52px;font-weight:900;color:#D4A843;line-height:1}
 .w-s{font-size:12px;color:#B3B3B3;margin-top:8px}
-
-/* ── STAT CARDS ── */
 .scards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
 .sc{background:#181818;border-radius:8px;padding:18px}
 .sc.g{border:1px solid rgba(212,168,67,.2)}
 .sc-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#B3B3B3;margin-bottom:8px;font-weight:700}
 .sc-v{font-size:28px;font-weight:900;color:#fff}
 .sc.g .sc-v{color:#D4A843}
-
-/* ── TIP AMOUNTS ── */
 .tamts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
 .ta{padding:12px 4px;border:1px solid #3E3E3E;border-radius:8px;text-align:center;font-size:14px;background:transparent;color:#B3B3B3;font-weight:700;transition:all .15s}
 .ta.on{border-color:#D4A843;background:rgba(212,168,67,.1);color:#D4A843}
-
-/* ── SHARE ── */
 .share-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
 .share-opt{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border:1px solid #3E3E3E;border-radius:8px;font-size:14px;font-weight:600;color:#fff;background:transparent}
 .share-opt:active{background:#282828}
 .sbox{background:#282828;border-radius:6px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .surl{flex:1;font-size:13px;color:#D4A843;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
 .cbtn{background:#D4A843;color:#000;border-radius:500px;padding:7px 16px;font-size:12px;font-weight:700;border:none}
-
-/* ── UPLOAD ── */
 .upa{border:1.5px dashed #3E3E3E;border-radius:10px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:16px}
 .upa:active,.upa.has-file{border-color:#D4A843;background:rgba(212,168,67,.07)}
-
-/* ── SUCCESS ── */
 .succ{text-align:center;padding:48px 0}
 .succ-ico{font-size:56px;display:block;margin-bottom:20px}
 .succ-t{font-size:32px;font-weight:900;margin-bottom:10px;color:#fff}
 .succ-t em{font-style:normal;color:#D4A843}
 .succ-s{font-size:14px;color:#B3B3B3;line-height:1.8;margin-bottom:28px}
-
-/* ── SECTION ── */
 .sec{font-size:20px;font-weight:900;margin-bottom:16px;color:#fff}
 .sec-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .sec-row .sec{margin:0}
 .see-all{font-size:12px;font-weight:700;color:#B3B3B3;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;border:none;background:none}
-
-/* ── DIVIDER ── */
 .hr{height:1px;background:#1c1c1c;margin:24px 0}
-
-/* ── LAUNCH STATS ── */
 .lstats{display:flex;gap:8px;margin-bottom:22px}
 .ls{background:#181818;border-radius:8px;padding:16px 10px;text-align:center;flex:1}
 .ls-v{font-size:24px;font-weight:900;color:#D4A843;margin-bottom:4px}
 .ls-l{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#B3B3B3;font-weight:700}
-
-/* ── EMPTY ── */
 .empty{text-align:center;padding:36px 0;color:#3E3E3E;font-size:14px}
 .empty span{color:#D4A843;font-weight:600;cursor:pointer}
-
-/* ── ME AVA ── */
 .me-ava{width:80px;height:80px;border-radius:50%;background:rgba(212,168,67,.1);border:2px solid rgba(212,168,67,.3);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:900;color:#D4A843;margin:0 auto 16px}
-
-/* ── SETTINGS ── */
 .set-sect{background:#181818;border-radius:10px;overflow:hidden;margin-bottom:16px}
 .set-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6A6A6A;font-weight:700;padding:16px 16px 8px}
 .set-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #282828;font-size:15px;font-weight:500;cursor:pointer;color:#fff;background:none;border-left:none;border-right:none;border-top:none;width:100%;text-align:left}
 .set-row:last-child{border-bottom:none}
 .set-row:active{background:#282828}
 .set-val{font-size:13px;color:#6A6A6A}
-
-/* ── FEED ── */
 .feed-card{background:#181818;border-radius:10px;padding:16px;margin-bottom:12px;cursor:pointer}
 .feed-card:active{background:#282828}
 .fc-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -292,8 +224,6 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .fc-time{font-size:12px;color:#6A6A6A;margin-top:2px}
 .fc-track{background:#282828;border-radius:8px;padding:12px;display:flex;align-items:center;gap:12px}
 .fc-art{width:48px;height:48px;border-radius:6px;background:#3E3E3E;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-
-/* ── CHART ROW ── */
 .chart-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #1c1c1c;cursor:pointer}
 .chart-row:last-child{border-bottom:none}
 .chart-row:active{opacity:.7}
@@ -304,11 +234,8 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 .chart-n{font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chart-a{font-size:12px;color:#B3B3B3;margin-top:2px}
 .chart-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.35);padding:4px 12px;border-radius:500px;flex-shrink:0;background:transparent}
-
-/* ── NP TIP ── */
 .np-tip{padding:0 24px;margin-bottom:16px}
-</style>
-
+  </style>
 </head>
 <body>
 
@@ -753,7 +680,7 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
       <p style="color:#B3B3B3;font-size:14px;margin-bottom:22px">Add more from your dashboard anytime.</p>
       <div class="field"><label>Track title</label><input type="text" id="aTrack" placeholder="Track name"/></div>
       <div class="field"><label>Genre</label>
-        <select id="aTrackG"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</option></select>
+        <select id="aTrackG"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</button></select>
       </div>
       <div class="upa" id="upa" onclick="document.getElementById('audioFile').click()">
         <div id="upIcon" style="color:#D4A843;margin-bottom:12px">
@@ -897,11 +824,17 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 </div>
 
 <script>
-// ══ CONFIG — paste Paynow keys here when ready ══
+// ══ SUPABASE ══
+const _sb = window.supabase.createClient(
+  'https://lonavuripzywpgguznza.supabase.co',
+  'YOUR_ANON_KEY'
+);
+
+// ══ CONFIG ══
 var PAYNOW_ID='';
 var PAYNOW_KEY='';
 
-// ══ DATA ══
+// ══ SEED DATA (shown until live tracks load from Supabase) ══
 var TRACKS=[
   {id:1,e:'🎵',n:'Ndinewe',a:'Jah Signal',g:'Zimdancehall',dur:'3:24'},
   {id:2,e:'🎶',n:'Rudo Rwangu',a:'Jah Signal',g:'Zimdancehall',dur:'4:12'},
@@ -1096,7 +1029,7 @@ function doSearch(q){
   document.getElementById('sDef').style.display='none';
   if(!fa.length&&!ft.length){document.getElementById('sRes').style.display='none';document.getElementById('sEmpty').style.display='block';return;}
   document.getElementById('sEmpty').style.display='none';document.getElementById('sRes').style.display='block';
-  document.getElementById('rA').innerHTML=fa.length?'<div class="sec" style="font-size:16px">Artists</div>'+fa.map(function(a,i){return aRow(a,ARTISTS.indexOf(a));}).join(''):'';
+  document.getElementById('rA').innerHTML=fa.length?'<div class="sec" style="font-size:16px">Artists</div>'+fa.map(function(a){return aRow(a,ARTISTS.indexOf(a));}).join(''):'';
   document.getElementById('rT').innerHTML=ft.length?'<div class="sec" style="font-size:16px">Tracks</div>'+ft.map(function(t,i){return tRow(t,i);}).join(''):'';
 }
 
@@ -1125,7 +1058,7 @@ function renderFeed(){
   if(!window._user){if(el)el.innerHTML='';if(ge)ge.style.display='block';return;}
   if(ge)ge.style.display='none';
   var items=ARTISTS.slice(0,4).map(function(a,i){return {a:a,t:TRACKS[i]||TRACKS[0],time:['2 mins ago','15 mins ago','1 hour ago','3 hours ago'][i]};});
-  el.innerHTML=items.map(function(item,i){
+  el.innerHTML=items.map(function(item){
     return '<div class="feed-card" onclick="openTrack('+item.t.id+')">' +
       '<div class="fc-head"><div class="fc-av">'+item.a.i+'</div><div><div class="fc-name">'+item.a.n+'</div><div class="fc-time">Uploaded a track · '+item.time+'</div></div></div>' +
       '<div class="fc-track"><div class="fc-art">'+item.t.e+'</div>' +
@@ -1262,7 +1195,11 @@ function sendTip(){
       else{st.style.color='#E91429';st.textContent='Payment failed. Please try again.';}
     }).catch(function(){btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;st.style.color='#E91429';st.textContent='Connection error. Try again.';});
   } else {
-    setTimeout(function(){btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;st.style.display='block';st.style.color='#D4A843';st.textContent='EcoCash payments setting up — live very soon.';},700);
+    setTimeout(function(){
+      btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;
+      st.style.display='block';st.style.color='#D4A843';
+      st.textContent='EcoCash payments setting up — live very soon.';
+    },700);
   }
 }
 
@@ -1286,57 +1223,45 @@ function sTW(){window.open('https://twitter.com/intent/tweet?text='+encodeURICom
 function sFB(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(_shareUrl),'_blank');}
 function sIG(){showToast('Copy the link and paste in your Instagram story');}
 
-// ══ FAN SIGNUP ══
+// ══ FAN SIGNUP — LIVE SUPABASE ══
 async function joinFan(){
-  var first=document.getElementById('fFirst').value.trim(),
-      user=document.getElementById('fUser').value.trim(),
-      email=document.getElementById('fEmail').value.trim(),
-      pass=document.getElementById('fPass').value;
+  var first=document.getElementById('fFirst').value.trim();
+  var last=document.getElementById('fLast').value.trim();
+  var user=document.getElementById('fUser').value.trim();
+  var email=document.getElementById('fEmail').value.trim();
+  var pass=document.getElementById('fPass').value;
 
-  if(!first||!user||!email||pass.length<8){
-    showToast('Fill all fields correctly');
-    return;
-  }
-
-  var btn=document.getElementById('fanBtn');
-  btn.textContent='Creating...';
-  btn.disabled=true;
-
-  const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: pass
-  });
-
-  if(error){
-    showToast(error.message);
-    btn.textContent='Create account';
-    btn.disabled=false;
-    return;
-  }
-
-  await supabase.from('fans').insert({
-    id: data.user.id,
-    username: user
-  });
-
-  setUser('fan', first, user);
-
-  btn.textContent='Create account';
-  btn.disabled=false;
-  showToast('Account created');
-}
-  var first=document.getElementById('fFirst').value.trim(),user=document.getElementById('fUser').value.trim(),email=document.getElementById('fEmail').value.trim(),pass=document.getElementById('fPass').value;
   if(!first){showToast('Please enter your first name');return;}
   if(!user){showToast('Please choose a username');return;}
   if(!email){showToast('Please enter your email');return;}
   if(pass.length<8){showToast('Password must be at least 8 characters');return;}
-  var btn=document.getElementById('fanBtn');btn.textContent='Creating...';btn.disabled=true;
-  setTimeout(function(){
-    var last=document.getElementById('fLast').value.trim();
-    document.getElementById('fanForm').style.display='none';document.getElementById('fanDone').style.display='block';
-    document.getElementById('fanMsg').textContent='Welcome '+first+'! Your account @'+user+' is ready.';
-    setUser('fan',first+(last?' '+last:''),user);btn.textContent='Create account';btn.disabled=false;
-  },700);
+
+  var btn=document.getElementById('fanBtn');
+  btn.textContent='Creating...';btn.disabled=true;
+
+  var result=await _sb.auth.signUp({email:email,password:pass});
+
+  if(result.error){
+    showToast(result.error.message);
+    btn.textContent='Create account';btn.disabled=false;
+    return;
+  }
+
+  // Insert profile row — ignore error if table doesn't exist yet
+  await _sb.from('fans').insert({
+    id:result.data.user.id,
+    username:user,
+    first_name:first,
+    last_name:last
+  });
+
+  var fullName=first+(last?' '+last:'');
+  document.getElementById('fanForm').style.display='none';
+  document.getElementById('fanDone').style.display='block';
+  document.getElementById('fanMsg').textContent='Welcome '+first+'! Your account @'+user+' is ready.';
+  setUser('fan',fullName,user);
+  btn.textContent='Create account';btn.disabled=false;
+  showToast('Account created!');
 }
 
 // ══ ARTIST SIGNUP ══
@@ -1358,7 +1283,8 @@ function aStep(n){
   }
   if(n===4){
     if(!document.getElementById('aTrack').value.trim()){showToast('Please enter your track title');return;}
-    var stage=document.getElementById('aStage').value.trim(),uname=document.getElementById('aUser').value.trim();
+    var stage=document.getElementById('aStage').value.trim();
+    var uname=document.getElementById('aUser').value.trim();
     document.getElementById('artLink').textContent='malbry.vercel.app/@'+uname;
     setUser('artist',stage,uname);
   }
@@ -1387,92 +1313,85 @@ function handleUploadPage(input){
   document.getElementById('uSub').textContent=(file.size/1024/1024).toFixed(1)+'MB — ready';
   document.getElementById('uIcon').innerHTML='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 }
+
+// ══ SUBMIT UPLOAD — LIVE SUPABASE ══
 async function submitUpload(){
-  var title=document.getElementById('uTitle').value.trim(),
-      file=document.getElementById('uFile').files[0];
+  var title=document.getElementById('uTitle').value.trim();
+  var genre=document.getElementById('uGenre').value;
+  var file=document.getElementById('uFile').files[0];
+  var btn=document.getElementById('uBtn');
+  var st=document.getElementById('uStat');
 
-  if(!title || !file){
-    showToast('Missing fields');
-    return;
-  }
-
-  var btn=document.getElementById('uBtn'),
-      st=document.getElementById('uStat');
-
-  btn.textContent='Uploading...';
-  btn.disabled=true;
-
-  const filePath = `tracks/${Date.now()}_${file.name}`;
-
-  const { error } = await supabase.storage
-    .from('tracks')
-    .upload(filePath, file);
-
-  if(error){
-    showToast('Upload failed');
-    btn.textContent='Upload track';
-    btn.disabled=false;
-    return;
-  }
-
-  const { data } = supabase.storage
-    .from('tracks')
-    .getPublicUrl(filePath);
-
-  await supabase.from('tracks').insert({
-    title: title,
-    audio_url: data.publicUrl
-  });
-
-  showToast('Track uploaded');
-  btn.textContent='Upload track';
-  btn.disabled=false;
-
-  loadTracks();
-}
-  var title=document.getElementById('uTitle').value.trim(),file=document.getElementById('uFile').files[0];
   if(!title){showToast('Please enter a track title');return;}
   if(!file){showToast('Please select an audio file');return;}
-  var btn=document.getElementById('uBtn'),st=document.getElementById('uStat');
-  btn.textContent='Uploading...';btn.disabled=true;st.style.display='block';st.style.color='#D4A843';st.textContent='Uploading...';
-  var p=0,iv=setInterval(function(){
-    p+=Math.random()*18;
-    if(p>=100){clearInterval(iv);st.style.color='#1ED760';st.textContent='Uploaded! Track will appear once streaming goes live.';btn.textContent='Upload track';btn.disabled=false;
-      var c=parseInt(document.getElementById('dTCount').textContent)||0;document.getElementById('dTCount').textContent=c+1;showToast('Track uploaded!');}
-    else st.textContent='Uploading... '+Math.round(p)+'%';
-  },180);
+
+  btn.textContent='Uploading...';btn.disabled=true;
+  st.style.display='block';st.style.color='#D4A843';st.textContent='Uploading...';
+
+  var filePath='tracks/'+Date.now()+'_'+file.name.replace(/[^a-z0-9_.]/gi,'_');
+
+  var upResult=await _sb.storage.from('tracks').upload(filePath,file);
+
+  if(upResult.error){
+    st.style.color='#E91429';st.textContent='Upload failed: '+upResult.error.message;
+    btn.textContent='Upload track';btn.disabled=false;
+    return;
+  }
+
+  var urlResult=_sb.storage.from('tracks').getPublicUrl(filePath);
+  var publicUrl=urlResult.data.publicUrl;
+
+  var insertResult=await _sb.from('tracks').insert({
+    title:title,
+    genre:genre,
+    audio_url:publicUrl,
+    artist_name:window._user?window._user.name:'Unknown'
+  });
+
+  if(insertResult.error){
+    st.style.color='#E91429';st.textContent='Track saved but metadata failed. Contact support.';
+  } else {
+    st.style.color='#1ED760';st.textContent='Track uploaded successfully!';
+    var c=parseInt(document.getElementById('dTCount').textContent)||0;
+    document.getElementById('dTCount').textContent=c+1;
+    showToast('Track uploaded!');
+    loadTracks();
+  }
+
+  btn.textContent='Upload track';btn.disabled=false;
 }
+
 function copyLink(){
   var link='https://'+document.getElementById('artLink').textContent;
   if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){showToast('Link copied!');});}else showToast(link);
 }
+
+// ══ LOAD LIVE TRACKS FROM SUPABASE ══
 async function loadTracks(){
-  const { data, error } = await supabase
-    .from('tracks')
-    .select('*');
-
-  if(error){
-    console.log(error);
-    return;
-  }
-
-  TRACKS = data.map(function(t){
+  var result=await _sb.from('tracks').select('*').order('created_at',{ascending:false});
+  if(result.error||!result.data||!result.data.length)return; // keep seed data on error
+  var emojis=['🎵','🎶','🎸','🎤','🙏','🎙','🔥','🎺','🎹','🎼'];
+  TRACKS=result.data.map(function(t,i){
     return {
-      id: t.id,
-      e: '🎵',
-      n: t.title,
-      a: t.artist_name || 'Unknown',
-      g: t.genre || 'Unknown',
-      dur: '3:00'
+      id:t.id,
+      e:emojis[i%emojis.length],
+      n:t.title||'Untitled',
+      a:t.artist_name||'Unknown',
+      g:t.genre||'Unknown',
+      dur:'3:00',
+      url:t.audio_url
     };
   });
-
   renderHome();
   renderCharts();
+  renderSearch();
 }
+
 // ══ INIT ══
 document.getElementById('greet').textContent=greet();
+renderHome();
 renderSearch();
+renderCharts();
 loadTracks();
 </script>
 
