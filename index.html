@@ -1,3 +1,8 @@
+const supabase = window.supabase.createClient(
+‘https://lonavuripzywpgguznza.supabase.co’,
+‘YOUR_ANON_KEY’
+);
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -822,7 +827,7 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 // ══ SUPABASE ══
 const supabase = window.supabase.createClient(
   'https://lonavuripzywpgguznza.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvbmF2dXJpcHp5d3BnZ3V6bnphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDgzMjksImV4cCI6MjA4ODkyNDMyOX0.YpubAkauQDr4k-_6Lo7qlW9hBYY3lYb_ewv6pBinkMk'
+  'YOUR_ANON_KEY'
 );
 
 // ══ CONFIG ══
@@ -1234,7 +1239,7 @@ async function joinFan(){
   var btn=document.getElementById('fanBtn');
   btn.textContent='Creating...';btn.disabled=true;
 
-  var result=await _sb.auth.signUp({email:email,password:pass});
+  var result=await supabase.auth.signUp({email:email,password:pass});
 
   if(result.error){
     showToast(result.error.message);
@@ -1243,7 +1248,7 @@ async function joinFan(){
   }
 
   // Insert profile row — ignore error if table doesn't exist yet
-  await _sb.from('fans').insert({
+  await supabase.from('fans').insert({
     id:result.data.user.id,
     username:user,
     first_name:first,
@@ -1325,7 +1330,7 @@ async function submitUpload(){
 
   var filePath='tracks/'+Date.now()+'_'+file.name.replace(/[^a-z0-9_.]/gi,'_');
 
-  var upResult=await _sb.storage.from('tracks').upload(filePath,file);
+  var upResult=await supabase.storage.from('tracks').upload(filePath,file);
 
   if(upResult.error){
     st.style.color='#E91429';st.textContent='Upload failed: '+upResult.error.message;
@@ -1333,10 +1338,10 @@ async function submitUpload(){
     return;
   }
 
-  var urlResult=_sb.storage.from('tracks').getPublicUrl(filePath);
+  var urlResult=supabase.storage.from('tracks').getPublicUrl(filePath);
   var publicUrl=urlResult.data.publicUrl;
 
-  var insertResult=await _sb.from('tracks').insert({
+  var insertResult=await supabase.from('tracks').insert({
     title:title,
     genre:genre,
     audio_url:publicUrl,
@@ -1363,7 +1368,7 @@ function copyLink(){
 
 // ══ LOAD LIVE TRACKS FROM SUPABASE ══
 async function loadTracks(){
-  var result=await _sb.from('tracks').select('*').order('created_at',{ascending:false});
+  var result=await supabase.from('tracks').select('*').order('created_at',{ascending:false});
   if(result.error||!result.data||!result.data.length)return; // keep seed data on error
   var emojis=['🎵','🎶','🎸','🎤','🙏','🎙','🔥','🎺','🎹','🎼'];
   TRACKS=result.data.map(function(t,i){
