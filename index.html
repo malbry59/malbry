@@ -2,249 +2,332 @@
 
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <title>Malbry</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-/* ── ALL COLORS HARDCODED — NO CSS VARS ON INTERACTIVE ELEMENTS ── */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Malbry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none}
 html,body{height:100%;background:#000;overscroll-behavior:none}
-body{color:#fff;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;overflow-x:hidden}
-button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit;outline:none;-webkit-appearance:none}
-input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:none;outline:none}
+body{color:#fff;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+h1,h2,h3,.logo,.sec{font-family:'Syne',sans-serif}
+button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;background:none;color:inherit;outline:none}
+input,select,textarea{font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none}
+
+/* PAGES */
 .pg{display:none;min-height:100vh;padding-top:56px}
 .pg.on{display:block}
 .pi{max-width:600px;margin:0 auto;padding:0 16px 120px}
-.tnav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#121212;border-bottom:1px solid #282828}
-.logo{font-size:21px;font-weight:900;color:#D4A843;letter-spacing:-.03em;cursor:pointer;background:none;border:none}
+
+/* TOP NAV */
+.tnav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#0a0a0a;border-bottom:1px solid #1a1a1a}
+.logo{font-size:22px;font-weight:900;color:#D4A843;letter-spacing:-.02em;border:none;background:none;cursor:pointer}
 .tnr{display:flex;align-items:center;gap:8px}
-.nbtn{padding:7px 16px;border-radius:500px;font-size:13px;font-weight:700;border:1px solid #3E3E3E;color:#fff;background:transparent}
-.nbtn.gold{background:#D4A843;color:#000;border-color:#D4A843}
-.nuser{align-items:center;gap:8px;background:#282828;border-radius:500px;padding:4px 12px 4px 4px;border:none;display:none}
-.nav-av{width:28px;height:28px;border-radius:50%;background:#D4A843;color:#000;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.nav-un{font-size:13px;font-weight:700;color:#fff}
-.nbell{width:32px;height:32px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;color:#B3B3B3;display:none}
-.bnav{position:fixed;bottom:0;left:0;right:0;z-index:500;height:64px;background:#121212;border-top:1px solid #282828;display:flex;align-items:stretch}
-.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6A6A6A!important;font-size:10px;font-weight:600;letter-spacing:.03em;border:none!important;background:none!important;padding:0;transition:color .15s}
+.nbtn{padding:7px 16px;border-radius:500px;font-size:13px;font-weight:600;border:1px solid #2a2a2a;color:#fff;background:transparent}
+.nbtn.gold{background:#D4A843;color:#000;border-color:#D4A843;font-weight:700}
+.nuser{display:none;align-items:center;gap:8px;background:#1a1a1a;border-radius:500px;padding:4px 12px 4px 4px;border:none;cursor:pointer}
+.nuser.on{display:flex}
+.nav-av{width:28px;height:28px;border-radius:50%;background:#D4A843;color:#000;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:‘Syne’,sans-serif}
+.nav-un{font-size:13px;font-weight:600;color:#fff}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:500;height:64px;background:#0a0a0a;border-top:1px solid #1a1a1a;display:flex;align-items:stretch}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#444!important;font-size:10px;font-weight:600;letter-spacing:.03em;border:none!important;background:none!important;padding:0;transition:color .15s}
 .bn.on{color:#fff!important}
-.bni{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
-.mp{display:none;position:fixed;bottom:64px;left:0;right:0;z-index:490;background:#181818;border-top:1px solid #282828;padding:10px 16px;align-items:center;gap:12px}
+.bni{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
+
+/* MINI PLAYER */
+.mp{display:none;position:fixed;bottom:64px;left:0;right:0;z-index:490;background:#111;border-top:1px solid #1a1a1a;padding:10px 16px;align-items:center;gap:12px}
 .mp.on{display:flex}
-.mp-prog{position:absolute;top:0;left:0;right:0;height:2px;background:#3E3E3E}
+.mp-prog{position:absolute;top:0;left:0;right:0;height:2px;background:#222}
 .mp-pf{height:100%;background:#D4A843;width:0;transition:width .3s linear}
-.mp-art{width:44px;height:44px;border-radius:4px;background:#282828;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;cursor:pointer}
+.mp-art{width:42px;height:42px;border-radius:6px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;cursor:pointer;overflow:hidden}
+.mp-art img{width:100%;height:100%;object-fit:cover}
 .mp-inf{flex:1;min-width:0;cursor:pointer}
 .mp-t{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
-.mp-a{font-size:12px;color:#B3B3B3;margin-top:2px}
+.mp-a{font-size:12px;color:#888;margin-top:2px}
 .mp-btns{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.mp-heart{color:#6A6A6A;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:none;background:none}
-.mp-heart.on{color:#D4A843}
-.mp-play{width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;border:none}
-.mp-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.4);padding:5px 12px;border-radius:500px;background:rgba(212,168,67,.07)}
-.nps{position:fixed;inset:0;z-index:800;background:linear-gradient(180deg,#1a1200 0%,#000 60%);display:none;flex-direction:column}
+.mp-heart{color:#444;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:none;background:none;padding:0}
+.mp-heart.on svg{fill:#D4A843;stroke:#D4A843}
+.mp-play{width:34px;height:34px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;border:none;flex-shrink:0}
+.mp-tip-btn{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.35);padding:5px 11px;border-radius:500px;background:transparent;white-space:nowrap}
+
+/* NOW PLAYING FULLSCREEN */
+.nps{position:fixed;inset:0;z-index:800;background:linear-gradient(180deg,#120d00 0%,#000 55%);display:none;flex-direction:column;overflow-y:auto}
 .nps.on{display:flex}
-.nps-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px}
-.nps-art{width:260px;height:260px;border-radius:12px;background:#181818;display:flex;align-items:center;justify-content:center;font-size:110px;margin:8px auto 24px;box-shadow:0 24px 64px rgba(0,0,0,.8)}
-.nps-body{padding:0 24px;flex:1}
-.nps-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.nps-title{font-size:24px;font-weight:900;letter-spacing:-.02em;color:#fff}
-.nps-artist{font-size:16px;color:#B3B3B3;font-weight:500;margin-top:4px}
-.nps-heart{color:#6A6A6A;border:none;background:none}
-.nps-heart.on{color:#D4A843}
-.nps-prog{height:4px;background:#3E3E3E;border-radius:2px;cursor:pointer;margin-bottom:8px}
-.nps-pf{height:100%;background:#fff;border-radius:2px;width:0;transition:width .3s linear}
-.nps-time{display:flex;justify-content:space-between;font-size:11px;color:#6A6A6A;margin-bottom:20px}
-.nps-ctrls{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding:0 4px}
-.nps-ctrl{color:#B3B3B3;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;background:none}
+.nps-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;flex-shrink:0}
+.nps-art{width:min(260px,70vw);height:min(260px,70vw);border-radius:14px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:100px;margin:8px auto 24px;box-shadow:0 24px 64px rgba(0,0,0,.9);flex-shrink:0;overflow:hidden}
+.nps-art img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+.nps-body{padding:0 24px 32px;flex:1}
+.nps-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.nps-title{font-size:22px;font-weight:900;letter-spacing:-.02em;color:#fff;font-family:‘Syne’,sans-serif}
+.nps-artist{font-size:15px;color:#888;font-weight:500;margin-top:4px}
+.nps-heart{color:#444;border:none;background:none;padding:4px}
+.nps-heart.on svg{fill:#D4A843;stroke:#D4A843}
+.prog-wrap{margin-bottom:6px}
+.prog-bar{height:4px;background:#222;border-radius:2px;cursor:pointer;position:relative}
+.prog-fill{height:100%;background:#D4A843;border-radius:2px;width:0;transition:width .3s linear;pointer-events:none}
+.time-r{display:flex;justify-content:space-between;font-size:11px;color:#555;margin-bottom:22px}
+.nps-ctrls{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;padding:0 4px}
+.nps-ctrl{color:#888;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;background:none}
 .nps-ctrl.on{color:#D4A843}
 .nps-pbig{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;border:none}
-.toast{position:fixed;bottom:calc(64px + 78px);left:50%;transform:translateX(-50%) translateY(20px);z-index:900;background:#3E3E3E;color:#fff;padding:12px 20px;border-radius:500px;font-size:13px;font-weight:600;opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap;pointer-events:none}
+.np-tip{padding:0 0 8px}
+
+/* TOAST */
+.toast{position:fixed;bottom:calc(64px + 80px);left:50%;transform:translateX(-50%) translateY(16px);z-index:999;background:#222;color:#fff;padding:11px 20px;border-radius:500px;font-size:13px;font-weight:600;opacity:0;transition:opacity .2s,transform .2s;white-space:nowrap;pointer-events:none;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-.mbg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:600;display:none;align-items:flex-end}
+
+/* MODALS */
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:700;display:none;align-items:flex-end;justify-content:center}
 .mbg.on{display:flex}
-.mod{background:#181818;border-radius:16px 16px 0 0;padding:0 20px 48px;width:100%;max-width:600px;margin:0 auto;position:relative;max-height:90vh;overflow-y:auto}
-.mh{width:32px;height:3px;background:#3E3E3E;border-radius:2px;margin:12px auto 22px}
-.mx{position:absolute;top:14px;right:16px;color:#B3B3B3;font-size:24px;line-height:1;border:none;background:none}
-.m-ttl{font-size:20px;font-weight:900;margin-bottom:4px;color:#fff}
-.m-sub{font-size:14px;color:#B3B3B3;margin-bottom:20px}
-.btn{display:block;width:100%;background:#D4A843;color:#000;border:none;border-radius:500px;padding:14px;font-size:14px;font-weight:700;letter-spacing:.04em;margin-bottom:10px;transition:transform .1s,opacity .15s}
+.mod{background:#111;border-radius:20px 20px 0 0;padding:0 20px 48px;width:100%;max-width:600px;position:relative;max-height:92vh;overflow-y:auto}
+.mh{width:36px;height:3px;background:#2a2a2a;border-radius:2px;margin:14px auto 24px}
+.mx{position:absolute;top:16px;right:16px;color:#666;font-size:22px;line-height:1;border:none;background:none;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+.m-ttl{font-size:20px;font-weight:900;margin-bottom:6px;color:#fff;font-family:‘Syne’,sans-serif}
+.m-sub{font-size:14px;color:#666;margin-bottom:22px}
+
+/* BUTTONS */
+.btn{display:block;width:100%;background:#D4A843;color:#000;border:none;border-radius:500px;padding:14px;font-size:14px;font-weight:700;letter-spacing:.03em;margin-bottom:10px;transition:transform .1s,opacity .15s;font-family:‘DM Sans’,sans-serif}
 .btn:active{transform:scale(.97)}
-.btn:disabled{opacity:.4}
-.btn-w{background:#fff;color:#000}
-.btn-o{display:block;width:100%;background:transparent;color:#fff;border:1px solid #3E3E3E;border-radius:500px;padding:13px;font-size:14px;font-weight:700;letter-spacing:.04em;margin-bottom:10px}
+.btn:disabled{opacity:.4;pointer-events:none}
+.btn-o{display:block;width:100%;background:transparent;color:#fff;border:1px solid #2a2a2a;border-radius:500px;padding:13px;font-size:14px;font-weight:600;letter-spacing:.03em;margin-bottom:10px;font-family:‘DM Sans’,sans-serif}
 .btn-o:active{border-color:#fff;opacity:.8}
-.btn-danger{display:block;width:100%;background:transparent;color:#E91429;border:1px solid rgba(233,20,41,.3);border-radius:500px;padding:13px;font-size:14px;font-weight:700;letter-spacing:.04em}
+.btn-danger{display:block;width:100%;background:transparent;color:#ff4444;border:1px solid rgba(255,68,68,.25);border-radius:500px;padding:13px;font-size:14px;font-weight:600;letter-spacing:.03em;font-family:‘DM Sans’,sans-serif}
 .btn-sm{width:auto;padding:8px 20px;font-size:13px;display:inline-block;margin-bottom:0}
 .brow{display:flex;gap:10px}
 .brow .btn,.brow .btn-o{flex:1;margin-bottom:0}
+
+/* FORMS */
 .field{margin-bottom:14px}
-.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#B3B3B3;margin-bottom:7px;font-weight:700}
-.field input,.field select,.field textarea{width:100%;background:#282828;border:1px solid transparent;border-radius:6px;padding:13px 14px;color:#fff;font-size:15px;transition:border-color .2s}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#B3B3B3}
-.field input::placeholder,.field textarea::placeholder{color:#6A6A6A}
-.field select option{background:#181818;color:#fff}
-.field textarea{min-height:90px;resize:none;line-height:1.6}
+.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#666;margin-bottom:7px;font-weight:700}
+.field input,.field select,.field textarea{width:100%;background:#1a1a1a;border:1px solid transparent;border-radius:8px;padding:13px 14px;color:#fff;font-size:15px;transition:border-color .2s;font-family:‘DM Sans’,sans-serif}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#444}
+.field input::placeholder,.field textarea::placeholder{color:#444}
+.field select option{background:#111;color:#fff}
+.field textarea{min-height:80px;resize:none;line-height:1.6}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .at-w{position:relative}
-.at-s{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#6A6A6A;font-size:15px;pointer-events:none}
-.at-w input{padding-left:28px}
+.at-s{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#444;font-size:15px;pointer-events:none}
+.at-w input{padding-left:26px}
+
+/* PILLS */
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.pill{padding:7px 16px;border-radius:500px;border:1px solid #3E3E3E;font-size:13px;color:#B3B3B3;font-weight:500;background:transparent;transition:all .15s}
-.pill.on{border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,.1)}
-.tog{display:flex;background:#282828;border-radius:6px;padding:3px;margin-bottom:24px;gap:3px}
-.topt{flex:1;padding:10px;text-align:center;font-size:14px;border-radius:4px;color:#6A6A6A;font-weight:700;background:none;border:none;transition:all .15s}
-.topt.on{background:#121212;color:#fff}
-.steps{display:flex;align-items:center;margin-bottom:26px}
-.sdot{width:28px;height:28px;border-radius:50%;border:2px solid #3E3E3E;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#6A6A6A;flex-shrink:0;transition:all .2s}
+.pill{padding:7px 16px;border-radius:500px;border:1px solid #2a2a2a;font-size:13px;color:#666;font-weight:500;background:transparent;transition:all .15s}
+.pill.on{border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,.08)}
+
+/* TOGGLE */
+.tog{display:flex;background:#1a1a1a;border-radius:8px;padding:3px;margin-bottom:24px;gap:3px}
+.topt{flex:1;padding:10px;text-align:center;font-size:14px;border-radius:6px;color:#555;font-weight:700;background:none;border:none;transition:all .15s;font-family:‘DM Sans’,sans-serif}
+.topt.on{background:#0a0a0a;color:#fff}
+
+/* STEPS */
+.steps{display:flex;align-items:center;margin-bottom:28px}
+.sdot{width:28px;height:28px;border-radius:50%;border:2px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#555;flex-shrink:0;transition:all .2s}
 .sdot.on{background:#D4A843;border-color:#D4A843;color:#000}
 .sdot.done{border-color:#D4A843;color:#D4A843}
-.sline{flex:1;height:2px;background:#282828;margin:0 6px;transition:background .3s}
+.sline{flex:1;height:2px;background:#1a1a1a;margin:0 6px;transition:background .3s}
 .sline.done{background:#D4A843}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.tcard{background:#181818;border-radius:8px;cursor:pointer;overflow:hidden;transition:background .2s}
-.tcard:active{background:#282828}
-.tcard-art{aspect-ratio:1;background:#282828;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative}
-.tcard-play{position:absolute;bottom:8px;right:8px;width:40px;height:40px;border-radius:50%;background:#D4A843;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.5);opacity:0;transform:translateY(4px);transition:all .2s;border:none}
+
+/* TRACK CARDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tcard{background:#111;border-radius:10px;cursor:pointer;overflow:hidden;transition:background .2s}
+.tcard:active{background:#1a1a1a}
+.tcard-art{aspect-ratio:1;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden}
+.tcard-art img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.tcard-play{position:absolute;bottom:8px;right:8px;width:38px;height:38px;border-radius:50%;background:#D4A843;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.6);opacity:0;transform:translateY(4px);transition:all .2s;border:none}
 .tcard:active .tcard-play{opacity:1;transform:translateY(0)}
-.tcard-body{padding:12px 14px}
-.tcard-n{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;color:#fff}
-.tcard-a{font-size:12px;color:#B3B3B3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.trow{display:flex;align-items:center;gap:12px;padding:8px 0;border-radius:4px;cursor:pointer;transition:background .15s}
-.trow:active{background:#1a1a1a}
-.trow-num{width:20px;font-size:14px;color:#6A6A6A;text-align:center;flex-shrink:0;font-weight:600}
+.tcard-body{padding:10px 12px 12px}
+.tcard-n{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;color:#fff}
+.tcard-a{font-size:12px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* TRACK ROW */
+.trow{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #111;cursor:pointer;transition:opacity .15s}
+.trow:last-child{border-bottom:none}
+.trow:active{opacity:.6}
+.trow-num{width:22px;font-size:13px;color:#444;text-align:center;flex-shrink:0;font-weight:600}
 .trow-num.top{color:#D4A843}
-.trow-art{width:44px;height:44px;border-radius:4px;background:#282828;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.trow-art{width:44px;height:44px;border-radius:6px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
+.trow-art img{width:100%;height:100%;object-fit:cover}
 .trow-inf{flex:1;min-width:0}
-.trow-n{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
-.trow-a{font-size:12px;color:#B3B3B3;margin-top:2px}
-.trow-dur{font-size:12px;color:#6A6A6A;flex-shrink:0}
-.trow-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.35);padding:4px 12px;border-radius:500px;flex-shrink:0;background:transparent}
-.arow{display:flex;align-items:center;gap:14px;padding:10px 0;cursor:pointer;border-radius:6px;transition:background .15s}
-.arow:active{background:#1a1a1a}
-.ava{width:52px;height:52px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#D4A843;flex-shrink:0}
+.trow-n{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
+.trow-a{font-size:12px;color:#666;margin-top:2px}
+.trow-dur{font-size:12px;color:#444;flex-shrink:0}
+.trow-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.3);padding:4px 11px;border-radius:500px;flex-shrink:0;background:transparent}
+
+/* ARTIST ROW */
+.arow{display:flex;align-items:center;gap:14px;padding:10px 0;cursor:pointer;border-bottom:1px solid #111;transition:opacity .15s}
+.arow:last-child{border-bottom:none}
+.arow:active{opacity:.6}
+.ava{width:50px;height:50px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#D4A843;flex-shrink:0;font-family:‘Syne’,sans-serif}
 .ar-inf{flex:1;min-width:0}
 .ar-n{font-size:15px;font-weight:600;color:#fff}
-.ar-m{font-size:12px;color:#B3B3B3;margin-top:2px}
-.fbtn{background:transparent;border:1px solid #3E3E3E;color:#fff;padding:7px 16px;border-radius:500px;font-size:12px;font-weight:700;white-space:nowrap;transition:all .15s}
-.fbtn.on{border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,.1)}
-.hscroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.ar-m{font-size:12px;color:#666;margin-top:2px}
+.fbtn{background:transparent;border:1px solid #2a2a2a;color:#fff;padding:7px 16px;border-radius:500px;font-size:12px;font-weight:600;white-space:nowrap;transition:all .15s;font-family:‘DM Sans’,sans-serif}
+.fbtn.on{border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,.08)}
+
+/* HORIZONTAL SCROLL */
+.hscroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
 .hscroll::-webkit-scrollbar{display:none}
-.hcard{flex-shrink:0;width:140px;cursor:pointer}
+.hcard{flex-shrink:0;width:130px;cursor:pointer}
 .hcard:active{opacity:.7}
-.hcard-art{width:140px;height:140px;border-radius:8px;background:#181818;display:flex;align-items:center;justify-content:center;font-size:52px;margin-bottom:10px}
+.hcard-art{width:130px;height:130px;border-radius:10px;background:#111;display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:8px;overflow:hidden}
+.hcard-art img{width:100%;height:100%;object-fit:cover}
 .hcard-n{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
-.hcard-a{font-size:12px;color:#B3B3B3;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hcard-a{font-size:11px;color:#666;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* GENRE GRID */
 .gg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
-.gc{border-radius:8px;padding:16px;height:88px;cursor:pointer;position:relative;overflow:hidden;transition:filter .15s}
-.gc:active{filter:brightness(.8)}
-.gc-n{font-size:15px;font-weight:700;color:#fff;position:relative;z-index:1}
-.gc-c{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px;position:relative;z-index:1}
-.gc-e{position:absolute;bottom:-10px;right:-4px;font-size:58px;opacity:.18;transform:rotate(15deg)}
+.gc{border-radius:10px;padding:16px;height:86px;cursor:pointer;position:relative;overflow:hidden;transition:filter .15s}
+.gc:active{filter:brightness(.75)}
+.gc-n{font-size:15px;font-weight:700;color:#fff;position:relative;z-index:1;font-family:‘Syne’,sans-serif}
+.gc-c{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;position:relative;z-index:1}
+.gc-e{position:absolute;bottom:-10px;right:-4px;font-size:56px;opacity:.15;transform:rotate(12deg)}
+
+/* SEARCH INPUT */
 .si-w{position:relative;margin-bottom:20px}
-.si{width:100%;background:#fff;color:#000;border-radius:500px;padding:12px 16px 12px 44px;font-size:15px;font-weight:500;border:none}
-.si::placeholder{color:#6a6a6a}
-.si-ico{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#6a6a6a;pointer-events:none}
-.phero{min-height:180px;background:linear-gradient(180deg,#2a1a00,#000);padding:calc(56px + 20px) 16px 20px;position:relative;overflow:hidden}
-.phero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60%,rgba(212,168,67,.07),transparent 70%)}
-.p-ava{width:88px;height:88px;border-radius:50%;background:#282828;border:3px solid #000;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:900;color:#D4A843;margin-bottom:14px}
-.p-name{font-size:28px;font-weight:900;margin-bottom:4px;color:#fff}
-.p-tag{font-size:13px;color:#B3B3B3;margin-bottom:10px}
-.p-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.3);border-radius:500px;padding:3px 10px;font-size:11px;color:#D4A843;font-weight:700;margin-bottom:10px}
-.pstats{display:flex;background:#181818;border-radius:8px;overflow:hidden;margin-bottom:18px}
-.ps{flex:1;padding:14px 8px;text-align:center;border-right:1px solid #282828}
+.si{width:100%;background:#1a1a1a;color:#fff;border-radius:500px;padding:12px 16px 12px 44px;font-size:15px;font-weight:500;border:1px solid transparent;transition:border-color .2s;font-family:‘DM Sans’,sans-serif}
+.si:focus{border-color:#333;outline:none}
+.si::placeholder{color:#444}
+.si-ico{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#444;pointer-events:none}
+
+/* PROFILE HERO */
+.phero{min-height:200px;background:linear-gradient(180deg,#1a1000,#000);padding:calc(56px + 20px) 16px 20px;position:relative;overflow:hidden}
+.p-ava{width:80px;height:80px;border-radius:50%;background:#1a1a1a;border:3px solid #000;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;color:#D4A843;margin-bottom:14px;font-family:‘Syne’,sans-serif;overflow:hidden}
+.p-ava img{width:100%;height:100%;object-fit:cover}
+.p-name{font-size:26px;font-weight:900;margin-bottom:4px;color:#fff;font-family:‘Syne’,sans-serif}
+.p-tag{font-size:13px;color:#666;margin-bottom:12px}
+.p-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:500px;padding:3px 10px;font-size:11px;color:#D4A843;font-weight:700;margin-bottom:12px}
+.pstats{display:flex;background:#111;border-radius:10px;overflow:hidden;margin-bottom:18px}
+.ps{flex:1;padding:14px 8px;text-align:center;border-right:1px solid #1a1a1a}
 .ps:last-child{border-right:none}
-.ps-v{font-size:20px;font-weight:900;color:#D4A843}
-.ps-l{font-size:10px;color:#6A6A6A;text-transform:uppercase;letter-spacing:.07em;margin-top:4px;font-weight:600}
-.track-art-lg{width:220px;height:220px;border-radius:10px;background:#181818;display:flex;align-items:center;justify-content:center;font-size:90px;margin:0 auto 24px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
-.gbadge{display:inline-block;font-size:10px;color:#D4A843;border:1px solid rgba(212,168,67,.35);border-radius:500px;padding:3px 12px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
-.prog-bar{height:4px;background:#3E3E3E;border-radius:2px;cursor:pointer;margin-bottom:8px}
-.prog-fill{height:100%;background:#fff;border-radius:2px;width:0;transition:width .3s linear}
-.time-r{display:flex;justify-content:space-between;font-size:11px;color:#6A6A6A;margin-bottom:20px}
-.ctrls{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding:0 4px}
-.ctrl{color:#B3B3B3;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;background:none;transition:color .15s}
-.ctrl:active{color:#fff}
-.ctrl.on{color:#D4A843}
-.pbig{width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;border:none;transition:transform .1s}
-.pbig:active{transform:scale(.93)}
-.wallet{background:linear-gradient(135deg,#1c1400,#0d0d0d);border:1px solid rgba(212,168,67,.2);border-radius:10px;padding:28px;text-align:center;margin-bottom:20px}
-.w-l{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#B3B3B3;margin-bottom:8px;font-weight:700}
-.w-a{font-size:52px;font-weight:900;color:#D4A843;line-height:1}
-.w-s{font-size:12px;color:#B3B3B3;margin-top:8px}
+.ps-v{font-size:19px;font-weight:900;color:#D4A843;font-family:‘Syne’,sans-serif}
+.ps-l{font-size:10px;color:#444;text-transform:uppercase;letter-spacing:.07em;margin-top:3px;font-weight:600}
+
+/* WALLET */
+.wallet{background:linear-gradient(135deg,#130e00,#0a0a0a);border:1px solid rgba(212,168,67,.15);border-radius:12px;padding:28px;text-align:center;margin-bottom:20px}
+.w-l{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#666;margin-bottom:8px;font-weight:700}
+.w-a{font-size:48px;font-weight:900;color:#D4A843;line-height:1;font-family:‘Syne’,sans-serif}
+.w-s{font-size:12px;color:#555;margin-top:8px}
+
+/* STAT CARDS */
 .scards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.sc{background:#181818;border-radius:8px;padding:18px}
-.sc.g{border:1px solid rgba(212,168,67,.2)}
-.sc-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#B3B3B3;margin-bottom:8px;font-weight:700}
-.sc-v{font-size:28px;font-weight:900;color:#fff}
+.sc{background:#111;border-radius:10px;padding:16px}
+.sc.g{border:1px solid rgba(212,168,67,.15)}
+.sc-l{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#555;margin-bottom:8px;font-weight:700}
+.sc-v{font-size:26px;font-weight:900;color:#fff;font-family:‘Syne’,sans-serif}
 .sc.g .sc-v{color:#D4A843}
+
+/* TIP AMOUNTS */
 .tamts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
-.ta{padding:12px 4px;border:1px solid #3E3E3E;border-radius:8px;text-align:center;font-size:14px;background:transparent;color:#B3B3B3;font-weight:700;transition:all .15s}
-.ta.on{border-color:#D4A843;background:rgba(212,168,67,.1);color:#D4A843}
+.ta{padding:12px 4px;border:1px solid #2a2a2a;border-radius:8px;text-align:center;font-size:14px;background:transparent;color:#666;font-weight:700;transition:all .15s;font-family:‘DM Sans’,sans-serif}
+.ta.on{border-color:#D4A843;background:rgba(212,168,67,.08);color:#D4A843}
+
+/* SHARE */
 .share-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.share-opt{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border:1px solid #3E3E3E;border-radius:8px;font-size:14px;font-weight:600;color:#fff;background:transparent}
-.share-opt:active{background:#282828}
-.sbox{background:#282828;border-radius:6px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.share-opt{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border:1px solid #2a2a2a;border-radius:10px;font-size:14px;font-weight:600;color:#fff;background:transparent;font-family:‘DM Sans’,sans-serif}
+.share-opt:active{background:#1a1a1a}
+.sbox{background:#1a1a1a;border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .surl{flex:1;font-size:13px;color:#D4A843;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
-.cbtn{background:#D4A843;color:#000;border-radius:500px;padding:7px 16px;font-size:12px;font-weight:700;border:none}
-.upa{border:1.5px dashed #3E3E3E;border-radius:10px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:16px}
-.upa:active,.upa.has-file{border-color:#D4A843;background:rgba(212,168,67,.07)}
+.cbtn{background:#D4A843;color:#000;border-radius:500px;padding:7px 16px;font-size:12px;font-weight:700;border:none;font-family:‘DM Sans’,sans-serif}
+
+/* UPLOAD AREA */
+.upa{border:1.5px dashed #2a2a2a;border-radius:12px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:16px}
+.upa.has-file,.upa:active{border-color:#D4A843;background:rgba(212,168,67,.04)}
+
+/* SUCCESS */
 .succ{text-align:center;padding:48px 0}
-.succ-ico{font-size:56px;display:block;margin-bottom:20px}
-.succ-t{font-size:32px;font-weight:900;margin-bottom:10px;color:#fff}
+.succ-ico{font-size:52px;display:block;margin-bottom:20px}
+.succ-t{font-size:30px;font-weight:900;margin-bottom:10px;color:#fff;font-family:‘Syne’,sans-serif}
 .succ-t em{font-style:normal;color:#D4A843}
-.succ-s{font-size:14px;color:#B3B3B3;line-height:1.8;margin-bottom:28px}
-.sec{font-size:20px;font-weight:900;margin-bottom:16px;color:#fff}
+.succ-s{font-size:14px;color:#666;line-height:1.8;margin-bottom:28px}
+
+/* SECTION */
+.sec{font-size:19px;font-weight:900;margin-bottom:14px;color:#fff}
 .sec-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .sec-row .sec{margin:0}
-.see-all{font-size:12px;font-weight:700;color:#B3B3B3;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;border:none;background:none}
-.hr{height:1px;background:#1c1c1c;margin:24px 0}
-.lstats{display:flex;gap:8px;margin-bottom:22px}
-.ls{background:#181818;border-radius:8px;padding:16px 10px;text-align:center;flex:1}
-.ls-v{font-size:24px;font-weight:900;color:#D4A843;margin-bottom:4px}
-.ls-l{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#B3B3B3;font-weight:700}
-.empty{text-align:center;padding:36px 0;color:#3E3E3E;font-size:14px}
+.see-all{font-size:11px;font-weight:700;color:#555;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:none;background:none;font-family:‘DM Sans’,sans-serif}
+.hr{height:1px;background:#111;margin:22px 0}
+.empty{text-align:center;padding:40px 0;color:#333;font-size:14px}
 .empty span{color:#D4A843;font-weight:600;cursor:pointer}
-.me-ava{width:80px;height:80px;border-radius:50%;background:rgba(212,168,67,.1);border:2px solid rgba(212,168,67,.3);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:900;color:#D4A843;margin:0 auto 16px}
-.set-sect{background:#181818;border-radius:10px;overflow:hidden;margin-bottom:16px}
-.set-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6A6A6A;font-weight:700;padding:16px 16px 8px}
-.set-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #282828;font-size:15px;font-weight:500;cursor:pointer;color:#fff;background:none;border-left:none;border-right:none;border-top:none;width:100%;text-align:left}
-.set-row:last-child{border-bottom:none}
-.set-row:active{background:#282828}
-.set-val{font-size:13px;color:#6A6A6A}
-.feed-card{background:#181818;border-radius:10px;padding:16px;margin-bottom:12px;cursor:pointer}
-.feed-card:active{background:#282828}
-.fc-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.fc-av{width:44px;height:44px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#D4A843;flex-shrink:0}
-.fc-name{font-size:14px;font-weight:700;color:#fff}
-.fc-time{font-size:12px;color:#6A6A6A;margin-top:2px}
-.fc-track{background:#282828;border-radius:8px;padding:12px;display:flex;align-items:center;gap:12px}
-.fc-art{width:48px;height:48px;border-radius:6px;background:#3E3E3E;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.chart-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #1c1c1c;cursor:pointer}
+
+/* HERO */
+.hero-card{background:linear-gradient(135deg,#170e00,#0a0a0a);border-radius:14px;padding:28px 22px;margin-bottom:20px;border:1px solid rgba(212,168,67,.08)}
+.hero-label{font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:#D4A843;font-weight:700;margin-bottom:12px}
+.hero-title{font-size:clamp(34px,9vw,52px);font-weight:900;line-height:1;letter-spacing:-.03em;margin-bottom:14px;color:#fff;font-family:‘Syne’,sans-serif}
+.lstats{display:flex;gap:8px;margin-bottom:22px}
+.ls{background:#111;border-radius:8px;padding:14px 8px;text-align:center;flex:1}
+.ls-v{font-size:22px;font-weight:900;color:#D4A843;margin-bottom:3px;font-family:‘Syne’,sans-serif}
+.ls-l{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#444;font-weight:700}
+
+/* CHART ROW */
+.chart-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #111;cursor:pointer;transition:opacity .15s}
 .chart-row:last-child{border-bottom:none}
-.chart-row:active{opacity:.7}
-.chart-num{width:28px;font-size:14px;font-weight:900;color:#6A6A6A;text-align:center;flex-shrink:0}
+.chart-row:active{opacity:.6}
+.chart-num{width:26px;font-size:14px;font-weight:900;color:#444;text-align:center;flex-shrink:0;font-family:‘Syne’,sans-serif}
 .chart-num.top{color:#D4A843}
-.chart-art{width:48px;height:48px;border-radius:6px;background:#282828;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.chart-art{width:48px;height:48px;border-radius:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden}
+.chart-art img{width:100%;height:100%;object-fit:cover}
 .chart-inf{flex:1;min-width:0}
 .chart-n{font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chart-a{font-size:12px;color:#B3B3B3;margin-top:2px}
-.chart-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.35);padding:4px 12px;border-radius:500px;flex-shrink:0;background:transparent}
-.np-tip{padding:0 24px;margin-bottom:16px}
-  </style>
+.chart-a{font-size:12px;color:#666;margin-top:2px}
+.chart-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.3);padding:4px 11px;border-radius:500px;flex-shrink:0;background:transparent;font-family:‘DM Sans’,sans-serif}
+
+/* ME PAGE */
+.me-ava{width:76px;height:76px;border-radius:50%;background:rgba(212,168,67,.08);border:2px solid rgba(212,168,67,.2);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;color:#D4A843;margin:0 auto 14px;font-family:‘Syne’,sans-serif}
+
+/* SETTINGS */
+.set-sect{background:#111;border-radius:12px;overflow:hidden;margin-bottom:14px}
+.set-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#444;font-weight:700;padding:14px 16px 8px}
+.set-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #1a1a1a;font-size:15px;font-weight:500;cursor:pointer;color:#fff;background:none;border-left:none;border-right:none;border-top:none;width:100%;text-align:left;font-family:‘DM Sans’,sans-serif;transition:background .15s}
+.set-row:last-child{border-bottom:none}
+.set-row:active{background:#1a1a1a}
+.set-val{font-size:13px;color:#444}
+
+/* FEED */
+.feed-card{background:#111;border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;transition:background .15s}
+.feed-card:active{background:#1a1a1a}
+.fc-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.fc-av{width:42px;height:42px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#D4A843;flex-shrink:0;font-family:‘Syne’,sans-serif}
+.fc-name{font-size:14px;font-weight:700;color:#fff}
+.fc-time{font-size:11px;color:#555;margin-top:2px}
+.fc-track{background:#1a1a1a;border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px}
+
+/* STATUS BOX */
+.st-box{background:#1a1a1a;border-radius:10px;padding:14px;text-align:center;font-size:13px;margin-top:8px;color:#fff;line-height:1.5;display:none}
+.st-box.on{display:block}
+
+/* LOADING */
+.loading{text-align:center;padding:40px 0;color:#333;font-size:14px}
+.loading::after{content:’’;display:inline-block;width:20px;height:20px;border:2px solid #333;border-top-color:#D4A843;border-radius:50%;animation:spin .7s linear infinite;margin-left:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* TIP STATUS */
+.tip-status{background:#1a1a1a;border-radius:10px;padding:16px;margin-top:12px;display:none}
+.tip-status.on{display:block}
+.tip-pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:#D4A843;margin-right:8px;animation:pulse 1.2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+audio{display:none}
+</style>
+
 </head>
 <body>
+
+<!-- AUDIO ELEMENT -->
+
+<audio id="audioEl" preload="none"></audio>
 
 <!-- TOP NAV -->
 
 <div class="tnav">
-  <button class="logo" onclick="go('home')">Malbry</button>
+  <button class="logo" id="logoBtn">Malbry</button>
   <div class="tnr">
-    <button class="nbell" id="nbell">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-    </button>
-    <button class="nbtn" onclick="go('search')">Search</button>
-    <button class="nbtn gold" id="navJoin" onclick="go('fan-signup')">Sign up</button>
-    <button class="nuser" id="navUser" onclick="go('me')">
+    <button class="nbtn" id="navSearchBtn">Search</button>
+    <button class="nbtn gold" id="navJoinBtn">Sign up</button>
+    <button class="nuser" id="navUserBtn">
       <div class="nav-av" id="navAv">?</div>
       <span class="nav-un" id="navUn">@-</span>
     </button>
@@ -254,20 +337,20 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 <!-- BOTTOM NAV -->
 
 <div class="bnav" id="bnav">
-  <button class="bn on" data-p="home" onclick="go('home')">
+  <button class="bn on" data-p="home" id="bnHome">
     <svg class="bni" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home
   </button>
-  <button class="bn" data-p="charts" onclick="go('charts')">
+  <button class="bn" data-p="charts" id="bnCharts">
     <svg class="bni" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Charts
   </button>
-  <button class="bn" data-p="search" onclick="go('search')">
+  <button class="bn" data-p="search" id="bnSearch">
     <svg class="bni" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search
   </button>
-  <button class="bn" data-p="feed" onclick="go('feed')">
+  <button class="bn" data-p="feed" id="bnFeed">
     <svg class="bni" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Feed
   </button>
-  <button class="bn" data-p="join" onclick="go('fan-signup')">
-    <svg class="bni" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Join
+  <button class="bn" data-p="me" id="bnMe">
+    <svg class="bni" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Me
   </button>
 </div>
 
@@ -275,19 +358,19 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="mp" id="mp">
   <div class="mp-prog"><div class="mp-pf" id="mpPF"></div></div>
-  <div class="mp-art" id="mpArt" onclick="openNP()">🎵</div>
-  <div class="mp-inf" onclick="openNP()">
+  <div class="mp-art" id="mpArt">🎵</div>
+  <div class="mp-inf" id="mpInf">
     <div class="mp-t" id="mpT">-</div>
     <div class="mp-a" id="mpA">-</div>
   </div>
   <div class="mp-btns">
-    <button class="mp-heart" id="mpH" onclick="toggleLike()">
+    <button class="mp-heart" id="mpH">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
     </button>
-    <button class="mp-play" onclick="togglePlay()">
+    <button class="mp-play" id="mpPlay">
       <svg id="mpIco" width="16" height="16" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     </button>
-    <div class="mp-tip" onclick="openTip(window._nA||'')">Tip</div>
+    <button class="mp-tip-btn" id="mpTipBtn">Tip</button>
   </div>
 </div>
 
@@ -295,10 +378,10 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="nps" id="nps">
   <div class="nps-hdr">
-    <button onclick="closeNP()" style="color:#B3B3B3;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;border:none;background:none">
+    <button id="closeNPBtn" style="color:#666;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;border:none;background:none">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>Now Playing
     </button>
-    <button onclick="openShare('https://malbry.vercel.app')" style="color:#B3B3B3;border:none;background:none">
+    <button id="npShareBtn" style="color:#666;border:none;background:none">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
     </button>
   </div>
@@ -309,30 +392,32 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
         <div class="nps-title" id="npsT">-</div>
         <div class="nps-artist" id="npsA">-</div>
       </div>
-      <button class="nps-heart" id="npsH" onclick="toggleLike()">
+      <button class="nps-heart" id="npsH">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
       </button>
     </div>
-    <div class="nps-prog" id="npsProg" onclick="seekNP(event)"><div class="nps-pf" id="npsPF"></div></div>
-    <div class="nps-time"><span id="npsCur">0:00</span><span>3:47</span></div>
+    <div class="prog-wrap">
+      <div class="prog-bar" id="npsProg"><div class="prog-fill" id="npsPF"></div></div>
+    </div>
+    <div class="time-r"><span id="npsCur">0:00</span><span id="npsDur">0:00</span></div>
     <div class="nps-ctrls">
-      <button class="nps-ctrl" id="npsShuf" onclick="toggleShuf()">
+      <button class="nps-ctrl" id="npsShuf">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
       </button>
-      <button class="nps-ctrl" onclick="prevT()">
+      <button class="nps-ctrl" id="npsPrev">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="4" x2="5" y2="20"/></svg>
       </button>
-      <button class="nps-pbig" onclick="togglePlay()">
+      <button class="nps-pbig" id="npsPlay">
         <svg id="npsIco" width="26" height="26" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       </button>
-      <button class="nps-ctrl" onclick="nextT()">
+      <button class="nps-ctrl" id="npsNext">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20"/></svg>
       </button>
-      <button class="nps-ctrl" id="npsRep" onclick="toggleRep()">
+      <button class="nps-ctrl" id="npsRep">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
       </button>
     </div>
-    <div class="np-tip"><button class="btn" onclick="openTip(window._nA||'')">Tip this artist</button></div>
+    <div class="np-tip"><button class="btn" id="npsTipBtn">Tip this artist</button></div>
   </div>
 </div>
 
@@ -344,20 +429,26 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="mbg" id="tipModal">
   <div class="mod">
-    <button class="mx" onclick="cm('tipModal')">×</button>
+    <button class="mx" id="closeTipBtn">×</button>
     <div class="mh"></div>
     <div class="m-ttl">Send a tip</div>
     <div class="m-sub" id="tipFor">Support this artist via EcoCash</div>
     <div class="tamts">
-      <button class="ta" onclick="setAmt(this,.5)">$0.50</button>
-      <button class="ta on" onclick="setAmt(this,1)">$1.00</button>
-      <button class="ta" onclick="setAmt(this,2)">$2.00</button>
-      <button class="ta" onclick="setAmt(this,5)">$5.00</button>
+      <button class="ta" data-amt="0.5">$0.50</button>
+      <button class="ta on" data-amt="1">$1.00</button>
+      <button class="ta" data-amt="2">$2.00</button>
+      <button class="ta" data-amt="5">$5.00</button>
     </div>
-    <div class="field"><label>EcoCash Number</label><input type="tel" id="tipEco" placeholder="0771234567"/></div>
-    <div class="field"><label>Message (optional)</label><input type="text" id="tipMsg" placeholder="Keep doing this!"/></div>
-    <button class="btn" id="tipBtn" onclick="sendTip()">Send $1.00 via EcoCash</button>
-    <div id="tipSt" style="display:none;background:#282828;border-radius:8px;padding:14px;text-align:center;font-size:13px;margin-top:4px;color:#fff"></div>
+    <div class="field"><label>Your EcoCash Number</label><input type="tel" id="tipEco" placeholder="0771234567"/></div>
+    <div class="field"><label>Message (optional)</label><input type="text" id="tipMsg" placeholder="Great track!"/></div>
+    <button class="btn" id="tipBtn">Send $1.00 via EcoCash</button>
+    <div class="tip-status" id="tipStatus">
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px">
+        <span class="tip-pulse"></span>
+        <span id="tipStatusMsg" style="font-size:13px;font-weight:600"></span>
+      </div>
+      <div id="tipStatusSub" style="font-size:12px;color:#666"></div>
+    </div>
   </div>
 </div>
 
@@ -365,22 +456,16 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="mbg" id="shareModal">
   <div class="mod">
-    <button class="mx" onclick="cm('shareModal')">×</button>
+    <button class="mx" id="closeShareBtn">×</button>
     <div class="mh"></div>
     <div class="m-ttl">Share</div>
-    <div class="sbox"><span class="surl" id="shareUrl">malbry.vercel.app</span><button class="cbtn" onclick="copyShareUrl()">Copy</button></div>
+    <div class="sbox"><span class="surl" id="shareUrl">malbry.vercel.app</span><button class="cbtn" id="copyUrlBtn">Copy</button></div>
     <div class="share-opts">
-      <button class="share-opt" onclick="sWA()">
+      <button class="share-opt" id="shareWA">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.49"/></svg>WhatsApp
       </button>
-      <button class="share-opt" onclick="sTW()">
+      <button class="share-opt" id="shareTW">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X / Twitter
-      </button>
-      <button class="share-opt" onclick="sFB()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
-      </button>
-      <button class="share-opt" onclick="sIG()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram
       </button>
     </div>
   </div>
@@ -390,14 +475,29 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="mbg" id="payModal">
   <div class="mod">
-    <button class="mx" onclick="cm('payModal')">×</button>
+    <button class="mx" id="closePayBtn">×</button>
     <div class="mh"></div>
     <div class="m-ttl">Request payout</div>
     <div class="m-sub">We'll send to your EcoCash</div>
     <div class="wallet" style="margin-bottom:18px"><div class="w-l">Available</div><div class="w-a" id="payBal">$0.00</div></div>
-    <div class="field"><label>Amount</label><input type="number" id="payAmt" placeholder="Min $5.00"/></div>
+    <div class="field"><label>Amount ($)</label><input type="number" id="payAmt" placeholder="Min $5.00" min="5" step="0.5"/></div>
     <div class="field"><label>EcoCash Number</label><input type="tel" id="payEco" placeholder="0771234567"/></div>
-    <button class="btn" onclick="doPayout()">Send to EcoCash</button>
+    <button class="btn" id="payBtn">Send to EcoCash</button>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+
+<div class="mbg" id="loginModal">
+  <div class="mod">
+    <button class="mx" id="closeLoginBtn">×</button>
+    <div class="mh"></div>
+    <div class="m-ttl">Welcome back</div>
+    <div class="m-sub">Log in to your Malbry account</div>
+    <div class="field"><label>Email</label><input type="email" id="liEmail" placeholder="your@email.com"/></div>
+    <div class="field"><label>Password</label><input type="password" id="liPass" placeholder="Your password"/></div>
+    <button class="btn" id="liBtn">Log in</button>
+    <p style="text-align:center;font-size:13px;color:#555">Don't have an account? <span style="color:#D4A843;font-weight:600;cursor:pointer" id="goSignupBtn">Sign up</span></p>
   </div>
 </div>
 
@@ -405,45 +505,42 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="pg on" id="pg-home">
   <div class="pi" style="padding-top:20px">
-    <div style="font-size:22px;font-weight:900;margin-bottom:18px;color:#fff" id="greet">Good evening</div>
+    <div style="font-size:21px;font-weight:900;margin-bottom:18px;color:#fff;font-family:'Syne',sans-serif" id="greet">Good evening</div>
     <div id="recentSec" style="display:none;margin-bottom:24px">
       <div class="sec-row"><div class="sec">Recently played</div></div>
       <div class="hscroll" id="recentList"></div>
     </div>
     <div id="heroSec">
-      <div style="background:linear-gradient(135deg,#1a1200,#0d0d0d);border-radius:12px;padding:28px 22px;margin-bottom:20px">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:#D4A843;font-weight:700;margin-bottom:12px">Zimbabwe's Music Platform</div>
-        <div style="font-size:clamp(36px,10vw,56px);font-weight:900;line-height:1.02;letter-spacing:-.03em;margin-bottom:14px;color:#fff">Where<br><span style="color:#D4A843">artists</span><br>get paid.</div>
-        <p style="font-size:14px;color:#B3B3B3;line-height:1.7;margin-bottom:22px">Stream Zimbabwean music. Tip artists directly via EcoCash. No middlemen.</p>
+      <div class="hero-card">
+        <div class="hero-label">Zimbabwe's Music Platform</div>
+        <div class="hero-title">Where<br><span style="color:#D4A843">artists</span><br>get paid.</div>
+        <p style="font-size:14px;color:#666;line-height:1.7;margin-bottom:22px">Stream Zimbabwean music. Tip artists directly via EcoCash. Zero middlemen.</p>
         <div class="brow">
-          <button class="btn btn-sm" onclick="go('search')">Explore</button>
-          <button class="btn-o btn-sm" id="heroABtn" onclick="go('artist-signup')">I'm an artist</button>
+          <button class="btn btn-sm" id="exploreBtn">Explore</button>
+          <button class="btn-o btn-sm" id="heroArtistBtn">I'm an artist</button>
         </div>
       </div>
       <div class="lstats">
-        <div class="ls"><div class="ls-v">100</div><div class="ls-l">Artist Goal</div></div>
-        <div class="ls"><div class="ls-v">Free</div><div class="ls-l">First $500</div></div>
-        <div class="ls"><div class="ls-v">Direct</div><div class="ls-l">EcoCash</div></div>
+        <div class="ls"><div class="ls-v">0%</div><div class="ls-l">Fees (First $500)</div></div>
+        <div class="ls"><div class="ls-v">Live</div><div class="ls-l">EcoCash Tips</div></div>
+        <div class="ls"><div class="ls-v">Real</div><div class="ls-l">Streaming</div></div>
       </div>
     </div>
-    <div class="sec-row"><div class="sec">Trending now</div><button class="see-all" onclick="go('search')">See all</button></div>
+    <div class="sec-row"><div class="sec">Trending now</div><button class="see-all" id="seeAllBtn">See all</button></div>
     <div class="pills" id="hFilter">
-      <button class="pill on" onclick="fHome(this,'All')">All</button>
-      <button class="pill" onclick="fHome(this,'Zimdancehall')">Zimdancehall</button>
-      <button class="pill" onclick="fHome(this,'Afrobeats')">Afrobeats</button>
-      <button class="pill" onclick="fHome(this,'Gospel')">Gospel</button>
-      <button class="pill" onclick="fHome(this,'Hip Hop')">Hip Hop</button>
+      <button class="pill on" data-g="All">All</button>
+      <button class="pill" data-g="Zimdancehall">Zimdancehall</button>
+      <button class="pill" data-g="Afrobeats">Afrobeats</button>
+      <button class="pill" data-g="Gospel">Gospel</button>
+      <button class="pill" data-g="Hip Hop">Hip Hop</button>
     </div>
-    <div class="g2" id="hGrid"></div>
+    <div id="hGrid"><div class="loading">Loading</div></div>
     <div class="hr"></div>
-    <div class="sec-row"><div class="sec">Featured artists</div><button class="see-all" onclick="go('search')">See all</button></div>
-    <div id="hArtists"></div>
-    <div id="homeCTA">
-      <div class="hr"></div>
-      <div style="background:#181818;border-radius:10px;padding:24px">
-        <div style="font-size:18px;font-weight:900;margin-bottom:8px;color:#fff">Are you an artist?</div>
-        <p style="color:#B3B3B3;font-size:14px;line-height:1.7;margin-bottom:20px">Upload music. Get tipped directly via EcoCash. 0% on your first $500.</p>
-        <button class="btn" style="width:auto;padding:12px 28px" onclick="go('artist-signup')">Join as an artist</button>
+    <div id="homeCTA" style="display:none">
+      <div style="background:#111;border-radius:12px;padding:22px;border:1px solid rgba(212,168,67,.08)">
+        <div style="font-size:17px;font-weight:900;margin-bottom:8px;color:#fff;font-family:'Syne',sans-serif">Are you an artist?</div>
+        <p style="color:#555;font-size:14px;line-height:1.7;margin-bottom:18px">Upload music. Get tipped via EcoCash. 0% on your first $500.</p>
+        <button class="btn" style="width:auto;padding:11px 24px" id="ctaArtistBtn">Join as an artist</button>
       </div>
     </div>
   </div>
@@ -453,15 +550,15 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="pg" id="pg-charts">
   <div class="pi" style="padding-top:20px">
-    <div style="font-size:24px;font-weight:900;margin-bottom:4px;color:#fff">Charts</div>
-    <p style="font-size:13px;color:#B3B3B3;margin-bottom:20px">Top tracks in Zimbabwe right now</p>
+    <div style="font-size:24px;font-weight:900;margin-bottom:4px;color:#fff;font-family:'Syne',sans-serif">Charts</div>
+    <p style="font-size:13px;color:#555;margin-bottom:20px">Most tipped tracks in Zimbabwe</p>
     <div class="pills" id="chartFilter">
-      <button class="pill on" onclick="fChart(this,'All')">Zimbabwe</button>
-      <button class="pill" onclick="fChart(this,'Zimdancehall')">Zimdancehall</button>
-      <button class="pill" onclick="fChart(this,'Afrobeats')">Afrobeats</button>
-      <button class="pill" onclick="fChart(this,'Gospel')">Gospel</button>
+      <button class="pill on" data-g="All">Zimbabwe</button>
+      <button class="pill" data-g="Zimdancehall">Zimdancehall</button>
+      <button class="pill" data-g="Afrobeats">Afrobeats</button>
+      <button class="pill" data-g="Gospel">Gospel</button>
     </div>
-    <div id="chartList"></div>
+    <div id="chartList"><div class="loading">Loading</div></div>
   </div>
 </div>
 
@@ -472,16 +569,13 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
     <div class="sec">Search</div>
     <div class="si-w">
       <svg class="si-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="si" type="search" id="sQ" placeholder="Artists, tracks, genres..." oninput="doSearch(this.value)">
+      <input class="si" type="search" id="sQ" placeholder="Artists, tracks, genres...">
     </div>
     <div id="sDef">
       <div class="sec" style="font-size:16px">Browse genres</div>
       <div class="gg" id="gGrid"></div>
-      <div class="hr"></div>
-      <div class="sec" style="font-size:16px">Artists</div>
-      <div id="sArtists"></div>
     </div>
-    <div id="sRes" style="display:none"><div id="rA"></div><div id="rT" style="margin-top:20px"></div></div>
+    <div id="sRes" style="display:none"></div>
     <div id="sEmpty" style="display:none"><div class="empty">No results found</div></div>
   </div>
 </div>
@@ -494,9 +588,9 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
     <div id="feedList"></div>
     <div id="feedGuest" style="display:none;text-align:center;padding:60px 0">
       <div style="font-size:40px;margin-bottom:16px">🎵</div>
-      <div style="font-size:18px;font-weight:700;margin-bottom:8px;color:#fff">Follow artists to see updates</div>
-      <p style="font-size:14px;color:#B3B3B3;margin-bottom:24px">When you follow artists their new tracks appear here.</p>
-      <button class="btn" style="width:auto;padding:12px 28px" onclick="go('search')">Find artists</button>
+      <div style="font-size:18px;font-weight:700;margin-bottom:8px;color:#fff;font-family:'Syne',sans-serif">Your feed is empty</div>
+      <p style="font-size:14px;color:#555;margin-bottom:24px">Sign up to follow artists and see new tracks here.</p>
+      <button class="btn" style="width:auto;padding:11px 24px" id="feedSignupBtn">Join Malbry</button>
     </div>
   </div>
 </div>
@@ -505,42 +599,42 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="pg" id="pg-track">
   <div class="pi" style="padding-top:14px">
-    <button onclick="goBack()" style="color:#B3B3B3;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:22px;border:none;background:none">
+    <button id="backBtn" style="color:#666;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:22px;border:none;background:none">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back
     </button>
-    <div class="track-art-lg" id="tArt">🎵</div>
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
-      <div>
-        <div class="gbadge" id="tGenre">Genre</div>
-        <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff" id="tTitle">Track</div>
-        <div style="font-size:14px;font-weight:600;color:#B3B3B3;cursor:pointer" id="tArtBtn" onclick="go('artist-profile')"></div>
+    <div style="width:200px;height:200px;border-radius:12px;background:#111;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;font-size:80px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.8)" id="tArt">🎵</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#D4A843;font-weight:700;margin-bottom:6px" id="tGenre">Genre</div>
+        <div style="font-size:22px;font-weight:900;margin-bottom:5px;color:#fff;font-family:'Syne',sans-serif" id="tTitle">Track</div>
+        <div style="font-size:14px;font-weight:600;color:#666;cursor:pointer" id="tArtBtn"></div>
       </div>
-      <button id="tHrt" onclick="toggleLike()" style="color:#6A6A6A;border:none;background:none;padding:4px;flex-shrink:0;margin-top:4px">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      <button id="tHrt" style="color:#444;border:none;background:none;padding:4px;flex-shrink:0;margin-top:4px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
       </button>
     </div>
-    <div class="prog-bar" id="tProg" onclick="seekT(event)"><div class="prog-fill" id="tFill"></div></div>
-    <div class="time-r"><span id="tCur">0:00</span><span>3:47</span></div>
-    <div class="ctrls">
-      <button class="ctrl" id="tShuf" onclick="toggleShuf()">
+    <div class="prog-bar" id="tProg"><div class="prog-fill" id="tFill"></div></div>
+    <div class="time-r"><span id="tCur">0:00</span><span id="tDur">0:00</span></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;padding:0 4px">
+      <button style="color:#666;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;background:none" id="tShuf">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
       </button>
-      <button class="ctrl" onclick="prevT()">
+      <button style="color:#888;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;background:none" id="tPrev">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="4" x2="5" y2="20"/></svg>
       </button>
-      <button class="pbig" onclick="togglePlay()">
+      <button style="width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;border:none" id="tPlay">
         <svg id="tIco" width="24" height="24" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       </button>
-      <button class="ctrl" onclick="nextT()">
+      <button style="color:#888;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;background:none" id="tNext">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20"/></svg>
       </button>
-      <button class="ctrl" id="tRep" onclick="toggleRep()">
+      <button style="color:#666;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;background:none" id="tRep">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
       </button>
     </div>
     <div class="brow" style="margin-bottom:24px">
       <button class="btn" style="margin:0" id="tTipBtn">Tip artist</button>
-      <button class="btn-o" style="margin:0;width:auto;padding:14px 18px" onclick="openShare('https://malbry.vercel.app')">Share</button>
+      <button class="btn-o" style="margin:0;width:auto;padding:13px 16px" id="tShareBtn">Share</button>
     </div>
     <div class="hr"></div>
     <div class="sec" style="font-size:16px">More like this</div>
@@ -552,28 +646,28 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="pg" id="pg-artist-profile">
   <div class="phero">
-    <div class="p-ava" id="apAva">J</div>
+    <div class="p-ava" id="apAva">A</div>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">
       <div class="p-name" id="apName">Artist</div>
       <span class="p-badge">✦ Artist</span>
     </div>
-    <div class="p-tag" id="apTag">Genre · City</div>
-    <p id="apBio" style="font-size:14px;color:#B3B3B3;line-height:1.7;max-width:340px"></p>
+    <div class="p-tag" id="apTag">Genre</div>
+    <p id="apBio" style="font-size:14px;color:#555;line-height:1.7;max-width:340px"></p>
   </div>
   <div class="pi" style="padding-top:16px">
     <div class="brow" style="margin-bottom:18px;flex-wrap:wrap;gap:8px">
-      <button class="btn btn-sm" id="apFBtn" onclick="doFollow()" style="margin:0">Follow</button>
-      <button class="btn-o btn-sm" style="margin:0" onclick="openTip(document.getElementById('apName').textContent||'')">Tip</button>
-      <button class="btn-o btn-sm" style="margin:0" onclick="openShare('https://malbry.vercel.app')">Share</button>
+      <button class="btn btn-sm" id="apFBtn" style="margin:0">Follow</button>
+      <button class="btn-o btn-sm" style="margin:0" id="apTipBtn">Tip</button>
+      <button class="btn-o btn-sm" style="margin:0" id="apShareBtn">Share</button>
     </div>
     <div class="pstats">
-      <div class="ps"><div class="ps-v" id="apPl">—</div><div class="ps-l">Plays</div></div>
-      <div class="ps"><div class="ps-v" id="apTr">—</div><div class="ps-l">Tracks</div></div>
-      <div class="ps"><div class="ps-v" id="apFo">—</div><div class="ps-l">Followers</div></div>
-      <div class="ps"><div class="ps-v" id="apTi">—</div><div class="ps-l">Tips</div></div>
+      <div class="ps"><div class="ps-v" id="apPl">0</div><div class="ps-l">Plays</div></div>
+      <div class="ps"><div class="ps-v" id="apTr">0</div><div class="ps-l">Tracks</div></div>
+      <div class="ps"><div class="ps-v" id="apFo">0</div><div class="ps-l">Followers</div></div>
+      <div class="ps"><div class="ps-v" id="apTi">$0</div><div class="ps-l">Tips</div></div>
     </div>
     <div class="sec" style="font-size:16px">Tracks</div>
-    <div id="apTracks"></div>
+    <div id="apTracks"><div class="loading">Loading</div></div>
   </div>
 </div>
 
@@ -582,40 +676,30 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 <div class="pg" id="pg-fan-signup">
   <div class="pi" style="padding-top:20px">
     <div class="tog">
-      <button class="topt on" onclick="go('fan-signup')">I'm a fan</button>
-      <button class="topt" onclick="go('artist-signup')">I'm an artist</button>
+      <button class="topt on" id="togFanBtn">I'm a fan</button>
+      <button class="topt" id="togArtBtn">I'm an artist</button>
     </div>
     <div id="fanForm">
-      <div style="font-size:26px;font-weight:900;margin-bottom:8px;color:#fff">Join Malbry</div>
-      <p style="color:#B3B3B3;font-size:14px;margin-bottom:22px">Free forever. Follow artists. Tip via EcoCash.</p>
+      <div style="font-size:26px;font-weight:900;margin-bottom:8px;color:#fff;font-family:'Syne',sans-serif">Join Malbry</div>
+      <p style="color:#555;font-size:14px;margin-bottom:22px">Free forever. Follow artists. Tip via EcoCash.</p>
       <div class="field-row">
         <div class="field"><label>First name</label><input type="text" id="fFirst" placeholder="First"/></div>
         <div class="field"><label>Last name</label><input type="text" id="fLast" placeholder="Last"/></div>
       </div>
       <div class="field"><label>Username</label>
-        <div class="at-w"><span class="at-s">@</span><input type="text" id="fUser" placeholder="yourname" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')"/></div>
+        <div class="at-w"><span class="at-s">@</span><input type="text" id="fUser" placeholder="yourname"/></div>
       </div>
       <div class="field"><label>Email</label><input type="email" id="fEmail" placeholder="your@email.com"/></div>
       <div class="field"><label>Password</label><input type="password" id="fPass" placeholder="Min 8 characters"/></div>
-      <div class="field"><label>EcoCash <span style="color:#6A6A6A;font-weight:400;text-transform:none;letter-spacing:0">(to send tips)</span></label><input type="tel" id="fEco" placeholder="0771234567"/></div>
-      <div class="field"><label>City</label>
-        <select id="fCity">
-          <option value="">Select...</option>
-          <option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option>
-          <option>Masvingo</option><option>Chinhoyi</option><option>Kwekwe</option>
-          <option>Diaspora — UK</option><option>Diaspora — South Africa</option>
-          <option>Diaspora — USA</option><option>Diaspora — Australia</option><option>Other</option>
-        </select>
-      </div>
-      <button class="btn" id="fanBtn" onclick="joinFan()">Create account</button>
-      <p style="text-align:center;font-size:13px;color:#B3B3B3">Already have an account? <span style="color:#D4A843;font-weight:600;cursor:pointer" onclick="showLogin()">Log in</span></p>
+      <div class="field"><label>EcoCash <span style="color:#444;font-weight:400;text-transform:none;letter-spacing:0">(to send tips)</span></label><input type="tel" id="fEco" placeholder="0771234567"/></div>
+      <button class="btn" id="fanBtn">Create account</button>
+      <p style="text-align:center;font-size:13px;color:#555">Already have an account? <span style="color:#D4A843;font-weight:600;cursor:pointer" id="fanLoginLink">Log in</span></p>
     </div>
     <div id="fanDone" style="display:none">
       <div class="succ"><span class="succ-ico">✦</span>
         <div class="succ-t">Welcome to <em>Malbry</em></div>
         <p class="succ-s" id="fanMsg">Your account is live.</p>
-        <button class="btn" onclick="go('home')">Start listening</button>
-        <button class="btn-o" onclick="go('search')">Discover artists</button>
+        <button class="btn" id="fanStartBtn">Start listening</button>
       </div>
     </div>
   </div>
@@ -626,8 +710,8 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 <div class="pg" id="pg-artist-signup">
   <div class="pi" style="padding-top:20px">
     <div class="tog">
-      <button class="topt" onclick="go('fan-signup')">I'm a fan</button>
-      <button class="topt on">I'm an artist</button>
+      <button class="topt" id="togFanBtn2">I'm a fan</button>
+      <button class="topt on" id="togArtBtn2">I'm an artist</button>
     </div>
     <div class="steps">
       <div class="sdot on" id="sd1">1</div><div class="sline" id="sl12"></div>
@@ -636,65 +720,66 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
       <div class="sdot" id="sd4">✦</div>
     </div>
     <div id="as1">
-      <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff">Create your account</div>
-      <p style="color:#B3B3B3;font-size:14px;margin-bottom:22px">Free. 0% on your first $500.</p>
+      <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff;font-family:'Syne',sans-serif">Create your profile</div>
+      <p style="color:#555;font-size:14px;margin-bottom:22px">Free. 0% on your first $500.</p>
       <div class="field"><label>Full name</label><input type="text" id="aFull" placeholder="Your real name"/></div>
       <div class="field"><label>Stage name</label><input type="text" id="aStage" placeholder="What fans know you as"/></div>
       <div class="field"><label>Username</label>
-        <div class="at-w"><span class="at-s">@</span><input type="text" id="aUser" placeholder="stagename" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')"/></div>
+        <div class="at-w"><span class="at-s">@</span><input type="text" id="aUser" placeholder="stagename"/></div>
       </div>
       <div class="field"><label>Email</label><input type="email" id="aEmail" placeholder="your@email.com"/></div>
       <div class="field"><label>Password</label><input type="password" id="aPass" placeholder="Min 8 characters"/></div>
-      <div class="field"><label>EcoCash <span style="color:#6A6A6A;font-weight:400;text-transform:none;letter-spacing:0">(tips go here)</span></label><input type="tel" id="aEco" placeholder="0771234567"/></div>
-      <button class="btn" onclick="aStep(2)">Continue</button>
+      <div class="field"><label>EcoCash <span style="color:#444;font-weight:400;text-transform:none;letter-spacing:0">(tips go here)</span></label><input type="tel" id="aEco" placeholder="0771234567"/></div>
+      <button class="btn" id="aStep2Btn">Continue</button>
     </div>
     <div id="as2" style="display:none">
-      <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff">Build your profile</div>
-      <p style="color:#B3B3B3;font-size:14px;margin-bottom:22px">Help fans discover you.</p>
+      <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff;font-family:'Syne',sans-serif">Your sound</div>
+      <p style="color:#555;font-size:14px;margin-bottom:22px">Help fans discover you.</p>
       <div class="field"><label>Bio</label><textarea id="aBio" placeholder="Tell fans who you are..."></textarea></div>
       <div class="field"><label>Your genres</label>
-        <div class="pills">
-          <button class="pill" onclick="this.classList.toggle('on')">Zimdancehall</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Afrobeats</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Gospel</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Hip Hop</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Amapiano</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Sungura</button>
-          <button class="pill" onclick="this.classList.toggle('on')">R&amp;B</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Pop</button>
+        <div class="pills" id="genrePills">
+          <button class="pill" data-g="Zimdancehall">Zimdancehall</button>
+          <button class="pill" data-g="Afrobeats">Afrobeats</button>
+          <button class="pill" data-g="Gospel">Gospel</button>
+          <button class="pill" data-g="Hip Hop">Hip Hop</button>
+          <button class="pill" data-g="Amapiano">Amapiano</button>
+          <button class="pill" data-g="Sungura">Sungura</button>
+          <button class="pill" data-g="R&B">R&amp;B</button>
+          <button class="pill" data-g="Pop">Pop</button>
         </div>
       </div>
       <div class="field"><label>City</label>
         <select id="aCity"><option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option><option>Masvingo</option><option>Kwekwe</option><option>Diaspora — UK</option><option>Diaspora — South Africa</option><option>Diaspora — USA</option></select>
       </div>
-      <button class="btn" onclick="aStep(3)">Continue</button>
-      <button class="btn-o" onclick="aStep(1)">Back</button>
+      <button class="btn" id="aStep3Btn">Continue</button>
+      <button class="btn-o" id="aBack2Btn">Back</button>
     </div>
     <div id="as3" style="display:none">
-      <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff">Upload your first track</div>
-      <p style="color:#B3B3B3;font-size:14px;margin-bottom:22px">Add more from your dashboard anytime.</p>
-      <div class="field"><label>Track title</label><input type="text" id="aTrack" placeholder="Track name"/></div>
+      <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff;font-family:'Syne',sans-serif">First track</div>
+      <p style="color:#555;font-size:14px;margin-bottom:22px">Upload now or skip — add from dashboard anytime.</p>
+      <div class="field"><label>Track title</label><input type="text" id="aTrackTitle" placeholder="Track name"/></div>
       <div class="field"><label>Genre</label>
-        <select id="aTrackG"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</button></select>
+        <select id="aTrackG"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</option></select>
       </div>
-      <div class="upa" id="upa" onclick="document.getElementById('audioFile').click()">
-        <div id="upIcon" style="color:#D4A843;margin-bottom:12px">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <div class="upa" id="aUpa">
+        <div id="aUpIcon" style="color:#D4A843;margin-bottom:12px">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         </div>
-        <div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#fff" id="upLabel">Tap to select audio</div>
-        <div style="font-size:12px;color:#B3B3B3" id="upSub">MP3 or WAV up to 50MB</div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#fff" id="aUpLabel">Tap to select audio</div>
+        <div style="font-size:12px;color:#444" id="aUpSub">MP3 or WAV · max 50MB</div>
       </div>
-      <input type="file" id="audioFile" accept=".mp3,.wav,audio/mpeg,audio/wav" style="display:none" onchange="handleUpload(this)"/>
-      <button class="btn" onclick="aStep(4)">Go live</button>
-      <button class="btn-o" onclick="aStep(2)">Back</button>
+      <input type="file" id="aAudioFile" accept=".mp3,.wav,audio/mpeg,audio/wav" style="display:none"/>
+      <div class="st-box" id="aUpStat"></div>
+      <button class="btn" id="aStep4Btn">Go live</button>
+      <button class="btn-o" id="aBack3Btn">Back</button>
     </div>
     <div id="as4" style="display:none">
       <div class="succ"><span class="succ-ico">✦</span>
         <div class="succ-t">You're <em>live!</em></div>
-        <p class="succ-s">Share your link — fans tip you directly via EcoCash.</p>
-        <div class="sbox"><span class="surl" id="artLink">malbry.vercel.app/@you</span><button class="cbtn" onclick="copyLink()">Copy</button></div>
-        <button class="btn" onclick="openShare('https://malbry.vercel.app/@'+(window._user?window._user.username:'you'))">Share your profile</button>
-        <button class="btn-o" onclick="go('dashboard')">Go to dashboard</button>
+        <p class="succ-s">Your profile is ready. Share your link and start getting tips via EcoCash.</p>
+        <div class="sbox"><span class="surl" id="artLink">malbry.vercel.app/@you</span><button class="cbtn" id="copyArtLinkBtn">Copy</button></div>
+        <button class="btn" id="shareArtBtn">Share profile</button>
+        <button class="btn-o" id="goDashBtn">Go to dashboard</button>
       </div>
     </div>
   </div>
@@ -704,24 +789,24 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="pg" id="pg-upload">
   <div class="pi" style="padding-top:20px">
-    <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff">Upload a track</div>
-    <p style="color:#B3B3B3;font-size:14px;margin-bottom:24px">Add music to your Malbry profile.</p>
+    <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff;font-family:'Syne',sans-serif">Upload a track</div>
+    <p style="color:#555;font-size:14px;margin-bottom:24px">Add music to your Malbry profile.</p>
     <div class="field"><label>Track title</label><input type="text" id="uTitle" placeholder="Track name"/></div>
     <div class="field"><label>Genre</label>
       <select id="uGenre"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</option></select>
     </div>
     <div class="field"><label>Description (optional)</label><textarea id="uDesc" placeholder="Tell fans about this track..."></textarea></div>
-    <div class="upa" id="uArea" onclick="document.getElementById('uFile').click()">
+    <div class="upa" id="uArea">
       <div id="uIcon" style="color:#D4A843;margin-bottom:12px">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
       </div>
       <div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#fff" id="uLabel">Tap to select audio</div>
-      <div style="font-size:12px;color:#B3B3B3" id="uSub">MP3 or WAV up to 50MB</div>
+      <div style="font-size:12px;color:#444" id="uSub">MP3 or WAV · max 50MB</div>
     </div>
-    <input type="file" id="uFile" accept=".mp3,.wav,audio/mpeg,audio/wav" style="display:none" onchange="handleUploadPage(this)"/>
-    <div id="uStat" style="display:none;background:#282828;border-radius:8px;padding:14px;text-align:center;font-size:13px;margin-bottom:12px;color:#fff"></div>
-    <button class="btn" id="uBtn" onclick="submitUpload()">Upload track</button>
-    <button class="btn-o" onclick="go('dashboard')">Cancel</button>
+    <input type="file" id="uFile" accept=".mp3,.wav,audio/mpeg,audio/wav" style="display:none"/>
+    <div class="st-box" id="uStat"></div>
+    <button class="btn" id="uBtn">Upload track</button>
+    <button class="btn-o" id="uCancelBtn">Cancel</button>
   </div>
 </div>
 
@@ -729,14 +814,14 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="pg" id="pg-dashboard">
   <div class="pi" style="padding-top:20px">
-    <div style="font-size:24px;font-weight:900;margin-bottom:4px;color:#fff">Your earnings</div>
-    <div style="font-size:13px;color:#B3B3B3;margin-bottom:22px" id="dashUser"></div>
+    <div style="font-size:24px;font-weight:900;margin-bottom:4px;color:#fff;font-family:'Syne',sans-serif">Earnings</div>
+    <div style="font-size:13px;color:#555;margin-bottom:22px" id="dashUser"></div>
     <div class="wallet">
-      <div class="w-l">Available balance</div>
+      <div class="w-l">Total tips received</div>
       <div class="w-a" id="dashBal">$0.00</div>
-      <div class="w-s">Ready to withdraw to EcoCash</div>
+      <div class="w-s">Paid tips only</div>
     </div>
-    <button class="btn" onclick="openPayModal()">Request EcoCash payout</button>
+    <button class="btn" id="payoutBtn">Request EcoCash payout</button>
     <div class="scards">
       <div class="sc g"><div class="sc-l">Total Earned</div><div class="sc-v" id="dEarned">$0.00</div></div>
       <div class="sc"><div class="sc-l">Total Plays</div><div class="sc-v" id="dPlays">0</div></div>
@@ -745,11 +830,11 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
     </div>
     <div class="hr"></div>
     <div class="sec" style="font-size:16px">Your tracks</div>
-    <div id="dTrackList"><div class="empty">No tracks yet · <span onclick="go('upload')">Upload your first track</span></div></div>
+    <div id="dTrackList"><div class="loading">Loading</div></div>
     <div class="hr"></div>
     <div class="sec" style="font-size:16px">Recent tips</div>
-    <div id="dTipFeed"><div class="empty">Tips will appear here once fans start tipping</div></div>
-    <div style="margin-top:22px"><button class="btn" onclick="go('upload')">+ Upload new track</button></div>
+    <div id="dTipFeed"><div class="loading">Loading</div></div>
+    <div style="margin-top:22px"><button class="btn" id="dashUploadBtn">+ Upload new track</button></div>
   </div>
 </div>
 
@@ -758,17 +843,18 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 <div class="pg" id="pg-me">
   <div class="pi" style="padding-top:24px">
     <div id="meGuest">
-      <div style="font-size:24px;font-weight:900;margin-bottom:10px;color:#fff">Your library</div>
-      <p style="color:#B3B3B3;font-size:14px;margin-bottom:26px">Create a free account to follow artists, send tips and build your music library.</p>
-      <button class="btn" onclick="go('fan-signup')">Sign up free</button>
-      <button class="btn-o" onclick="go('artist-signup')">Join as an artist</button>
+      <div style="font-size:24px;font-weight:900;margin-bottom:10px;color:#fff;font-family:'Syne',sans-serif">Your library</div>
+      <p style="color:#555;font-size:14px;margin-bottom:26px">Sign up to follow artists, tip, and build your library.</p>
+      <button class="btn" id="meSignupBtn">Sign up free</button>
+      <button class="btn-o" id="meArtistBtn">Join as an artist</button>
+      <button class="btn-o" id="meLoginBtn">Log in</button>
     </div>
     <div id="meIn" style="display:none">
       <div style="text-align:center;margin-bottom:28px">
         <div class="me-ava" id="meAva">?</div>
-        <div style="font-size:22px;font-weight:900;margin-bottom:4px;color:#fff" id="meName">-</div>
+        <div style="font-size:22px;font-weight:900;margin-bottom:4px;color:#fff;font-family:'Syne',sans-serif" id="meName">-</div>
         <div style="font-size:14px;color:#D4A843;font-weight:600" id="meUD">@-</div>
-        <div style="font-size:12px;color:#B3B3B3;margin-top:4px" id="meTL">Fan</div>
+        <div style="font-size:12px;color:#555;margin-top:4px" id="meTL">Fan</div>
       </div>
       <div class="hr" style="margin-top:0"></div>
       <div id="meFanStats">
@@ -780,12 +866,12 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
         <div id="meLiked"><div class="empty">Like tracks to see them here</div></div>
       </div>
       <div id="meArtLinks" style="display:none">
-        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" onclick="go('dashboard')"><span>Earnings dashboard</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" onclick="go('artist-profile')"><span>My artist profile</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" onclick="go('upload')"><span>Upload a track</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" id="meDashBtn"><span>Earnings dashboard</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" id="meProfileBtn"><span>My artist profile</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" id="meUploadBtn"><span>Upload a track</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
       </div>
       <div class="hr"></div>
-      <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" onclick="go('settings')"><span>Settings</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" id="meSettingsBtn"><span>Settings</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
       <button class="btn-danger" id="logoutBtn">Log out</button>
     </div>
   </div>
@@ -795,599 +881,980 @@ input,select,textarea{font-family:inherit;-webkit-appearance:none;appearance:non
 
 <div class="pg" id="pg-settings">
   <div class="pi" style="padding-top:20px">
-    <div style="font-size:24px;font-weight:900;margin-bottom:24px;color:#fff">Settings</div>
+    <div style="font-size:24px;font-weight:900;margin-bottom:24px;color:#fff;font-family:'Syne',sans-serif">Settings</div>
     <div class="set-sect">
       <div class="set-lbl">Account</div>
-      <button class="set-row" onclick="showToast('Edit profile coming soon')"><span>Edit profile</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('Change password coming soon')"><span>Change password</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('Notifications coming soon')"><span>Notifications</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setEditProfile"><span>Edit profile</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setChangePw"><span>Change password</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
     <div class="set-sect">
       <div class="set-lbl">Payments</div>
-      <button class="set-row" onclick="showToast('EcoCash settings coming soon')"><span>EcoCash number</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('Payout history coming soon')"><span>Payout history</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('Tip history coming soon')"><span>Tip history</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setEcocash"><span>EcoCash number</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setPayHistory"><span>Payout history</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
     <div class="set-sect">
       <div class="set-lbl">About</div>
-      <button class="set-row" onclick="showToast('Malbry v1.0 · malbry.vercel.app')"><span>Version</span><span class="set-val">1.0.0</span></button>
-      <button class="set-row" onclick="openShare('https://malbry.vercel.app')"><span>Share Malbry</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('support@malbry.app')"><span>Contact support</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setVersion"><span>Version</span><span class="set-val">2.0.0</span></button>
+      <button class="set-row" id="setShare"><span>Share Malbry</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setSupport"><span>Contact support</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
-    <button class="btn-danger" onclick="doLogout()" style="margin-top:8px">Log out</button>
+    <button class="btn-danger" id="settingsLogoutBtn" style="margin-top:8px">Log out</button>
   </div>
 </div>
 
 <script>
-// ══ SUPABASE ══
-const supabase = window.supabase.createClient(
-  'https://lonavuripzywpgguznza.supabase.co',
-  'YOUR_ANON_KEY'
-);
+// ════════════════════════════════════════════
+// SUPABASE INIT — reads from Vercel env vars injected at build time
+// or falls back to window globals if set
+// ════════════════════════════════════════════
+const SUPA_URL = window.__SUPABASE_URL__ || 'https://lonavuripzywpgguznza.supabase.co';
+const SUPA_KEY = window.__SUPABASE_ANON_KEY__ || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvbmF2dXJpcHp5d3BnZ3V6bnphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDgzMjksImV4cCI6MjA4ODkyNDMyOX0.YpubAkauQDr4k-_6Lo7qlW9hBYY3lYb_ewv6pBinkMk';
+const sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 
-// ══ CONFIG ══
-var PAYNOW_ID='';
-var PAYNOW_KEY='';
+// ════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════
+let _user = null;        // Supabase auth user
+let _profile = null;     // DB profile row (fan or artist)
+let _tracks = [];        // current track list
+let _nowIdx = 0;         // index in _tracks
+let _playing = false;
+let _shuf = false;
+let _rep = false;
+let _liked = {};
+let _fol = 0;
+let _tipTotal = 0;
+let _tipAmt = 1;
+let _tipArtistId = null;
+let _tipTrackId = null;
+let _tipRef = null;
+let _pollInt = null;
+let _prevPg = 'home';
+let _shareUrl = 'https://malbry.vercel.app';
+let _recent = [];
+let _toastT = null;
+let _currentArtist = null;
 
-// ══ SEED DATA (shown until live tracks load from Supabase) ══
-var TRACKS=[
-  {id:1,e:'🎵',n:'Ndinewe',a:'Jah Signal',g:'Zimdancehall',dur:'3:24'},
-  {id:2,e:'🎶',n:'Rudo Rwangu',a:'Jah Signal',g:'Zimdancehall',dur:'4:12'},
-  {id:3,e:'🎸',n:'Simba',a:'Tocky Vibes',g:'Zimdancehall',dur:'3:47'},
-  {id:4,e:'🎤',n:'Disappear',a:'Ammara Brown',g:'Afrobeats',dur:'3:58'},
-  {id:5,e:'🙏',n:'Hallelujah',a:'Charles Charamba',g:'Gospel',dur:'5:02'},
-  {id:6,e:'🎙',n:'Street Anthem',a:'Killer T',g:'Zimdancehall',dur:'3:31'},
-  {id:7,e:'🔥',n:'Zora',a:'Winky D',g:'Zimdancehall',dur:'4:45'},
-  {id:8,e:'🎺',n:'Sendekera',a:'Jah Prayzah',g:'Afrobeats',dur:'3:52'}
+const audioEl = document.getElementById('audioEl');
+const GENRES = [
+  {n:'Zimdancehall',e:'🎵',bg:'#0a0f2e'},{n:'Afrobeats',e:'🥁',bg:'#0a2010'},
+  {n:'Gospel',e:'🙏',bg:'#2e0a0a'},{n:'Hip Hop',e:'🎤',bg:'#0a1528'},
+  {n:'Amapiano',e:'🎹',bg:'#281a0a'},{n:'Sungura',e:'🎸',bg:'#180a2e'},
+  {n:'R&B',e:'🎶',bg:'#0a2e24'},{n:'Pop',e:'🌟',bg:'#2e0a18'}
 ];
-var ARTISTS=[
-  {i:'W',n:'Winky D',g:'Zimdancehall',l:'Harare'},
-  {i:'J',n:'Jah Prayzah',g:'Afrobeats',l:'Harare'},
-  {i:'A',n:'Ammara Brown',g:'Afrobeats',l:'Harare'},
-  {i:'K',n:'Killer T',g:'Zimdancehall',l:'Harare'},
-  {i:'T',n:'Tocky Vibes',g:'Zimdancehall',l:'Masvingo'},
-  {i:'C',n:'Charles Charamba',g:'Gospel',l:'Harare'},
-  {i:'S',n:'Jah Signal',g:'Zimdancehall',l:'Harare'}
-];
-var GENRES=[
-  {n:'Zimdancehall',e:'🎵',bg:'#0a0f33'},{n:'Afrobeats',e:'🥁',bg:'#0a2810'},
-  {n:'Gospel',e:'🙏',bg:'#330a0a'},{n:'Hip Hop',e:'🎤',bg:'#0a1a33'},
-  {n:'Amapiano',e:'🎹',bg:'#33290a'},{n:'Sungura',e:'🎸',bg:'#1f0a33'},
-  {n:'R&B',e:'🎶',bg:'#0a332a'},{n:'Pop',e:'🌟',bg:'#330a1f'}
-];
 
-// ══ STATE ══
-window._user=null;
-var _fol=0,_tipTotal=0,_tipAmt=1,_prevPg='home';
-var _playing=false,_pct=0,_pInt=null,_nowId=1;
-var _shuf=false,_rep=false,_liked={};
-var _shareUrl='https://malbry.vercel.app';
-var _recent=[];
-var _toastT=null;
+// ════════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════════
+function greet(){const h=new Date().getHours();return h<12?'Good morning':h<17?'Good afternoon':'Good evening';}
+function fmt(s){if(!s||isNaN(s))return'0:00';s=Math.floor(s);return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;}
 
-// ══ GREETING ══
-function greet(){var h=new Date().getHours();return h<12?'Good morning':h<17?'Good afternoon':'Good evening';}
-
-// ══ TOAST ══
-function showToast(msg){
-  var t=document.getElementById('toast');
+function showToast(msg,dur=2600){
+  const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('on');
   clearTimeout(_toastT);
-  _toastT=setTimeout(function(){t.classList.remove('on');},2600);
+  _toastT=setTimeout(()=>t.classList.remove('on'),dur);
 }
 
-// ══ NAV ══
 function go(p){
   _prevPg=(document.querySelector('.pg.on')||{id:'pg-home'}).id.replace('pg-','');
-  document.querySelectorAll('.pg').forEach(function(x){x.classList.remove('on');});
-  var el=document.getElementById('pg-'+p);
+  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
+  const el=document.getElementById('pg-'+p);
   if(el)el.classList.add('on');
-  document.querySelectorAll('.bn').forEach(function(x){x.classList.remove('on');});
-  var map={home:'home',charts:'charts',search:'search',feed:'feed',track:'search',
-    'artist-profile':'search','fan-signup':'join','artist-signup':'join',
-    upload:'upload',dashboard:'earn',me:'me',settings:'me'};
-  document.querySelectorAll('.bn').forEach(function(b){
-    if(b.getAttribute('data-p')===map[p])b.classList.add('on');
-  });
+  document.querySelectorAll('.bn').forEach(x=>x.classList.remove('on'));
+  const map={home:'home',charts:'charts',search:'search',feed:'feed',track:'search',
+    'artist-profile':'search','fan-signup':'me','artist-signup':'me',
+    upload:'upload',dashboard:'dashboard',me:'me',settings:'me'};
+  const target=map[p];
+  document.querySelectorAll('.bn').forEach(b=>{if(b.getAttribute('data-p')===target)b.classList.add('on');});
   window.scrollTo(0,0);
-  if(p==='artist-signup'&&(!window._user||window._user.type!=='artist'))resetAForm();
   if(p==='feed')renderFeed();
-  if(p==='charts')renderCharts();
+  if(p==='charts')loadCharts();
+  if(p==='dashboard')loadDashboard();
+  if(p==='search')renderSearch();
 }
-function goBack(){go(_prevPg||'home');}
 
-function buildNav(type){
-  var nav=document.getElementById('bnav');nav.innerHTML='';
-  var S={
+function goBack(){go(_prevPg||'home');}
+function cm(id){document.getElementById(id).classList.remove('on');}
+function om(id){document.getElementById(id).classList.add('on');}
+
+// ════════════════════════════════════════════
+// AUTH
+// ════════════════════════════════════════════
+async function initAuth(){
+  const {data:{session}}=await sb.auth.getSession();
+  if(session){
+    _user=session.user;
+    await loadProfile();
+  }
+  renderUserUI();
+  document.getElementById('greet').textContent=greet()+(_profile?', '+(_profile.first_name||_profile.stage_name||''):'');
+}
+
+async function loadProfile(){
+  if(!_user)return;
+  // Try artists first
+  let {data:art}=await sb.from('artists').select('*').eq('id',_user.id).single();
+  if(art){_profile={...art,role:'artist'};return;}
+  let {data:fan}=await sb.from('fans').select('*').eq('id',_user.id).single();
+  if(fan)_profile={...fan,role:'fan'};
+}
+
+function renderUserUI(){
+  const loggedIn=!!_user;
+  document.getElementById('navJoinBtn').style.display=loggedIn?'none':'block';
+  const nu=document.getElementById('navUserBtn');
+  if(loggedIn){
+    nu.classList.add('on');
+    const name=_profile?((_profile.first_name||_profile.stage_name||'?')):'?';
+    document.getElementById('navAv').textContent=name[0].toUpperCase();
+    document.getElementById('navUn').textContent='@'+(_profile?.username||'me');
+    document.getElementById('meGuest').style.display='none';
+    document.getElementById('meIn').style.display='block';
+    document.getElementById('meAva').textContent=name[0].toUpperCase();
+    document.getElementById('meName').textContent=name;
+    document.getElementById('meUD').textContent='@'+(_profile?.username||'');
+    document.getElementById('meTL').textContent=_profile?.role==='artist'?'Artist':'Fan';
+    document.getElementById('meFanStats').style.display=_profile?.role==='fan'?'block':'none';
+    document.getElementById('meArtLinks').style.display=_profile?.role==='artist'?'block':'none';
+    document.getElementById('heroSec').style.display='none';
+    document.getElementById('homeCTA').style.display='none';
+    document.getElementById('recentSec').style.display='block';
+    // Build correct nav
+    buildNav(_profile?.role||'fan');
+  } else {
+    nu.classList.remove('on');
+    document.getElementById('meGuest').style.display='block';
+    document.getElementById('meIn').style.display='none';
+    document.getElementById('heroSec').style.display='block';
+    document.getElementById('homeCTA').style.display='block';
+    buildNav(null);
+  }
+}
+
+function buildNav(role){
+  const nav=document.getElementById('bnav');
+  nav.innerHTML='';
+  const icons={
     home:'<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
     charts:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
     search:'<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
     feed:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',
     upload:'<polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>',
-    earn:'<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
-    me:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>',
-    join:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>'
+    dashboard:'<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
+    me:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>'
   };
-  var items;
-  if(type==='fan') items=[['home','home','Home'],['charts','charts','Charts'],['search','search','Search'],['feed','feed','Feed'],['me','me','Me']];
-  else if(type==='artist') items=[['home','home','Home'],['charts','charts','Charts'],['upload','upload','Upload'],['dashboard','earn','Earn'],['me','me','Me']];
-  else items=[['home','home','Home'],['charts','charts','Charts'],['search','search','Search'],['feed','feed','Feed'],['fan-signup','join','Join']];
-  items.forEach(function(it){
-    var b=document.createElement('button');
-    b.className='bn';b.setAttribute('data-p',it[1]);
-    b.innerHTML='<svg class="bni" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+S[it[1]]+'</svg>'+it[2];
-    b.onclick=function(){go(it[0]);};
+  let items;
+  if(role==='artist') items=[['home','home','Home'],['charts','charts','Charts'],['upload','upload','Upload'],['dashboard','dashboard','Earn'],['me','me','Me']];
+  else if(role==='fan') items=[['home','home','Home'],['charts','charts','Charts'],['search','search','Search'],['feed','feed','Feed'],['me','me','Me']];
+  else items=[['home','home','Home'],['charts','charts','Charts'],['search','search','Search'],['feed','feed','Feed'],['me','me','Join']];
+  items.forEach(([pg,key,label])=>{
+    const b=document.createElement('button');
+    b.className='bn';b.setAttribute('data-p',key);
+    b.innerHTML=`<svg class="bni" viewBox="0 0 24 24">${icons[key]}</svg>${label}`;
+    b.addEventListener('click',()=>go(pg));
     nav.appendChild(b);
   });
-  var hb=nav.querySelector('[data-p="home"]');
-  if(hb)hb.classList.add('on');
-}
-
-// ══ USER ══
-function setUser(type,name,username){
-  window._user={type:type,name:name,username:username};
-  document.getElementById('navJoin').style.display='none';
-  var nu=document.getElementById('navUser');
-  nu.style.cssText='display:flex!important;align-items:center;gap:8px;background:#282828;border-radius:500px;padding:4px 12px 4px 4px;border:none;cursor:pointer;';
-  document.getElementById('navAv').textContent=name.charAt(0).toUpperCase();
-  document.getElementById('navUn').textContent='@'+username;
-  document.getElementById('nbell').style.cssText='display:flex;width:32px;height:32px;border-radius:50%;background:#282828;align-items:center;justify-content:center;color:#B3B3B3;border:none;cursor:pointer;';
-  buildNav(type);
-  document.getElementById('meGuest').style.display='none';
-  document.getElementById('meIn').style.display='block';
-  document.getElementById('meAva').textContent=name.charAt(0).toUpperCase();
-  document.getElementById('meName').textContent=name;
-  document.getElementById('meUD').textContent='@'+username;
-  document.getElementById('meTL').textContent=type==='artist'?'Artist':'Fan';
-  document.getElementById('meFanStats').style.display=type==='fan'?'block':'none';
-  document.getElementById('meArtLinks').style.display=type==='artist'?'block':'none';
-  if(type==='artist')document.getElementById('dashUser').textContent='@'+username;
-  document.getElementById('homeCTA').style.display='none';
-  document.getElementById('heroSec').style.display='none';
-  document.getElementById('recentSec').style.display='block';
-  document.getElementById('greet').textContent=greet()+', '+name.split(' ')[0];
-  document.getElementById('logoutBtn').onclick=doLogout;
-}
-
-function doLogout(){
-  window._user=null;_fol=0;_tipTotal=0;_recent=[];_liked={};
-  document.getElementById('navJoin').style.display='block';
-  document.getElementById('navUser').style.cssText='display:none;';
-  document.getElementById('nbell').style.cssText='display:none;';
-  document.getElementById('meGuest').style.display='block';
-  document.getElementById('meIn').style.display='none';
-  document.getElementById('homeCTA').style.display='block';
-  document.getElementById('heroSec').style.display='block';
-  document.getElementById('recentSec').style.display='none';
-  document.getElementById('greet').textContent=greet();
-  buildNav(null);
-  go('home');
-  showToast('Logged out');
-}
-function showLogin(){showToast('Login coming soon — create a new account for now');}
-
-// ══ HELPERS ══
-function tipById(id){var t=TRACKS.find(function(x){return x.id===id;});if(t)openTip(t.a);}
-function tipByIdx(i){var a=ARTISTS[i];if(a)openTip(a.n);}
-
-// ══ RENDER ══
-function tCard(t){
-  return '<div class="tcard" onclick="openTrack('+t.id+')">' +
-    '<div class="tcard-art">'+t.e+'<button class="tcard-play" onclick="event.stopPropagation();openTrack('+t.id+')"><svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg></button></div>' +
-    '<div class="tcard-body"><div class="tcard-n">'+t.n+'</div><div class="tcard-a">'+t.a+'</div></div></div>';
-}
-function hCard(t){
-  return '<div class="hcard" onclick="openTrack('+t.id+')"><div class="hcard-art">'+t.e+'</div><div class="hcard-n">'+t.n+'</div><div class="hcard-a">'+t.a+'</div></div>';
-}
-function tRow(t,i){
-  return '<div class="trow" onclick="openTrack('+t.id+')">' +
-    '<div class="trow-num'+(i!==undefined&&i<3?' top':'')+'>'+(i!==undefined?i+1:'')+'</div>' +
-    '<div class="trow-art">'+t.e+'</div>' +
-    '<div class="trow-inf"><div class="trow-n">'+t.n+'</div><div class="trow-a">'+t.a+'</div></div>' +
-    '<div class="trow-dur">'+t.dur+'</div>' +
-    '<button class="trow-tip" onclick="event.stopPropagation();tipById('+t.id+')">Tip</button>' +
-    '</div>';
-}
-function aRow(a,idx){
-  return '<div class="arow" onclick="openArtist('+idx+')">' +
-    '<div class="ava">'+a.i+'</div>' +
-    '<div class="ar-inf"><div class="ar-n">'+a.n+'</div><div class="ar-m">'+a.g+' · '+a.l+'</div></div>' +
-    '<button class="fbtn" onclick="event.stopPropagation();toggleFol(this)">Follow</button>' +
-    '</div>';
-}
-
-function renderHome(g){
-  var f=(!g||g==='All')?TRACKS:TRACKS.filter(function(t){return t.g===g;});
-  document.getElementById('hGrid').innerHTML=f.map(tCard).join('');
-  document.getElementById('hArtists').innerHTML=ARTISTS.slice(0,4).map(function(a,i){return aRow(a,i);}).join('');
-}
-function fHome(btn,g){
-  document.querySelectorAll('#hFilter .pill').forEach(function(p){p.classList.remove('on');});
-  btn.classList.add('on');renderHome(g);
-}
-function renderRecent(){
-  var el=document.getElementById('recentList');if(!el)return;
-  el.innerHTML=_recent.length?_recent.map(hCard).join(''):'<div style="color:#3E3E3E;font-size:13px">Play some tracks to see them here</div>';
-}
-function renderSearch(){
-  document.getElementById('gGrid').innerHTML=GENRES.map(function(g){
-    return '<div class="gc" style="background:'+g.bg+'" onclick="doSearch(\''+g.n+'\')"><div class="gc-n">'+g.n+'</div><div class="gc-c">Browse tracks</div><div class="gc-e">'+g.e+'</div></div>';
-  }).join('');
-  document.getElementById('sArtists').innerHTML=ARTISTS.map(function(a,i){return aRow(a,i);}).join('');
-}
-function doSearch(q){
-  var inp=document.getElementById('sQ');if(inp)inp.value=q;
-  if(!q||!q.trim()){document.getElementById('sDef').style.display='block';document.getElementById('sRes').style.display='none';document.getElementById('sEmpty').style.display='none';return;}
-  var ql=q.toLowerCase();
-  var fa=ARTISTS.filter(function(a){return a.n.toLowerCase().indexOf(ql)>-1||a.g.toLowerCase().indexOf(ql)>-1;});
-  var ft=TRACKS.filter(function(t){return t.n.toLowerCase().indexOf(ql)>-1||t.a.toLowerCase().indexOf(ql)>-1||t.g.toLowerCase().indexOf(ql)>-1;});
-  document.getElementById('sDef').style.display='none';
-  if(!fa.length&&!ft.length){document.getElementById('sRes').style.display='none';document.getElementById('sEmpty').style.display='block';return;}
-  document.getElementById('sEmpty').style.display='none';document.getElementById('sRes').style.display='block';
-  document.getElementById('rA').innerHTML=fa.length?'<div class="sec" style="font-size:16px">Artists</div>'+fa.map(function(a){return aRow(a,ARTISTS.indexOf(a));}).join(''):'';
-  document.getElementById('rT').innerHTML=ft.length?'<div class="sec" style="font-size:16px">Tracks</div>'+ft.map(function(t,i){return tRow(t,i);}).join(''):'';
-}
-
-function renderCharts(){
-  var genre=document.querySelector('#chartFilter .pill.on');
-  var g=genre?genre.textContent:'All';
-  var tracks=g==='Zimbabwe'||g==='All'?TRACKS:TRACKS.filter(function(t){return t.g===g;});
-  if(!tracks.length)tracks=TRACKS;
-  document.getElementById('chartList').innerHTML=tracks.map(function(t,i){
-    return '<div class="chart-row" onclick="openTrack('+t.id+')">' +
-      '<div class="chart-num'+(i<3?' top':'')+'>'+(i+1)+'</div>' +
-      '<div class="chart-art">'+t.e+'</div>' +
-      '<div class="chart-inf"><div class="chart-n">'+t.n+'</div><div class="chart-a">'+t.a+' · '+t.dur+'</div></div>' +
-      '<button class="chart-tip" onclick="event.stopPropagation();tipById('+t.id+')">Tip</button>' +
-      '</div>';
-  }).join('');
-}
-function fChart(btn,g){
-  document.querySelectorAll('#chartFilter .pill').forEach(function(p){p.classList.remove('on');});
-  btn.classList.add('on');renderCharts();
-}
-
-function renderFeed(){
-  var el=document.getElementById('feedList');
-  var ge=document.getElementById('feedGuest');
-  if(!window._user){if(el)el.innerHTML='';if(ge)ge.style.display='block';return;}
-  if(ge)ge.style.display='none';
-  var items=ARTISTS.slice(0,4).map(function(a,i){return {a:a,t:TRACKS[i]||TRACKS[0],time:['2 mins ago','15 mins ago','1 hour ago','3 hours ago'][i]};});
-  el.innerHTML=items.map(function(item){
-    return '<div class="feed-card" onclick="openTrack('+item.t.id+')">' +
-      '<div class="fc-head"><div class="fc-av">'+item.a.i+'</div><div><div class="fc-name">'+item.a.n+'</div><div class="fc-time">Uploaded a track · '+item.time+'</div></div></div>' +
-      '<div class="fc-track"><div class="fc-art">'+item.t.e+'</div>' +
-      '<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+item.t.n+'</div>' +
-      '<div style="font-size:12px;color:#B3B3B3;margin-top:2px">'+item.t.g+' · '+item.t.dur+'</div></div>' +
-      '<button class="chart-tip" onclick="event.stopPropagation();tipById('+item.t.id+')">Tip</button>' +
-      '</div></div>';
-  }).join('');
-}
-
-// ══ TRACK ══
-function openTrack(id){
-  var t=TRACKS.find(function(x){return x.id===id;});if(!t)return;
-  _nowId=id;
-  _recent=_recent.filter(function(x){return x.id!==id;});_recent.unshift(t);if(_recent.length>8)_recent.pop();
-  renderRecent();
-  document.getElementById('tArt').textContent=t.e;
-  document.getElementById('tTitle').textContent=t.n;
-  document.getElementById('tArtBtn').textContent=t.a;
-  document.getElementById('tGenre').textContent=t.g;
-  document.getElementById('tTipBtn').onclick=function(){tipById(id);};
-  document.getElementById('mpArt').textContent=t.e;
-  document.getElementById('mpT').textContent=t.n;
-  document.getElementById('mpA').textContent=t.a;
-  document.getElementById('npsArt').textContent=t.e;
-  document.getElementById('npsT').textContent=t.n;
-  document.getElementById('npsA').textContent=t.a;
-  window._nA=t.a;
-  _pct=0;if(_pInt)clearInterval(_pInt);_playing=false;
-  ['tFill','npsPF','mpPF'].forEach(function(i){var el=document.getElementById(i);if(el)el.style.width='0';});
-  document.getElementById('tCur').textContent='0:00';
-  if(document.getElementById('npsCur'))document.getElementById('npsCur').textContent='0:00';
-  setPlayIcos(false);updateHearts();
-  document.getElementById('mTracks').innerHTML=TRACKS.filter(function(x){return x.id!==id;}).slice(0,6).map(function(x,i){return tRow(x,i);}).join('');
-  document.getElementById('mp').classList.add('on');
-  go('track');
-}
-function setPlayIcos(p){
-  var play='<polygon points="5 3 19 12 5 21 5 3"/>';
-  var pause='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-  var ico=p?pause:play;
-  ['tIco','npsIco','mpIco'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML=ico;});
-}
-function togglePlay(){
-  _playing=!_playing;setPlayIcos(_playing);
-  if(_playing){
-    _pInt=setInterval(function(){
-      _pct=Math.min(_pct+100/227,100);
-      var w=_pct+'%';
-      ['tFill','npsPF','mpPF'].forEach(function(i){var el=document.getElementById(i);if(el)el.style.width=w;});
-      var s=Math.round((_pct/100)*227),ts=Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
-      if(document.getElementById('tCur'))document.getElementById('tCur').textContent=ts;
-      if(document.getElementById('npsCur'))document.getElementById('npsCur').textContent=ts;
-      if(_pct>=100){clearInterval(_pInt);_playing=false;setPlayIcos(false);_pct=0;if(_rep)openTrack(_nowId);else if(_shuf)nextT();}
-    },1000);
-  } else clearInterval(_pInt);
-}
-function prevT(){var i=TRACKS.findIndex(function(x){return x.id===_nowId;});openTrack(TRACKS[(i-1+TRACKS.length)%TRACKS.length].id);}
-function nextT(){var i=TRACKS.findIndex(function(x){return x.id===_nowId;});openTrack(_shuf?TRACKS[Math.floor(Math.random()*TRACKS.length)].id:TRACKS[(i+1)%TRACKS.length].id);}
-function seekT(e){var r=document.getElementById('tProg').getBoundingClientRect();_pct=((e.clientX-r.left)/r.width)*100;document.getElementById('tFill').style.width=_pct+'%';}
-function seekNP(e){var r=document.getElementById('npsProg').getBoundingClientRect();_pct=((e.clientX-r.left)/r.width)*100;document.getElementById('npsPF').style.width=_pct+'%';}
-function toggleShuf(){_shuf=!_shuf;['tShuf','npsShuf'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('on',_shuf);});showToast(_shuf?'Shuffle on':'Shuffle off');}
-function toggleRep(){_rep=!_rep;['tRep','npsRep'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('on',_rep);});showToast(_rep?'Repeat on':'Repeat off');}
-function openNP(){document.getElementById('nps').classList.add('on');}
-function closeNP(){document.getElementById('nps').classList.remove('on');}
-
-// ══ LIKE ══
-function toggleLike(){
-  _liked[_nowId]=!_liked[_nowId];updateHearts();
-  showToast(_liked[_nowId]?'Added to liked tracks':'Removed from liked tracks');
-  renderLiked();
-}
-function updateHearts(){
-  var on=!!_liked[_nowId];
-  ['mpH','tHrt','npsH'].forEach(function(id){
-    var el=document.getElementById(id);if(!el)return;
-    el.classList.toggle('on',on);
-    var svg=el.querySelector('svg');
-    if(svg){svg.setAttribute('fill',on?'#D4A843':'none');svg.setAttribute('stroke',on?'#D4A843':'currentColor');}
-  });
-}
-function renderLiked(){
-  var el=document.getElementById('meLiked');if(!el)return;
-  var liked=TRACKS.filter(function(t){return _liked[t.id];});
-  el.innerHTML=liked.length?liked.map(function(t,i){return tRow(t,i);}).join(''):'<div class="empty">Like tracks to see them here</div>';
-}
-
-// ══ ARTIST ══
-function openArtist(idx){
-  var a=ARTISTS[idx];if(!a)return;
-  document.getElementById('apAva').textContent=a.i;
-  document.getElementById('apName').textContent=a.n;
-  document.getElementById('apTag').textContent=a.g+' · '+a.l;
-  document.getElementById('apBio').textContent=a.n+' is a '+a.g+' artist from '+a.l+'. Known for powerful performances and authentic music that connects with fans across Zimbabwe and the diaspora.';
-  ['apPl','apTr','apFo','apTi'].forEach(function(id){document.getElementById(id).textContent='—';});
-  document.getElementById('apTracks').innerHTML=TRACKS.filter(function(t){return t.a===a.n;}).concat(TRACKS.slice(0,4)).slice(0,6).map(function(t,i){return tRow(t,i);}).join('');
-  var btn=document.getElementById('apFBtn');btn.textContent='Follow';btn.style.cssText='border:none;background:#D4A843;color:#000;margin:0;';
-  go('artist-profile');
-}
-function doFollow(){
-  var btn=document.getElementById('apFBtn');var f=btn.textContent==='Following';
-  btn.textContent=f?'Follow':'Following';
-  btn.style.cssText=f?'border:none;background:#D4A843;color:#000;margin:0;':'background:rgba(212,168,67,.1);color:#D4A843;border:1px solid rgba(212,168,67,.4);margin:0;';
-  showToast(f?'Unfollowed':'Following');
-}
-function toggleFol(btn){
-  var on=btn.classList.toggle('on');btn.textContent=on?'Following':'Follow';
-  _fol+=on?1:-1;document.getElementById('meFol').textContent=_fol;showToast(on?'Following':'Unfollowed');
-}
-
-// ══ TIP ══
-function openTip(a){
-  document.getElementById('tipFor').textContent='Support '+(a||'this artist')+' via EcoCash';
-  document.getElementById('tipSt').style.display='none';
-  document.getElementById('tipModal').classList.add('on');
-}
-function setAmt(btn,a){
-  document.querySelectorAll('.ta').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');_tipAmt=a;
-  document.getElementById('tipBtn').textContent='Send $'+a.toFixed(2)+' via EcoCash';
-}
-function sendTip(){
-  var eco=document.getElementById('tipEco').value.trim();
-  if(!eco){showToast('Please enter your EcoCash number');return;}
-  var btn=document.getElementById('tipBtn'),st=document.getElementById('tipSt');
-  btn.textContent='Sending...';btn.disabled=true;
-  if(PAYNOW_ID&&PAYNOW_KEY){
-    st.style.display='block';st.style.color='#D4A843';st.textContent='Sending to '+eco+'...';
-    fetch('https://www.paynow.co.zw/interface/remotetransaction',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:new URLSearchParams({id:PAYNOW_ID,reference:'tip-'+Date.now(),amount:_tipAmt.toFixed(2),additionalinfo:'Malbry tip',phone:eco,method:'ecocash',returnurl:'https://malbry.vercel.app',resulturl:'https://malbry.vercel.app'})
-    }).then(function(r){return r.text();}).then(function(res){
-      btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;
-      if(res.toLowerCase().indexOf('ok')>-1){st.style.color='#1ED760';st.textContent='EcoCash prompt sent! Approve on your phone.';_tipTotal+=_tipAmt;document.getElementById('meTS').textContent='$'+_tipTotal.toFixed(2);showToast('Tip sent!');}
-      else{st.style.color='#E91429';st.textContent='Payment failed. Please try again.';}
-    }).catch(function(){btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;st.style.color='#E91429';st.textContent='Connection error. Try again.';});
-  } else {
-    setTimeout(function(){
-      btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;
-      st.style.display='block';st.style.color='#D4A843';
-      st.textContent='EcoCash payments setting up — live very soon.';
-    },700);
+  const cur=document.querySelector('.pg.on');
+  if(cur){
+    const p=cur.id.replace('pg-','');
+    const map={home:'home',charts:'charts',search:'search',feed:'feed',upload:'upload',dashboard:'dashboard',me:'me',settings:'me','fan-signup':'me','artist-signup':'me'};
+    nav.querySelectorAll('.bn').forEach(b=>{if(b.getAttribute('data-p')===map[p])b.classList.add('on');});
   }
 }
 
-// ══ PAYOUT ══
-function openPayModal(){document.getElementById('payBal').textContent=document.getElementById('dashBal').textContent;document.getElementById('payModal').classList.add('on');}
-function doPayout(){
-  var a=parseFloat(document.getElementById('payAmt').value);
-  if(!a||a<5){showToast('Minimum payout is $5');return;}
-  cm('payModal');showToast('Payout request submitted');
+async function doLogout(){
+  await sb.auth.signOut();
+  _user=null;_profile=null;_liked={};_recent=[];_fol=0;_tipTotal=0;
+  renderUserUI();
+  go('home');
+  loadTracks();
+  showToast('Logged out');
 }
 
-// ══ MODALS ══
-function cm(id){document.getElementById(id).classList.remove('on');}
-document.addEventListener('click',function(e){if(e.target.classList.contains('mbg'))e.target.classList.remove('on');});
+// ════════════════════════════════════════════
+// TRACKS — REAL DATA FROM SUPABASE
+// ════════════════════════════════════════════
+async function loadTracks(genre=null){
+  let q=sb.from('tracks').select('*, artists(stage_name,username,ecocash_number)').order('created_at',{ascending:false});
+  if(genre&&genre!=='All')q=q.eq('genre',genre);
+  const {data,error}=await q;
+  if(error){console.error(error);return;}
+  _tracks=data||[];
+  renderHome();
+}
 
-// ══ SHARE ══
-function openShare(url){_shareUrl=url||'https://malbry.vercel.app';document.getElementById('shareUrl').textContent=_shareUrl;document.getElementById('shareModal').classList.add('on');}
-function copyShareUrl(){if(navigator.clipboard){navigator.clipboard.writeText(_shareUrl).then(function(){showToast('Link copied!');});}else showToast(_shareUrl);}
-function sWA(){window.open('https://wa.me/?text='+encodeURIComponent('Check out Malbry — Zimbabwe music, tip artists via EcoCash! '+_shareUrl),'_blank');}
-function sTW(){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('Check out Malbry! '+_shareUrl),'_blank');}
-function sFB(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(_shareUrl),'_blank');}
-function sIG(){showToast('Copy the link and paste in your Instagram story');}
+function emojiFor(g){
+  const m={Zimdancehall:'🎵',Afrobeats:'🥁',Gospel:'🙏','Hip Hop':'🎤',Amapiano:'🎹',Sungura:'🎸','R&B':'🎶',Pop:'🌟'};
+  return m[g]||'🎵';
+}
 
-// ══ FAN SIGNUP — LIVE SUPABASE ══
+function artEl(t){
+  if(t.cover_url)return`<img src="${t.cover_url}" alt="" loading="lazy" onerror="this.style.display='none'">`;
+  return emojiFor(t.genre);
+}
+
+function renderHome(){
+  const grid=document.getElementById('hGrid');
+  if(!_tracks.length){grid.innerHTML='<div class="empty">No tracks yet — be the first artist to upload!</div>';return;}
+  grid.innerHTML=_tracks.slice(0,8).map(t=>`
+    <div class="tcard" data-id="${t.id}">
+      <div class="tcard-art">${artEl(t)}<button class="tcard-play" data-id="${t.id}"><svg width="16" height="16" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg></button></div>
+      <div class="tcard-body"><div class="tcard-n">${escHtml(t.title)}</div><div class="tcard-a">${escHtml(t.artists?.stage_name||'Unknown')}</div></div>
+    </div>`).join('');
+  document.getElementById('recentList').innerHTML=_recent.slice(0,8).map(t=>`
+    <div class="hcard" data-id="${t.id}"><div class="hcard-art">${artEl(t)}</div><div class="hcard-n">${escHtml(t.title)}</div><div class="hcard-a">${escHtml(t.artists?.stage_name||'')}</div></div>`).join('');
+}
+
+function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function tRowHtml(t,i){
+  const artist=t.artists?.stage_name||'Unknown';
+  return`<div class="trow" data-id="${t.id}">
+    <div class="trow-num${i<3?' top':''}">${i+1}</div>
+    <div class="trow-art">${artEl(t)}</div>
+    <div class="trow-inf"><div class="trow-n">${escHtml(t.title)}</div><div class="trow-a">${escHtml(artist)}</div></div>
+    <button class="trow-tip" data-id="${t.id}" data-artist="${escHtml(artist)}" data-artistid="${t.artist_id}">Tip</button>
+  </div>`;
+}
+
+async function loadCharts(){
+  // Sort by tip count
+  const {data:tipCounts}=await sb.from('tips').select('track_id').eq('status','paid');
+  const counts={};
+  (tipCounts||[]).forEach(r=>{counts[r.track_id]=(counts[r.track_id]||0)+1;});
+  const genre=document.querySelector('#chartFilter .pill.on')?.getAttribute('data-g')||'All';
+  let q=sb.from('tracks').select('*, artists(stage_name,username)').order('created_at',{ascending:false});
+  if(genre!=='All')q=q.eq('genre',genre);
+  const {data}=await q;
+  const sorted=(data||[]).sort((a,b)=>(counts[b.id]||0)-(counts[a.id]||0));
+  const el=document.getElementById('chartList');
+  if(!sorted.length){el.innerHTML='<div class="empty">No tracks yet</div>';return;}
+  el.innerHTML=sorted.map((t,i)=>`
+    <div class="chart-row" data-id="${t.id}">
+      <div class="chart-num${i<3?' top':''}">${i+1}</div>
+      <div class="chart-art">${artEl(t)}</div>
+      <div class="chart-inf"><div class="chart-n">${escHtml(t.title)}</div><div class="chart-a">${escHtml(t.artists?.stage_name||'')} · ${counts[t.id]||0} tips</div></div>
+      <button class="chart-tip" data-id="${t.id}" data-artist="${escHtml(t.artists?.stage_name||'')}" data-artistid="${t.artist_id}">Tip</button>
+    </div>`).join('');
+}
+
+function renderSearch(){
+  document.getElementById('gGrid').innerHTML=GENRES.map(g=>`
+    <div class="gc" style="background:${g.bg}" data-g="${g.n}">
+      <div class="gc-n">${g.n}</div><div class="gc-c">Browse tracks</div><div class="gc-e">${g.e}</div>
+    </div>`).join('');
+}
+
+async function doSearch(q){
+  if(!q||!q.trim()){
+    document.getElementById('sDef').style.display='block';
+    document.getElementById('sRes').style.display='none';
+    document.getElementById('sEmpty').style.display='none';
+    return;
+  }
+  document.getElementById('sDef').style.display='none';
+  const ql=q.toLowerCase();
+  const {data:tracks}=await sb.from('tracks').select('*, artists(stage_name,username)');
+  const {data:artists}=await sb.from('artists').select('*');
+  const ft=(tracks||[]).filter(t=>t.title?.toLowerCase().includes(ql)||(t.artists?.stage_name||'').toLowerCase().includes(ql)||t.genre?.toLowerCase().includes(ql));
+  const fa=(artists||[]).filter(a=>a.stage_name?.toLowerCase().includes(ql)||a.username?.toLowerCase().includes(ql));
+  if(!ft.length&&!fa.length){
+    document.getElementById('sRes').style.display='none';
+    document.getElementById('sEmpty').style.display='block';
+    return;
+  }
+  document.getElementById('sEmpty').style.display='none';
+  document.getElementById('sRes').style.display='block';
+  document.getElementById('sRes').innerHTML=
+    (fa.length?`<div class="sec" style="font-size:16px">Artists</div>`+fa.map(a=>`
+      <div class="arow" data-artistid="${a.id}">
+        <div class="ava">${(a.stage_name||'?')[0]}</div>
+        <div class="ar-inf"><div class="ar-n">${escHtml(a.stage_name)}</div><div class="ar-m">@${escHtml(a.username)}</div></div>
+      </div>`).join(''):'')+
+    (ft.length?`<div class="sec" style="font-size:16px;margin-top:${fa.length?'20px':'0'}">Tracks</div>`+ft.map((t,i)=>tRowHtml(t,i)).join(''):'');
+}
+
+function renderFeed(){
+  const el=document.getElementById('feedList');
+  const ge=document.getElementById('feedGuest');
+  if(!_user){el.innerHTML='';ge.style.display='block';return;}
+  ge.style.display='none';
+  if(!_tracks.length){el.innerHTML='<div class="empty">No tracks yet</div>';return;}
+  el.innerHTML=_tracks.slice(0,10).map(t=>`
+    <div class="feed-card" data-id="${t.id}">
+      <div class="fc-head">
+        <div class="fc-av">${(t.artists?.stage_name||'?')[0]}</div>
+        <div><div class="fc-name">${escHtml(t.artists?.stage_name||'')}</div><div class="fc-time">Uploaded a track</div></div>
+      </div>
+      <div class="fc-track">
+        <div style="width:44px;height:44px;border-radius:6px;background:#222;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden">${artEl(t)}</div>
+        <div style="flex:1;min-width:0;margin-left:10px"><div style="font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(t.title)}</div><div style="font-size:12px;color:#666;margin-top:2px">${t.genre||''}</div></div>
+        <button class="chart-tip" data-id="${t.id}" data-artist="${escHtml(t.artists?.stage_name||'')}" data-artistid="${t.artist_id}">Tip</button>
+      </div>
+    </div>`).join('');
+}
+
+// ════════════════════════════════════════════
+// AUDIO PLAYER — REAL HTML5
+// ════════════════════════════════════════════
+function openTrack(trackId){
+  const t=_tracks.find(x=>String(x.id)===String(trackId));
+  if(!t)return;
+  _nowIdx=_tracks.indexOf(t);
+  // Add to recent
+  _recent=_recent.filter(x=>String(x.id)!==String(t.id));
+  _recent.unshift(t);
+  if(_recent.length>8)_recent.pop();
+
+  const artist=t.artists?.stage_name||'Unknown';
+  // Update all UI
+  ['tArt','npsArt','mpArt'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=artEl(t);});
+  document.getElementById('tTitle').textContent=t.title||'';
+  document.getElementById('tArtBtn').textContent=artist;
+  document.getElementById('tGenre').textContent=t.genre||'';
+  document.getElementById('npsT').textContent=t.title||'';
+  document.getElementById('npsA').textContent=artist;
+  document.getElementById('mpT').textContent=t.title||'';
+  document.getElementById('mpA').textContent=artist;
+  window._nowArtistId=t.artist_id;
+  window._nowArtistName=artist;
+  window._nowTrackId=t.id;
+
+  // Load audio
+  if(t.audio_url){
+    audioEl.src=t.audio_url;
+    audioEl.load();
+    audioEl.play().then(()=>{_playing=true;setPlayIcos(true);}).catch(()=>{_playing=false;setPlayIcos(false);});
+  } else {
+    showToast('No audio file for this track');
+  }
+
+  document.getElementById('mp').classList.add('on');
+  updateHearts();
+  document.getElementById('mTracks').innerHTML=_tracks.filter(x=>String(x.id)!==String(t.id)).slice(0,6).map((x,i)=>tRowHtml(x,i)).join('');
+
+  if(window._user) loadTracks(); // passive refresh
+  go('track');
+}
+
+audioEl.addEventListener('timeupdate',()=>{
+  if(!audioEl.duration)return;
+  const pct=(audioEl.currentTime/audioEl.duration)*100;
+  ['tFill','npsPF','mpPF'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.width=pct+'%';});
+  const cur=fmt(audioEl.currentTime);
+  ['tCur','npsCur'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=cur;});
+});
+
+audioEl.addEventListener('loadedmetadata',()=>{
+  const dur=fmt(audioEl.duration);
+  ['tDur','npsDur'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=dur;});
+});
+
+audioEl.addEventListener('ended',()=>{
+  _playing=false;setPlayIcos(false);
+  if(_rep){audioEl.currentTime=0;audioEl.play().then(()=>{_playing=true;setPlayIcos(true);});}
+  else nextT();
+});
+
+function togglePlay(){
+  if(!audioEl.src){showToast('Select a track first');return;}
+  if(_playing){audioEl.pause();_playing=false;}
+  else{audioEl.play().then(()=>{_playing=true;}).catch(e=>showToast('Playback error'));_playing=true;}
+  setPlayIcos(_playing);
+}
+
+function setPlayIcos(p){
+  const play='<polygon points="5 3 19 12 5 21 5 3"/>';
+  const pause='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  ['tIco','npsIco','mpIco'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=p?pause:play;});
+}
+
+function prevT(){
+  if(!_tracks.length)return;
+  _nowIdx=(_nowIdx-1+_tracks.length)%_tracks.length;
+  openTrack(_tracks[_nowIdx].id);
+}
+
+function nextT(){
+  if(!_tracks.length)return;
+  if(_shuf)_nowIdx=Math.floor(Math.random()*_tracks.length);
+  else _nowIdx=(_nowIdx+1)%_tracks.length;
+  openTrack(_tracks[_nowIdx].id);
+}
+
+function seekAudio(e,barId){
+  const bar=document.getElementById(barId);
+  if(!bar||!audioEl.duration)return;
+  const r=bar.getBoundingClientRect();
+  audioEl.currentTime=((e.clientX-r.left)/r.width)*audioEl.duration;
+}
+
+// ════════════════════════════════════════════
+// LIKES
+// ════════════════════════════════════════════
+function toggleLike(){
+  const id=window._nowTrackId;if(!id)return;
+  _liked[id]=!_liked[id];
+  updateHearts();
+  showToast(_liked[id]?'Added to liked':'Removed from liked');
+  renderLiked();
+}
+
+function updateHearts(){
+  const id=window._nowTrackId;
+  const on=!!_liked[id];
+  ['mpH','tHrt','npsH'].forEach(btnId=>{
+    const el=document.getElementById(btnId);if(!el)return;
+    el.classList.toggle('on',on);
+    const svg=el.querySelector('svg');
+    if(svg){svg.setAttribute('fill',on?'#D4A843':'none');svg.setAttribute('stroke',on?'#D4A843':'currentColor');}
+  });
+}
+
+function renderLiked(){
+  const el=document.getElementById('meLiked');if(!el)return;
+  const liked=_tracks.filter(t=>_liked[t.id]);
+  el.innerHTML=liked.length?liked.map((t,i)=>tRowHtml(t,i)).join(''):'<div class="empty">Like tracks to see them here</div>';
+}
+
+// ════════════════════════════════════════════
+// ARTIST PROFILE
+// ════════════════════════════════════════════
+async function openArtist(artistId){
+  const {data:a}=await sb.from('artists').select('*').eq('id',artistId).single();
+  if(!a)return;
+  _currentArtist=a;
+  document.getElementById('apAva').textContent=(a.stage_name||'?')[0];
+  document.getElementById('apName').textContent=a.stage_name||'';
+  document.getElementById('apTag').textContent=(a.genres||'')+(a.city?' · '+a.city:'');
+  document.getElementById('apBio').textContent=a.bio||'';
+  // Load their tracks
+  const {data:tracks}=await sb.from('tracks').select('*').eq('artist_id',artistId).order('created_at',{ascending:false});
+  document.getElementById('apTracks').innerHTML=(tracks||[]).map((t,i)=>tRowHtml(t,i)).join('')||'<div class="empty">No tracks yet</div>';
+  // Stats
+  document.getElementById('apTr').textContent=(tracks||[]).length;
+  const {data:tips}=await sb.from('tips').select('amount').eq('artist_id',artistId).eq('status','paid');
+  const total=(tips||[]).reduce((s,r)=>s+Number(r.amount),0);
+  document.getElementById('apTi').textContent='$'+total.toFixed(0);
+  document.getElementById('apPl').textContent='—';
+  document.getElementById('apFo').textContent='—';
+  go('artist-profile');
+}
+
+// ════════════════════════════════════════════
+// TIP FLOW — REAL PAYNOW VIA /api/paynow.js
+// ════════════════════════════════════════════
+function openTip(artistName,artistId,trackId){
+  _tipArtistId=artistId;
+  _tipTrackId=trackId;
+  document.getElementById('tipFor').textContent='Tip '+escHtml(artistName||'this artist')+' via EcoCash';
+  document.getElementById('tipStatus').classList.remove('on');
+  document.getElementById('tipBtn').disabled=false;
+  document.getElementById('tipBtn').textContent='Send $1.00 via EcoCash';
+  // reset amount
+  _tipAmt=1;
+  document.querySelectorAll('.ta').forEach(b=>b.classList.toggle('on',b.getAttribute('data-amt')==='1'));
+  om('tipModal');
+}
+
+async function sendTip(){
+  const eco=document.getElementById('tipEco').value.trim();
+  if(!eco){showToast('Please enter your EcoCash number');return;}
+  if(!/^07\d{8}$/.test(eco.replace(/\s/g,''))){showToast('Enter a valid Zimbabwean number e.g. 0771234567');return;}
+  const msg=document.getElementById('tipMsg').value.trim();
+  const btn=document.getElementById('tipBtn');
+  btn.disabled=true;btn.textContent='Sending...';
+  const status=document.getElementById('tipStatus');
+  status.classList.add('on');
+  document.getElementById('tipStatusMsg').textContent='Sending EcoCash prompt...';
+  document.getElementById('tipStatusSub').textContent='';
+
+  _tipRef='tip-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+
+  try{
+    const res=await fetch('/api/paynow',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        amount:_tipAmt,
+        phone:eco.replace(/\s/g,''),
+        reference:_tipRef,
+        info:'Malbry tip'+(msg?' — '+msg:''),
+        artist_id:_tipArtistId,
+        track_id:_tipTrackId
+      })
+    });
+    const json=await res.json();
+    if(json.error){
+      document.getElementById('tipStatusMsg').textContent='Payment failed';
+      document.getElementById('tipStatusSub').textContent=json.error;
+      btn.disabled=false;btn.textContent='Try again';
+      return;
+    }
+    document.getElementById('tipStatusMsg').textContent='Check your phone!';
+    document.getElementById('tipStatusSub').textContent='Approve the EcoCash prompt on your phone. Checking automatically...';
+    btn.textContent='Waiting for approval...';
+    startTipPolling();
+  } catch(e){
+    document.getElementById('tipStatusMsg').textContent='Network error';
+    document.getElementById('tipStatusSub').textContent='Check your connection and try again';
+    btn.disabled=false;btn.textContent='Retry';
+  }
+}
+
+function startTipPolling(){
+  if(_pollInt)clearInterval(_pollInt);
+  let attempts=0;
+  _pollInt=setInterval(async()=>{
+    attempts++;
+    if(attempts>12){// 60 seconds
+      clearInterval(_pollInt);
+      document.getElementById('tipStatusMsg').textContent='Timed out';
+      document.getElementById('tipStatusSub').textContent='If you approved, your tip will still be counted. Check again later.';
+      document.getElementById('tipBtn').disabled=false;
+      document.getElementById('tipBtn').textContent='Close';
+      return;
+    }
+    const {data}=await sb.from('tips').select('status').eq('reference',_tipRef).single();
+    if(data?.status==='paid'){
+      clearInterval(_pollInt);
+      document.getElementById('tipStatusMsg').textContent='Tip sent! 🎉';
+      document.getElementById('tipStatusSub').textContent='$'+_tipAmt.toFixed(2)+' sent successfully via EcoCash.';
+      document.getElementById('tipBtn').textContent='Done';
+      document.getElementById('tipBtn').disabled=false;
+      document.getElementById('tipBtn').onclick=()=>cm('tipModal');
+      _tipTotal+=_tipAmt;
+      document.getElementById('meTS').textContent='$'+_tipTotal.toFixed(2);
+      showToast('Tip sent! 🎉');
+    }
+  },5000);
+}
+
+// ════════════════════════════════════════════
+// PAYOUT
+// ════════════════════════════════════════════
+function openPayModal(){
+  document.getElementById('payBal').textContent=document.getElementById('dashBal').textContent;
+  om('payModal');
+}
+function doPayout(){
+  const a=parseFloat(document.getElementById('payAmt').value);
+  const eco=document.getElementById('payEco').value.trim();
+  if(!a||a<5){showToast('Minimum payout is $5');return;}
+  if(!eco){showToast('Enter your EcoCash number');return;}
+  cm('payModal');showToast('Payout request submitted. Processing within 24 hours.');
+}
+
+// ════════════════════════════════════════════
+// FAN SIGNUP
+// ════════════════════════════════════════════
 async function joinFan(){
-  var first=document.getElementById('fFirst').value.trim();
-  var last=document.getElementById('fLast').value.trim();
-  var user=document.getElementById('fUser').value.trim();
-  var email=document.getElementById('fEmail').value.trim();
-  var pass=document.getElementById('fPass').value;
-
+  const first=document.getElementById('fFirst').value.trim();
+  const last=document.getElementById('fLast').value.trim();
+  const user=document.getElementById('fUser').value.trim().toLowerCase().replace(/[^a-z0-9_.]/g,'');
+  const email=document.getElementById('fEmail').value.trim();
+  const pass=document.getElementById('fPass').value;
   if(!first){showToast('Please enter your first name');return;}
   if(!user){showToast('Please choose a username');return;}
   if(!email){showToast('Please enter your email');return;}
   if(pass.length<8){showToast('Password must be at least 8 characters');return;}
-
-  var btn=document.getElementById('fanBtn');
-  btn.textContent='Creating...';btn.disabled=true;
-
-  var result=await supabase.auth.signUp({email:email,password:pass});
-
-  if(result.error){
-    showToast(result.error.message);
-    btn.textContent='Create account';btn.disabled=false;
-    return;
-  }
-
-  // Insert profile row — ignore error if table doesn't exist yet
-  await supabase.from('fans').insert({
-    id:result.data.user.id,
-    username:user,
-    first_name:first,
-    last_name:last
-  });
-
-  var fullName=first+(last?' '+last:'');
+  const btn=document.getElementById('fanBtn');
+  btn.disabled=true;btn.textContent='Creating...';
+  const {data,error}=await sb.auth.signUp({email,password:pass});
+  if(error){showToast(error.message);btn.disabled=false;btn.textContent='Create account';return;}
+  await sb.from('fans').insert({id:data.user.id,username:user,first_name:first,last_name:last});
+  _user=data.user;
+  _profile={id:data.user.id,username:user,first_name:first,last_name:last,role:'fan'};
   document.getElementById('fanForm').style.display='none';
   document.getElementById('fanDone').style.display='block';
-  document.getElementById('fanMsg').textContent='Welcome '+first+'! Your account @'+user+' is ready.';
-  setUser('fan',fullName,user);
-  btn.textContent='Create account';btn.disabled=false;
-  showToast('Account created!');
+  document.getElementById('fanMsg').textContent='Welcome '+first+'! Your account @'+user+' is live.';
+  renderUserUI();
+  btn.disabled=false;btn.textContent='Create account';
+  showToast('Welcome to Malbry!');
 }
 
-// ══ ARTIST SIGNUP ══
-function resetAForm(){
-  for(var i=1;i<=4;i++){
-    var el=document.getElementById('as'+i);if(el)el.style.display=i===1?'block':'none';
-    var d=document.getElementById('sd'+i);if(d){d.classList.remove('on','done');if(i===1)d.classList.add('on');d.textContent=i===4?'✦':String(i);}
-    if(i<4){var sl=document.getElementById('sl'+i+(i+1));if(sl)sl.classList.remove('done');}
-  }
+// ════════════════════════════════════════════
+// ARTIST SIGNUP
+// ════════════════════════════════════════════
+let _artistSignupData={};
+
+async function artistStep2(){
+  const full=document.getElementById('aFull').value.trim();
+  const stage=document.getElementById('aStage').value.trim();
+  const user=document.getElementById('aUser').value.trim().toLowerCase().replace(/[^a-z0-9_.]/g,'');
+  const email=document.getElementById('aEmail').value.trim();
+  const pass=document.getElementById('aPass').value;
+  const eco=document.getElementById('aEco').value.trim();
+  if(!full){showToast('Full name required');return;}
+  if(!stage){showToast('Stage name required');return;}
+  if(!user){showToast('Username required');return;}
+  if(!email){showToast('Email required');return;}
+  if(pass.length<8){showToast('Password must be 8+ characters');return;}
+  if(!eco){showToast('EcoCash number required');return;}
+  _artistSignupData={full,stage,user,email,pass,eco};
+  stepGo(2);
 }
-function aStep(n){
-  if(n===2){
-    if(!document.getElementById('aFull').value.trim()){showToast('Please enter your full name');return;}
-    if(!document.getElementById('aStage').value.trim()){showToast('Please enter your stage name');return;}
-    if(!document.getElementById('aUser').value.trim()){showToast('Please choose a username');return;}
-    if(!document.getElementById('aEmail').value.trim()){showToast('Please enter your email');return;}
-    if(document.getElementById('aPass').value.length<8){showToast('Password must be 8+ characters');return;}
-    if(!document.getElementById('aEco').value.trim()){showToast('Please enter your EcoCash number');return;}
+
+async function artistStep4(){
+  const btn=document.getElementById('aStep4Btn');
+  btn.disabled=true;btn.textContent='Creating...';
+  const {data,error}=await sb.auth.signUp({email:_artistSignupData.email,password:_artistSignupData.pass});
+  if(error){showToast(error.message);btn.disabled=false;btn.textContent='Go live';return;}
+  const genres=Array.from(document.querySelectorAll('#genrePills .pill.on')).map(p=>p.getAttribute('data-g')).join(',');
+  const bio=document.getElementById('aBio').value.trim();
+  const city=document.getElementById('aCity').value;
+  await sb.from('artists').insert({
+    id:data.user.id,
+    stage_name:_artistSignupData.stage,
+    username:_artistSignupData.user,
+    ecocash_number:_artistSignupData.eco,
+    bio,genres,city
+  });
+  _user=data.user;
+  _profile={id:data.user.id,role:'artist',stage_name:_artistSignupData.stage,username:_artistSignupData.user,ecocash_number:_artistSignupData.eco};
+  // Upload track if selected
+  const file=document.getElementById('aAudioFile').files[0];
+  const title=document.getElementById('aTrackTitle').value.trim();
+  if(file&&title){
+    const stat=document.getElementById('aUpStat');
+    stat.classList.add('on');stat.textContent='Uploading track...';stat.style.color='#D4A843';
+    const path=`tracks/${data.user.id}/${Date.now()}_${file.name.replace(/[^a-z0-9_.]/gi,'_')}`;
+    const {error:ue}=await sb.storage.from('tracks').upload(path,file);
+    if(!ue){
+      const {data:ud}=sb.storage.from('tracks').getPublicUrl(path);
+      await sb.from('tracks').insert({title,genre:document.getElementById('aTrackG').value,audio_url:ud.publicUrl,artist_id:data.user.id});
+      stat.textContent='Track uploaded!';stat.style.color='#4ade80';
+    } else {
+      stat.textContent='Track upload failed — add from dashboard later';stat.style.color='#f87171';
+    }
   }
-  if(n===4){
-    if(!document.getElementById('aTrack').value.trim()){showToast('Please enter your track title');return;}
-    var stage=document.getElementById('aStage').value.trim();
-    var uname=document.getElementById('aUser').value.trim();
-    document.getElementById('artLink').textContent='malbry.vercel.app/@'+uname;
-    setUser('artist',stage,uname);
-  }
-  for(var i=1;i<=4;i++){
-    var el=document.getElementById('as'+i);if(el)el.style.display=i===n?'block':'none';
-    var d=document.getElementById('sd'+i);
-    if(d){d.classList.remove('on','done');if(i===n)d.classList.add('on');else if(i<n){d.classList.add('done');d.textContent='✓';}else d.textContent=i===4?'✦':String(i);}
-    if(i<4){var sl=document.getElementById('sl'+i+(i+1));if(sl){sl.classList.remove('done');if(i<n)sl.classList.add('done');}}
+  document.getElementById('artLink').textContent='malbry.vercel.app/@'+_artistSignupData.user;
+  renderUserUI();
+  stepGo(4);
+  btn.disabled=false;btn.textContent='Go live';
+  showToast('You\'re live on Malbry!');
+}
+
+function stepGo(n){
+  for(let i=1;i<=4;i++){
+    const el=document.getElementById('as'+i);if(el)el.style.display=i===n?'block':'none';
+    const d=document.getElementById('sd'+i);
+    if(d){d.classList.remove('on','done');
+      if(i===n)d.classList.add('on');
+      else if(i<n){d.classList.add('done');d.textContent='✓';}
+      else d.textContent=i===4?'✦':String(i);}
+    if(i<4){const sl=document.getElementById('sl'+i+(i+1));if(sl){sl.classList.remove('done');if(i<n)sl.classList.add('done');}}
   }
 }
 
-// ══ UPLOAD ══
-function handleUpload(input){
-  var file=input.files[0];if(!file)return;
-  if(file.size>50*1024*1024){showToast('File too large. Max 50MB.');input.value='';return;}
-  document.getElementById('upa').classList.add('has-file');
-  document.getElementById('upLabel').textContent=file.name;
-  document.getElementById('upSub').textContent=(file.size/1024/1024).toFixed(1)+'MB — ready';
-  document.getElementById('upIcon').innerHTML='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
-}
-function handleUploadPage(input){
-  var file=input.files[0];if(!file)return;
-  if(file.size>50*1024*1024){showToast('File too large. Max 50MB.');input.value='';return;}
-  document.getElementById('uArea').classList.add('has-file');
-  document.getElementById('uLabel').textContent=file.name;
-  document.getElementById('uSub').textContent=(file.size/1024/1024).toFixed(1)+'MB — ready';
-  document.getElementById('uIcon').innerHTML='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
-}
-
-// ══ SUBMIT UPLOAD — LIVE SUPABASE ══
+// ════════════════════════════════════════════
+// UPLOAD PAGE
+// ════════════════════════════════════════════
 async function submitUpload(){
-  var title=document.getElementById('uTitle').value.trim();
-  var genre=document.getElementById('uGenre').value;
-  var file=document.getElementById('uFile').files[0];
-  var btn=document.getElementById('uBtn');
-  var st=document.getElementById('uStat');
-
+  if(!_user||_profile?.role!=='artist'){showToast('Artists only');return;}
+  const title=document.getElementById('uTitle').value.trim();
+  const genre=document.getElementById('uGenre').value;
+  const file=document.getElementById('uFile').files[0];
+  const btn=document.getElementById('uBtn');
+  const st=document.getElementById('uStat');
   if(!title){showToast('Please enter a track title');return;}
   if(!file){showToast('Please select an audio file');return;}
+  btn.disabled=true;btn.textContent='Uploading...';
+  st.classList.add('on');st.style.color='#D4A843';st.textContent='Uploading audio...';
+  const path=`tracks/${_user.id}/${Date.now()}_${file.name.replace(/[^a-z0-9_.]/gi,'_')}`;
+  const {error:ue}=await sb.storage.from('tracks').upload(path,file);
+  if(ue){st.style.color='#f87171';st.textContent='Upload failed: '+ue.message;btn.disabled=false;btn.textContent='Upload track';return;}
+  const {data:ud}=sb.storage.from('tracks').getPublicUrl(path);
+  const {error:ie}=await sb.from('tracks').insert({
+    title,genre,audio_url:ud.publicUrl,artist_id:_user.id,
+    description:document.getElementById('uDesc').value.trim()
+  });
+  if(ie){st.style.color='#f87171';st.textContent='Saved but DB error: '+ie.message;}
+  else{st.style.color='#4ade80';st.textContent='Uploaded successfully!';showToast('Track live!');loadTracks();}
+  btn.disabled=false;btn.textContent='Upload track';
+}
 
-  btn.textContent='Uploading...';btn.disabled=true;
-  st.style.display='block';st.style.color='#D4A843';st.textContent='Uploading...';
+// ════════════════════════════════════════════
+// DASHBOARD
+// ════════════════════════════════════════════
+async function loadDashboard(){
+  if(!_user||_profile?.role!=='artist')return;
+  document.getElementById('dashUser').textContent='@'+(_profile.username||'');
+  const {data:tracks}=await sb.from('tracks').select('*').eq('artist_id',_user.id).order('created_at',{ascending:false});
+  const {data:tips}=await sb.from('tips').select('*').eq('artist_id',_user.id).eq('status','paid').order('created_at',{ascending:false});
+  const total=(tips||[]).reduce((s,r)=>s+Number(r.amount),0);
+  document.getElementById('dashBal').textContent='$'+total.toFixed(2);
+  document.getElementById('dEarned').textContent='$'+total.toFixed(2);
+  document.getElementById('dPlays').textContent='—';
+  document.getElementById('dTips').textContent=(tips||[]).length;
+  document.getElementById('dTCount').textContent=(tracks||[]).length;
+  document.getElementById('dTrackList').innerHTML=(tracks||[]).length
+    ?(tracks||[]).map((t,i)=>tRowHtml(t,i)).join('')
+    :'<div class="empty">No tracks yet · <span id="dashUploadLink">Upload your first</span></div>';
+  document.getElementById('dTipFeed').innerHTML=(tips||[]).length
+    ?(tips||[]).slice(0,10).map(tip=>`
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #111">
+        <div><div style="font-size:14px;font-weight:600;color:#fff">$${Number(tip.amount).toFixed(2)}</div><div style="font-size:12px;color:#555;margin-top:2px">${tip.phone||'fan'} · ${new Date(tip.created_at).toLocaleDateString()}</div></div>
+        <div style="font-size:12px;color:#4ade80;font-weight:600">Paid</div>
+      </div>`).join('')
+    :'<div class="empty">Tips will appear here once fans start tipping</div>';
+}
 
-  var filePath='tracks/'+Date.now()+'_'+file.name.replace(/[^a-z0-9_.]/gi,'_');
+// ════════════════════════════════════════════
+// LOGIN
+// ════════════════════════════════════════════
+async function doLogin(){
+  const email=document.getElementById('liEmail').value.trim();
+  const pass=document.getElementById('liPass').value;
+  if(!email||!pass){showToast('Enter email and password');return;}
+  const btn=document.getElementById('liBtn');
+  btn.disabled=true;btn.textContent='Logging in...';
+  const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error){showToast(error.message);btn.disabled=false;btn.textContent='Log in';return;}
+  _user=data.user;
+  await loadProfile();
+  renderUserUI();
+  cm('loginModal');
+  go('home');
+  loadTracks();
+  showToast('Welcome back!');
+  btn.disabled=false;btn.textContent='Log in';
+}
 
-  var upResult=await supabase.storage.from('tracks').upload(filePath,file);
+// ════════════════════════════════════════════
+// SHARE
+// ════════════════════════════════════════════
+function openShare(url){
+  _shareUrl=url||'https://malbry.vercel.app';
+  document.getElementById('shareUrl').textContent=_shareUrl;
+  om('shareModal');
+}
+function copyUrl(){
+  if(navigator.clipboard)navigator.clipboard.writeText(_shareUrl).then(()=>showToast('Link copied!'));
+  else showToast(_shareUrl);
+}
 
-  if(upResult.error){
-    st.style.color='#E91429';st.textContent='Upload failed: '+upResult.error.message;
-    btn.textContent='Upload track';btn.disabled=false;
-    return;
-  }
+// ════════════════════════════════════════════
+// EVENT LISTENERS — ALL USING addEventListener
+// ════════════════════════════════════════════
+function bindAll(){
+  // Nav
+  document.getElementById('logoBtn').addEventListener('click',()=>go('home'));
+  document.getElementById('navSearchBtn').addEventListener('click',()=>go('search'));
+  document.getElementById('navJoinBtn').addEventListener('click',()=>go('fan-signup'));
+  document.getElementById('navUserBtn').addEventListener('click',()=>go('me'));
 
-  var urlResult=supabase.storage.from('tracks').getPublicUrl(filePath);
-  var publicUrl=urlResult.data.publicUrl;
+  // Bottom nav
+  document.getElementById('bnHome').addEventListener('click',()=>go('home'));
+  document.getElementById('bnCharts').addEventListener('click',()=>{go('charts');loadCharts();});
+  document.getElementById('bnSearch').addEventListener('click',()=>go('search'));
+  document.getElementById('bnFeed').addEventListener('click',()=>go('feed'));
+  document.getElementById('bnMe').addEventListener('click',()=>go('me'));
 
-  var insertResult=await supabase.from('tracks').insert({
-    title:title,
-    genre:genre,
-    audio_url:publicUrl,
-    artist_name:window._user?window._user.name:'Unknown'
+  // Home
+  document.getElementById('exploreBtn').addEventListener('click',()=>go('search'));
+  document.getElementById('heroArtistBtn').addEventListener('click',()=>go('artist-signup'));
+  document.getElementById('seeAllBtn').addEventListener('click',()=>go('search'));
+  document.getElementById('ctaArtistBtn')?.addEventListener('click',()=>go('artist-signup'));
+  document.getElementById('hFilter').addEventListener('click',e=>{
+    const pill=e.target.closest('.pill');if(!pill)return;
+    document.querySelectorAll('#hFilter .pill').forEach(p=>p.classList.remove('on'));
+    pill.classList.add('on');
+    loadTracks(pill.getAttribute('data-g'));
   });
 
-  if(insertResult.error){
-    st.style.color='#E91429';st.textContent='Track saved but metadata failed. Contact support.';
-  } else {
-    st.style.color='#1ED760';st.textContent='Track uploaded successfully!';
-    var c=parseInt(document.getElementById('dTCount').textContent)||0;
-    document.getElementById('dTCount').textContent=c+1;
-    showToast('Track uploaded!');
-    loadTracks();
-  }
-
-  btn.textContent='Upload track';btn.disabled=false;
-}
-
-function copyLink(){
-  var link='https://'+document.getElementById('artLink').textContent;
-  if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){showToast('Link copied!');});}else showToast(link);
-}
-
-// ══ LOAD LIVE TRACKS FROM SUPABASE ══
-async function loadTracks(){
-  var result=await supabase.from('tracks').select('*').order('created_at',{ascending:false});
-  if(result.error||!result.data||!result.data.length)return; // keep seed data on error
-  var emojis=['🎵','🎶','🎸','🎤','🙏','🎙','🔥','🎺','🎹','🎼'];
-  TRACKS=result.data.map(function(t,i){
-    return {
-      id:t.id,
-      e:emojis[i%emojis.length],
-      n:t.title||'Untitled',
-      a:t.artist_name||'Unknown',
-      g:t.genre||'Unknown',
-      dur:'3:00',
-      url:t.audio_url
-    };
+  // Charts filter
+  document.getElementById('chartFilter').addEventListener('click',e=>{
+    const pill=e.target.closest('.pill');if(!pill)return;
+    document.querySelectorAll('#chartFilter .pill').forEach(p=>p.classList.remove('on'));
+    pill.classList.add('on');loadCharts();
   });
-  renderHome();
-  renderCharts();
-  renderSearch();
+
+  // Search
+  document.getElementById('sQ').addEventListener('input',e=>doSearch(e.target.value));
+  document.getElementById('gGrid').addEventListener('click',e=>{
+    const gc=e.target.closest('.gc');if(!gc)return;
+    document.getElementById('sQ').value=gc.getAttribute('data-g');
+    doSearch(gc.getAttribute('data-g'));
+  });
+
+  // Delegated track/tip clicks on entire body
+  document.body.addEventListener('click',e=>{
+    const tcard=e.target.closest('.tcard');
+    const trow=e.target.closest('.trow');
+    const crow=e.target.closest('.chart-row');
+    const feed=e.target.closest('.feed-card');
+    const hcard=e.target.closest('.hcard');
+    const tipBtn=e.target.closest('.trow-tip,.chart-tip,[data-tip]');
+    const arow=e.target.closest('.arow');
+
+    if(tipBtn&&!e.defaultPrevented){
+      e.preventDefault();
+      const artist=tipBtn.getAttribute('data-artist')||window._nowArtistName||'this artist';
+      const artistId=tipBtn.getAttribute('data-artistid')||window._nowArtistId;
+      const trackId=tipBtn.getAttribute('data-id')||window._nowTrackId;
+      openTip(artist,artistId,trackId);
+      return;
+    }
+    if(arow){const id=arow.getAttribute('data-artistid');if(id)openArtist(id);return;}
+    if(tcard&&!e.target.closest('button')){openTrack(tcard.getAttribute('data-id'));return;}
+    if(tcard&&e.target.closest('.tcard-play')){openTrack(e.target.closest('[data-id]').getAttribute('data-id'));return;}
+    if(trow&&!e.target.closest('button')){openTrack(trow.getAttribute('data-id'));return;}
+    if(crow&&!e.target.closest('button')){openTrack(crow.getAttribute('data-id'));return;}
+    if(feed&&!e.target.closest('button')){openTrack(feed.getAttribute('data-id'));return;}
+    if(hcard){openTrack(hcard.getAttribute('data-id'));return;}
+  });
+
+  // Mini player
+  document.getElementById('mpArt').addEventListener('click',()=>document.getElementById('nps').classList.add('on'));
+  document.getElementById('mpInf').addEventListener('click',()=>document.getElementById('nps').classList.add('on'));
+  document.getElementById('mpPlay').addEventListener('click',togglePlay);
+  document.getElementById('mpH').addEventListener('click',toggleLike);
+  document.getElementById('mpTipBtn').addEventListener('click',()=>openTip(window._nowArtistName,window._nowArtistId,window._nowTrackId));
+
+  // Now playing
+  document.getElementById('closeNPBtn').addEventListener('click',()=>document.getElementById('nps').classList.remove('on'));
+  document.getElementById('npShareBtn').addEventListener('click',()=>openShare('https://malbry.vercel.app'));
+  document.getElementById('npsPlay').addEventListener('click',togglePlay);
+  document.getElementById('npsPrev').addEventListener('click',prevT);
+  document.getElementById('npsNext').addEventListener('click',nextT);
+  document.getElementById('npsShuf').addEventListener('click',()=>{_shuf=!_shuf;document.getElementById('npsShuf').classList.toggle('on',_shuf);showToast(_shuf?'Shuffle on':'Shuffle off');});
+  document.getElementById('npsRep').addEventListener('click',()=>{_rep=!_rep;document.getElementById('npsRep').classList.toggle('on',_rep);showToast(_rep?'Repeat on':'Repeat off');});
+  document.getElementById('npsH').addEventListener('click',toggleLike);
+  document.getElementById('npsTipBtn').addEventListener('click',()=>openTip(window._nowArtistName,window._nowArtistId,window._nowTrackId));
+  document.getElementById('npsProg').addEventListener('click',e=>seekAudio(e,'npsProg'));
+
+  // Track page
+  document.getElementById('backBtn').addEventListener('click',goBack);
+  document.getElementById('tPlay').addEventListener('click',togglePlay);
+  document.getElementById('tPrev').addEventListener('click',prevT);
+  document.getElementById('tNext').addEventListener('click',nextT);
+  document.getElementById('tHrt').addEventListener('click',toggleLike);
+  document.getElementById('tShuf').addEventListener('click',()=>{_shuf=!_shuf;document.getElementById('tShuf').style.color=_shuf?'#D4A843':'#666';showToast(_shuf?'Shuffle on':'Shuffle off');});
+  document.getElementById('tRep').addEventListener('click',()=>{_rep=!_rep;document.getElementById('tRep').style.color=_rep?'#D4A843':'#666';showToast(_rep?'Repeat on':'Repeat off');});
+  document.getElementById('tTipBtn').addEventListener('click',()=>openTip(window._nowArtistName,window._nowArtistId,window._nowTrackId));
+  document.getElementById('tShareBtn').addEventListener('click',()=>openShare('https://malbry.vercel.app'));
+  document.getElementById('tArtBtn').addEventListener('click',()=>{if(window._nowArtistId)openArtist(window._nowArtistId);});
+  document.getElementById('tProg').addEventListener('click',e=>seekAudio(e,'tProg'));
+
+  // Artist profile
+  document.getElementById('apFBtn').addEventListener('click',()=>{const b=document.getElementById('apFBtn');const f=b.textContent==='Following';b.textContent=f?'Follow':'Following';b.style.background=f?'#D4A843':'transparent';b.style.color=f?'#000':'#D4A843';b.style.border=f?'none':'1px solid rgba(212,168,67,.4)';showToast(f?'Unfollowed':'Following');});
+  document.getElementById('apTipBtn').addEventListener('click',()=>{if(_currentArtist)openTip(_currentArtist.stage_name,_currentArtist.id,null);});
+  document.getElementById('apShareBtn').addEventListener('click',()=>openShare('https://malbry.vercel.app/@'+(_currentArtist?.username||'')));
+
+  // Tip modal
+  document.getElementById('closeTipBtn').addEventListener('click',()=>{cm('tipModal');if(_pollInt)clearInterval(_pollInt);});
+  document.getElementById('tipModal').addEventListener('click',e=>{if(e.target===document.getElementById('tipModal')){cm('tipModal');if(_pollInt)clearInterval(_pollInt);}});
+  document.querySelectorAll('.ta').forEach(b=>b.addEventListener('click',()=>{
+    _tipAmt=parseFloat(b.getAttribute('data-amt'));
+    document.querySelectorAll('.ta').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    document.getElementById('tipBtn').textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';
+  }));
+  document.getElementById('tipBtn').addEventListener('click',sendTip);
+
+  // Share modal
+  document.getElementById('closeShareBtn').addEventListener('click',()=>cm('shareModal'));
+  document.getElementById('shareModal').addEventListener('click',e=>{if(e.target===document.getElementById('shareModal'))cm('shareModal');});
+  document.getElementById('copyUrlBtn').addEventListener('click',copyUrl);
+  document.getElementById('shareWA').addEventListener('click',()=>window.open('https://wa.me/?text='+encodeURIComponent('Check out Malbry — Zimbabwe music! '+_shareUrl),'_blank'));
+  document.getElementById('shareTW').addEventListener('click',()=>window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('Check out Malbry! '+_shareUrl),'_blank'));
+
+  // Payout modal
+  document.getElementById('closePayBtn').addEventListener('click',()=>cm('payModal'));
+  document.getElementById('payModal').addEventListener('click',e=>{if(e.target===document.getElementById('payModal'))cm('payModal');});
+  document.getElementById('payBtn').addEventListener('click',doPayout);
+  document.getElementById('payoutBtn').addEventListener('click',openPayModal);
+
+  // Login modal
+  document.getElementById('closeLoginBtn').addEventListener('click',()=>cm('loginModal'));
+  document.getElementById('loginModal').addEventListener('click',e=>{if(e.target===document.getElementById('loginModal'))cm('loginModal');});
+  document.getElementById('liBtn').addEventListener('click',doLogin);
+  document.getElementById('goSignupBtn').addEventListener('click',()=>{cm('loginModal');go('fan-signup');});
+  document.getElementById('meLoginBtn')?.addEventListener('click',()=>om('loginModal'));
+
+  // Fan signup
+  document.getElementById('fanBtn').addEventListener('click',joinFan);
+  document.getElementById('fanLoginLink').addEventListener('click',()=>om('loginModal'));
+  document.getElementById('fanStartBtn')?.addEventListener('click',()=>{go('home');document.getElementById('fanForm').style.display='block';document.getElementById('fanDone').style.display='none';});
+  document.getElementById('togFanBtn').addEventListener('click',()=>go('fan-signup'));
+  document.getElementById('togArtBtn').addEventListener('click',()=>go('artist-signup'));
+
+  // Artist signup
+  document.getElementById('togFanBtn2').addEventListener('click',()=>go('fan-signup'));
+  document.getElementById('togArtBtn2').addEventListener('click',()=>go('artist-signup'));
+  document.getElementById('aStep2Btn').addEventListener('click',artistStep2);
+  document.getElementById('aStep3Btn').addEventListener('click',()=>stepGo(3));
+  document.getElementById('aBack2Btn').addEventListener('click',()=>stepGo(1));
+  document.getElementById('aStep4Btn').addEventListener('click',artistStep4);
+  document.getElementById('aBack3Btn').addEventListener('click',()=>stepGo(2));
+  document.getElementById('goDashBtn').addEventListener('click',()=>go('dashboard'));
+  document.getElementById('shareArtBtn').addEventListener('click',()=>openShare('https://malbry.vercel.app/@'+(_artistSignupData.user||'')));
+  document.getElementById('copyArtLinkBtn').addEventListener('click',()=>{const l='https://'+document.getElementById('artLink').textContent;if(navigator.clipboard)navigator.clipboard.writeText(l).then(()=>showToast('Copied!'));else showToast(l);});
+  document.getElementById('genrePills').addEventListener('click',e=>{const p=e.target.closest('.pill');if(p)p.classList.toggle('on');});
+  document.getElementById('aUpa').addEventListener('click',()=>document.getElementById('aAudioFile').click());
+  document.getElementById('aAudioFile').addEventListener('change',e=>{
+    const f=e.target.files[0];if(!f)return;
+    if(f.size>50*1024*1024){showToast('Max 50MB');e.target.value='';return;}
+    document.getElementById('aUpa').classList.add('has-file');
+    document.getElementById('aUpLabel').textContent=f.name;
+    document.getElementById('aUpSub').textContent=(f.size/1024/1024).toFixed(1)+'MB — ready';
+    document.getElementById('aUpIcon').innerHTML='<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>';
+  });
+
+  // Upload page
+  document.getElementById('uArea').addEventListener('click',()=>document.getElementById('uFile').click());
+  document.getElementById('uFile').addEventListener('change',e=>{
+    const f=e.target.files[0];if(!f)return;
+    if(f.size>50*1024*1024){showToast('Max 50MB');e.target.value='';return;}
+    document.getElementById('uArea').classList.add('has-file');
+    document.getElementById('uLabel').textContent=f.name;
+    document.getElementById('uSub').textContent=(f.size/1024/1024).toFixed(1)+'MB — ready';
+    document.getElementById('uIcon').innerHTML='<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>';
+  });
+  document.getElementById('uBtn').addEventListener('click',submitUpload);
+  document.getElementById('uCancelBtn').addEventListener('click',()=>go('dashboard'));
+
+  // Dashboard
+  document.getElementById('dashUploadBtn').addEventListener('click',()=>go('upload'));
+
+  // Me page
+  document.getElementById('meSignupBtn')?.addEventListener('click',()=>go('fan-signup'));
+  document.getElementById('meArtistBtn')?.addEventListener('click',()=>go('artist-signup'));
+  document.getElementById('logoutBtn').addEventListener('click',doLogout);
+  document.getElementById('meDashBtn')?.addEventListener('click',()=>go('dashboard'));
+  document.getElementById('meProfileBtn')?.addEventListener('click',()=>{if(_user)openArtist(_user.id);});
+  document.getElementById('meUploadBtn')?.addEventListener('click',()=>go('upload'));
+  document.getElementById('meSettingsBtn')?.addEventListener('click',()=>go('settings'));
+  document.getElementById('feedSignupBtn')?.addEventListener('click',()=>go('fan-signup'));
+
+  // Settings
+  document.getElementById('setEditProfile').addEventListener('click',()=>showToast('Edit profile coming soon'));
+  document.getElementById('setChangePw').addEventListener('click',()=>showToast('Change password coming soon'));
+  document.getElementById('setEcocash').addEventListener('click',()=>showToast('EcoCash settings coming soon'));
+  document.getElementById('setPayHistory').addEventListener('click',()=>showToast('Payout history coming soon'));
+  document.getElementById('setVersion').addEventListener('click',()=>showToast('Malbry v2.0'));
+  document.getElementById('setShare').addEventListener('click',()=>openShare('https://malbry.vercel.app'));
+  document.getElementById('setSupport').addEventListener('click',()=>showToast('support@malbry.app'));
+  document.getElementById('settingsLogoutBtn').addEventListener('click',doLogout);
+
+  // Supabase auth state listener
+  sb.auth.onAuthStateChange(async(event,session)=>{
+    if(event==='SIGNED_IN'&&session&&!_user){
+      _user=session.user;await loadProfile();renderUserUI();loadTracks();
+    }
+    if(event==='SIGNED_OUT'){_user=null;_profile=null;renderUserUI();}
+  });
 }
 
-// ══ INIT ══
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
 document.getElementById('greet').textContent=greet();
-renderHome();
 renderSearch();
-renderCharts();
-loadTracks();
+bindAll();
+initAuth().then(()=>loadTracks());
 </script>
 
 </body>
