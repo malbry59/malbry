@@ -1,5 +1,8 @@
 {
   "name": "malbry",
   "version": "1.0.0",
-  "engines": { "node": "20.x" }
+  "description": "Zimbabwe music tipping platform",
+  "engines": {
+    "node": "20.x"
+  }
 }
