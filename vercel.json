@@ -1,6 +1,11 @@
 {
   "version": 2,
   "functions": {
-    "api/*.js": { "runtime": "nodejs20.x" }
+    "api/paynow.js": {
+      "runtime": "nodejs20.x"
+    },
+    "api/paynow-poll.js": {
+      "runtime": "nodejs20.x"
+    }
   }
 }
