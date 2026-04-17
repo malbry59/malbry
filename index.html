@@ -11,25 +11,20 @@ html,body{height:100%;background:#000;overscroll-behavior:none}
 body{color:#fff;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;overflow-x:hidden}
 button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit;outline:none}
 input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
-.pg{display:none;min-height:100vh;padding-top:56px}
-.pg.on{display:block}
+.pg{display:none;min-height:100vh;padding-top:56px}.pg.on{display:block}
 .pi{max-width:600px;margin:0 auto;padding:0 16px 120px}
-/* NAV */
 .tnav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#121212;border-bottom:1px solid #282828}
-.logo{font-size:21px;font-weight:900;color:#D4A843;letter-spacing:-.03em;cursor:pointer}
+.logo{font-size:21px;font-weight:900;color:#D4A843;letter-spacing:-.03em}
 .tnr{display:flex;align-items:center;gap:8px}
 .nbtn{padding:7px 16px;border-radius:500px;font-size:13px;font-weight:700;border:1px solid #3E3E3E;color:#fff;background:transparent}
 .nbtn.gold{background:#D4A843;color:#000;border-color:#D4A843}
 .nuser{align-items:center;gap:8px;background:#282828;border-radius:500px;padding:4px 12px 4px 4px;display:none}
 .nav-av{width:28px;height:28px;border-radius:50%;background:#D4A843;color:#000;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center}
 .nav-un{font-size:13px;font-weight:700;color:#fff}
-.nbell{width:32px;height:32px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;color:#B3B3B3;display:none}
-/* BOTTOM NAV */
 .bnav{position:fixed;bottom:0;left:0;right:0;z-index:500;height:64px;background:#121212;border-top:1px solid #282828;display:flex;align-items:stretch}
-.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6A6A6A!important;font-size:10px;font-weight:600;letter-spacing:.03em;border:none!important;background:none!important;padding:0;transition:color .15s}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6A6A6A!important;font-size:10px;font-weight:600;border:none!important;background:none!important;padding:0;transition:color .15s}
 .bn.on{color:#fff!important}
 .bni{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
-/* MINI PLAYER */
 .mp{display:none;position:fixed;bottom:64px;left:0;right:0;z-index:490;background:#181818;border-top:1px solid #282828;padding:10px 16px;align-items:center;gap:12px}
 .mp.on{display:flex}
 .mp-prog{position:absolute;top:0;left:0;right:0;height:2px;background:#3E3E3E}
@@ -39,11 +34,8 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
 .mp-t{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
 .mp-a{font-size:12px;color:#B3B3B3;margin-top:2px}
 .mp-btns{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.mp-heart{color:#6A6A6A;width:24px;height:24px;display:flex;align-items:center;justify-content:center}
-.mp-heart.on{color:#D4A843}
 .mp-play{width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
-.mp-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.4);padding:5px 12px;border-radius:500px;background:rgba(212,168,67,.07)}
-/* NOW PLAYING */
+.mp-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.4);padding:5px 12px;border-radius:500px;background:rgba(212,168,67,.07);cursor:pointer}
 .nps{position:fixed;inset:0;z-index:800;background:linear-gradient(180deg,#1a1200 0%,#000 60%);display:none;flex-direction:column}
 .nps.on{display:flex}
 .nps-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px}
@@ -52,8 +44,6 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
 .nps-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .nps-title{font-size:24px;font-weight:900;color:#fff}
 .nps-artist{font-size:16px;color:#B3B3B3;font-weight:500;margin-top:4px}
-.nps-heart{color:#6A6A6A}
-.nps-heart.on{color:#D4A843}
 .nps-prog{height:4px;background:#3E3E3E;border-radius:2px;cursor:pointer;margin-bottom:8px}
 .nps-pf{height:100%;background:#fff;border-radius:2px;width:0;transition:width .3s linear}
 .nps-time{display:flex;justify-content:space-between;font-size:11px;color:#6A6A6A;margin-bottom:20px}
@@ -61,11 +51,11 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
 .nps-ctrl{color:#B3B3B3;width:44px;height:44px;display:flex;align-items:center;justify-content:center}
 .nps-ctrl.on{color:#D4A843}
 .nps-pbig{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
-.np-tip{padding:0 24px;margin-bottom:16px}
-/* TOAST */
-.toast{position:fixed;bottom:calc(64px + 78px);left:50%;transform:translateX(-50%) translateY(20px);z-index:900;background:#3E3E3E;color:#fff;padding:12px 20px;border-radius:500px;font-size:13px;font-weight:600;opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap;pointer-events:none}
+.toast{position:fixed;bottom:calc(64px + 78px);left:50%;transform:translateX(-50%) translateY(20px);z-index:900;padding:12px 20px;border-radius:500px;font-size:13px;font-weight:600;opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap;pointer-events:none;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-/* MODALS */
+.toast.success{background:#1ED760;color:#000}
+.toast.error{background:#E91429;color:#fff}
+.toast.info{background:#3E3E3E;color:#fff}
 .mbg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:600;display:none;align-items:flex-end}
 .mbg.on{display:flex}
 .mod{background:#181818;border-radius:16px 16px 0 0;padding:0 20px 48px;width:100%;max-width:600px;margin:0 auto;position:relative;max-height:90vh;overflow-y:auto}
@@ -73,16 +63,12 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
 .mx{position:absolute;top:14px;right:16px;color:#B3B3B3;font-size:24px;line-height:1}
 .m-ttl{font-size:20px;font-weight:900;margin-bottom:4px;color:#fff}
 .m-sub{font-size:14px;color:#B3B3B3;margin-bottom:20px}
-/* BUTTONS */
 .btn{display:block;width:100%;background:#D4A843;color:#000;border:none;border-radius:500px;padding:14px;font-size:14px;font-weight:700;letter-spacing:.04em;margin-bottom:10px;transition:transform .1s,opacity .15s}
-.btn:active{transform:scale(.97)}
-.btn:disabled{opacity:.4}
+.btn:active{transform:scale(.97)}.btn:disabled{opacity:.4}
 .btn-o{display:block;width:100%;background:transparent;color:#fff;border:1px solid #3E3E3E;border-radius:500px;padding:13px;font-size:14px;font-weight:700;letter-spacing:.04em;margin-bottom:10px}
 .btn-danger{display:block;width:100%;background:transparent;color:#E91429;border:1px solid rgba(233,20,41,.3);border-radius:500px;padding:13px;font-size:14px;font-weight:700;letter-spacing:.04em}
 .btn-sm{width:auto;padding:8px 20px;font-size:13px;display:inline-block;margin-bottom:0}
-.brow{display:flex;gap:10px}
-.brow .btn,.brow .btn-o{flex:1;margin-bottom:0}
-/* FORMS */
+.brow{display:flex;gap:10px}.brow .btn,.brow .btn-o{flex:1;margin-bottom:0}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#B3B3B3;margin-bottom:7px;font-weight:700}
 .field input,.field select,.field textarea{width:100%;background:#282828;border:1px solid transparent;border-radius:6px;padding:13px 14px;color:#fff;font-size:15px;transition:border-color .2s}
@@ -91,377 +77,249 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
 .field select option{background:#181818;color:#fff}
 .field textarea{min-height:90px;resize:none;line-height:1.6}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.at-w{position:relative}
-.at-s{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#6A6A6A;font-size:15px;pointer-events:none}
+.at-w{position:relative}.at-s{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#6A6A6A;font-size:15px;pointer-events:none}
 .at-w input{padding-left:28px}
-/* PILLS */
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 .pill{padding:7px 16px;border-radius:500px;border:1px solid #3E3E3E;font-size:13px;color:#B3B3B3;font-weight:500;background:transparent;transition:all .15s}
 .pill.on{border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,.1)}
-/* TOGGLE */
 .tog{display:flex;background:#282828;border-radius:6px;padding:3px;margin-bottom:24px;gap:3px}
 .topt{flex:1;padding:10px;text-align:center;font-size:14px;border-radius:4px;color:#6A6A6A;font-weight:700;background:none}
 .topt.on{background:#121212;color:#fff}
-/* STEPS */
 .steps{display:flex;align-items:center;margin-bottom:26px}
 .sdot{width:28px;height:28px;border-radius:50%;border:2px solid #3E3E3E;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#6A6A6A;flex-shrink:0;transition:all .2s}
-.sdot.on{background:#D4A843;border-color:#D4A843;color:#000}
-.sdot.done{border-color:#D4A843;color:#D4A843}
-.sline{flex:1;height:2px;background:#282828;margin:0 6px;transition:background .3s}
-.sline.done{background:#D4A843}
-/* TRACK CARDS */
+.sdot.on{background:#D4A843;border-color:#D4A843;color:#000}.sdot.done{border-color:#D4A843;color:#D4A843}
+.sline{flex:1;height:2px;background:#282828;margin:0 6px;transition:background .3s}.sline.done{background:#D4A843}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .tcard{background:#181818;border-radius:8px;cursor:pointer;overflow:hidden;transition:background .2s}
 .tcard:active{background:#282828}
 .tcard-art{aspect-ratio:1;background:#282828;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative}
-.tcard-play{position:absolute;bottom:8px;right:8px;width:40px;height:40px;border-radius:50%;background:#D4A843;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.5);opacity:0;transform:translateY(4px);transition:all .2s}
+.tcard-play{position:absolute;bottom:8px;right:8px;width:40px;height:40px;border-radius:50%;background:#D4A843;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(4px);transition:all .2s}
 .tcard:active .tcard-play{opacity:1;transform:translateY(0)}
 .tcard-body{padding:12px 14px}
 .tcard-n{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;color:#fff}
-.tcard-a{font-size:12px;color:#B3B3B3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* TRACK ROW */
-.trow{display:flex;align-items:center;gap:12px;padding:8px 0;border-radius:4px;cursor:pointer;transition:background .15s}
-.trow:active{background:#1a1a1a}
-.trow-num{width:20px;font-size:14px;color:#6A6A6A;text-align:center;flex-shrink:0;font-weight:600}
-.trow-num.top{color:#D4A843}
+.tcard-a{font-size:12px;color:#B3B3B3}
+.trow{display:flex;align-items:center;gap:12px;padding:8px 0;cursor:pointer}.trow:active{opacity:.7}
+.trow-num{width:20px;font-size:14px;color:#6A6A6A;text-align:center;flex-shrink:0;font-weight:600}.trow-num.top{color:#D4A843}
 .trow-art{width:44px;height:44px;border-radius:4px;background:#282828;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .trow-inf{flex:1;min-width:0}
 .trow-n{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
 .trow-a{font-size:12px;color:#B3B3B3;margin-top:2px}
 .trow-dur{font-size:12px;color:#6A6A6A;flex-shrink:0}
 .trow-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.35);padding:4px 12px;border-radius:500px;flex-shrink:0;background:transparent}
-/* ARTIST ROW */
-.arow{display:flex;align-items:center;gap:14px;padding:10px 0;cursor:pointer;border-radius:6px;transition:background .15s}
-.arow:active{background:#1a1a1a}
+.arow{display:flex;align-items:center;gap:14px;padding:10px 0;cursor:pointer}.arow:active{opacity:.7}
 .ava{width:52px;height:52px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#D4A843;flex-shrink:0}
 .ar-inf{flex:1;min-width:0}
-.ar-n{font-size:15px;font-weight:600;color:#fff}
-.ar-m{font-size:12px;color:#B3B3B3;margin-top:2px}
+.ar-n{font-size:15px;font-weight:600;color:#fff}.ar-m{font-size:12px;color:#B3B3B3;margin-top:2px}
 .fbtn{background:transparent;border:1px solid #3E3E3E;color:#fff;padding:7px 16px;border-radius:500px;font-size:12px;font-weight:700;white-space:nowrap;transition:all .15s}
 .fbtn.on{border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,.1)}
-/* HORIZONTAL SCROLL */
 .hscroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
 .hscroll::-webkit-scrollbar{display:none}
 .hcard{flex-shrink:0;width:140px;cursor:pointer}
-.hcard:active{opacity:.7}
 .hcard-art{width:140px;height:140px;border-radius:8px;background:#181818;display:flex;align-items:center;justify-content:center;font-size:52px;margin-bottom:10px}
 .hcard-n{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
-.hcard-a{font-size:12px;color:#B3B3B3;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* GENRE GRID */
+.hcard-a{font-size:12px;color:#B3B3B3;margin-top:3px}
 .gg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
-.gc{border-radius:8px;padding:16px;height:88px;cursor:pointer;position:relative;overflow:hidden;transition:filter .15s}
-.gc:active{filter:brightness(.8)}
+.gc{border-radius:8px;padding:16px;height:88px;cursor:pointer;position:relative;overflow:hidden}
 .gc-n{font-size:15px;font-weight:700;color:#fff;position:relative;z-index:1}
 .gc-c{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px;position:relative;z-index:1}
 .gc-e{position:absolute;bottom:-10px;right:-4px;font-size:58px;opacity:.18;transform:rotate(15deg)}
-/* SEARCH */
 .si-w{position:relative;margin-bottom:20px}
 .si{width:100%;background:#fff;color:#000;border-radius:500px;padding:12px 16px 12px 44px;font-size:15px;font-weight:500;border:none}
 .si::placeholder{color:#6a6a6a}
 .si-ico{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#6a6a6a;pointer-events:none}
-/* PROFILE HERO */
-.phero{min-height:180px;background:linear-gradient(180deg,#2a1a00,#000);padding:calc(56px + 20px) 16px 20px;position:relative;overflow:hidden}
+.phero{min-height:180px;background:linear-gradient(180deg,#2a1a00,#000);padding:calc(56px + 20px) 16px 20px;position:relative}
 .p-ava{width:88px;height:88px;border-radius:50%;background:#282828;border:3px solid #000;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:900;color:#D4A843;margin-bottom:14px}
 .p-name{font-size:28px;font-weight:900;margin-bottom:4px;color:#fff}
 .p-tag{font-size:13px;color:#B3B3B3;margin-bottom:10px}
-.p-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.3);border-radius:500px;padding:3px 10px;font-size:11px;color:#D4A843;font-weight:700;margin-bottom:10px}
 .pstats{display:flex;background:#181818;border-radius:8px;overflow:hidden;margin-bottom:18px}
-.ps{flex:1;padding:14px 8px;text-align:center;border-right:1px solid #282828}
-.ps:last-child{border-right:none}
+.ps{flex:1;padding:14px 8px;text-align:center;border-right:1px solid #282828}.ps:last-child{border-right:none}
 .ps-v{font-size:20px;font-weight:900;color:#D4A843}
 .ps-l{font-size:10px;color:#6A6A6A;text-transform:uppercase;letter-spacing:.07em;margin-top:4px;font-weight:600}
-/* PLAYER */
 .track-art-lg{width:220px;height:220px;border-radius:10px;background:#181818;display:flex;align-items:center;justify-content:center;font-size:90px;margin:0 auto 24px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
 .gbadge{display:inline-block;font-size:10px;color:#D4A843;border:1px solid rgba(212,168,67,.35);border-radius:500px;padding:3px 12px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
 .prog-bar{height:4px;background:#3E3E3E;border-radius:2px;cursor:pointer;margin-bottom:8px}
 .prog-fill{height:100%;background:#fff;border-radius:2px;width:0;transition:width .3s linear}
 .time-r{display:flex;justify-content:space-between;font-size:11px;color:#6A6A6A;margin-bottom:20px}
 .ctrls{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding:0 4px}
-.ctrl{color:#B3B3B3;width:44px;height:44px;display:flex;align-items:center;justify-content:center;transition:color .15s}
-.ctrl:active{color:#fff}
-.ctrl.on{color:#D4A843}
-.pbig{width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;transition:transform .1s}
-.pbig:active{transform:scale(.93)}
-/* WALLET */
+.ctrl{color:#B3B3B3;width:44px;height:44px;display:flex;align-items:center;justify-content:center}.ctrl.on{color:#D4A843}
+.pbig{width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;transition:transform .1s}.pbig:active{transform:scale(.93)}
 .wallet{background:linear-gradient(135deg,#1c1400,#0d0d0d);border:1px solid rgba(212,168,67,.2);border-radius:10px;padding:28px;text-align:center;margin-bottom:20px}
 .w-l{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#B3B3B3;margin-bottom:8px;font-weight:700}
 .w-a{font-size:52px;font-weight:900;color:#D4A843;line-height:1}
 .w-s{font-size:12px;color:#B3B3B3;margin-top:8px}
-/* STAT CARDS */
 .scards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.sc{background:#181818;border-radius:8px;padding:18px}
-.sc.g{border:1px solid rgba(212,168,67,.2)}
+.sc{background:#181818;border-radius:8px;padding:18px}.sc.g{border:1px solid rgba(212,168,67,.2)}
 .sc-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#B3B3B3;margin-bottom:8px;font-weight:700}
-.sc-v{font-size:28px;font-weight:900;color:#fff}
-.sc.g .sc-v{color:#D4A843}
-/* TIP AMOUNTS */
+.sc-v{font-size:28px;font-weight:900;color:#fff}.sc.g .sc-v{color:#D4A843}
 .tamts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
 .ta{padding:12px 4px;border:1px solid #3E3E3E;border-radius:8px;text-align:center;font-size:14px;background:transparent;color:#B3B3B3;font-weight:700;transition:all .15s}
 .ta.on{border-color:#D4A843;background:rgba(212,168,67,.1);color:#D4A843}
-/* SHARE */
 .share-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
 .share-opt{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border:1px solid #3E3E3E;border-radius:8px;font-size:14px;font-weight:600;color:#fff;background:transparent}
 .share-opt:active{background:#282828}
 .sbox{background:#282828;border-radius:6px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .surl{flex:1;font-size:13px;color:#D4A843;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
 .cbtn{background:#D4A843;color:#000;border-radius:500px;padding:7px 16px;font-size:12px;font-weight:700}
-/* UPLOAD */
 .upa{border:1.5px dashed #3E3E3E;border-radius:10px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:16px}
 .upa:active,.upa.has-file{border-color:#D4A843;background:rgba(212,168,67,.07)}
-/* SUCCESS */
 .succ{text-align:center;padding:48px 0}
 .succ-ico{font-size:56px;display:block;margin-bottom:20px}
 .succ-t{font-size:32px;font-weight:900;margin-bottom:10px;color:#fff}
 .succ-t em{font-style:normal;color:#D4A843}
 .succ-s{font-size:14px;color:#B3B3B3;line-height:1.8;margin-bottom:28px}
-/* SECTION */
 .sec{font-size:20px;font-weight:900;margin-bottom:16px;color:#fff}
 .sec-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .sec-row .sec{margin:0}
 .see-all{font-size:12px;font-weight:700;color:#B3B3B3;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
-/* DIVIDER */
 .hr{height:1px;background:#1c1c1c;margin:24px 0}
-/* LAUNCH STATS */
 .lstats{display:flex;gap:8px;margin-bottom:22px}
 .ls{background:#181818;border-radius:8px;padding:16px 10px;text-align:center;flex:1}
 .ls-v{font-size:24px;font-weight:900;color:#D4A843;margin-bottom:4px}
 .ls-l{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#B3B3B3;font-weight:700}
-/* EMPTY */
 .empty{text-align:center;padding:36px 0;color:#3E3E3E;font-size:14px}
 .empty span{color:#D4A843;font-weight:600;cursor:pointer}
-/* ME AVA */
 .me-ava{width:80px;height:80px;border-radius:50%;background:rgba(212,168,67,.1);border:2px solid rgba(212,168,67,.3);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:900;color:#D4A843;margin:0 auto 16px}
-/* SETTINGS */
 .set-sect{background:#181818;border-radius:10px;overflow:hidden;margin-bottom:16px}
 .set-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6A6A6A;font-weight:700;padding:16px 16px 8px}
 .set-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #282828;font-size:15px;font-weight:500;cursor:pointer;color:#fff;background:none;border-left:none;border-right:none;border-top:none;width:100%;text-align:left}
-.set-row:last-child{border-bottom:none}
-.set-row:active{background:#282828}
+.set-row:last-child{border-bottom:none}.set-row:active{background:#282828}
 .set-val{font-size:13px;color:#6A6A6A}
-/* FEED */
 .feed-card{background:#181818;border-radius:10px;padding:16px;margin-bottom:12px;cursor:pointer}
 .feed-card:active{background:#282828}
 .fc-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .fc-av{width:44px;height:44px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#D4A843;flex-shrink:0}
-.fc-name{font-size:14px;font-weight:700;color:#fff}
-.fc-time{font-size:12px;color:#6A6A6A;margin-top:2px}
+.fc-name{font-size:14px;font-weight:700;color:#fff}.fc-time{font-size:12px;color:#6A6A6A;margin-top:2px}
 .fc-track{background:#282828;border-radius:8px;padding:12px;display:flex;align-items:center;gap:12px}
 .fc-art{width:48px;height:48px;border-radius:6px;background:#3E3E3E;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-/* CHART ROW */
 .chart-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #1c1c1c;cursor:pointer}
-.chart-row:last-child{border-bottom:none}
-.chart-row:active{opacity:.7}
-.chart-num{width:28px;font-size:14px;font-weight:900;color:#6A6A6A;text-align:center;flex-shrink:0}
-.chart-num.top{color:#D4A843}
+.chart-row:last-child{border-bottom:none}.chart-row:active{opacity:.7}
+.chart-num{width:28px;font-size:14px;font-weight:900;color:#6A6A6A;text-align:center;flex-shrink:0}.chart-num.top{color:#D4A843}
 .chart-art{width:48px;height:48px;border-radius:6px;background:#282828;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .chart-inf{flex:1;min-width:0}
 .chart-n{font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chart-a{font-size:12px;color:#B3B3B3;margin-top:2px}
 .chart-tip{font-size:11px;font-weight:700;color:#D4A843;border:1px solid rgba(212,168,67,.35);padding:4px 12px;border-radius:500px;flex-shrink:0;background:transparent}
-/* EXCLUSIVE DROP */
-.drop-card{background:linear-gradient(135deg,#1a0a00,#0f0f0f);border:1px solid rgba(212,168,67,.35);border-radius:12px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden;cursor:pointer}
-.drop-card::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(212,168,67,.12),transparent);pointer-events:none}
-.drop-badge{display:inline-flex;align-items:center;gap:5px;background:#D4A843;color:#000;border-radius:500px;padding:3px 10px;font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
-.drop-title{font-size:18px;font-weight:900;color:#fff;margin-bottom:3px}
-.drop-artist{font-size:13px;color:#B3B3B3;margin-bottom:14px}
-.drop-stats{display:flex;gap:24px;margin-bottom:14px}
-.ds-v{font-size:20px;font-weight:900;color:#D4A843}
-.ds-l{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#6A6A6A;margin-top:2px;font-weight:700}
-.drop-cd{background:rgba(0,0,0,.4);border-radius:8px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.drop-cd-l{font-size:11px;color:#B3B3B3;font-weight:600}
-.drop-cd-v{font-size:15px;font-weight:900;color:#D4A843}
-.drop-bar{height:3px;background:#282828;border-radius:2px;margin-bottom:5px;overflow:hidden}
-.drop-bar-fill{height:100%;background:linear-gradient(90deg,#D4A843,#fff);border-radius:2px}
-.drop-bar-lbl{display:flex;justify-content:space-between;font-size:10px;color:#6A6A6A;margin-bottom:14px}
-.drop-btns{display:flex;gap:8px}
-.drop-preview{flex:1;background:#282828;color:#fff;border:none;border-radius:500px;padding:10px;font-size:13px;font-weight:700;cursor:pointer}
-.drop-unlock{flex:2;background:#D4A843;color:#000;border:none;border-radius:500px;padding:10px;font-size:13px;font-weight:700;cursor:pointer}
-/* EARNINGS TICKER */
-.earn-ticker{background:#0d0d0d;border:1px solid rgba(212,168,67,.25);border-radius:8px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.et-l{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6A6A6A;font-weight:700}
-.et-v{font-size:24px;font-weight:900;color:#D4A843}
-.et-live{display:flex;align-items:center;gap:6px;font-size:11px;color:#1ED760;font-weight:700}
-.et-dot{width:6px;height:6px;border-radius:50%;background:#1ED760;animation:etpulse 1.5s infinite}
-@keyframes etpulse{0%,100%{opacity:1}50%{opacity:.3}}
-/* TIP PROMPT */
 .tip-prompt{position:fixed;bottom:calc(64px + 74px);left:16px;right:16px;z-index:490;background:#181818;border:1px solid rgba(212,168,67,.4);border-radius:14px;padding:16px;display:none;box-shadow:0 8px 32px rgba(0,0,0,.6)}
-.tip-prompt.on{display:block;animation:tpUp .3s ease}
-@keyframes tpUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.tip-prompt.on{display:block}
 .tp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .tp-title{font-size:14px;font-weight:700;color:#fff}
-.tp-x{color:#6A6A6A;font-size:20px;line-height:1}
 .tp-msg{font-size:13px;color:#B3B3B3;margin-bottom:12px;line-height:1.6}
 .tp-amts{display:flex;gap:8px;margin-bottom:12px}
 .tp-amt{flex:1;padding:10px 4px;border:1px solid #3E3E3E;border-radius:8px;text-align:center;font-size:13px;background:transparent;color:#B3B3B3;font-weight:700;cursor:pointer;transition:all .15s}
 .tp-amt.on{border-color:#D4A843;background:rgba(212,168,67,.1);color:#D4A843}
+.loading{display:flex;align-items:center;justify-content:center;padding:40px 0;gap:12px;color:#6A6A6A;font-size:14px}
+.spin{width:20px;height:20px;border:2px solid #3E3E3E;border-top-color:#D4A843;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.poll-status{background:#282828;border-radius:8px;padding:14px;text-align:center;font-size:13px;margin-top:10px;display:none;color:#fff}
 </style>
 </head>
 <body>
-
 <div class="tnav">
-  <button class="logo" onclick="go('home')">Malbry</button>
+  <button class="logo" id="btnLogo">Malbry</button>
   <div class="tnr">
-    <button class="nbell" id="nbell" onclick="showToast('Notifications coming soon')">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-    </button>
-    <button class="nbtn" onclick="go('search')">Search</button>
-    <button class="nbtn gold" id="navJoin" onclick="go('fan-signup')">Sign up</button>
-    <button class="nuser" id="navUser" onclick="go('me')">
+    <button class="nbtn" id="btnSearch">Search</button>
+    <button class="nbtn gold" id="navJoin">Sign up</button>
+    <button class="nuser" id="navUser">
       <div class="nav-av" id="navAv">?</div>
       <span class="nav-un" id="navUn">@-</span>
     </button>
   </div>
 </div>
-
 <div class="bnav" id="bnav">
-  <button class="bn on" data-p="home" onclick="go('home')">
-    <svg class="bni" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home
-  </button>
-  <button class="bn" data-p="charts" onclick="go('charts')">
-    <svg class="bni" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Charts
-  </button>
-  <button class="bn" data-p="search" onclick="go('search')">
-    <svg class="bni" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search
-  </button>
-  <button class="bn" data-p="feed" onclick="go('feed')">
-    <svg class="bni" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Feed
-  </button>
-  <button class="bn" data-p="join" onclick="go('fan-signup')">
-    <svg class="bni" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Join
-  </button>
+  <button class="bn on" data-p="home" id="bnHome"><svg class="bni" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
+  <button class="bn" data-p="charts" id="bnCharts"><svg class="bni" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Charts</button>
+  <button class="bn" data-p="search" id="bnSearch"><svg class="bni" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</button>
+  <button class="bn" data-p="feed" id="bnFeed"><svg class="bni" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Feed</button>
+  <button class="bn" data-p="join" id="bnJoin"><svg class="bni" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Join</button>
 </div>
-
 <div class="mp" id="mp">
   <div class="mp-prog"><div class="mp-pf" id="mpPF"></div></div>
-  <div class="mp-art" id="mpArt" onclick="openNP()">&#127925;</div>
-  <div class="mp-inf" onclick="openNP()">
-    <div class="mp-t" id="mpT">-</div>
-    <div class="mp-a" id="mpA">-</div>
-  </div>
+  <div class="mp-art" id="mpArt">&#127925;</div>
+  <div class="mp-inf" id="mpInf"><div class="mp-t" id="mpT">-</div><div class="mp-a" id="mpA">-</div></div>
   <div class="mp-btns">
-    <button class="mp-heart" id="mpH" onclick="toggleLike()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-    </button>
-    <button class="mp-play" onclick="togglePlay()">
-      <svg id="mpIco" width="16" height="16" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    </button>
-    <div class="mp-tip" onclick="openTip(window._nA||'')">Tip</div>
+    <button class="mp-play" id="mpPlay"><svg id="mpIco" width="16" height="16" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+    <div class="mp-tip" id="mpTip">Tip</div>
   </div>
 </div>
-
 <div class="nps" id="nps">
   <div class="nps-hdr">
-    <button onclick="closeNP()" style="color:#B3B3B3;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>Now Playing
-    </button>
-    <button onclick="openShare('https://malbry.vercel.app')" style="color:#B3B3B3">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-    </button>
+    <button id="btnCloseNP" style="color:#B3B3B3;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>Now Playing</button>
+    <button id="btnShareNP" style="color:#B3B3B3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
   </div>
   <div class="nps-art" id="npsArt">&#127925;</div>
   <div class="nps-body">
-    <div class="nps-row">
-      <div><div class="nps-title" id="npsT">-</div><div class="nps-artist" id="npsA">-</div></div>
-      <button class="nps-heart" id="npsH" onclick="toggleLike()">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-      </button>
-    </div>
-    <div class="nps-prog" id="npsProg" onclick="seekNP(event)"><div class="nps-pf" id="npsPF"></div></div>
+    <div class="nps-row"><div><div class="nps-title" id="npsT">-</div><div class="nps-artist" id="npsA">-</div></div></div>
+    <div class="nps-prog" id="npsProg"><div class="nps-pf" id="npsPF"></div></div>
     <div class="nps-time"><span id="npsCur">0:00</span><span>3:47</span></div>
     <div class="nps-ctrls">
-      <button class="nps-ctrl" id="npsShuf" onclick="toggleShuf()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
-      </button>
-      <button class="nps-ctrl" onclick="prevT()">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="4" x2="5" y2="20"/></svg>
-      </button>
-      <button class="nps-pbig" onclick="togglePlay()">
-        <svg id="npsIco" width="26" height="26" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </button>
-      <button class="nps-ctrl" onclick="nextT()">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20"/></svg>
-      </button>
-      <button class="nps-ctrl" id="npsRep" onclick="toggleRep()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
-      </button>
+      <button class="nps-ctrl" id="npsShuf"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></button>
+      <button class="nps-ctrl" id="npsPrev"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="4" x2="5" y2="20"/></svg></button>
+      <button class="nps-pbig" id="npsPlay"><svg id="npsIco" width="26" height="26" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+      <button class="nps-ctrl" id="npsNext"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20"/></svg></button>
+      <button class="nps-ctrl" id="npsRep"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></button>
     </div>
-    <div class="np-tip"><button class="btn" onclick="openTip(window._nA||'')">Tip this artist</button></div>
+    <div style="padding:0 24px;margin-bottom:16px"><button class="btn" id="npsTipBtn">Tip this artist</button></div>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
-
-<!-- TIP PROMPT — fires at 70% listen -->
-
 <div class="tip-prompt" id="tipPrompt">
-  <div class="tp-head">
-    <div class="tp-title" id="tpTitle">You love this track</div>
-    <button class="tp-x" onclick="dismissPrompt()">x</button>
-  </div>
-  <div class="tp-msg" id="tpMsg">Send this artist a tip directly to their EcoCash. Even $0.50 makes a real difference.</div>
+  <div class="tp-head"><div class="tp-title" id="tpTitle">You love this track</div><button id="tpClose" style="color:#6A6A6A;font-size:20px;line-height:1">x</button></div>
+  <div class="tp-msg" id="tpMsg">Send the artist a tip directly to their EcoCash.</div>
   <div class="tp-amts">
-    <button class="tp-amt on" onclick="setPA(this,.5)">$0.50</button>
-    <button class="tp-amt" onclick="setPA(this,1)">$1.00</button>
-    <button class="tp-amt" onclick="setPA(this,2)">$2.00</button>
+    <button class="tp-amt on" data-amt="0.5">$0.50</button>
+    <button class="tp-amt" data-amt="1">$1.00</button>
+    <button class="tp-amt" data-amt="2">$2.00</button>
   </div>
-  <button class="btn" id="tpBtn" style="margin:0" onclick="tipFromPrompt()">Send $0.50 via EcoCash</button>
+  <button class="btn" id="tpBtn" style="margin:0">Send $0.50 via EcoCash</button>
 </div>
-
 <!-- TIP MODAL -->
-
 <div class="mbg" id="tipModal">
   <div class="mod">
-    <button class="mx" onclick="cm('tipModal')">x</button>
+    <button class="mx" data-close="tipModal">x</button>
     <div class="mh"></div>
     <div class="m-ttl">Send a tip</div>
     <div class="m-sub" id="tipFor">Support this artist via EcoCash</div>
     <div class="tamts">
-      <button class="ta" onclick="setAmt(this,.5)">$0.50</button>
-      <button class="ta on" onclick="setAmt(this,1)">$1.00</button>
-      <button class="ta" onclick="setAmt(this,2)">$2.00</button>
-      <button class="ta" onclick="setAmt(this,5)">$5.00</button>
+      <button class="ta" data-amt="0.5">$0.50</button>
+      <button class="ta on" data-amt="1">$1.00</button>
+      <button class="ta" data-amt="2">$2.00</button>
+      <button class="ta" data-amt="5">$5.00</button>
     </div>
     <div class="field"><label>EcoCash Number</label><input type="tel" id="tipEco" placeholder="0771234567"/></div>
     <div class="field"><label>Message (optional)</label><input type="text" id="tipMsg" placeholder="Keep doing this!"/></div>
-    <button class="btn" id="tipBtn" onclick="sendTip()">Send $1.00 via EcoCash</button>
-    <div id="tipSt" style="display:none;background:#282828;border-radius:8px;padding:14px;text-align:center;font-size:13px;margin-top:4px;color:#fff"></div>
+    <button class="btn" id="tipSendBtn">Send $1.00 via EcoCash</button>
+    <div class="poll-status" id="pollStatus"></div>
   </div>
 </div>
-
 <!-- SHARE MODAL -->
-
 <div class="mbg" id="shareModal">
   <div class="mod">
-    <button class="mx" onclick="cm('shareModal')">x</button>
+    <button class="mx" data-close="shareModal">x</button>
     <div class="mh"></div>
     <div class="m-ttl">Share</div>
-    <div class="sbox"><span class="surl" id="shareUrl">malbry.vercel.app</span><button class="cbtn" onclick="copyShareUrl()">Copy</button></div>
+    <div class="sbox"><span class="surl" id="shareUrl">malbry.vercel.app</span><button class="cbtn" id="copyUrlBtn">Copy</button></div>
     <div class="share-opts">
-      <button class="share-opt" onclick="sWA()"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.49"/></svg>WhatsApp</button>
-      <button class="share-opt" onclick="sTW()"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X / Twitter</button>
-      <button class="share-opt" onclick="sFB()"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</button>
-      <button class="share-opt" onclick="sIG()"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</button>
+      <button class="share-opt" id="shareWA"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.49"/></svg>WhatsApp</button>
+      <button class="share-opt" id="shareTW"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X</button>
+      <button class="share-opt" id="shareFB"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</button>
+      <button class="share-opt" id="shareIG"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</button>
     </div>
   </div>
 </div>
-
 <!-- PAYOUT MODAL -->
-
 <div class="mbg" id="payModal">
   <div class="mod">
-    <button class="mx" onclick="cm('payModal')">x</button>
+    <button class="mx" data-close="payModal">x</button>
     <div class="mh"></div>
     <div class="m-ttl">Request payout</div>
     <div class="m-sub">We will send to your EcoCash</div>
     <div class="wallet" style="margin-bottom:18px"><div class="w-l">Available</div><div class="w-a" id="payBal">$0.00</div></div>
     <div class="field"><label>Amount</label><input type="number" id="payAmt" placeholder="Min $5.00"/></div>
     <div class="field"><label>EcoCash Number</label><input type="tel" id="payEco" placeholder="0771234567"/></div>
-    <button class="btn" onclick="doPayout()">Send to EcoCash</button>
+    <button class="btn" id="payBtn">Send to EcoCash</button>
   </div>
 </div>
-
 <!-- HOME -->
-
 <div class="pg on" id="pg-home">
   <div class="pi" style="padding-top:20px">
     <div style="font-size:22px;font-weight:900;margin-bottom:18px;color:#fff" id="greet">Good evening</div>
@@ -475,86 +333,72 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
         <div style="font-size:clamp(36px,10vw,56px);font-weight:900;line-height:1.02;letter-spacing:-.03em;margin-bottom:14px;color:#fff">Where<br><span style="color:#D4A843">artists</span><br>get paid.</div>
         <p style="font-size:14px;color:#B3B3B3;line-height:1.7;margin-bottom:22px">Stream Zimbabwean music. Tip artists directly via EcoCash. No middlemen.</p>
         <div class="brow">
-          <button class="btn btn-sm" onclick="go('search')">Explore</button>
-          <button class="btn-o btn-sm" id="heroABtn" onclick="go('artist-signup')">I am an artist</button>
+          <button class="btn btn-sm" id="heroExplore">Explore</button>
+          <button class="btn-o btn-sm" id="heroArtist">I am an artist</button>
         </div>
       </div>
       <div class="lstats">
-        <div class="ls"><div class="ls-v">100</div><div class="ls-l">Artist Goal</div></div>
+        <div class="ls"><div class="ls-v" id="statArtists">0</div><div class="ls-l">Artists</div></div>
         <div class="ls"><div class="ls-v">Free</div><div class="ls-l">First $500</div></div>
         <div class="ls"><div class="ls-v">Direct</div><div class="ls-l">EcoCash</div></div>
       </div>
     </div>
-    <!-- EXCLUSIVE DROPS -->
-    <div id="dropsSec" style="margin-bottom:24px">
-      <div class="sec-row">
-        <div class="sec">Exclusive <span style="color:#D4A843">Drops</span></div>
-        <span style="font-size:11px;font-weight:700;color:#D4A843;letter-spacing:.05em">EARLY ACCESS</span>
-      </div>
-      <div id="dropsList"></div>
-    </div>
-    <div class="sec-row"><div class="sec">Trending now</div><button class="see-all" onclick="go('search')">See all</button></div>
+    <div class="sec-row"><div class="sec">Trending now</div><button class="see-all" id="seeAllTrending">See all</button></div>
     <div class="pills" id="hFilter">
-      <button class="pill on" onclick="fHome(this,'All')">All</button>
-      <button class="pill" onclick="fHome(this,'Zimdancehall')">Zimdancehall</button>
-      <button class="pill" onclick="fHome(this,'Afrobeats')">Afrobeats</button>
-      <button class="pill" onclick="fHome(this,'Gospel')">Gospel</button>
-      <button class="pill" onclick="fHome(this,'Hip Hop')">Hip Hop</button>
+      <button class="pill on" data-genre="All">All</button>
+      <button class="pill" data-genre="Zimdancehall">Zimdancehall</button>
+      <button class="pill" data-genre="Afrobeats">Afrobeats</button>
+      <button class="pill" data-genre="Gospel">Gospel</button>
+      <button class="pill" data-genre="Hip Hop">Hip Hop</button>
     </div>
-    <div class="g2" id="hGrid"></div>
+    <div id="hGrid"><div class="loading"><div class="spin"></div>Loading tracks...</div></div>
     <div class="hr"></div>
-    <div class="sec-row"><div class="sec">Featured artists</div><button class="see-all" onclick="go('search')">See all</button></div>
-    <div id="hArtists"></div>
+    <div class="sec-row"><div class="sec">Featured artists</div><button class="see-all" id="seeAllArtists">See all</button></div>
+    <div id="hArtists"><div class="loading"><div class="spin"></div>Loading artists...</div></div>
     <div id="homeCTA">
       <div class="hr"></div>
       <div style="background:#181818;border-radius:10px;padding:24px">
         <div style="font-size:18px;font-weight:900;margin-bottom:8px;color:#fff">Are you an artist?</div>
         <p style="color:#B3B3B3;font-size:14px;line-height:1.7;margin-bottom:20px">Upload music. Get tipped directly via EcoCash. 0% on your first $500.</p>
-        <button class="btn" style="width:auto;padding:12px 28px" onclick="go('artist-signup')">Join as an artist</button>
+        <button class="btn" style="width:auto;padding:12px 28px" id="ctaArtistBtn">Join as an artist</button>
       </div>
     </div>
   </div>
 </div>
-
 <!-- CHARTS -->
-
 <div class="pg" id="pg-charts">
   <div class="pi" style="padding-top:20px">
     <div style="font-size:24px;font-weight:900;margin-bottom:4px;color:#fff">Charts</div>
-    <p style="font-size:13px;color:#B3B3B3;margin-bottom:20px">Top tracks in Zimbabwe right now</p>
+    <p style="font-size:13px;color:#B3B3B3;margin-bottom:20px">Top tracks right now</p>
     <div class="pills" id="chartFilter">
-      <button class="pill on" onclick="fChart(this,'All')">Zimbabwe</button>
-      <button class="pill" onclick="fChart(this,'Zimdancehall')">Zimdancehall</button>
-      <button class="pill" onclick="fChart(this,'Afrobeats')">Afrobeats</button>
-      <button class="pill" onclick="fChart(this,'Gospel')">Gospel</button>
+      <button class="pill on" data-genre="All">Zimbabwe</button>
+      <button class="pill" data-genre="Zimdancehall">Zimdancehall</button>
+      <button class="pill" data-genre="Afrobeats">Afrobeats</button>
+      <button class="pill" data-genre="Gospel">Gospel</button>
     </div>
-    <div id="chartList"></div>
+    <div id="chartList"><div class="loading"><div class="spin"></div>Loading...</div></div>
   </div>
 </div>
-
 <!-- SEARCH -->
-
 <div class="pg" id="pg-search">
   <div class="pi" style="padding-top:20px">
     <div class="sec">Search</div>
     <div class="si-w">
       <svg class="si-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="si" type="search" id="sQ" placeholder="Artists, tracks, genres..." oninput="doSearch(this.value)">
+      <input class="si" type="search" id="sQ" placeholder="Artists, tracks, genres...">
     </div>
     <div id="sDef">
       <div class="sec" style="font-size:16px">Browse genres</div>
       <div class="gg" id="gGrid"></div>
       <div class="hr"></div>
       <div class="sec" style="font-size:16px">Artists</div>
-      <div id="sArtists"></div>
+      <div id="sArtists"><div class="loading"><div class="spin"></div>Loading...</div></div>
     </div>
     <div id="sRes" style="display:none"><div id="rA"></div><div id="rT" style="margin-top:20px"></div></div>
     <div id="sEmpty" style="display:none"><div class="empty">No results found</div></div>
   </div>
 </div>
-
 <!-- FEED -->
-
 <div class="pg" id="pg-feed">
   <div class="pi" style="padding-top:20px">
     <div class="sec">Feed</div>
@@ -562,80 +406,54 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
     <div id="feedGuest" style="display:none;text-align:center;padding:60px 0">
       <div style="font-size:40px;margin-bottom:16px">&#127925;</div>
       <div style="font-size:18px;font-weight:700;margin-bottom:8px;color:#fff">Follow artists to see updates</div>
-      <p style="font-size:14px;color:#B3B3B3;margin-bottom:24px">When you follow artists their new tracks appear here.</p>
-      <button class="btn" style="width:auto;padding:12px 28px" onclick="go('search')">Find artists</button>
+      <p style="font-size:14px;color:#B3B3B3;margin-bottom:24px">Sign in to see new music from artists you follow.</p>
+      <button class="btn" style="width:auto;padding:12px 28px" id="feedSignupBtn">Sign up free</button>
     </div>
   </div>
 </div>
-
 <!-- TRACK PAGE -->
-
 <div class="pg" id="pg-track">
   <div class="pi" style="padding-top:14px">
-    <button onclick="goBack()" style="color:#B3B3B3;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:22px">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back
-    </button>
-    <div id="earnTicker" style="display:none" class="earn-ticker">
-      <div><div class="et-l">Track Earnings</div><div class="et-v" id="tickerAmt">$0.00</div></div>
-      <div class="et-live"><div class="et-dot"></div>LIVE</div>
-    </div>
+    <button id="btnTrackBack" style="color:#B3B3B3;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:22px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
     <div class="track-art-lg" id="tArt">&#127925;</div>
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
       <div>
         <div class="gbadge" id="tGenre">Genre</div>
         <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff" id="tTitle">Track</div>
-        <div style="font-size:14px;font-weight:600;color:#B3B3B3;cursor:pointer" id="tArtBtn" onclick="go('artist-profile')"></div>
+        <div style="font-size:14px;font-weight:600;color:#B3B3B3;cursor:pointer" id="tArtBtn">-</div>
       </div>
-      <button id="tHrt" onclick="toggleLike()" style="color:#6A6A6A;padding:4px;flex-shrink:0;margin-top:4px">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-      </button>
     </div>
-    <div class="prog-bar" id="tProg" onclick="seekT(event)"><div class="prog-fill" id="tFill"></div></div>
+    <div class="prog-bar" id="tProg"><div class="prog-fill" id="tFill"></div></div>
     <div class="time-r"><span id="tCur">0:00</span><span>3:47</span></div>
     <div class="ctrls">
-      <button class="ctrl" id="tShuf" onclick="toggleShuf()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
-      </button>
-      <button class="ctrl" onclick="prevT()">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="4" x2="5" y2="20"/></svg>
-      </button>
-      <button class="pbig" onclick="togglePlay()">
-        <svg id="tIco" width="24" height="24" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </button>
-      <button class="ctrl" onclick="nextT()">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20"/></svg>
-      </button>
-      <button class="ctrl" id="tRep" onclick="toggleRep()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
-      </button>
+      <button class="ctrl" id="tShuf"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></button>
+      <button class="ctrl" id="tPrev"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="4" x2="5" y2="20"/></svg></button>
+      <button class="pbig" id="tBtn"><svg id="tIco" width="24" height="24" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+      <button class="ctrl" id="tNext"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20"/></svg></button>
+      <button class="ctrl" id="tRep"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></button>
     </div>
     <div class="brow" style="margin-bottom:24px">
       <button class="btn" style="margin:0" id="tTipBtn">Tip artist</button>
-      <button class="btn-o" style="margin:0;width:auto;padding:14px 18px" onclick="openShare('https://malbry.vercel.app')">Share</button>
+      <button class="btn-o" style="margin:0;width:auto;padding:14px 18px" id="tShareBtn">Share</button>
     </div>
     <div class="hr"></div>
     <div class="sec" style="font-size:16px">More like this</div>
     <div id="mTracks"></div>
   </div>
 </div>
-
 <!-- ARTIST PROFILE -->
-
 <div class="pg" id="pg-artist-profile">
   <div class="phero">
     <div class="p-ava" id="apAva">J</div>
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">
-      <div class="p-name" id="apName">Artist</div>
-      <span class="p-badge">&#10022; Artist</span>
-    </div>
-    <div class="p-tag" id="apTag">Genre · City</div>
+    <div class="p-name" id="apName">Artist</div>
+    <div class="p-tag" id="apTag">Genre</div>
     <p id="apBio" style="font-size:14px;color:#B3B3B3;line-height:1.7;max-width:340px"></p>
   </div>
   <div class="pi" style="padding-top:16px">
     <div class="brow" style="margin-bottom:18px;flex-wrap:wrap;gap:8px">
-      <button class="btn btn-sm" id="apFBtn" onclick="doFollow()" style="margin:0">Follow</button>
-      <button class="btn-o btn-sm" style="margin:0" onclick="openTip(document.getElementById('apName').textContent||'')">Tip</button>
-      <button class="btn-o btn-sm" style="margin:0" onclick="openShare('https://malbry.vercel.app')">Share</button>
+      <button class="btn btn-sm" id="apFBtn" style="margin:0">Follow</button>
+      <button class="btn-o btn-sm" id="apTipBtn" style="margin:0">Tip</button>
+      <button class="btn-o btn-sm" id="apShareBtn" style="margin:0">Share</button>
     </div>
     <div class="pstats">
       <div class="ps"><div class="ps-v" id="apPl">-</div><div class="ps-l">Plays</div></div>
@@ -644,18 +462,13 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
       <div class="ps"><div class="ps-v" id="apTi">-</div><div class="ps-l">Tips</div></div>
     </div>
     <div class="sec" style="font-size:16px">Tracks</div>
-    <div id="apTracks"></div>
+    <div id="apTracks"><div class="loading"><div class="spin"></div>Loading...</div></div>
   </div>
 </div>
-
 <!-- FAN SIGNUP -->
-
 <div class="pg" id="pg-fan-signup">
   <div class="pi" style="padding-top:20px">
-    <div class="tog">
-      <button class="topt on" onclick="go('fan-signup')">I am a fan</button>
-      <button class="topt" onclick="go('artist-signup')">I am an artist</button>
-    </div>
+    <div class="tog"><button class="topt on" id="togFan">I am a fan</button><button class="topt" id="togArtist">I am an artist</button></div>
     <div id="fanForm">
       <div style="font-size:26px;font-weight:900;margin-bottom:8px;color:#fff">Join Malbry</div>
       <p style="color:#B3B3B3;font-size:14px;margin-bottom:22px">Free forever. Follow artists. Tip via EcoCash.</p>
@@ -663,43 +476,41 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
         <div class="field"><label>First name</label><input type="text" id="fFirst" placeholder="First"/></div>
         <div class="field"><label>Last name</label><input type="text" id="fLast" placeholder="Last"/></div>
       </div>
-      <div class="field"><label>Username</label>
-        <div class="at-w"><span class="at-s">@</span><input type="text" id="fUser" placeholder="yourname" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')"/></div>
-      </div>
+      <div class="field"><label>Username</label><div class="at-w"><span class="at-s">@</span><input type="text" id="fUser" placeholder="yourname"/></div></div>
       <div class="field"><label>Email</label><input type="email" id="fEmail" placeholder="your@email.com"/></div>
       <div class="field"><label>Password</label><input type="password" id="fPass" placeholder="Min 8 characters"/></div>
       <div class="field"><label>EcoCash <span style="color:#6A6A6A;font-weight:400;text-transform:none;letter-spacing:0">(to send tips)</span></label><input type="tel" id="fEco" placeholder="0771234567"/></div>
       <div class="field"><label>City</label>
-        <select id="fCity">
-          <option value="">Select...</option>
-          <option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option>
-          <option>Masvingo</option><option>Chinhoyi</option><option>Kwekwe</option>
-          <option>Diaspora - UK</option><option>Diaspora - South Africa</option>
-          <option>Diaspora - USA</option><option>Diaspora - Australia</option><option>Other</option>
-        </select>
+        <select id="fCity"><option value="">Select...</option><option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option><option>Masvingo</option><option>Chinhoyi</option><option>Kwekwe</option><option>Diaspora - UK</option><option>Diaspora - South Africa</option><option>Diaspora - USA</option><option>Diaspora - Australia</option><option>Other</option></select>
       </div>
-      <button class="btn" id="fanBtn" onclick="joinFan()">Create account</button>
-      <p style="text-align:center;font-size:13px;color:#B3B3B3">Already have an account? <span style="color:#D4A843;font-weight:600;cursor:pointer" onclick="showLogin()">Log in</span></p>
+      <button class="btn" id="fanSignupBtn">Create account</button>
+      <p style="text-align:center;font-size:13px;color:#B3B3B3">Already have an account? <span style="color:#D4A843;font-weight:600;cursor:pointer" id="loginLink">Log in</span></p>
     </div>
     <div id="fanDone" style="display:none">
       <div class="succ"><span class="succ-ico">&#10022;</span>
         <div class="succ-t">Welcome to <em>Malbry</em></div>
         <p class="succ-s" id="fanMsg">Your account is live.</p>
-        <button class="btn" onclick="go('home')">Start listening</button>
-        <button class="btn-o" onclick="go('search')">Discover artists</button>
+        <button class="btn" id="fanDoneHome">Start listening</button>
+        <button class="btn-o" id="fanDoneSearch">Discover artists</button>
       </div>
     </div>
   </div>
 </div>
-
+<!-- LOGIN -->
+<div class="pg" id="pg-login">
+  <div class="pi" style="padding-top:20px">
+    <div style="font-size:26px;font-weight:900;margin-bottom:8px;color:#fff">Log in</div>
+    <p style="color:#B3B3B3;font-size:14px;margin-bottom:24px">Welcome back to Malbry.</p>
+    <div class="field"><label>Email</label><input type="email" id="lEmail" placeholder="your@email.com"/></div>
+    <div class="field"><label>Password</label><input type="password" id="lPass" placeholder="Your password"/></div>
+    <button class="btn" id="loginBtn">Log in</button>
+    <p style="text-align:center;font-size:13px;color:#B3B3B3">No account? <span style="color:#D4A843;font-weight:600;cursor:pointer" id="signupLink">Sign up free</span></p>
+  </div>
+</div>
 <!-- ARTIST SIGNUP -->
-
 <div class="pg" id="pg-artist-signup">
   <div class="pi" style="padding-top:20px">
-    <div class="tog">
-      <button class="topt" onclick="go('fan-signup')">I am a fan</button>
-      <button class="topt on">I am an artist</button>
-    </div>
+    <div class="tog"><button class="topt" id="togFan2">I am a fan</button><button class="topt on">I am an artist</button></div>
     <div class="steps">
       <div class="sdot on" id="sd1">1</div><div class="sline" id="sl12"></div>
       <div class="sdot" id="sd2">2</div><div class="sline" id="sl23"></div>
@@ -711,110 +522,82 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
       <p style="color:#B3B3B3;font-size:14px;margin-bottom:22px">Free. 0% on your first $500.</p>
       <div class="field"><label>Full name</label><input type="text" id="aFull" placeholder="Your real name"/></div>
       <div class="field"><label>Stage name</label><input type="text" id="aStage" placeholder="What fans know you as"/></div>
-      <div class="field"><label>Username</label>
-        <div class="at-w"><span class="at-s">@</span><input type="text" id="aUser" placeholder="stagename" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')"/></div>
-      </div>
+      <div class="field"><label>Username</label><div class="at-w"><span class="at-s">@</span><input type="text" id="aUser" placeholder="stagename"/></div></div>
       <div class="field"><label>Email</label><input type="email" id="aEmail" placeholder="your@email.com"/></div>
       <div class="field"><label>Password</label><input type="password" id="aPass" placeholder="Min 8 characters"/></div>
       <div class="field"><label>EcoCash <span style="color:#6A6A6A;font-weight:400;text-transform:none;letter-spacing:0">(tips go here)</span></label><input type="tel" id="aEco" placeholder="0771234567"/></div>
-      <button class="btn" onclick="aStep(2)">Continue</button>
+      <button class="btn" id="aStep2Btn">Continue</button>
     </div>
     <div id="as2" style="display:none">
       <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff">Build your profile</div>
-      <p style="color:#B3B3B3;font-size:14px;margin-bottom:22px">Help fans discover you.</p>
       <div class="field"><label>Bio</label><textarea id="aBio" placeholder="Tell fans who you are..."></textarea></div>
       <div class="field"><label>Your genres</label>
-        <div class="pills">
-          <button class="pill" onclick="this.classList.toggle('on')">Zimdancehall</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Afrobeats</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Gospel</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Hip Hop</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Amapiano</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Sungura</button>
-          <button class="pill" onclick="this.classList.toggle('on')">R&amp;B</button>
-          <button class="pill" onclick="this.classList.toggle('on')">Pop</button>
+        <div class="pills" id="genrePills">
+          <button class="pill" data-genre="Zimdancehall">Zimdancehall</button>
+          <button class="pill" data-genre="Afrobeats">Afrobeats</button>
+          <button class="pill" data-genre="Gospel">Gospel</button>
+          <button class="pill" data-genre="Hip Hop">Hip Hop</button>
+          <button class="pill" data-genre="Amapiano">Amapiano</button>
+          <button class="pill" data-genre="Sungura">Sungura</button>
+          <button class="pill" data-genre="R&B">R&amp;B</button>
+          <button class="pill" data-genre="Pop">Pop</button>
         </div>
       </div>
-      <div class="field"><label>City</label>
-        <select id="aCity"><option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option><option>Masvingo</option><option>Kwekwe</option><option>Diaspora - UK</option><option>Diaspora - South Africa</option><option>Diaspora - USA</option></select>
-      </div>
-      <button class="btn" onclick="aStep(3)">Continue</button>
-      <button class="btn-o" onclick="aStep(1)">Back</button>
+      <div class="field"><label>City</label><select id="aCity"><option>Harare</option><option>Bulawayo</option><option>Mutare</option><option>Gweru</option><option>Masvingo</option><option>Kwekwe</option><option>Diaspora - UK</option><option>Diaspora - South Africa</option><option>Diaspora - USA</option></select></div>
+      <button class="btn" id="aStep3Btn">Continue</button>
+      <button class="btn-o" id="aBack2Btn">Back</button>
     </div>
     <div id="as3" style="display:none">
       <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff">Upload your first track</div>
-      <p style="color:#B3B3B3;font-size:14px;margin-bottom:22px">You can add more from your dashboard.</p>
       <div class="field"><label>Track title</label><input type="text" id="aTrack" placeholder="Track name"/></div>
-      <div class="field"><label>Genre</label>
-        <select id="aTrackG"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</option></select>
-      </div>
-      <div class="upa" id="upa" onclick="document.getElementById('audioFile').click()">
-        <div id="upIcon" style="color:#D4A843;margin-bottom:12px">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        </div>
+      <div class="field"><label>Genre</label><select id="aTrackG"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</option></select></div>
+      <div class="upa" id="upa">
+        <div id="upIcon" style="color:#D4A843;margin-bottom:12px"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
         <div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#fff" id="upLabel">Tap to select audio</div>
         <div style="font-size:12px;color:#B3B3B3" id="upSub">MP3 or WAV up to 50MB</div>
       </div>
-      <input type="file" id="audioFile" accept=".mp3,.wav,audio/mpeg,audio/wav" style="display:none" onchange="handleUpload(this)"/>
-      <button class="btn" onclick="aStep(4)">Go live</button>
-      <button class="btn-o" onclick="aStep(2)">Back</button>
+      <input type="file" id="audioFile" accept=".mp3,.wav,audio/mpeg,audio/wav" style="display:none"/>
+      <div id="uploadProgress" style="display:none;background:#282828;border-radius:8px;padding:14px;text-align:center;font-size:13px;margin-bottom:12px;color:#D4A843"></div>
+      <button class="btn" id="aGoLiveBtn">Go live</button>
+      <button class="btn-o" id="aBack3Btn">Back</button>
     </div>
     <div id="as4" style="display:none">
       <div class="succ"><span class="succ-ico">&#10022;</span>
         <div class="succ-t">You are <em>live!</em></div>
         <p class="succ-s">Share your link. Fans tip you directly via EcoCash.</p>
-        <div class="sbox"><span class="surl" id="artLink">malbry.vercel.app/@you</span><button class="cbtn" onclick="copyLink()">Copy</button></div>
-        <button class="btn" onclick="openShare('https://malbry.vercel.app/@'+(window._user?window._user.username:'you'))">Share your profile</button>
-        <button class="btn-o" onclick="go('dashboard')">Go to dashboard</button>
+        <div class="sbox"><span class="surl" id="artLink">malbry.vercel.app/@you</span><button class="cbtn" id="copyArtLink">Copy</button></div>
+        <button class="btn" id="shareProfileBtn">Share your profile</button>
+        <button class="btn-o" id="goDashBtn">Go to dashboard</button>
       </div>
     </div>
   </div>
 </div>
-
 <!-- UPLOAD -->
-
 <div class="pg" id="pg-upload">
   <div class="pi" style="padding-top:20px">
     <div style="font-size:24px;font-weight:900;margin-bottom:6px;color:#fff">Upload a track</div>
     <p style="color:#B3B3B3;font-size:14px;margin-bottom:24px">Add music to your Malbry profile.</p>
     <div class="field"><label>Track title</label><input type="text" id="uTitle" placeholder="Track name"/></div>
-    <div class="field"><label>Genre</label>
-      <select id="uGenre"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</option></select>
-    </div>
-    <div class="field">
-      <label>Exclusive Drop? <span style="color:#D4A843;font-weight:400;text-transform:none;letter-spacing:0">(lock until earnings goal is hit)</span></label>
-      <select id="uExclusive">
-        <option value="0">No - release publicly</option>
-        <option value="1">Yes - exclusive drop first</option>
-      </select>
-    </div>
+    <div class="field"><label>Genre</label><select id="uGenre"><option>Zimdancehall</option><option>Afrobeats</option><option>Gospel</option><option>Hip Hop</option><option>Amapiano</option><option>Sungura</option><option>R&amp;B</option><option>Pop</option></select></div>
     <div class="field"><label>Description</label><textarea id="uDesc" placeholder="Tell fans about this track..."></textarea></div>
-    <div class="upa" id="uArea" onclick="document.getElementById('uFile').click()">
-      <div id="uIcon" style="color:#D4A843;margin-bottom:12px">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      </div>
+    <div class="upa" id="uArea">
+      <div id="uIcon" style="color:#D4A843;margin-bottom:12px"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
       <div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#fff" id="uLabel">Tap to select audio</div>
       <div style="font-size:12px;color:#B3B3B3" id="uSub">MP3 or WAV up to 50MB</div>
     </div>
-    <input type="file" id="uFile" accept=".mp3,.wav,audio/mpeg,audio/wav" style="display:none" onchange="handleUploadPage(this)"/>
+    <input type="file" id="uFile" accept=".mp3,.wav,audio/mpeg,audio/wav" style="display:none"/>
     <div id="uStat" style="display:none;background:#282828;border-radius:8px;padding:14px;text-align:center;font-size:13px;margin-bottom:12px;color:#fff"></div>
-    <button class="btn" id="uBtn" onclick="submitUpload()">Upload track</button>
-    <button class="btn-o" onclick="go('dashboard')">Cancel</button>
+    <button class="btn" id="uUploadBtn">Upload track</button>
+    <button class="btn-o" id="uCancelBtn">Cancel</button>
   </div>
 </div>
-
 <!-- DASHBOARD -->
-
 <div class="pg" id="pg-dashboard">
   <div class="pi" style="padding-top:20px">
     <div style="font-size:24px;font-weight:900;margin-bottom:4px;color:#fff">Your earnings</div>
     <div style="font-size:13px;color:#B3B3B3;margin-bottom:22px" id="dashUser"></div>
-    <div class="wallet">
-      <div class="w-l">Available balance</div>
-      <div class="w-a" id="dashBal">$0.00</div>
-      <div class="w-s">Ready to withdraw to EcoCash</div>
-    </div>
-    <button class="btn" onclick="openPayModal()">Request EcoCash payout</button>
+    <div class="wallet"><div class="w-l">Available balance</div><div class="w-a" id="dashBal">$0.00</div><div class="w-s">Ready to withdraw to EcoCash</div></div>
+    <button class="btn" id="payoutBtn">Request EcoCash payout</button>
     <div class="scards">
       <div class="sc g"><div class="sc-l">Total Earned</div><div class="sc-v" id="dEarned">$0.00</div></div>
       <div class="sc"><div class="sc-l">Total Plays</div><div class="sc-v" id="dPlays">0</div></div>
@@ -823,23 +606,21 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
     </div>
     <div class="hr"></div>
     <div class="sec" style="font-size:16px">Your tracks</div>
-    <div id="dTrackList"><div class="empty">No tracks yet <span onclick="go('upload')">Upload your first track</span></div></div>
+    <div id="dTrackList"><div class="empty">No tracks yet</div></div>
     <div class="hr"></div>
     <div class="sec" style="font-size:16px">Recent tips</div>
     <div id="dTipFeed"><div class="empty">Tips will appear here once fans start tipping</div></div>
-    <div style="margin-top:22px"><button class="btn" onclick="go('upload')">+ Upload new track</button></div>
+    <div style="margin-top:22px"><button class="btn" id="dashNewTrackBtn">+ Upload new track</button></div>
   </div>
 </div>
-
 <!-- ME -->
-
 <div class="pg" id="pg-me">
   <div class="pi" style="padding-top:24px">
     <div id="meGuest">
       <div style="font-size:24px;font-weight:900;margin-bottom:10px;color:#fff">Your library</div>
       <p style="color:#B3B3B3;font-size:14px;margin-bottom:26px">Create a free account to follow artists, send tips and build your music library.</p>
-      <button class="btn" onclick="go('fan-signup')">Sign up free</button>
-      <button class="btn-o" onclick="go('artist-signup')">Join as an artist</button>
+      <button class="btn" id="meSignupBtn">Sign up free</button>
+      <button class="btn-o" id="meArtistBtn">Join as an artist</button>
     </div>
     <div id="meIn" style="display:none">
       <div style="text-align:center;margin-bottom:28px">
@@ -858,618 +639,627 @@ input,select,textarea{font-family:inherit;outline:none;-webkit-appearance:none}
         <div id="meLiked"><div class="empty">Like tracks to see them here</div></div>
       </div>
       <div id="meArtLinks" style="display:none">
-        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" onclick="go('dashboard')"><span>Earnings dashboard</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" onclick="go('artist-profile')"><span>My artist profile</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" onclick="go('upload')"><span>Upload a track</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" id="meDashBtn"><span>Earnings dashboard</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" id="meProfileBtn"><span>My artist profile</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" id="meUploadBtn"><span>Upload a track</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
       </div>
       <div class="hr"></div>
-      <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" onclick="go('settings')"><span>Settings</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="btn-o" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between" id="meSettingsBtn"><span>Settings</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
       <button class="btn-danger" id="logoutBtn">Log out</button>
     </div>
   </div>
 </div>
-
 <!-- SETTINGS -->
-
 <div class="pg" id="pg-settings">
   <div class="pi" style="padding-top:20px">
     <div style="font-size:24px;font-weight:900;margin-bottom:24px;color:#fff">Settings</div>
     <div class="set-sect">
       <div class="set-lbl">Account</div>
-      <button class="set-row" onclick="showToast('Edit profile coming soon')"><span>Edit profile</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('Change password coming soon')"><span>Change password</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('Notifications coming soon')"><span>Notifications</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setEditProfile"><span>Edit profile</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setChangePass"><span>Change password</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
     <div class="set-sect">
       <div class="set-lbl">Payments</div>
-      <button class="set-row" onclick="showToast('EcoCash settings coming soon')"><span>EcoCash number</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('Payout history coming soon')"><span>Payout history</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('Tip history coming soon')"><span>Tip history</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setEcoCash"><span>EcoCash number</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setPayHistory"><span>Payout history</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
     <div class="set-sect">
       <div class="set-lbl">About</div>
-      <button class="set-row" onclick="showToast('Malbry v1.0')"><span>Version</span><span class="set-val">1.0.0</span></button>
-      <button class="set-row" onclick="openShare('https://malbry.vercel.app')"><span>Share Malbry</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-      <button class="set-row" onclick="showToast('support@malbry.app')"><span>Contact support</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setVersion"><span>Version</span><span class="set-val">1.0.0</span></button>
+      <button class="set-row" id="setShare"><span>Share Malbry</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <button class="set-row" id="setSupport"><span>Contact support</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6A6A6A" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
-    <button class="btn-danger" onclick="doLogout()" style="margin-top:8px">Log out</button>
+    <button class="btn-danger" id="settingsLogout" style="margin-top:8px">Log out</button>
   </div>
 </div>
-
 <script>
-var PAYNOW_ID='';
-var PAYNOW_KEY='';
-
-var TRACKS=[
-  {id:1,n:'Ndinewe',a:'Jah Signal',g:'Zimdancehall',dur:'3:24'},
-  {id:2,n:'Rudo Rwangu',a:'Jah Signal',g:'Zimdancehall',dur:'4:12'},
-  {id:3,n:'Simba',a:'Tocky Vibes',g:'Zimdancehall',dur:'3:47'},
-  {id:4,n:'Disappear',a:'Ammara Brown',g:'Afrobeats',dur:'3:58'},
-  {id:5,n:'Hallelujah',a:'Charles Charamba',g:'Gospel',dur:'5:02'},
-  {id:6,n:'Street Anthem',a:'Killer T',g:'Zimdancehall',dur:'3:31'},
-  {id:7,n:'Zora',a:'Winky D',g:'Zimdancehall',dur:'4:45'},
-  {id:8,n:'Sendekera',a:'Jah Prayzah',g:'Afrobeats',dur:'3:52'}
-];
-var TICONS=['&#127925;','&#127926;','&#127928;','&#127908;','&#128591;','&#127897;','&#128293;','&#127930;'];
-var ARTISTS=[
-  {i:'W',n:'Winky D',g:'Zimdancehall',l:'Harare'},
-  {i:'J',n:'Jah Prayzah',g:'Afrobeats',l:'Harare'},
-  {i:'A',n:'Ammara Brown',g:'Afrobeats',l:'Harare'},
-  {i:'K',n:'Killer T',g:'Zimdancehall',l:'Harare'},
-  {i:'T',n:'Tocky Vibes',g:'Zimdancehall',l:'Masvingo'},
-  {i:'C',n:'Charles Charamba',g:'Gospel',l:'Harare'},
-  {i:'S',n:'Jah Signal',g:'Zimdancehall',l:'Harare'}
-];
-var GENRES=[
-  {n:'Zimdancehall',bg:'#0a0f33'},{n:'Afrobeats',bg:'#0a2810'},
-  {n:'Gospel',bg:'#330a0a'},{n:'Hip Hop',bg:'#0a1a33'},
-  {n:'Amapiano',bg:'#33290a'},{n:'Sungura',bg:'#1f0a33'},
-  {n:'R&B',bg:'#0a332a'},{n:'Pop',bg:'#330a1f'}
-];
-var GICONS=['&#127925;','&#129345;','&#128591;','&#127908;','&#127929;','&#127928;','&#127926;','&#127775;'];
-var DROPS=[
-  {id:'d1',n:'Untitled Banger',a:'Winky D',g:'Zimdancehall',earnings:14.50,tips:29,listeners:187,hours:48,pct:30,teaser:'First taste of the new album. Nobody has heard this yet.'},
-  {id:'d2',n:'Diaspora Love',a:'Ammara Brown',g:'Afrobeats',earnings:8.20,tips:16,listeners:94,hours:72,pct:30,teaser:'Written for every Zimbabwean far from home.'}
-];
-
-window._user=null;
-var _fol=0,_tipTotal=0,_tipAmt=1,_prevPg='home';
-var _playing=false,_pct=0,_pInt=null,_nowId=1;
-var _shuf=false,_rep=false,_liked={};
+var SB='https://lonavuripzywpgguznza.supabase.co';
+var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvbmF2dXJpcHp5d3BnZ3V6bnphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDgzMjksImV4cCI6MjA4ODkyNDMyOX0.YpubAkauQDr4k-_6Lo7qlW9hBYY3lYb_ewv6pBinkMk';
+var _sess=null,_user=null,_prof=null;
+var _playing=false,_pct=0,_pInt=null,_nowId=null,_nowT=null;
+var _shuf=false,_rep=false,_tracks=[],_artists=[];
+var _tipAmt=1,_tipArtistId=null,_tipArtistName='';
+var _pollInt=null,_pollCount=0;
 var _shareUrl='https://malbry.vercel.app';
-var _recent=[];
-var _toastT=null;
-var _promptAmt=0.5;
-var _promptShown=false;
-var _promptDismissed=false;
-var _isDrop=false;
+var _promptShown=false,_promptDismissed=false;
+var _recent=[],_fol=0,_tipTotal=0;
+var _artistData={},_artistGenres=[];
+var _toastT=null,_prevPg='home';
+var ICONS=['&#127925;','&#127926;','&#127928;','&#127908;','&#128591;','&#127897;','&#128293;','&#127930;'];
+var GCOLORS=['#0a0f33','#0a2810','#330a0a','#0a1a33','#33290a','#1f0a33','#0a332a','#330a1f'];
+var GNAMES=['Zimdancehall','Afrobeats','Gospel','Hip Hop','Amapiano','Sungura','R&B','Pop'];
+var GICONS=['&#127925;','&#129345;','&#128591;','&#127908;','&#127929;','&#127928;','&#127926;','&#127775;'];
 
-function greet(){var h=new Date().getHours();return h<12?'Good morning':h<17?'Good afternoon':'Good evening';}
+function ico(i){return ICONS[i%ICONS.length];}
+function esc(s){return s?String(s).replace(/&/g,’&’).replace(/</g,’<’).replace(/>/g,’>’).replace(/”/g,’"’):’’}
+function greetMsg(){var h=new Date().getHours();return h<12?‘Good morning’:h<17?‘Good afternoon’:‘Good evening’;}
+function $id(id){return document.getElementById(id);}
 
-function showToast(msg){
-  var t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('on');
-  clearTimeout(_toastT);
-  _toastT=setTimeout(function(){t.classList.remove('on');},2600);
+/* SUPABASE */
+function sbH(tok){var h={‘apikey’:SK,‘Content-Type’:‘application/json’};h[‘Authorization’]=‘Bearer ‘+(tok||(_sess?_sess.access_token:SK));return h;}
+function sbGet(path){return fetch(SB+path,{headers:sbH()}).then(function(r){return r.json();}).catch(function(){return[];});}
+function sbPost(path,data){return fetch(SB+path,{method:‘POST’,headers:Object.assign(sbH(),{‘Prefer’:‘return=representation’}),body:JSON.stringify(data)}).then(function(r){return r.json();}).catch(function(e){return{error:e.message};});}
+function sbPatch(path,data){return fetch(SB+path,{method:‘PATCH’,headers:Object.assign(sbH(),{‘Prefer’:‘return=representation’}),body:JSON.stringify(data)}).then(function(r){return r.json();}).catch(function(e){return{error:e.message};});}
+function authPost(path,data){return fetch(SB+’/auth/v1’+path,{method:‘POST’,headers:{apikey:SK,‘Content-Type’:‘application/json’},body:JSON.stringify(data)}).then(function(r){return r.json();}).catch(function(e){return{error:{message:e.message}};});}
+
+/* TOAST */
+function showToast(msg,type){
+var t=$id(‘toast’);t.textContent=msg;t.className=‘toast ‘+(type||‘info’)+’ on’;
+clearTimeout(_toastT);_toastT=setTimeout(function(){t.classList.remove(‘on’);},3000);
 }
 
+/* NAV */
 function go(p){
-  _prevPg=(document.querySelector('.pg.on')||{id:'pg-home'}).id.replace('pg-','');
-  document.querySelectorAll('.pg').forEach(function(x){x.classList.remove('on');});
-  var el=document.getElementById('pg-'+p);
-  if(el)el.classList.add('on');
-  document.querySelectorAll('.bn').forEach(function(x){x.classList.remove('on');});
-  var map={home:'home',charts:'charts',search:'search',feed:'feed',track:'search',
-    'artist-profile':'search','fan-signup':'join','artist-signup':'join',
-    upload:'upload',dashboard:'earn',me:'me',settings:'me'};
-  document.querySelectorAll('.bn').forEach(function(b){
-    if(b.getAttribute('data-p')===map[p])b.classList.add('on');
-  });
-  window.scrollTo(0,0);
-  if(p==='artist-signup'&&(!window._user||window._user.type!=='artist'))resetAForm();
-  if(p==='feed')renderFeed();
-  if(p==='charts')renderCharts();
+_prevPg=(document.querySelector(’.pg.on’)||{id:‘pg-home’}).id.replace(‘pg-’,’’);
+document.querySelectorAll(’.pg’).forEach(function(x){x.classList.remove(‘on’);});
+var el=$id(‘pg-’+p);if(el)el.classList.add(‘on’);
+document.querySelectorAll(’.bn’).forEach(function(x){x.classList.remove(‘on’);});
+var map={home:‘home’,charts:‘charts’,search:‘search’,feed:‘feed’,track:‘search’,‘artist-profile’:‘search’,‘fan-signup’:‘join’,‘artist-signup’:‘join’,login:‘join’,upload:‘upload’,dashboard:‘earn’,me:‘me’,settings:‘me’};
+document.querySelectorAll(’.bn’).forEach(function(b){if(b.getAttribute(‘data-p’)===map[p])b.classList.add(‘on’);});
+window.scrollTo(0,0);
+if(p===‘feed’)renderFeed();
+if(p===‘charts’)loadCharts(‘All’);
+if(p===‘dashboard’)loadDashboard();
+if(p===‘search’){loadSearchArtists();renderGenreGrid();}
 }
-function goBack(){go(_prevPg||'home');}
+function goBack(){go(_prevPg||‘home’);}
 
-function buildNav(type){
-  var nav=document.getElementById('bnav');nav.innerHTML='';
-  var S={
-    home:'<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
-    charts:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
-    search:'<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
-    feed:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',
-    upload:'<polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>',
-    earn:'<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
-    me:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>',
-    join:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>'
-  };
-  var items;
-  if(type==='fan')items=[['home','home','Home'],['charts','charts','Charts'],['search','search','Search'],['feed','feed','Feed'],['me','me','Me']];
-  else if(type==='artist')items=[['home','home','Home'],['charts','charts','Charts'],['upload','upload','Upload'],['dashboard','earn','Earn'],['me','me','Me']];
-  else items=[['home','home','Home'],['charts','charts','Charts'],['search','search','Search'],['feed','feed','Feed'],['fan-signup','join','Join']];
-  items.forEach(function(it){
-    var b=document.createElement('button');
-    b.className='bn';b.setAttribute('data-p',it[1]);
-    b.innerHTML='<svg class="bni" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+S[it[1]]+'</svg>'+it[2];
-    b.onclick=function(){go(it[0]);};
-    nav.appendChild(b);
-  });
-  var hb=nav.querySelector('[data-p="home"]');
-  if(hb)hb.classList.add('on');
+function buildNav(role){
+var nav=$id(‘bnav’);nav.innerHTML=’’;
+var S={home:’<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>’,charts:’<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>’,search:’<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>’,feed:’<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>’,upload:’<polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>’,earn:’<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>’,me:’<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>’,join:’<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>’};
+var items=role===‘artist’?[[‘home’,‘home’,‘Home’],[‘charts’,‘charts’,‘Charts’],[‘upload’,‘upload’,‘Upload’],[‘dashboard’,‘earn’,‘Earn’],[‘me’,‘me’,‘Me’]]:role===‘fan’?[[‘home’,‘home’,‘Home’],[‘charts’,‘charts’,‘Charts’],[‘search’,‘search’,‘Search’],[‘feed’,‘feed’,‘Feed’],[‘me’,‘me’,‘Me’]]:[[‘home’,‘home’,‘Home’],[‘charts’,‘charts’,‘Charts’],[‘search’,‘search’,‘Search’],[‘feed’,‘feed’,‘Feed’],[‘fan-signup’,‘join’,‘Join’]];
+items.forEach(function(it){var b=document.createElement(‘button’);b.className=‘bn’;b.setAttribute(‘data-p’,it[1]);b.innerHTML=’<svg class="bni" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">’+S[it[1]]+’</svg>’+it[2];b.addEventListener(‘click’,function(){go(it[0]);});nav.appendChild(b);});
+var hb=nav.querySelector(’[data-p=“home”]’);if(hb)hb.classList.add(‘on’);
 }
 
-function setUser(type,name,username){
-  window._user={type:type,name:name,username:username};
-  document.getElementById('navJoin').style.display='none';
-  var nu=document.getElementById('navUser');
-  nu.style.cssText='display:flex!important;align-items:center;gap:8px;background:#282828;border-radius:500px;padding:4px 12px 4px 4px;border:none;cursor:pointer;';
-  document.getElementById('navAv').textContent=name.charAt(0).toUpperCase();
-  document.getElementById('navUn').textContent='@'+username;
-  document.getElementById('nbell').style.cssText='display:flex;width:32px;height:32px;border-radius:50%;background:#282828;align-items:center;justify-content:center;color:#B3B3B3;border:none;cursor:pointer;';
-  buildNav(type);
-  document.getElementById('meGuest').style.display='none';
-  document.getElementById('meIn').style.display='block';
-  document.getElementById('meAva').textContent=name.charAt(0).toUpperCase();
-  document.getElementById('meName').textContent=name;
-  document.getElementById('meUD').textContent='@'+username;
-  document.getElementById('meTL').textContent=type==='artist'?'Artist':'Fan';
-  document.getElementById('meFanStats').style.display=type==='fan'?'block':'none';
-  document.getElementById('meArtLinks').style.display=type==='artist'?'block':'none';
-  if(type==='artist')document.getElementById('dashUser').textContent='@'+username;
-  document.getElementById('homeCTA').style.display='none';
-  document.getElementById('heroSec').style.display='none';
-  document.getElementById('recentSec').style.display='block';
-  document.getElementById('greet').textContent=greet()+', '+name.split(' ')[0];
-  document.getElementById('logoutBtn').onclick=doLogout;
+/* AUTH STATE */
+function applySession(sess,prof){
+_sess=sess;_user=sess?sess.user:null;_prof=prof;
+if(!_user){resetGuest();return;}
+var role=prof?prof.role:‘fan’;
+var name=prof?(prof.stage_name||prof.full_name||prof.username||_user.email):_user.email;
+var uname=prof?(prof.username||’’):_user.email;
+$id(‘navJoin’).style.display=‘none’;
+$id(‘navUser’).style.cssText=‘display:flex!important;align-items:center;gap:8px;background:#282828;border-radius:500px;padding:4px 12px 4px 4px;border:none;cursor:pointer;’;
+$id(‘navAv’).textContent=name.charAt(0).toUpperCase();
+$id(‘navUn’).textContent=’@’+(uname||name.split(’ ‘)[0]);
+buildNav(role);
+$id(‘meGuest’).style.display=‘none’;$id(‘meIn’).style.display=‘block’;
+$id(‘meAva’).textContent=name.charAt(0).toUpperCase();
+$id(‘meName’).textContent=name;
+$id(‘meUD’).textContent=’@’+(uname||name.split(’ ‘)[0]);
+$id(‘meTL’).textContent=role===‘artist’?‘Artist’:‘Fan’;
+$id(‘meFanStats’).style.display=role===‘fan’?‘block’:‘none’;
+$id(‘meArtLinks’).style.display=role===‘artist’?‘block’:‘none’;
+if(role===‘artist’)$id(‘dashUser’).textContent=’@’+(uname||name);
+$id(‘homeCTA’).style.display=‘none’;$id(‘heroSec’).style.display=‘none’;
+$id(‘recentSec’).style.display=‘block’;
+$id(‘greet’).textContent=greetMsg()+’, ‘+name.split(’ ‘)[0];
+if(role===‘fan’)loadFanStats();
 }
-
+function resetGuest(){
+_sess=null;_user=null;_prof=null;
+$id(‘navJoin’).style.display=‘block’;$id(‘navUser’).style.cssText=‘display:none;’;
+$id(‘meGuest’).style.display=‘block’;$id(‘meIn’).style.display=‘none’;
+$id(‘homeCTA’).style.display=‘block’;$id(‘heroSec’).style.display=‘block’;
+$id(‘recentSec’).style.display=‘none’;$id(‘greet’).textContent=greetMsg();
+buildNav(null);
+}
+function loadProfile(uid){return sbGet(’/rest/v1/profiles?user_id=eq.’+uid+’&select=*’).then(function(d){return Array.isArray(d)&&d.length?d[0]:null;});}
+function checkSession(){
+try{
+var s=JSON.parse(localStorage.getItem(‘mb_sess’)||‘null’);
+if(!s||!s.access_token){resetGuest();return;}
+_sess=s;
+loadProfile(s.user.id).then(function(p){applySession(s,p);});
+}catch(e){resetGuest();}
+}
 function doLogout(){
-  window._user=null;_fol=0;_tipTotal=0;_recent=[];_liked={};
-  document.getElementById('navJoin').style.display='block';
-  document.getElementById('navUser').style.cssText='display:none;';
-  document.getElementById('nbell').style.cssText='display:none;';
-  document.getElementById('meGuest').style.display='block';
-  document.getElementById('meIn').style.display='none';
-  document.getElementById('homeCTA').style.display='block';
-  document.getElementById('heroSec').style.display='block';
-  document.getElementById('recentSec').style.display='none';
-  document.getElementById('greet').textContent=greet();
-  buildNav(null);
-  go('home');
-  showToast('Logged out');
-}
-function showLogin(){showToast('Login coming soon — create a new account for now');}
-
-function tipById(id){
-  var t=TRACKS.find(function(x){return x.id===id;});
-  if(t)openTip(t.a);
-}
-function tipByArtistIdx(i){
-  var a=ARTISTS[i];if(a)openTip(a.n);
+fetch(SB+’/auth/v1/logout’,{method:‘POST’,headers:sbH(_sess?_sess.access_token:null)}).finally(function(){localStorage.removeItem(‘mb_sess’);resetGuest();go(‘home’);showToast(‘Logged out’,‘info’);});
 }
 
-function tCard(t,idx){
-  var ico=TICONS[idx%TICONS.length];
-  return '<div class="tcard" onclick="openTrack('+t.id+')">' +
-    '<div class="tcard-art">'+ico+'<button class="tcard-play" onclick="event.stopPropagation();openTrack('+t.id+')"><svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg></button></div>' +
-    '<div class="tcard-body"><div class="tcard-n">'+t.n+'</div><div class="tcard-a">'+t.a+'</div></div></div>';
-}
-function hCard(t,idx){
-  var ico=TICONS[idx%TICONS.length];
-  return '<div class="hcard" onclick="openTrack('+t.id+')"><div class="hcard-art">'+ico+'</div><div class="hcard-n">'+t.n+'</div><div class="hcard-a">'+t.a+'</div></div>';
-}
-function tRow(t,i,idx){
-  var ico=TICONS[(idx!==undefined?idx:i)%TICONS.length];
-  return '<div class="trow" onclick="openTrack('+t.id+')">' +
-    '<div class="trow-num'+(i!==undefined&&i<3?' top':'')+'>'+(i!==undefined?i+1:'')+'</div>' +
-    '<div class="trow-art">'+ico+'</div>' +
-    '<div class="trow-inf"><div class="trow-n">'+t.n+'</div><div class="trow-a">'+t.a+'</div></div>' +
-    '<div class="trow-dur">'+t.dur+'</div>' +
-    '<button class="trow-tip" onclick="event.stopPropagation();tipById('+t.id+')">Tip</button>' +
-    '</div>';
-}
-function aRow(a,idx){
-  return '<div class="arow" onclick="openArtist('+idx+')">' +
-    '<div class="ava">'+a.i+'</div>' +
-    '<div class="ar-inf"><div class="ar-n">'+a.n+'</div><div class="ar-m">'+a.g+' · '+a.l+'</div></div>' +
-    '<button class="fbtn" onclick="event.stopPropagation();toggleFol(this)">Follow</button>' +
-    '</div>';
+/* SIGNUP FAN */
+function joinFan(){
+var first=$id(‘fFirst’).value.trim(),last=$id(‘fLast’).value.trim();
+var user=$id(‘fUser’).value.trim().toLowerCase().replace(/[^a-z0-9_.]/g,’’);
+var email=$id(‘fEmail’).value.trim(),pass=$id(‘fPass’).value;
+var eco=$id(‘fEco’).value.trim(),city=$id(‘fCity’).value;
+if(!first)return showToast(‘Please enter your first name’,‘error’);
+if(!user)return showToast(‘Please choose a username’,‘error’);
+if(!email)return showToast(‘Please enter your email’,‘error’);
+if(pass.length<8)return showToast(‘Password must be at least 8 characters’,‘error’);
+var btn=$id(‘fanSignupBtn’);btn.textContent=‘Creating…’;btn.disabled=true;
+authPost(’/signup’,{email:email,password:pass}).then(function(d){
+if(d.error||!d.user){btn.textContent=‘Create account’;btn.disabled=false;return showToast((d.error&&d.error.message)||‘Signup failed’,‘error’);}
+var sess=d;localStorage.setItem(‘mb_sess’,JSON.stringify(sess));
+sbPost(’/rest/v1/profiles’,{user_id:d.user.id,username:user,full_name:first+(last?’ ‘+last:’’),role:‘fan’,city:city,ecocash:eco}).then(function(p){
+var prof=Array.isArray(p)?p[0]:p;
+applySession(sess,prof);
+$id(‘fanForm’).style.display=‘none’;$id(‘fanDone’).style.display=‘block’;
+$id(‘fanMsg’).textContent=‘Welcome ‘+first+’! Your account @’+user+’ is ready.’;
+btn.textContent=‘Create account’;btn.disabled=false;
+showToast(‘Account created!’,‘success’);
+});
+});
 }
 
-function renderHome(g){
-  var f=(!g||g==='All')?TRACKS:TRACKS.filter(function(t){return t.g===g;});
-  document.getElementById('hGrid').innerHTML=f.map(function(t,i){return tCard(t,i);}).join('');
-  document.getElementById('hArtists').innerHTML=ARTISTS.slice(0,4).map(function(a,i){return aRow(a,i);}).join('');
+/* LOGIN */
+function doLogin(){
+var email=$id(‘lEmail’).value.trim(),pass=$id(‘lPass’).value;
+if(!email||!pass)return showToast(‘Please enter email and password’,‘error’);
+var btn=$id(‘loginBtn’);btn.textContent=‘Logging in…’;btn.disabled=true;
+authPost(’/token?grant_type=password’,{email:email,password:pass}).then(function(d){
+btn.textContent=‘Log in’;btn.disabled=false;
+if(!d.access_token)return showToast(d.error_description||d.error||‘Login failed’,‘error’);
+localStorage.setItem(‘mb_sess’,JSON.stringify(d));
+loadProfile(d.user.id).then(function(p){applySession(d,p);go(‘home’);showToast(‘Welcome back!’,‘success’);});
+});
 }
-function fHome(btn,g){
-  document.querySelectorAll('#hFilter .pill').forEach(function(p){p.classList.remove('on');});
-  btn.classList.add('on');renderHome(g);
+
+/* ARTIST SIGNUP */
+function aStep2(){
+var full=$id(‘aFull’).value.trim(),stage=$id(‘aStage’).value.trim();
+var user=$id(‘aUser’).value.trim().toLowerCase().replace(/[^a-z0-9_.]/g,’’);
+var email=$id(‘aEmail’).value.trim(),pass=$id(‘aPass’).value,eco=$id(‘aEco’).value.trim();
+if(!full)return showToast(‘Please enter your full name’,‘error’);
+if(!stage)return showToast(‘Please enter your stage name’,‘error’);
+if(!user)return showToast(‘Please choose a username’,‘error’);
+if(!email)return showToast(‘Please enter your email’,‘error’);
+if(pass.length<8)return showToast(‘Password must be 8+ characters’,‘error’);
+if(!eco)return showToast(‘Please enter your EcoCash number’,‘error’);
+_artistData={full:full,stage:stage,user:user,email:email,pass:pass,eco:eco};
+setStep(2);
 }
-function renderRecent(){
-  var el=document.getElementById('recentList');if(!el)return;
-  el.innerHTML=_recent.length?_recent.map(function(t,i){return hCard(t,i);}).join(''):'<div style="color:#3E3E3E;font-size:13px">Play some tracks to see them here</div>';
+function aStep3(){_artistData.bio=$id(‘aBio’).value.trim();_artistData.city=$id(‘aCity’).value;_artistData.genres=_artistGenres.join(’, ‘);setStep(3);}
+function aGoLive(){
+var title=$id(‘aTrack’).value.trim();
+if(!title)return showToast(‘Please enter a track title’,‘error’);
+var btn=$id(‘aGoLiveBtn’);btn.textContent=‘Creating…’;btn.disabled=true;
+authPost(’/signup’,{email:_artistData.email,password:_artistData.pass}).then(function(d){
+if(d.error||!d.user){btn.textContent=‘Go live’;btn.disabled=false;return showToast((d.error&&d.error.message)||‘Signup failed’,‘error’);}
+localStorage.setItem(‘mb_sess’,JSON.stringify(d));
+sbPost(’/rest/v1/profiles’,{user_id:d.user.id,username:_artistData.user,full_name:_artistData.full,stage_name:_artistData.stage,role:‘artist’,bio:_artistData.bio,genre:_artistData.genres,city:_artistData.city,ecocash:_artistData.eco}).then(function(pArr){
+var prof=Array.isArray(pArr)?pArr[0]:pArr;
+applySession(d,prof);
+$id(‘artLink’).textContent=‘malbry.vercel.app/@’+_artistData.user;
+var file=$id(‘audioFile’).files[0];
+if(file){
+uploadFile(file,title,$id(‘aTrackG’).value,prof.id,function(){btn.textContent=‘Go live’;btn.disabled=false;setStep(4);showToast(‘You are live!’,‘success’);});
+} else {btn.textContent=‘Go live’;btn.disabled=false;setStep(4);showToast(‘You are live!’,‘success’);}
+});
+});
 }
-function renderSearch(){
-  document.getElementById('gGrid').innerHTML=GENRES.map(function(g,i){
-    return '<div class="gc" style="background:'+g.bg+'" onclick="doSearch(\''+g.n+'\')"><div class="gc-n">'+g.n+'</div><div class="gc-c">Browse tracks</div><div class="gc-e">'+GICONS[i]+'</div></div>';
-  }).join('');
-  document.getElementById('sArtists').innerHTML=ARTISTS.map(function(a,i){return aRow(a,i);}).join('');
+function setStep(n){
+for(var i=1;i<=4;i++){
+var el=$id(‘as’+i);if(el)el.style.display=i===n?‘block’:‘none’;
+var d=$id(‘sd’+i);
+if(d){d.classList.remove(‘on’,‘done’);if(i===n)d.classList.add(‘on’);else if(i<n){d.classList.add(‘done’);d.textContent=‘v’;}else d.textContent=i===4?String.fromCharCode(10022):String(i);}
+if(i<4){var sl=$id(‘sl’+i+(i+1));if(sl){sl.classList.remove(‘done’);if(i<n)sl.classList.add(‘done’);}}
+}
+}
+
+/* RENDER HELPERS */
+function tCard(t,i){
+var a=t.profiles?(t.profiles.stage_name||t.profiles.full_name||t.profiles.username||‘Artist’):‘Artist’;
+return ‘<div class="tcard" data-id="'+t.id+'"><div class="tcard-art">’+ico(i)+’<button class="tcard-play" data-id="'+t.id+'"><svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><polygon points="5 3 19 12 5 21 5 3"/></svg></button></div><div class="tcard-body"><div class="tcard-n">’+esc(t.title)+’</div><div class="tcard-a">’+esc(a)+’</div></div></div>’;
+}
+function tRow(t,i){
+var a=t.profiles?(t.profiles.stage_name||t.profiles.full_name||t.profiles.username||‘Artist’):‘Artist’;
+return ‘<div class="trow" data-id="'+t.id+'"><div class=“trow-num’+(i<3?’ top’:’’)+’>’+(i+1)+’</div><div class="trow-art">’+ico(i)+’</div><div class="trow-inf"><div class="trow-n">’+esc(t.title)+’</div><div class="trow-a">’+esc(a)+’</div></div><div class="trow-dur">’+(t.duration||‘3:47’)+’</div><button class="trow-tip" data-artist-id="'+(t.artist_id||'')+'" data-artist-name="'+esc(a)+'">Tip</button></div>’;
+}
+function aRow(a){
+var name=a.stage_name||a.full_name||a.username||‘Artist’;
+return ‘<div class="arow" data-artist-id="'+a.id+'"><div class="ava">’+name.charAt(0).toUpperCase()+’</div><div class="ar-inf"><div class="ar-n">’+esc(name)+’</div><div class="ar-m">’+esc(a.genre||’’)+’ · ‘+esc(a.city||’’)+’</div></div><button class="fbtn" data-artist-id="'+a.id+'">Follow</button></div>’;
+}
+function hCard(t,i){
+var a=t.profiles?(t.profiles.stage_name||t.profiles.full_name||’’):’’;
+return ‘<div class="hcard" data-id="'+t.id+'"><div class="hcard-art">’+ico(i)+’</div><div class="hcard-n">’+esc(t.title)+’</div><div class="hcard-a">’+esc(a)+’</div></div>’;
+}
+
+/* HOME */
+function loadHomeGrid(genre){
+var el=$id(‘hGrid’);el.innerHTML=’<div class="loading"><div class="spin"></div>Loading tracks…</div>’;
+var path=’/rest/v1/tracks?select=*,profiles(username,stage_name,full_name)&order=created_at.desc&limit=20’;
+if(genre&&genre!==‘All’)path+=’&genre=eq.’+encodeURIComponent(genre);
+sbGet(path).then(function(tracks){
+if(!Array.isArray(tracks)||!tracks.length){el.innerHTML=’<div class="empty">No tracks yet. Be the first artist to upload!</div>’;return;}
+_tracks=tracks;el.innerHTML=tracks.map(tCard).join(’’);
+$id(‘statArtists’).textContent=tracks.length+’+’;
+});
+}
+function loadFeaturedArtists(){
+sbGet(’/rest/v1/profiles?role=eq.artist&select=*&limit=6’).then(function(data){
+var el=$id(‘hArtists’);
+if(!Array.isArray(data)||!data.length){el.innerHTML=’<div class="empty">No artists yet. Invite yours!</div>’;return;}
+_artists=data;el.innerHTML=data.map(aRow).join(’’);
+});
+}
+
+/* CHARTS */
+function loadCharts(genre){
+var el=$id(‘chartList’);el.innerHTML=’<div class="loading"><div class="spin"></div>Loading…</div>’;
+var path=’/rest/v1/tracks?select=*,profiles(stage_name,full_name)&order=play_count.desc&limit=20’;
+if(genre&&genre!==‘All’)path+=’&genre=eq.’+encodeURIComponent(genre);
+sbGet(path).then(function(tracks){
+if(!Array.isArray(tracks)||!tracks.length){el.innerHTML=’<div class="empty">No tracks yet</div>’;return;}
+el.innerHTML=tracks.map(function(t,i){
+var a=t.profiles?(t.profiles.stage_name||t.profiles.full_name||‘Artist’):‘Artist’;
+return ‘<div class="chart-row" data-id="'+t.id+'"><div class=“chart-num’+(i<3?’ top’:’’)+’>’+(i+1)+’</div><div class="chart-art">’+ico(i)+’</div><div class="chart-inf"><div class="chart-n">’+esc(t.title)+’</div><div class="chart-a">’+esc(a)+’ · ‘+(t.duration||‘3:47’)+’</div></div><button class="chart-tip" data-artist-id="'+(t.artist_id||'')+'" data-artist-name="'+esc(a)+'">Tip</button></div>’;
+}).join(’’);
+});
+}
+
+/* SEARCH */
+function renderGenreGrid(){
+$id(‘gGrid’).innerHTML=GNAMES.map(function(n,i){return ‘<div class="gc" style="background:'+GCOLORS[i]+'" data-genre="'+n+'"><div class="gc-n">’+n+’</div><div class="gc-c">Browse tracks</div><div class="gc-e">’+GICONS[i]+’</div></div>’;}).join(’’);
+}
+function loadSearchArtists(){
+sbGet(’/rest/v1/profiles?role=eq.artist&select=*&limit=20’).then(function(data){
+var el=$id(‘sArtists’);
+if(!Array.isArray(data)||!data.length){el.innerHTML=’<div class="empty">No artists yet</div>’;return;}
+_artists=data;el.innerHTML=data.map(aRow).join(’’);
+});
 }
 function doSearch(q){
-  var inp=document.getElementById('sQ');if(inp)inp.value=q;
-  if(!q||!q.trim()){document.getElementById('sDef').style.display='block';document.getElementById('sRes').style.display='none';document.getElementById('sEmpty').style.display='none';return;}
-  var ql=q.toLowerCase();
-  var fa=ARTISTS.filter(function(a){return a.n.toLowerCase().indexOf(ql)>-1||a.g.toLowerCase().indexOf(ql)>-1;});
-  var ft=TRACKS.filter(function(t){return t.n.toLowerCase().indexOf(ql)>-1||t.a.toLowerCase().indexOf(ql)>-1||t.g.toLowerCase().indexOf(ql)>-1;});
-  document.getElementById('sDef').style.display='none';
-  if(!fa.length&&!ft.length){document.getElementById('sRes').style.display='none';document.getElementById('sEmpty').style.display='block';return;}
-  document.getElementById('sEmpty').style.display='none';document.getElementById('sRes').style.display='block';
-  document.getElementById('rA').innerHTML=fa.length?'<div class="sec" style="font-size:16px">Artists</div>'+fa.map(function(a){return aRow(a,ARTISTS.indexOf(a));}).join(''):'';
-  document.getElementById('rT').innerHTML=ft.length?'<div class="sec" style="font-size:16px">Tracks</div>'+ft.map(function(t,i){return tRow(t,i,TRACKS.indexOf(t));}).join(''):'';
+if(!q||!q.trim()){$id(‘sDef’).style.display=‘block’;$id(‘sRes’).style.display=‘none’;$id(‘sEmpty’).style.display=‘none’;return;}
+$id(‘sDef’).style.display=‘none’;
+var ql=q.toLowerCase();
+var ft=_tracks.filter(function(t){var a=t.profiles?(t.profiles.stage_name||t.profiles.full_name||’’):’’;return t.title.toLowerCase().indexOf(ql)>-1||a.toLowerCase().indexOf(ql)>-1||(t.genre||’’).toLowerCase().indexOf(ql)>-1;});
+var fa=_artists.filter(function(a){var n=a.stage_name||a.full_name||a.username||’’;return n.toLowerCase().indexOf(ql)>-1||(a.genre||’’).toLowerCase().indexOf(ql)>-1;});
+if(!ft.length&&!fa.length){$id(‘sRes’).style.display=‘none’;$id(‘sEmpty’).style.display=‘block’;return;}
+$id(‘sEmpty’).style.display=‘none’;$id(‘sRes’).style.display=‘block’;
+$id(‘rA’).innerHTML=fa.length?’<div class="sec" style="font-size:16px">Artists</div>’+fa.map(aRow).join(’’):’’;
+$id(‘rT’).innerHTML=ft.length?’<div class="sec" style="font-size:16px">Tracks</div>’+ft.map(tRow).join(’’):’’;
 }
-function renderCharts(){
-  var g=document.querySelector('#chartFilter .pill.on');
-  var genre=g?g.textContent:'All';
-  var tracks=genre==='All'||genre==='Zimbabwe'?TRACKS:TRACKS.filter(function(t){return t.g===genre;});
-  if(!tracks.length)tracks=TRACKS;
-  document.getElementById('chartList').innerHTML=tracks.map(function(t,i){
-    var ico=TICONS[TRACKS.indexOf(t)%TICONS.length];
-    return '<div class="chart-row" onclick="openTrack('+t.id+')">' +
-      '<div class="chart-num'+(i<3?' top':'')+'>'+(i+1)+'</div>' +
-      '<div class="chart-art">'+ico+'</div>' +
-      '<div class="chart-inf"><div class="chart-n">'+t.n+'</div><div class="chart-a">'+t.a+' · '+t.dur+'</div></div>' +
-      '<button class="chart-tip" onclick="event.stopPropagation();tipById('+t.id+')">Tip</button>' +
-      '</div>';
-  }).join('');
-}
-function fChart(btn,g){
-  document.querySelectorAll('#chartFilter .pill').forEach(function(p){p.classList.remove('on');});
-  btn.classList.add('on');renderCharts();
-}
+
+/* FEED */
 function renderFeed(){
-  var el=document.getElementById('feedList');
-  var ge=document.getElementById('feedGuest');
-  if(!window._user){if(el)el.innerHTML='';if(ge)ge.style.display='block';return;}
-  if(ge)ge.style.display='none';
-  var times=['2 mins ago','15 mins ago','1 hour ago','3 hours ago'];
-  var items=ARTISTS.slice(0,4).map(function(a,i){return {a:a,t:TRACKS[i]||TRACKS[0],time:times[i],idx:i};});
-  el.innerHTML=items.map(function(item){
-    var ico=TICONS[item.idx%TICONS.length];
-    return '<div class="feed-card" onclick="openTrack('+item.t.id+')">' +
-      '<div class="fc-head"><div class="fc-av">'+item.a.i+'</div><div><div class="fc-name">'+item.a.n+'</div><div class="fc-time">Uploaded a track · '+item.time+'</div></div></div>' +
-      '<div class="fc-track"><div class="fc-art">'+ico+'</div>' +
-      '<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+item.t.n+'</div>' +
-      '<div style="font-size:12px;color:#B3B3B3;margin-top:2px">'+item.t.g+' · '+item.t.dur+'</div></div>' +
-      '<button class="chart-tip" onclick="event.stopPropagation();tipById('+item.t.id+')">Tip</button>' +
-      '</div></div>';
-  }).join('');
+var el=$id(‘feedList’),ge=$id(‘feedGuest’);
+if(!_user){el.innerHTML=’’;ge.style.display=‘block’;return;}
+ge.style.display=‘none’;el.innerHTML=’<div class="loading"><div class="spin"></div>Loading feed…</div>’;
+sbGet(’/rest/v1/tracks?select=*,profiles(username,stage_name,full_name)&order=created_at.desc&limit=10’).then(function(tracks){
+if(!Array.isArray(tracks)||!tracks.length){el.innerHTML=’<div class="empty">Follow artists to see their new tracks here</div>’;return;}
+var times=[‘2 mins ago’,‘15 mins ago’,‘1 hour ago’,‘3 hours ago’,‘5 hours ago’];
+el.innerHTML=tracks.map(function(t,i){
+var a=t.profiles?(t.profiles.stage_name||t.profiles.full_name||‘Artist’):‘Artist’;
+return ‘<div class="feed-card" data-id="'+t.id+'"><div class="fc-head"><div class="fc-av">’+a.charAt(0).toUpperCase()+’</div><div><div class="fc-name">’+esc(a)+’</div><div class="fc-time">Uploaded a track · ‘+times[i%times.length]+’</div></div></div><div class="fc-track"><div class="fc-art">’+ico(i)+’</div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">’+esc(t.title)+’</div><div style="font-size:12px;color:#B3B3B3;margin-top:2px">’+esc(t.genre||’’)+’ · ‘+(t.duration||‘3:47’)+’</div></div><button class="chart-tip" data-artist-id="'+(t.artist_id||'')+'" data-artist-name="'+esc(a)+'">Tip</button></div></div>’;
+}).join(’’);
+});
 }
 
-function renderDrops(){
-  var el=document.getElementById('dropsList');
-  if(!el)return;
-  el.innerHTML=DROPS.map(function(d){
-    var goal=50;
-    var pct=Math.min(Math.round((d.earnings/goal)*100),100);
-    var h=Math.floor(d.hours),m=Math.floor((d.hours-h)*60);
-    var cd=h>24?Math.floor(h/24)+'d '+(h%24)+'h':h+'h '+m+'m';
-    return '<div class="drop-card" onclick="openDrop(\''+d.id+'\')">'+
-      '<div class="drop-badge">LOCK  Exclusive Drop</div>'+
-      '<div class="drop-title">'+d.n+'</div>'+
-      '<div class="drop-artist">'+d.a+' · '+d.g+'</div>'+
-      '<div class="drop-stats">'+
-        '<div><div class="ds-v">$'+d.earnings.toFixed(2)+'</div><div class="ds-l">Earned</div></div>'+
-        '<div><div class="ds-v">'+d.tips+'</div><div class="ds-l">Tips</div></div>'+
-        '<div><div class="ds-v">'+d.listeners+'</div><div class="ds-l">Listeners</div></div>'+
-      '</div>'+
-      '<div class="drop-cd"><div class="drop-cd-l">Drops to YouTube in</div><div class="drop-cd-v">'+cd+'</div></div>'+
-      '<div class="drop-bar"><div class="drop-bar-fill" style="width:'+pct+'%"></div></div>'+
-      '<div class="drop-bar-lbl"><span>$0</span><span>Goal: $'+goal+'</span></div>'+
-      '<div class="drop-btns">'+
-        '<button class="drop-preview" onclick="event.stopPropagation();previewDrop(\''+d.id+'\')">Preview '+d.pct+'%</button>'+
-        '<button class="drop-unlock" onclick="event.stopPropagation();unlockDrop(\''+d.id+'\')">Tip to Unlock</button>'+
-      '</div></div>';
-  }).join('');
-}
-
-function openDrop(id){
-  var d=DROPS.find(function(x){return x.id===id;});if(!d)return;
-  _isDrop=true;
-  _nowId=id;
-  document.getElementById('tArt').innerHTML='&#127925;';
-  document.getElementById('tTitle').textContent=d.n;
-  document.getElementById('tArtBtn').textContent=d.a;
-  document.getElementById('tGenre').textContent=d.g+' · EXCLUSIVE';
-  document.getElementById('tTipBtn').textContent='Tip to Unlock';
-  document.getElementById('tTipBtn').onclick=function(){unlockDrop(id);};
-  document.getElementById('mpArt').innerHTML='&#127925;';
-  document.getElementById('mpT').textContent=d.n+' (Exclusive)';
-  document.getElementById('mpA').textContent=d.a;
-  document.getElementById('npsArt').innerHTML='&#127925;';
-  document.getElementById('npsT').textContent=d.n;
-  document.getElementById('npsA').textContent=d.a;
-  window._nA=d.a;
-  document.getElementById('earnTicker').style.display='flex';
-  document.getElementById('tickerAmt').textContent='$'+d.earnings.toFixed(2);
-  document.getElementById('mTracks').innerHTML='<div style="background:#181818;border-radius:8px;padding:20px;text-align:center"><div style="font-size:13px;color:#B3B3B3;margin-bottom:16px">'+d.teaser+'</div><button class="btn" onclick="unlockDrop(\''+id+'\')">Tip $1 to hear the full track</button></div>';
-  _pct=0;_playing=false;setPlayIcos(false);
-  document.getElementById('tFill').style.width='0';
-  document.getElementById('tCur').textContent='0:00';
-  document.getElementById('mp').classList.add('on');
-  _promptShown=false;_promptDismissed=false;
-  go('track');
-}
-function previewDrop(id){
-  var d=DROPS.find(function(x){return x.id===id;});if(!d)return;
-  openDrop(id);
-  showToast('Playing '+d.pct+'% preview — tip to hear the full track');
-  setTimeout(function(){togglePlay();},300);
-}
-function unlockDrop(id){
-  var d=DROPS.find(function(x){return x.id===id;});if(!d)return;
-  document.getElementById('tipFor').textContent='Unlock: '+d.n+' by '+d.a;
-  document.getElementById('tipModal').classList.add('on');
-}
-
+/* PLAYER */
 function openTrack(id){
-  var t=TRACKS.find(function(x){return x.id===id;});if(!t)return;
-  _isDrop=false;_nowId=id;
-  _recent=_recent.filter(function(x){return x.id!==id;});_recent.unshift(t);if(_recent.length>8)_recent.pop();
-  renderRecent();
-  var ico=TICONS[TRACKS.indexOf(t)%TICONS.length];
-  document.getElementById('tArt').innerHTML=ico;
-  document.getElementById('tTitle').textContent=t.n;
-  document.getElementById('tArtBtn').textContent=t.a;
-  document.getElementById('tGenre').textContent=t.g;
-  document.getElementById('tTipBtn').textContent='Tip artist';
-  document.getElementById('tTipBtn').onclick=function(){tipById(id);};
-  document.getElementById('mpArt').innerHTML=ico;
-  document.getElementById('mpT').textContent=t.n;
-  document.getElementById('mpA').textContent=t.a;
-  document.getElementById('npsArt').innerHTML=ico;
-  document.getElementById('npsT').textContent=t.n;
-  document.getElementById('npsA').textContent=t.a;
-  window._nA=t.a;
-  document.getElementById('earnTicker').style.display='none';
-  _pct=0;if(_pInt)clearInterval(_pInt);_playing=false;
-  ['tFill','npsPF','mpPF'].forEach(function(i){var el=document.getElementById(i);if(el)el.style.width='0';});
-  document.getElementById('tCur').textContent='0:00';
-  if(document.getElementById('npsCur'))document.getElementById('npsCur').textContent='0:00';
-  setPlayIcos(false);updateHearts();
-  _promptShown=false;_promptDismissed=false;
-  document.getElementById('mTracks').innerHTML=TRACKS.filter(function(x){return x.id!==id;}).slice(0,6).map(function(x,i){return tRow(x,i,TRACKS.indexOf(x));}).join('');
-  document.getElementById('mp').classList.add('on');
-  go('track');
+sbGet(’/rest/v1/tracks?id=eq.’+id+’&select=*,profiles(id,username,stage_name,full_name,ecocash)’).then(function(data){
+var t=Array.isArray(data)?data[0]:data;
+if(!t){showToast(‘Track not found’,‘error’);return;}
+_nowT=t;_nowId=t.id;
+var a=t.profiles?(t.profiles.stage_name||t.profiles.full_name||‘Artist’):‘Artist’;
+var i=Math.max(0,_tracks.findIndex(function(x){return x.id===id;}));
+var ic=ico(i);
+$id(‘tArt’).innerHTML=ic;$id(‘tTitle’).textContent=t.title;$id(‘tArtBtn’).textContent=a;$id(‘tGenre’).textContent=t.genre||’’;
+$id(‘mpArt’).innerHTML=ic;$id(‘mpT’).textContent=t.title;$id(‘mpA’).textContent=a;
+$id(‘npsArt’).innerHTML=ic;$id(‘npsT’).textContent=t.title;$id(‘npsA’).textContent=a;
+_tipArtistName=a;_tipArtistId=t.artist_id;
+_pct=0;if(_pInt)clearInterval(_pInt);_playing=false;
+[‘tFill’,‘npsPF’,‘mpPF’].forEach(function(x){var e=$id(x);if(e)e.style.width=‘0’;});
+$id(‘tCur’).textContent=‘0:00’;if($id(‘npsCur’))$id(‘npsCur’).textContent=‘0:00’;
+setPlayIcos(false);_promptShown=false;_promptDismissed=false;
+_recent=_recent.filter(function(x){return x.id!==id;});_recent.unshift(t);if(_recent.length>8)_recent.pop();
+renderRecent();
+sbGet(’/rest/v1/tracks?select=*,profiles(stage_name,full_name)&genre=eq.’+encodeURIComponent(t.genre||’’)+’&limit=8’).then(function(more){
+$id(‘mTracks’).innerHTML=Array.isArray(more)?more.filter(function(x){return x.id!==id;}).map(tRow).join(’’):’’;
+});
+sbPatch(’/rest/v1/tracks?id=eq.’+id,{play_count:(t.play_count||0)+1});
+$id(‘mp’).classList.add(‘on’);go(‘track’);
+});
 }
 function setPlayIcos(p){
-  var play='<polygon points="5 3 19 12 5 21 5 3"/>';
-  var pause='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-  var ico=p?pause:play;
-  ['tIco','npsIco','mpIco'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML=ico;});
+var pl=’<polygon points="5 3 19 12 5 21 5 3"/>’,pa=’<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>’;
+[‘tIco’,‘npsIco’,‘mpIco’].forEach(function(x){var e=$id(x);if(e)e.innerHTML=p?pa:pl;});
 }
 function togglePlay(){
-  _playing=!_playing;setPlayIcos(_playing);
-  if(_playing){
-    _pInt=setInterval(function(){
-      _pct=Math.min(_pct+100/227,100);
-      var w=_pct+'%';
-      ['tFill','npsPF','mpPF'].forEach(function(i){var el=document.getElementById(i);if(el)el.style.width=w;});
-      var s=Math.round((_pct/100)*227),ts=Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
-      if(document.getElementById('tCur'))document.getElementById('tCur').textContent=ts;
-      if(document.getElementById('npsCur'))document.getElementById('npsCur').textContent=ts;
-      if(_pct>=70&&!_promptShown&&!_promptDismissed){showTipPrompt();}
-      if(_pct>=100){
-        clearInterval(_pInt);_playing=false;setPlayIcos(false);_pct=0;
-        _promptShown=false;_promptDismissed=false;
-        if(_rep)openTrack(_nowId);else if(_shuf)nextT();
-      }
-    },1000);
-  } else clearInterval(_pInt);
+_playing=!_playing;setPlayIcos(_playing);
+if(_playing){
+_pInt=setInterval(function(){
+_pct=Math.min(_pct+100/227,100);
+[‘tFill’,‘npsPF’,‘mpPF’].forEach(function(x){var e=$id(x);if(e)e.style.width=_pct+’%’;});
+var s=Math.round((_pct/100)*227),ts=Math.floor(s/60)+’:’+(s%60<10?‘0’:’’)+s%60;
+var tc=$id(‘tCur’);if(tc)tc.textContent=ts;var nc=$id(‘npsCur’);if(nc)nc.textContent=ts;
+if(_pct>=70&&!_promptShown&&!_promptDismissed)showTipPrompt();
+if(_pct>=100){clearInterval(_pInt);_playing=false;setPlayIcos(false);_pct=0;_promptShown=false;_promptDismissed=false;if(_rep&&_nowId)openTrack(_nowId);}
+},1000);
+} else clearInterval(_pInt);
 }
-function prevT(){var i=TRACKS.findIndex(function(x){return x.id===_nowId;});if(i>=0)openTrack(TRACKS[(i-1+TRACKS.length)%TRACKS.length].id);}
-function nextT(){var i=TRACKS.findIndex(function(x){return x.id===_nowId;});if(i>=0)openTrack(_shuf?TRACKS[Math.floor(Math.random()*TRACKS.length)].id:TRACKS[(i+1)%TRACKS.length].id);}
-function seekT(e){var r=document.getElementById('tProg').getBoundingClientRect();_pct=((e.clientX-r.left)/r.width)*100;document.getElementById('tFill').style.width=_pct+'%';}
-function seekNP(e){var r=document.getElementById('npsProg').getBoundingClientRect();_pct=((e.clientX-r.left)/r.width)*100;document.getElementById('npsPF').style.width=_pct+'%';}
-function toggleShuf(){_shuf=!_shuf;['tShuf','npsShuf'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('on',_shuf);});showToast(_shuf?'Shuffle on':'Shuffle off');}
-function toggleRep(){_rep=!_rep;['tRep','npsRep'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('on',_rep);});showToast(_rep?'Repeat on':'Repeat off');}
-function openNP(){document.getElementById('nps').classList.add('on');}
-function closeNP(){document.getElementById('nps').classList.remove('on');}
+function prevT(){if(_recent.length>1)openTrack(_recent[1].id);}
+function nextT(){if(!_tracks.length)return;if(_shuf){openTrack(_tracks[Math.floor(Math.random()*_tracks.length)].id);return;}var i=_tracks.findIndex(function(x){return x.id===_nowId;});openTrack(_tracks[(i+1)%_tracks.length].id);}
+function seekT(e){var r=$id(‘tProg’).getBoundingClientRect();_pct=((e.clientX-r.left)/r.width)*100;$id(‘tFill’).style.width=_pct+’%’;}
+function seekNP(e){var r=$id(‘npsProg’).getBoundingClientRect();_pct=((e.clientX-r.left)/r.width)*100;$id(‘npsPF’).style.width=_pct+’%’;}
+function toggleShuf(){_shuf=!_shuf;$id(‘tShuf’).classList.toggle(‘on’,_shuf);$id(‘npsShuf’).classList.toggle(‘on’,_shuf);showToast(_shuf?‘Shuffle on’:‘Shuffle off’,‘info’);}
+function toggleRep(){_rep=!_rep;$id(‘tRep’).classList.toggle(‘on’,_rep);$id(‘npsRep’).classList.toggle(‘on’,_rep);showToast(_rep?‘Repeat on’:‘Repeat off’,‘info’);}
 
+/* TIP PROMPT */
 function showTipPrompt(){
-  _promptShown=true;
-  var t=TRACKS.find(function(x){return x.id===_nowId;});
-  var name=t?t.a:(window._nA||'this artist');
-  var track=t?t.n:'this track';
-  document.getElementById('tpTitle').textContent='You love "'+track+'"';
-  document.getElementById('tpMsg').textContent='Send '+name+' a tip directly to their EcoCash. Even $0.50 makes a real difference.';
-  document.getElementById('tipPrompt').classList.add('on');
-}
-function dismissPrompt(){_promptDismissed=true;document.getElementById('tipPrompt').classList.remove('on');}
-function setPA(btn,a){
-  document.querySelectorAll('.tp-amt').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');_promptAmt=a;
-  document.getElementById('tpBtn').textContent='Send $'+a.toFixed(2)+' via EcoCash';
-}
-function tipFromPrompt(){dismissPrompt();openTip(window._nA||'');}
-
-function toggleLike(){
-  _liked[_nowId]=!_liked[_nowId];updateHearts();
-  showToast(_liked[_nowId]?'Added to liked tracks':'Removed from liked tracks');
-  renderLiked();
-}
-function updateHearts(){
-  var on=!!_liked[_nowId];
-  ['mpH','tHrt','npsH'].forEach(function(id){
-    var el=document.getElementById(id);if(!el)return;
-    el.classList.toggle('on',on);
-    var svg=el.querySelector('svg');
-    if(svg){svg.setAttribute('fill',on?'#D4A843':'none');svg.setAttribute('stroke',on?'#D4A843':'currentColor');}
-  });
-}
-function renderLiked(){
-  var el=document.getElementById('meLiked');if(!el)return;
-  var liked=TRACKS.filter(function(t){return _liked[t.id];});
-  el.innerHTML=liked.length?liked.map(function(t,i){return tRow(t,i,TRACKS.indexOf(t));}).join(''):'<div class="empty">Like tracks to see them here</div>';
+_promptShown=true;
+$id(‘tpTitle’).textContent=‘You love “’+((_nowT&&_nowT.title)||‘this track’)+’”’;
+$id(‘tpMsg’).textContent=‘Send ‘+_tipArtistName+’ a tip directly to their EcoCash.’;
+$id(‘tipPrompt’).classList.add(‘on’);
 }
 
-function openArtist(idx){
-  var a=ARTISTS[idx];if(!a)return;
-  document.getElementById('apAva').textContent=a.i;
-  document.getElementById('apName').textContent=a.n;
-  document.getElementById('apTag').textContent=a.g+' · '+a.l;
-  document.getElementById('apBio').textContent=a.n+' is a '+a.g+' artist from '+a.l+'. Known for powerful performances and authentic music that connects with fans across Zimbabwe and the diaspora.';
-  ['apPl','apTr','apFo','apTi'].forEach(function(id){document.getElementById(id).textContent='—';});
-  var artistTracks=TRACKS.filter(function(t){return t.a===a.n;});
-  var allTracks=artistTracks.concat(TRACKS.filter(function(t){return t.a!==a.n;})).slice(0,6);
-  document.getElementById('apTracks').innerHTML=allTracks.map(function(t,i){return tRow(t,i,TRACKS.indexOf(t));}).join('');
-  var btn=document.getElementById('apFBtn');btn.textContent='Follow';btn.style.cssText='border:none;background:#D4A843;color:#000;margin:0;';
-  go('artist-profile');
-}
-function doFollow(){
-  var btn=document.getElementById('apFBtn');var f=btn.textContent==='Following';
-  btn.textContent=f?'Follow':'Following';
-  btn.style.cssText=f?'border:none;background:#D4A843;color:#000;margin:0;':'background:rgba(212,168,67,.1);color:#D4A843;border:1px solid rgba(212,168,67,.4);margin:0;';
-  showToast(f?'Unfollowed':'Following');
-}
-function toggleFol(btn){
-  var on=btn.classList.toggle('on');btn.textContent=on?'Following':'Follow';
-  _fol+=on?1:-1;document.getElementById('meFol').textContent=_fol;showToast(on?'Following':'Unfollowed');
-}
-
-function openTip(a){
-  document.getElementById('tipFor').textContent='Support '+(a||'this artist')+' via EcoCash';
-  document.getElementById('tipSt').style.display='none';
-  document.getElementById('tipModal').classList.add('on');
-}
-function setAmt(btn,a){
-  document.querySelectorAll('.ta').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');_tipAmt=a;
-  document.getElementById('tipBtn').textContent='Send $'+a.toFixed(2)+' via EcoCash';
+/* TIP PAYMENT */
+function openTip(artistId,artistName){
+_tipArtistId=artistId;_tipArtistName=artistName||‘this artist’;
+$id(‘tipFor’).textContent=‘Support ‘+_tipArtistName+’ via EcoCash’;
+$id(‘pollStatus’).style.display=‘none’;
+$id(‘tipSendBtn’).textContent=‘Send $’+_tipAmt.toFixed(2)+’ via EcoCash’;
+$id(‘tipModal’).classList.add(‘on’);
 }
 function sendTip(){
-  var eco=document.getElementById('tipEco').value.trim();
-  if(!eco){showToast('Please enter your EcoCash number');return;}
-  var btn=document.getElementById('tipBtn'),st=document.getElementById('tipSt');
-  btn.textContent='Sending...';btn.disabled=true;
-  if(PAYNOW_ID&&PAYNOW_KEY){
-    st.style.display='block';st.style.color='#D4A843';st.textContent='Sending to '+eco+'...';
-    fetch('https://www.paynow.co.zw/interface/remotetransaction',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:new URLSearchParams({id:PAYNOW_ID,reference:'tip-'+Date.now(),amount:_tipAmt.toFixed(2),additionalinfo:'Malbry tip',phone:eco,method:'ecocash',returnurl:'https://malbry.vercel.app',resulturl:'https://malbry.vercel.app'})
-    }).then(function(r){return r.text();}).then(function(res){
-      btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;
-      if(res.toLowerCase().indexOf('ok')>-1){st.style.color='#1ED760';st.textContent='EcoCash prompt sent! Approve on your phone.';_tipTotal+=_tipAmt;document.getElementById('meTS').textContent='$'+_tipTotal.toFixed(2);showToast('Tip sent!');}
-      else{st.style.color='#E91429';st.textContent='Payment failed. Please try again.';}
-    }).catch(function(){btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;st.style.color='#E91429';st.textContent='Connection error. Try again.';});
-  } else {
-    setTimeout(function(){btn.textContent='Send $'+_tipAmt.toFixed(2)+' via EcoCash';btn.disabled=false;st.style.display='block';st.style.color='#D4A843';st.textContent='EcoCash payments setting up — live very soon.';},700);
-  }
+var eco=$id(‘tipEco’).value.trim();
+if(!eco)return showToast(‘Please enter your EcoCash number’,‘error’);
+var btn=$id(‘tipSendBtn’),ps=$id(‘pollStatus’);
+btn.textContent=‘Sending…’;btn.disabled=true;
+ps.style.display=‘block’;ps.style.color=’#D4A843’;ps.textContent=‘Sending EcoCash prompt to ‘+eco+’…’;
+fetch(’/api/paynow’,{method:‘POST’,headers:{‘Content-Type’:‘application/json’},body:JSON.stringify({phone:eco,amount:_tipAmt.toFixed(2),reference:‘tip-’+Date.now(),artistName:_tipArtistName})})
+.then(function(r){return r.json();}).then(function(d){
+btn.textContent=‘Send $’+_tipAmt.toFixed(2)+’ via EcoCash’;btn.disabled=false;
+if(d.success){
+ps.style.color=’#D4A843’;ps.textContent=d.instructions||‘EcoCash prompt sent! Approve on your phone.’;
+showToast(‘EcoCash prompt sent!’,‘success’);
+if(d.pollUrl)startPolling(d.pollUrl,eco);
+} else {ps.style.color=’#E91429’;ps.textContent=d.error||‘Payment failed. Please try again.’;}
+}).catch(function(){btn.textContent=‘Send $’+_tipAmt.toFixed(2)+’ via EcoCash’;btn.disabled=false;ps.style.color=’#E91429’;ps.textContent=‘Connection error. Try again.’;});
+}
+function startPolling(pollUrl,eco){
+if(_pollInt)clearInterval(_pollInt);_pollCount=0;
+var ps=$id(‘pollStatus’);
+_pollInt=setInterval(function(){
+_pollCount++;
+if(_pollCount>12){clearInterval(_pollInt);ps.style.color=’#E91429’;ps.textContent=‘Payment timed out. If approved, it will be processed shortly.’;return;}
+fetch(’/api/paynow-poll’,{method:‘POST’,headers:{‘Content-Type’:‘application/json’},body:JSON.stringify({pollUrl:pollUrl})})
+.then(function(r){return r.json();}).then(function(d){
+if(d.paid){
+clearInterval(_pollInt);ps.style.color=’#1ED760’;ps.textContent=‘Payment confirmed! Thank you for supporting ‘+_tipArtistName;
+showToast(‘Tip sent to ‘+_tipArtistName+’!’,‘success’);
+recordTip(eco,d.amount||_tipAmt);
+setTimeout(function(){cm(‘tipModal’);},3000);
+}
+}).catch(function(){});
+},10000);
+}
+function recordTip(eco,amount){
+if(!_tipArtistId)return;
+sbPost(’/rest/v1/tips’,{artist_id:_tipArtistId,track_id:_nowId,amount:parseFloat(amount),ecocash:eco,status:‘confirmed’,fan_id:_user?_user.id:null}).then(function(){
+sbGet(’/rest/v1/profiles?id=eq.’+_tipArtistId+’&select=earnings’).then(function(d){
+var cur=Array.isArray(d)&&d.length?(parseFloat(d[0].earnings)||0):0;
+sbPatch(’/rest/v1/profiles?id=eq.’+_tipArtistId,{earnings:cur+parseFloat(amount)});
+});
+_tipTotal+=parseFloat(amount);var ts=$id(‘meTS’);if(ts)ts.textContent=’$’+_tipTotal.toFixed(2);
+});
 }
 
-function openPayModal(){document.getElementById('payBal').textContent=document.getElementById('dashBal').textContent;document.getElementById('payModal').classList.add('on');}
-function doPayout(){
-  var a=parseFloat(document.getElementById('payAmt').value);
-  if(!a||a<5){showToast('Minimum payout is $5');return;}
-  cm('payModal');showToast('Payout request submitted');
+/* ARTIST PROFILE */
+function openArtist(id){
+sbGet(’/rest/v1/profiles?id=eq.’+id+’&select=*’).then(function(data){
+var a=Array.isArray(data)?data[0]:null;
+if(!a){showToast(‘Artist not found’,‘error’);return;}
+var name=a.stage_name||a.full_name||a.username||‘Artist’;
+$id(‘apAva’).textContent=name.charAt(0).toUpperCase();
+$id(‘apName’).textContent=name;
+$id(‘apTag’).textContent=(a.genre||’’)+(a.city?’ · ‘+a.city:’’);
+$id(‘apBio’).textContent=a.bio||’’;
+$id(‘apTi’).textContent=a.earnings?’$’+parseFloat(a.earnings).toFixed(2):’$0’;
+$id(‘apTipBtn’).onclick=function(){openTip(a.id,name);};
+sbGet(’/rest/v1/tracks?artist_id=eq.’+a.id+’&select=*,profiles(stage_name,full_name)&order=created_at.desc’).then(function(tracks){
+$id(‘apTr’).textContent=Array.isArray(tracks)?tracks.length:0;
+$id(‘apTracks’).innerHTML=Array.isArray(tracks)&&tracks.length?tracks.map(tRow).join(’’):’<div class="empty">No tracks uploaded yet</div>’;
+});
+go(‘artist-profile’);
+});
 }
 
-function cm(id){document.getElementById(id).classList.remove('on');}
-document.addEventListener('click',function(e){if(e.target.classList.contains('mbg'))e.target.classList.remove('on');});
-
-function openShare(url){_shareUrl=url||'https://malbry.vercel.app';document.getElementById('shareUrl').textContent=_shareUrl;document.getElementById('shareModal').classList.add('on');}
-function copyShareUrl(){if(navigator.clipboard){navigator.clipboard.writeText(_shareUrl).then(function(){showToast('Link copied!');});}else showToast(_shareUrl);}
-function sWA(){window.open('https://wa.me/?text='+encodeURIComponent('Check out Malbry — Zimbabwe music, tip artists via EcoCash! '+_shareUrl),'_blank');}
-function sTW(){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('Check out Malbry! '+_shareUrl),'_blank');}
-function sFB(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(_shareUrl),'_blank');}
-function sIG(){showToast('Copy the link and paste in your Instagram story');}
-
-function joinFan(){
-  var first=document.getElementById('fFirst').value.trim(),user=document.getElementById('fUser').value.trim(),email=document.getElementById('fEmail').value.trim(),pass=document.getElementById('fPass').value;
-  if(!first){showToast('Please enter your first name');return;}
-  if(!user){showToast('Please choose a username');return;}
-  if(!email){showToast('Please enter your email');return;}
-  if(pass.length<8){showToast('Password must be at least 8 characters');return;}
-  var btn=document.getElementById('fanBtn');btn.textContent='Creating...';btn.disabled=true;
-  setTimeout(function(){
-    var last=document.getElementById('fLast').value.trim();
-    document.getElementById('fanForm').style.display='none';document.getElementById('fanDone').style.display='block';
-    document.getElementById('fanMsg').textContent='Welcome '+first+'! Your account @'+user+' is ready.';
-    setUser('fan',first+(last?' '+last:''),user);btn.textContent='Create account';btn.disabled=false;
-  },700);
-}
-
-function resetAForm(){
-  for(var i=1;i<=4;i++){
-    var el=document.getElementById('as'+i);if(el)el.style.display=i===1?'block':'none';
-    var d=document.getElementById('sd'+i);if(d){d.classList.remove('on','done');if(i===1)d.classList.add('on');d.textContent=i===4?String.fromCharCode(10022):String(i);}
-    if(i<4){var sl=document.getElementById('sl'+i+(i+1));if(sl)sl.classList.remove('done');}
-  }
-}
-function aStep(n){
-  if(n===2){
-    if(!document.getElementById('aFull').value.trim()){showToast('Please enter your full name');return;}
-    if(!document.getElementById('aStage').value.trim()){showToast('Please enter your stage name');return;}
-    if(!document.getElementById('aUser').value.trim()){showToast('Please choose a username');return;}
-    if(!document.getElementById('aEmail').value.trim()){showToast('Please enter your email');return;}
-    if(document.getElementById('aPass').value.length<8){showToast('Password must be 8+ characters');return;}
-    if(!document.getElementById('aEco').value.trim()){showToast('Please enter your EcoCash number');return;}
-  }
-  if(n===4){
-    if(!document.getElementById('aTrack').value.trim()){showToast('Please enter your track title');return;}
-    var stage=document.getElementById('aStage').value.trim(),uname=document.getElementById('aUser').value.trim();
-    document.getElementById('artLink').textContent='malbry.vercel.app/@'+uname;
-    setUser('artist',stage,uname);
-  }
-  for(var i=1;i<=4;i++){
-    var el=document.getElementById('as'+i);if(el)el.style.display=i===n?'block':'none';
-    var d=document.getElementById('sd'+i);
-    if(d){d.classList.remove('on','done');if(i===n)d.classList.add('on');else if(i<n){d.classList.add('done');d.textContent='v';}else d.textContent=i===4?String.fromCharCode(10022):String(i);}
-    if(i<4){var sl=document.getElementById('sl'+i+(i+1));if(sl){sl.classList.remove('done');if(i<n)sl.classList.add('done');}}
-  }
-}
-
-function handleUpload(input){
-  var file=input.files[0];if(!file)return;
-  if(file.size>50*1024*1024){showToast('File too large. Max 50MB.');input.value='';return;}
-  document.getElementById('upa').classList.add('has-file');
-  document.getElementById('upLabel').textContent=file.name;
-  document.getElementById('upSub').textContent=(file.size/1024/1024).toFixed(1)+'MB — ready';
-  document.getElementById('upIcon').innerHTML='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
-}
-function handleUploadPage(input){
-  var file=input.files[0];if(!file)return;
-  if(file.size>50*1024*1024){showToast('File too large. Max 50MB.');input.value='';return;}
-  document.getElementById('uArea').classList.add('has-file');
-  document.getElementById('uLabel').textContent=file.name;
-  document.getElementById('uSub').textContent=(file.size/1024/1024).toFixed(1)+'MB — ready';
-  document.getElementById('uIcon').innerHTML='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+/* UPLOAD */
+function uploadFile(file,title,genre,artistId,cb){
+if(!_sess){showToast(‘Please log in to upload’,‘error’);return;}
+var ext=file.name.split(’.’).pop();
+var path=‘tracks/’+Date.now()+’-’+title.replace(/[^a-z0-9]/gi,’-’).toLowerCase()+’.’+ext;
+var prog=$id(‘uploadProgress’)||$id(‘uStat’);
+if(prog){prog.style.display=‘block’;prog.style.color=’#D4A843’;prog.textContent=‘Uploading audio…’;}
+fetch(SB+’/storage/v1/object/tracks/’+path,{method:‘POST’,headers:{Authorization:‘Bearer ‘+_sess.access_token,‘Content-Type’:file.type||‘audio/mpeg’,‘x-upsert’:‘true’},body:file})
+.then(function(r){return r.json();}).then(function(sd){
+if(sd.error){if(prog){prog.style.color=’#E91429’;prog.textContent=‘Upload failed: ‘+(sd.error.message||sd.error);}return;}
+var url=SB+’/storage/v1/object/public/tracks/’+path;
+sbPost(’/rest/v1/tracks’,{artist_id:artistId,title:title,genre:genre,file_url:url,play_count:0}).then(function(){
+if(prog){prog.style.color=’#1ED760’;prog.textContent=‘Track uploaded!’;}
+showToast(‘Track uploaded!’,‘success’);if(cb)cb();
+});
+}).catch(function(){if(prog){prog.style.color=’#E91429’;prog.textContent=‘Upload failed. Please try again.’;}});
 }
 function submitUpload(){
-  var title=document.getElementById('uTitle').value.trim(),file=document.getElementById('uFile').files[0];
-  if(!title){showToast('Please enter a track title');return;}
-  if(!file){showToast('Please select an audio file');return;}
-  var btn=document.getElementById('uBtn'),st=document.getElementById('uStat');
-  btn.textContent='Uploading...';btn.disabled=true;st.style.display='block';st.style.color='#D4A843';st.textContent='Uploading...';
-  var p=0,iv=setInterval(function(){
-    p+=Math.random()*18;
-    if(p>=100){
-      clearInterval(iv);st.style.color='#1ED760';st.textContent='Track uploaded! It will appear on your profile once streaming goes live.';
-      btn.textContent='Upload track';btn.disabled=false;
-      var c=parseInt(document.getElementById('dTCount').textContent)||0;document.getElementById('dTCount').textContent=c+1;
-      showToast('Track uploaded!');
-    } else st.textContent='Uploading... '+Math.round(p)+'%';
-  },180);
-}
-function copyLink(){
-  var link='https://'+document.getElementById('artLink').textContent;
-  if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){showToast('Link copied!');});}else showToast(link);
+if(!_user)return showToast(‘Please log in to upload’,‘error’);
+if(!_prof||_prof.role!==‘artist’)return showToast(‘Only artists can upload tracks’,‘error’);
+var title=$id(‘uTitle’).value.trim(),file=$id(‘uFile’).files[0];
+if(!title)return showToast(‘Please enter a track title’,‘error’);
+if(!file)return showToast(‘Please select an audio file’,‘error’);
+var btn=$id(‘uUploadBtn’);btn.textContent=‘Uploading…’;btn.disabled=true;
+uploadFile(file,title,$id(‘uGenre’).value,_prof.id,function(){btn.textContent=‘Upload track’;btn.disabled=false;go(‘dashboard’);loadDashboard();});
 }
 
-document.getElementById('greet').textContent=greet();
-renderHome();
-renderSearch();
-renderCharts();
-renderDrops();
+/* DASHBOARD */
+function loadDashboard(){
+if(!_user||!_prof)return;
+$id(‘dashUser’).textContent=’@’+(_prof.username||’’);
+var e=parseFloat(_prof.earnings||0);
+$id(‘dashBal’).textContent=’$’+e.toFixed(2);$id(‘dEarned’).textContent=’$’+e.toFixed(2);
+sbGet(’/rest/v1/tracks?artist_id=eq.’+_prof.id+’&select=*&order=created_at.desc’).then(function(tracks){
+$id(‘dTCount’).textContent=Array.isArray(tracks)?tracks.length:0;
+var plays=0;
+$id(‘dTrackList’).innerHTML=Array.isArray(tracks)&&tracks.length?tracks.map(function(t,i){plays+=(t.play_count||0);return ‘<div class="trow" data-id="'+t.id+'"><div class="trow-num">’+(i+1)+’</div><div class="trow-art">’+ico(i)+’</div><div class="trow-inf"><div class="trow-n">’+esc(t.title)+’</div><div class="trow-a">’+esc(t.genre||’’)+’</div></div><div class="trow-dur">’+(t.play_count||0)+’ plays</div></div>’;}).join(’’):’<div class="empty">No tracks yet</div>’;
+$id(‘dPlays’).textContent=plays;
+});
+sbGet(’/rest/v1/tips?artist_id=eq.’+_prof.id+’&select=*&order=created_at.desc&limit=10’).then(function(tips){
+$id(‘dTips’).textContent=Array.isArray(tips)?tips.length:0;
+$id(‘dTipFeed’).innerHTML=Array.isArray(tips)&&tips.length?tips.map(function(t){return ‘<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #1c1c1c"><div style="width:36px;height:36px;border-radius:50%;background:#282828;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🎵</div><div style="flex:1"><div style="font-size:13px;font-weight:600;color:#fff">Fan tip</div><div style="font-size:11px;color:#6A6A6A;margin-top:2px">’+new Date(t.created_at).toLocaleDateString()+’</div></div><div style="font-size:20px;font-weight:900;color:#D4A843">$’+parseFloat(t.amount).toFixed(2)+’</div></div>’;}).join(’’):’<div class="empty">Tips will appear here once fans start tipping</div>’;
+});
+}
+
+/* FAN STATS */
+function loadFanStats(){
+if(!_user)return;
+sbGet(’/rest/v1/tips?fan_id=eq.’+_user.id+’&select=amount’).then(function(tips){
+var total=Array.isArray(tips)?tips.reduce(function(s,t){return s+parseFloat(t.amount||0);},0):0;
+_tipTotal=total;var ts=$id(‘meTS’);if(ts)ts.textContent=’$’+total.toFixed(2);
+});
+}
+
+/* RECENTLY PLAYED */
+function renderRecent(){
+var el=$id(‘recentList’);if(!el)return;
+el.innerHTML=_recent.length?_recent.map(hCard).join(’’):’<div style="color:#3E3E3E;font-size:13px">Play some tracks to see them here</div>’;
+}
+
+/* SHARE */
+function openShare(url){_shareUrl=url||‘https://malbry.vercel.app’;$id(‘shareUrl’).textContent=_shareUrl;$id(‘shareModal’).classList.add(‘on’);}
+
+/* PAYOUT */
+function openPayModal(){$id(‘payBal’).textContent=$id(‘dashBal’).textContent;$id(‘payModal’).classList.add(‘on’);}
+function doPayout(){var a=parseFloat($id(‘payAmt’).value);if(!a||a<5)return showToast(‘Minimum payout is $5’,‘error’);cm(‘payModal’);showToast(‘Payout request submitted. We will send to your EcoCash.’,‘success’);}
+
+/* MODALS */
+function cm(id){$id(id).classList.remove(‘on’);}
+
+/* INIT — all event listeners */
+document.addEventListener(‘DOMContentLoaded’,function(){
+$id(‘btnLogo’).addEventListener(‘click’,function(){go(‘home’);});
+$id(‘btnSearch’).addEventListener(‘click’,function(){go(‘search’);});
+$id(‘navJoin’).addEventListener(‘click’,function(){go(‘fan-signup’);});
+$id(‘navUser’).addEventListener(‘click’,function(){go(‘me’);});
+$id(‘heroExplore’).addEventListener(‘click’,function(){go(‘search’);});
+$id(‘heroArtist’).addEventListener(‘click’,function(){go(‘artist-signup’);});
+$id(‘seeAllTrending’).addEventListener(‘click’,function(){go(‘search’);});
+$id(‘seeAllArtists’).addEventListener(‘click’,function(){go(‘search’);});
+$id(‘ctaArtistBtn’).addEventListener(‘click’,function(){go(‘artist-signup’);});
+$id(‘hFilter’).addEventListener(‘click’,function(e){var p=e.target.closest(’.pill’);if(!p)return;document.querySelectorAll(’#hFilter .pill’).forEach(function(x){x.classList.remove(‘on’);});p.classList.add(‘on’);loadHomeGrid(p.getAttribute(‘data-genre’));});
+$id(‘chartFilter’).addEventListener(‘click’,function(e){var p=e.target.closest(’.pill’);if(!p)return;document.querySelectorAll(’#chartFilter .pill’).forEach(function(x){x.classList.remove(‘on’);});p.classList.add(‘on’);loadCharts(p.getAttribute(‘data-genre’));});
+$id(‘mpArt’).addEventListener(‘click’,function(){$id(‘nps’).classList.add(‘on’);});
+$id(‘mpInf’).addEventListener(‘click’,function(){$id(‘nps’).classList.add(‘on’);});
+$id(‘mpPlay’).addEventListener(‘click’,togglePlay);
+$id(‘mpTip’).addEventListener(‘click’,function(){openTip(_tipArtistId,_tipArtistName);});
+$id(‘btnCloseNP’).addEventListener(‘click’,function(){$id(‘nps’).classList.remove(‘on’);});
+$id(‘btnShareNP’).addEventListener(‘click’,function(){openShare(‘https://malbry.vercel.app’);});
+$id(‘npsPlay’).addEventListener(‘click’,togglePlay);
+$id(‘npsPrev’).addEventListener(‘click’,prevT);
+$id(‘npsNext’).addEventListener(‘click’,nextT);
+$id(‘npsShuf’).addEventListener(‘click’,toggleShuf);
+$id(‘npsRep’).addEventListener(‘click’,toggleRep);
+$id(‘npsProg’).addEventListener(‘click’,seekNP);
+$id(‘npsTipBtn’).addEventListener(‘click’,function(){openTip(_tipArtistId,_tipArtistName);});
+$id(‘btnTrackBack’).addEventListener(‘click’,goBack);
+$id(‘tBtn’).addEventListener(‘click’,togglePlay);
+$id(‘tPrev’).addEventListener(‘click’,prevT);
+$id(‘tNext’).addEventListener(‘click’,nextT);
+$id(‘tShuf’).addEventListener(‘click’,toggleShuf);
+$id(‘tRep’).addEventListener(‘click’,toggleRep);
+$id(‘tProg’).addEventListener(‘click’,seekT);
+$id(‘tTipBtn’).addEventListener(‘click’,function(){openTip(_tipArtistId,_tipArtistName);});
+$id(‘tShareBtn’).addEventListener(‘click’,function(){openShare(‘https://malbry.vercel.app’);});
+$id(‘tArtBtn’).addEventListener(‘click’,function(){if(_nowT&&_nowT.artist_id)openArtist(_nowT.artist_id);});
+$id(‘apShareBtn’).addEventListener(‘click’,function(){openShare(‘https://malbry.vercel.app’);});
+$id(‘apFBtn’).addEventListener(‘click’,function(){var b=this,f=b.textContent===‘Following’;b.textContent=f?‘Follow’:‘Following’;b.style.cssText=f?’’:‘background:rgba(212,168,67,.1);color:#D4A843;border:1px solid rgba(212,168,67,.4);margin:0;’;*fol+=f?-1:1;var mf=$id(‘meFol’);if(mf)mf.textContent=*fol;showToast(f?‘Unfollowed’:‘Following’,‘info’);});
+$id(‘togFan’).addEventListener(‘click’,function(){go(‘fan-signup’);});
+$id(‘togArtist’).addEventListener(‘click’,function(){go(‘artist-signup’);});
+$id(‘fanSignupBtn’).addEventListener(‘click’,joinFan);
+$id(‘loginLink’).addEventListener(‘click’,function(){go(‘login’);});
+$id(‘fanDoneHome’).addEventListener(‘click’,function(){go(‘home’);});
+$id(‘fanDoneSearch’).addEventListener(‘click’,function(){go(‘search’);});
+$id(‘fUser’).addEventListener(‘input’,function(){this.value=this.value.toLowerCase().replace(/[^a-z0-9*.]/g,’’);});
+$id(‘loginBtn’).addEventListener(‘click’,doLogin);
+$id(‘signupLink’).addEventListener(‘click’,function(){go(‘fan-signup’);});
+$id(‘togFan2’).addEventListener(‘click’,function(){go(‘fan-signup’);});
+$id(‘aStep2Btn’).addEventListener(‘click’,aStep2);
+$id(‘aStep3Btn’).addEventListener(‘click’,aStep3);
+$id(‘aGoLiveBtn’).addEventListener(‘click’,aGoLive);
+$id(‘aBack2Btn’).addEventListener(‘click’,function(){setStep(1);});
+$id(‘aBack3Btn’).addEventListener(‘click’,function(){setStep(2);});
+$id(‘aUser’).addEventListener(‘input’,function(){this.value=this.value.toLowerCase().replace(/[^a-z0-9*.]/g,’’);});
+$id(‘goDashBtn’).addEventListener(‘click’,function(){go(‘dashboard’);});
+$id(‘shareProfileBtn’).addEventListener(‘click’,function(){openShare(‘https://malbry.vercel.app/@’+(_prof?_prof.username:‘you’));});
+$id(‘copyArtLink’).addEventListener(‘click’,function(){var l=‘https://’+$id(‘artLink’).textContent;if(navigator.clipboard)navigator.clipboard.writeText(l).then(function(){showToast(‘Link copied!’,‘success’);});});
+$id(‘upa’).addEventListener(‘click’,function(){$id(‘audioFile’).click();});
+$id(‘audioFile’).addEventListener(‘change’,function(){var f=this.files[0];if(!f)return;if(f.size>50*1024*1024){showToast(‘File too large. Max 50MB.’,‘error’);this.value=’’;return;}$id(‘upa’).classList.add(‘has-file’);$id(‘upLabel’).textContent=f.name;$id(‘upSub’).textContent=(f.size/1024/1024).toFixed(1)+‘MB - ready’;});
+$id(‘genrePills’).addEventListener(‘click’,function(e){var p=e.target.closest(’.pill’);if(!p)return;p.classList.toggle(‘on’);_artistGenres=Array.from(document.querySelectorAll(’#genrePills .pill.on’)).map(function(x){return x.getAttribute(‘data-genre’);});});
+$id(‘uArea’).addEventListener(‘click’,function(){$id(‘uFile’).click();});
+$id(‘uFile’).addEventListener(‘change’,function(){var f=this.files[0];if(!f)return;if(f.size>50*1024*1024){showToast(‘File too large. Max 50MB.’,‘error’);this.value=’’;return;}$id(‘uArea’).classList.add(‘has-file’);$id(‘uLabel’).textContent=f.name;$id(‘uSub’).textContent=(f.size/1024/1024).toFixed(1)+‘MB - ready’;});
+$id(‘uUploadBtn’).addEventListener(‘click’,submitUpload);
+$id(‘uCancelBtn’).addEventListener(‘click’,function(){go(‘dashboard’);});
+$id(‘dashNewTrackBtn’).addEventListener(‘click’,function(){go(‘upload’);});
+$id(‘payoutBtn’).addEventListener(‘click’,openPayModal);
+$id(‘payBtn’).addEventListener(‘click’,doPayout);
+$id(‘meSignupBtn’).addEventListener(‘click’,function(){go(‘fan-signup’);});
+$id(‘meArtistBtn’).addEventListener(‘click’,function(){go(‘artist-signup’);});
+$id(‘meDashBtn’).addEventListener(‘click’,function(){go(‘dashboard’);});
+$id(‘meProfileBtn’).addEventListener(‘click’,function(){if(_prof)openArtist(_prof.id);});
+$id(‘meUploadBtn’).addEventListener(‘click’,function(){go(‘upload’);});
+$id(‘meSettingsBtn’).addEventListener(‘click’,function(){go(‘settings’);});
+$id(‘logoutBtn’).addEventListener(‘click’,doLogout);
+$id(‘settingsLogout’).addEventListener(‘click’,doLogout);
+$id(‘setEditProfile’).addEventListener(‘click’,function(){showToast(‘Edit profile coming soon’,‘info’);});
+$id(‘setChangePass’).addEventListener(‘click’,function(){showToast(‘Change password coming soon’,‘info’);});
+$id(‘setEcoCash’).addEventListener(‘click’,function(){showToast(‘EcoCash settings coming soon’,‘info’);});
+$id(‘setPayHistory’).addEventListener(‘click’,function(){showToast(‘Payout history coming soon’,‘info’);});
+$id(‘setVersion’).addEventListener(‘click’,function(){showToast(‘Malbry v1.0’,‘info’);});
+$id(‘setShare’).addEventListener(‘click’,function(){openShare(‘https://malbry.vercel.app’);});
+$id(‘setSupport’).addEventListener(‘click’,function(){showToast(‘support@malbry.app’,‘info’);});
+document.querySelectorAll(’.ta’).forEach(function(b){b.addEventListener(‘click’,function(){document.querySelectorAll(’.ta’).forEach(function(x){x.classList.remove(‘on’);});this.classList.add(‘on’);_tipAmt=parseFloat(this.getAttribute(‘data-amt’));$id(‘tipSendBtn’).textContent=‘Send $’+_tipAmt.toFixed(2)+’ via EcoCash’;});});
+$id(‘tipSendBtn’).addEventListener(‘click’,sendTip);
+$id(‘tpClose’).addEventListener(‘click’,function(){$id(‘tipPrompt’).classList.remove(‘on’);_promptDismissed=true;});
+document.querySelectorAll(’.tp-amt’).forEach(function(b){b.addEventListener(‘click’,function(){document.querySelectorAll(’.tp-amt’).forEach(function(x){x.classList.remove(‘on’);});this.classList.add(‘on’);_tipAmt=parseFloat(this.getAttribute(‘data-amt’));$id(‘tpBtn’).textContent=‘Send $’+_tipAmt.toFixed(2)+’ via EcoCash’;});});
+$id(‘tpBtn’).addEventListener(‘click’,function(){$id(‘tipPrompt’).classList.remove(‘on’);openTip(_tipArtistId,_tipArtistName);});
+$id(‘copyUrlBtn’).addEventListener(‘click’,function(){if(navigator.clipboard)navigator.clipboard.writeText(_shareUrl).then(function(){showToast(‘Link copied!’,‘success’);});});
+$id(‘shareWA’).addEventListener(‘click’,function(){window.open(‘https://wa.me/?text=’+encodeURIComponent(‘Check out Malbry! ‘+_shareUrl),’_blank’);});
+$id(‘shareTW’).addEventListener(‘click’,function(){window.open(‘https://twitter.com/intent/tweet?text=’+encodeURIComponent(‘Check out Malbry! ‘+_shareUrl),’_blank’);});
+$id(‘shareFB’).addEventListener(‘click’,function(){window.open(‘https://www.facebook.com/sharer/sharer.php?u=’+encodeURIComponent(_shareUrl),’_blank’);});
+$id(‘shareIG’).addEventListener(‘click’,function(){showToast(‘Copy the link and paste in your Instagram story’,‘info’);});
+document.querySelectorAll(’[data-close]’).forEach(function(b){b.addEventListener(‘click’,function(){cm(this.getAttribute(‘data-close’));});});
+document.querySelectorAll(’.mbg’).forEach(function(bg){bg.addEventListener(‘click’,function(e){if(e.target===this)this.classList.remove(‘on’);});});
+$id(‘feedSignupBtn’).addEventListener(‘click’,function(){go(‘fan-signup’);});
+$id(‘sQ’).addEventListener(‘input’,function(){doSearch(this.value);});
+$id(‘gGrid’).addEventListener(‘click’,function(e){var gc=e.target.closest(’.gc’);if(!gc)return;var g=gc.getAttribute(‘data-genre’);$id(‘sQ’).value=g;doSearch(g);});
+document.addEventListener(‘click’,function(e){
+var tc=e.target.closest(’.tcard’);if(tc&&!e.target.closest(’.tcard-play’)){openTrack(tc.getAttribute(‘data-id’));return;}
+var tp=e.target.closest(’.tcard-play’);if(tp){openTrack(tp.getAttribute(‘data-id’));return;}
+var tr=e.target.closest(’.trow’);if(tr&&!e.target.closest(’.trow-tip’)){openTrack(tr.getAttribute(‘data-id’));return;}
+var tip=e.target.closest(’.trow-tip,.chart-tip’);if(tip){openTip(tip.getAttribute(‘data-artist-id’),tip.getAttribute(‘data-artist-name’));return;}
+var ar=e.target.closest(’.arow’);if(ar&&!e.target.closest(’.fbtn’)){openArtist(ar.getAttribute(‘data-artist-id’));return;}
+var hc=e.target.closest(’.hcard’);if(hc&&hc.getAttribute(‘data-id’)){openTrack(hc.getAttribute(‘data-id’));return;}
+var fc=e.target.closest(’.feed-card’);if(fc&&!e.target.closest(’.chart-tip’)){openTrack(fc.getAttribute(‘data-id’));return;}
+var cr=e.target.closest(’.chart-row’);if(cr&&!e.target.closest(’.chart-tip’)){openTrack(cr.getAttribute(‘data-id’));return;}
+});
+$id(‘greet’).textContent=greetMsg();
+checkSession();
+loadHomeGrid(‘All’);
+loadFeaturedArtists();
+renderGenreGrid();
+});
 </script>
 
 </body>
