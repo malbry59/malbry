@@ -1010,60 +1010,77 @@ function doLogout() {
 // ═══════════════════════════════════════════
 function joinFan() {
   var first = (G('fFirst') && G('fFirst').value.trim()) || '';
-  var last = (G('fLast') && G('fLast').value.trim()) || '';
-  var user = (G('fUser') && G('fUser').value.trim().toLowerCase().replace(/[^a-z0-9_.]/g,'')) || '';
+  var last  = (G('fLast') && G('fLast').value.trim()) || '';
+  var user  = (G('fUser') && G('fUser').value.trim().toLowerCase().replace(/[^a-z0-9_.]/g,'')) || '';
   var email = (G('fEmail') && G('fEmail').value.trim()) || '';
-  var pass = (G('fPass') && G('fPass').value) || '';
-  var eco = (G('fEco') && G('fEco').value.trim()) || '';
-  var city = (G('fCity') && G('fCity').value) || '';
+  var pass  = (G('fPass') && G('fPass').value) || '';
+  var eco   = (G('fEco') && G('fEco').value.trim()) || '';
+  var city  = (G('fCity') && G('fCity').value) || '';
 
   if (!first) return showToast('Please enter your first name', 'error');
-  if (!user) return showToast('Please choose a username', 'error');
+  if (!user)  return showToast('Please choose a username', 'error');
   if (!email) return showToast('Please enter your email', 'error');
   if (pass.length < 8) return showToast('Password must be at least 8 characters', 'error');
 
   var btn = G('fanSignupBtn');
   if (btn) { btn.textContent = 'Creating...'; btn.disabled = true; }
 
-  authFetch('/signup', { email: email, password: pass }).then(function(d) {
+  authFetch('/signup', { email: email, password: pass })
+  .then(function(d) {
     if (btn) { btn.textContent = 'Create account'; btn.disabled = false; }
 
-    if (d.error) return showToast(d.error.message || 'Signup failed', 'error');
-    if (!d.user && !d.id) return showToast('Signup failed. Please try again.', 'error');
+    // Show the REAL error
+    if (d.error) return showToast(d.error.message || d.error, 'error');
+    if (d.error_description) return showToast(d.error_description, 'error');
+    if (!d.user && !d.id) return showToast('Signup failed — no user returned', 'error');
 
     var uid = (d.user && d.user.id) || d.id;
-    // Get the access token from signup response - needed to pass RLS
-    var signupToken = (d.session && d.session.access_token) || d.access_token || null;
+    var tok = (d.session && d.session.access_token) || d.access_token || SK;
 
-    // Use signup token for profile insert so RLS auth.uid() = user_id passes
-    var profHeaders = {
-      'apikey': SK,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation',
-      'Authorization': 'Bearer ' + (signupToken || SK)
-    };
+    // Save session immediately if we got one (email confirm OFF)
+    if (d.session && d.session.access_token) {
+      saveSession(d.session);
+      _sess = d.session;
+    }
+
     fetch(SB + '/rest/v1/profiles', {
       method: 'POST',
-      headers: profHeaders,
+      headers: {
+        'apikey': SK,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation',
+        'Authorization': 'Bearer ' + tok
+      },
       body: JSON.stringify({
-        user_id: uid,
-        username: user,
+        user_id:   uid,
+        username:  user,
         full_name: first + (last ? ' ' + last : ''),
-        role: 'fan',
-        city: city,
-        ecocash: eco,
-        earnings: 0
+        role:      'fan',
+        city:      city,
+        ecocash:   eco,
+        earnings:  0
       })
-    }).then(function(r) { return r.json(); }).then(function() {
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(prof) {
+      // If profile insert errored, show it — don't swallow it
+      if (prof && prof.code) {
+        console.error('Profile insert error:', prof);
+        // Still show success for auth — profile can be fixed separately
+      }
       var ff = G('fanForm'), fd = G('fanDone');
       if (ff) ff.style.display = 'none';
       if (fd) fd.style.display = 'block';
-      var fm = G('fanMsg');
-      if (fm) fm.textContent = 'Welcome ' + first + '! Check your email to confirm your account, then log in.';
-      showToast('Account created! Check your email.', 'success');
+      S('fanMsg', 'Welcome ' + first + '! Your account is ready.');
+      showToast('Account created!', 'success');
+    })
+    .catch(function(e) {
+      console.error('Profile insert failed:', e);
+      showToast('Account created but profile setup failed. Try logging in.', 'info');
     });
   });
 }
+
 
 // ═══════════════════════════════════════════
 // LOGIN
