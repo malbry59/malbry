@@ -841,6 +841,8 @@ function showToast(msg, type) {
 // NAVIGATION
 // ═══════════════════════════════════════════
 function go(p) {
+  if (p === 'join') p = 'fan-signup';
+  if (p === 'earn') p = 'dashboard';
   var cur = document.querySelector('.pg.on');
   _prevPg = cur ? cur.id.replace('pg-', '') : 'home';
   document.querySelectorAll('.pg').forEach(function(x) { x.classList.remove('on'); });
@@ -853,7 +855,8 @@ function go(p) {
     'home':'home','charts':'charts','search':'search','feed':'feed',
     'track':'search','artist-profile':'search',
     'fan-signup':'join','artist-signup':'join','login':'join',
-    'upload':'upload','dashboard':'earn','me':'me','settings':'me'
+    'upload':'upload','dashboard':'earn','me':'me','settings':'me',
+    'join':'join'
   };
   var target = map[p] || 'home';
   document.querySelectorAll('.bn[data-p="' + target + '"]').forEach(function(b) { b.classList.add('on'); });
@@ -1029,18 +1032,29 @@ function joinFan() {
     if (!d.user && !d.id) return showToast('Signup failed. Please try again.', 'error');
 
     var uid = (d.user && d.user.id) || d.id;
+    // Get the access token from signup response - needed to pass RLS
+    var signupToken = (d.session && d.session.access_token) || d.access_token || null;
 
-    // Save profile — use service role via RLS insert policy
-    // Note: user must confirm email before logging in, but we can still create profile
-    sbPost('/rest/v1/profiles', {
-      user_id: uid,
-      username: user,
-      full_name: first + (last ? ' ' + last : ''),
-      role: 'fan',
-      city: city,
-      ecocash: eco,
-      earnings: 0
-    }).then(function() {
+    // Use signup token for profile insert so RLS auth.uid() = user_id passes
+    var profHeaders = {
+      'apikey': SK,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+      'Authorization': 'Bearer ' + (signupToken || SK)
+    };
+    fetch(SB + '/rest/v1/profiles', {
+      method: 'POST',
+      headers: profHeaders,
+      body: JSON.stringify({
+        user_id: uid,
+        username: user,
+        full_name: first + (last ? ' ' + last : ''),
+        role: 'fan',
+        city: city,
+        ecocash: eco,
+        earnings: 0
+      })
+    }).then(function(r) { return r.json(); }).then(function() {
       var ff = G('fanForm'), fd = G('fanDone');
       if (ff) ff.style.display = 'none';
       if (fd) fd.style.display = 'block';
@@ -1118,22 +1132,46 @@ function aGoLive() {
 
     var uid = (d.user && d.user.id) || d.id;
     _artistData.uid = uid;
-
     var artLinkEl = G('artLink');
     if (artLinkEl) artLinkEl.textContent = 'malbry.vercel.app/@' + _artistData.user;
 
-    sbPost('/rest/v1/profiles', {
-      user_id: uid,
-      username: _artistData.user,
-      full_name: _artistData.full,
-      stage_name: _artistData.stage,
-      role: 'artist',
-      bio: _artistData.bio,
-      genre: _artistData.genres,
-      city: _artistData.city,
-      ecocash: _artistData.eco,
-      earnings: 0
-    }).then(function() {
+    // Get access token from signup - needed for RLS
+    var artistToken = (d.session && d.session.access_token) || d.access_token || null;
+    var artistHeaders = {
+      'apikey': SK,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+      'Authorization': 'Bearer ' + (artistToken || SK)
+    };
+
+    // If we got a session (email confirm off), save it so upload works
+    if (artistToken) {
+      _sess = d.session || d;
+      if (_sess && _sess.access_token) saveSession(_sess);
+    }
+
+    fetch(SB + '/rest/v1/profiles', {
+      method: 'POST',
+      headers: artistHeaders,
+      body: JSON.stringify({
+        user_id: uid,
+        username: _artistData.user,
+        full_name: _artistData.full,
+        stage_name: _artistData.stage,
+        role: 'artist',
+        bio: _artistData.bio,
+        genre: _artistData.genres,
+        city: _artistData.city,
+        ecocash: _artistData.eco,
+        earnings: 0
+      })
+    }).then(function(r) { return r.json(); }).then(function(prof) {
+      var profile = Array.isArray(prof) ? prof[0] : prof;
+      if (profile && profile.id) {
+        _prof = profile;
+        // Set profile id for upload to work
+        _artistData.profileId = profile.id;
+      }
       setStep(4);
       showToast('Account created! Check your email to confirm.', 'success');
     });
@@ -1629,12 +1667,13 @@ function uploadFile(file, title, genre, artistProfileId, cb) {
       play_count: 0
     }).then(function(result) {
       if (result && result.error) {
-        if (prog) { prog.style.color = '#E91429'; prog.textContent = 'Failed to save track: ' + result.error.message; }
+        if (prog) { prog.style.color = '#E91429'; prog.textContent = 'Failed to save track: ' + (result.error.message || result.error); }
+        if (cb) cb(false);
         return;
       }
       if (prog) { prog.style.color = '#1ED760'; prog.textContent = 'Track uploaded successfully!'; }
       showToast('Track uploaded!', 'success');
-      if (cb) cb();
+      if (cb) cb(true);
     });
   })
   .catch(function(e) {
@@ -1655,12 +1694,16 @@ function submitUpload() {
   if (!file) return showToast('Please select an audio file', 'error');
 
   var btn = G('uUploadBtn');
+  var stat = G('uStat');
   if (btn) { btn.textContent = 'Uploading...'; btn.disabled = true; }
+  if (stat) { stat.style.display = 'block'; stat.style.color = '#D4A843'; stat.textContent = 'Starting upload...'; }
 
-  uploadFile(file, title, genre, _prof.id, function() {
+  uploadFile(file, title, genre, _prof.id, function(ok) {
     if (btn) { btn.textContent = 'Upload track'; btn.disabled = false; }
-    go('dashboard');
-    setTimeout(loadDashboard, 500);
+    if (ok) {
+      go('dashboard');
+      setTimeout(loadDashboard, 800);
+    }
   });
 }
 
