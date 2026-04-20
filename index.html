@@ -1032,7 +1032,12 @@ function joinFan() {
     // Show the REAL error
     if (d.error) return showToast(d.error.message || d.error, 'error');
     if (d.error_description) return showToast(d.error_description, 'error');
-    if (!d.user && !d.id) return showToast('Signup failed — no user returned', 'error');
+    var uid = (d.user && d.user.id) || d.id;
+if (!uid) {
+  console.error('Full Supabase response:', JSON.stringify(d));
+  return showToast(d.msg || d.error_description || 'Signup failed', 'error');
+}
+
 
     var uid = (d.user && d.user.id) || d.id;
     var tok = (d.session && d.session.access_token) || d.access_token || SK;
