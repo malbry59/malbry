@@ -2092,15 +2092,24 @@ document.addEventListener('DOMContentLoaded', function() {
     if (ar && !e.target.closest('.fbtn')) { openArtist(ar.getAttribute('data-profile-id')); return; }
 
     // Follow button
-    var fb = e.target.closest('.fbtn');
-    if (fb) {
-      var on2 = fb.classList.toggle('on');
-      fb.textContent = on2 ? 'Following' : 'Follow';
-      _fol += on2 ? 1 : -1;
-      S('meFol', String(_fol));
-      showToast(on2 ? 'Following' : 'Unfollowed', 'info');
-      return;
-    }
+var fb = e.target.closest('.fbtn');
+if (fb) {
+  if (!_sess) {
+    showToast('Log in to follow artists', 'error');
+    setTimeout(function() { go('login'); }, 1000);
+    return;
+  }
+  var on2 = fb.classList.toggle('on');
+  fb.textContent = on2 ? 'Following' : 'Follow';
+  fb.style.cssText = on2
+    ? 'border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,.1);'
+    : '';
+  _fol += on2 ? 1 : -1;
+  S('meFol', String(_fol));
+  showToast(on2 ? 'Following' : 'Unfollowed', 'info');
+  return;
+}
+
 
     // hCard (recently played)
     var hc = e.target.closest('.hcard');
